@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["IsLessFeature"]
 
-from lib.features.binary.BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 
 class IsLessFeature(BinaryFeature):
   """check if left is greater than right"""

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from lib.features.binary.BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 import talib
 
 class AROONOSCFeature(BinaryFeature):

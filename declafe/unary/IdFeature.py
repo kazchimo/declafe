@@ -7,7 +7,7 @@ from .UnaryColumnFeature import UnaryColumnFeature
 __all__ = ["IdFeature"]
 
 from .. import FeatureGen
-from lib.features.composed import MinuteNFeature
+from declafe.composed import MinuteNFeature
 
 
 class IdFeature(UnaryColumnFeature):
@@ -35,14 +35,14 @@ class IdFeature(UnaryColumnFeature):
     return [HourNFeature(self.column_name, n) for n in ns]
 
   def dip_againsts(self, high_column: str, max_high_periods: List[int]) -> List["FeatureGen"]:
-    from lib.features.unary import IdFeature
-    from lib.features.composed import DipFeature
+    from declafe.unary import IdFeature
+    from declafe.composed import DipFeature
 
     return [DipFeature(price_column=self.column_name, high_column=high_column, hh_period=p) for p in max_high_periods]
 
   def rip_againsts(self, low_column: str, min_low_periods: List[int]) -> List["FeatureGen"]:
-    from lib.features.unary import IdFeature
-    from lib.features.composed import RipFeature
+    from declafe.unary import IdFeature
+    from declafe.composed import RipFeature
 
     return [RipFeature(price_column=self.column_name, low_column=low_column, ll_period=p) for p in min_low_periods]
 

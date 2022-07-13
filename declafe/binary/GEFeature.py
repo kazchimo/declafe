@@ -7,7 +7,7 @@ from lib.features import FeatureGen
 
 __all__ = ["GEFeature"]
 
-from lib.features.binary.BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 
 regex = "(\w+)_is_greater_than_equal_(\w+)"
 

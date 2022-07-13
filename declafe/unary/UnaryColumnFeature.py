@@ -3,7 +3,7 @@ from typing import Type
 
 import pandas as pd
 
-from lib.features.feature_gen import FeatureGen
+from declafe.feature_gen import FeatureGen
 
 
 class UnaryColumnFeature(FeatureGen, ABC):

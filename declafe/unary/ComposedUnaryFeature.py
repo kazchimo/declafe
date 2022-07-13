@@ -2,7 +2,7 @@ from typing import List
 
 import pandas as pd
 
-from lib.features.unary.UnaryColumnFeature import UnaryColumnFeature
+from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["ComposedUnaryFeature"]
 

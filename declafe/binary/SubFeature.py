@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["SubFeature"]
 
-from lib.features.binary.BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 
 class SubFeature(BinaryFeature):
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:

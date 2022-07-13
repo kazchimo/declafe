@@ -6,7 +6,7 @@ from lib.features import FeatureGen
 
 __all__ = ["BiComposeFeature"]
 
-from lib.features.binary.BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 
 class BiComposeFeature(FeatureGen):
   """check if left is greater than right"""
@@ -31,7 +31,7 @@ class BiComposeFeature(FeatureGen):
 
   @staticmethod
   def make(left: FeatureGen, right: FeatureGen, to: Type[BinaryFeature], toKwargs: Dict[str, Any] = None) -> "FeatureGen":
-    from lib.features.unary import IdFeature
+    from declafe.unary import IdFeature
     if isinstance(left, IdFeature) and isinstance(right, IdFeature):
       return to(left=left.column_name, right=right.column_name, **(toKwargs or {}))
     else:

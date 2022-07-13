@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["IsGreaterFeature"]
 
-from lib.features.binary.BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 
 
 class IsGreaterFeature(BinaryFeature):

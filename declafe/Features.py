@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List, Type
-from lib.features.unary import *
+from declafe.unary import *
 from .feature_gen import FeatureGen
 import pandas as pd
 

@@ -1,9 +1,9 @@
 from lib.features import ComposedFeature
-from lib.features.binary import IsGreaterFeature
-from lib.features.binary.BiComposeFeature import BiComposeFeature
-from lib.features.binary.IsLessFeature import IsLessFeature
-from lib.features.dsl import *
-from lib.features.unary import *
+from declafe.binary import IsGreaterFeature
+from declafe.binary.BiComposeFeature import BiComposeFeature
+from declafe.binary.IsLessFeature import IsLessFeature
+from declafe.dsl import *
+from declafe.unary import *
 
 
 def BreakoutBBandUpperFeature(price_column: str, bbands_column: str, bbands_periods: int) -> BiComposeFeature:

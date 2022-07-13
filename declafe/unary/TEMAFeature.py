@@ -1,6 +1,6 @@
 import pandas as pd
 
-from lib.features.unary import UnaryColumnFeature
+from declafe.unary import UnaryColumnFeature
 import talib
 
 

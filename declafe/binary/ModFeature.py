@@ -2,8 +2,8 @@ import re
 
 import pandas as pd
 
-from lib.features.binary.BinaryFeature import BinaryFeature
-from lib.features.feature_gen import FeatureGen
+from declafe.binary.BinaryFeature import BinaryFeature
+from declafe.feature_gen import FeatureGen
 
 __all__ = ["ModFeature"]
 
