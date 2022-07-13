@@ -29,10 +29,3 @@ class UnaryColumnFeature(FeatureGen, ABC):
   @abstractmethod
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     raise NotImplementedError
-
-  def then(self, otherT: Type["UnaryColumnFeature"], *args, **kwargs) -> "ComposedFeature":
-    from .ComposedUnaryFeature import ComposedUnaryFeature
-    return ComposedUnaryFeature(
-      column_name=self.column_name,
-      features=[self, otherT(column_name=self.feature_name, *args, **kwargs)]
-    )
