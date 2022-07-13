@@ -5,14 +5,12 @@ import pandas as pd
 
 __all__ = ["FeatureGen", "FG"]
 
-from lib.features.feature_gen.StaticMixin import StaticMixin
-
 if TYPE_CHECKING:
   from lib.features import ComposedFeature, UnaryColumnFeature, BiComposeFeature, Features
   from lib.features.unary import IdFeature
 
 
-class FeatureGen(ABC, StaticMixin):
+class FeatureGen(ABC):
   def __init__(self):
     self.override_feature_name: Optional[str] = None
 
@@ -227,7 +225,126 @@ class FeatureGen(ABC, StaticMixin):
     from lib.features.unary import BBandsLowerFeature
     return self.next(BBandsLowerFeature, periods=period)
 
+  def __eq__(self, other):
+    from lib.features.binary import EqualFeature, BiComposeFeature
 
+    return BiComposeFeature.make(left=self, right=self.__conv_const(other), to=EqualFeature)
+
+  def __ne__(self, other):
+    return (self == other).flip_bool()
+
+  def __add__(self, other):
+    from lib.features.binary import AddFeature
+    from lib.features import BiComposeFeature
+    return BiComposeFeature.make(left=self, right=other, to=AddFeature)
+
+  def __sub__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import SubFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), SubFeature)
+
+  def __mul__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import ProductFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), ProductFeature)
+
+  def __mod__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import ModFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), ModFeature)
+
+  def __truediv__(self, other: "FeatureGen") -> "FeatureGen":
+    from lib.features import BiComposeFeature
+    from lib.features.binary import DivideFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), DivideFeature)
+
+  def __gt__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import IsGreaterFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), IsGreaterFeature)
+
+  def __lt__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import IsLessFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), IsLessFeature)
+
+  def __ge__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import GEFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), GEFeature)
+
+  def __le__(self, other):
+    from lib.features import BiComposeFeature
+    from lib.features.binary import LEFeature
+
+    return BiComposeFeature.make(self, self.__conv_const(other), LEFeature)
+
+  @staticmethod
+  def sar(high: str, low: str) -> "FeatureGen":
+    from lib.features.binary import SARFeature
+    return SARFeature(high, low)
+
+  @staticmethod
+  def sarext(high: str, low: str) -> "FeatureGen":
+    from lib.features.binary import SAREXTFeature
+    return SAREXTFeature(high, low)
+
+  @staticmethod
+  def adxes(high: str, low: str, close: str, periods: List[int]) -> List["FeatureGen"]:
+    return [FeatureGen.adx(high, low, close, period) for period in periods]
+
+  @staticmethod
+  def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
+    from lib.features.tri.ADXFeature import ADXFeature
+    return ADXFeature(high, low, close, period)
+
+  @staticmethod
+  def adxrs(high: str, low: str, close: str, periods: List[int]) -> List["FeatureGen"]:
+    return [FeatureGen.adx(high, low, close, period) for period in periods]
+
+  @staticmethod
+  def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
+    from lib.features.tri import ADXRFeature
+    return ADXRFeature(high, low, close, period)
+
+  @staticmethod
+  def aroon_up(high: str, low: str, period: int) -> "FeatureGen":
+    from lib.features.binary import AROONUpFeature
+    return AROONUpFeature(high, low, period)
+
+  @staticmethod
+  def aroon_ups(high: str, low: str, periods: List[int]) -> List["FeatureGen"]:
+    return [FeatureGen.aroon_up(high, low, period) for period in periods]
+
+  @staticmethod
+  def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
+    from lib.features.binary import AROONDownFeature
+    return AROONDownFeature(high, low, period)
+
+  @staticmethod
+  def aroon_downs(high: str, low: str, periods: List[int]) -> List["FeatureGen"]:
+    return [FeatureGen.aroon_down(high, low, period) for period in periods]
+
+  @staticmethod
+  def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
+    from lib.features.binary import AROONOSCFeature
+    return AROONOSCFeature(high, low, period)
+
+  @staticmethod
+  def arron_oscs(high: str, low: str, periods: List[int]) -> List["FeatureGen"]:
+    return [FeatureGen.arron_osc(high, low, period) for period in periods]
+
+  @staticmethod
+  def bop(open_col: str = "open", high: str = "high", low: str = "low", close: str = "close") -> "FeatureGen":
+    from lib.features.quadri import BOPFeature
+    return BOPFeature(open_col, high, low, close)
 
   def __conv_const(self, con: Any):
     from lib.features.dsl import c
@@ -236,6 +353,5 @@ class FeatureGen(ABC, StaticMixin):
       return c(con)
     else:
       return con
-
 
 FG = FeatureGen
