@@ -1,7 +1,7 @@
 import pandas as pd
-
-from declafe import FeatureGen
 import talib
+
+from ..feature_gen import FeatureGen
 
 
 class BOPFeature(FeatureGen):

@@ -1,9 +1,9 @@
 from typing import Any, TYPE_CHECKING
 
-from declafe.ConstFeature import ConstFeature
+from .ConstFeature import ConstFeature
 
 if TYPE_CHECKING:
-  from declafe.unary.IdFeature import IdFeature
+  from .unary import IdFeature
 
 
 def c(v: Any) -> ConstFeature:
@@ -11,5 +11,5 @@ def c(v: Any) -> ConstFeature:
 
 
 def col(column_name: str) -> "IdFeature":
-  from declafe.unary.IdFeature import IdFeature
+  from .unary.IdFeature import IdFeature
   return IdFeature(column_name)

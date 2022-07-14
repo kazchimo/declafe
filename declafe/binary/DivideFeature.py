@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["DivideFeature"]
 
-from declafe.binary.BinaryFeature import BinaryFeature
+from .BinaryFeature import BinaryFeature
 
 
 class DivideFeature(BinaryFeature):

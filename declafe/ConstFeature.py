@@ -2,7 +2,7 @@ from typing import Any
 
 import pandas as pd
 
-from declafe.feature_gen.FeatureGen import FeatureGen
+from .feature_gen import FeatureGen
 
 __all__ = ["ConstFeature"]
 

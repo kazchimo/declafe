@@ -4,7 +4,7 @@ import pandas as pd
 
 __all__ = ["GEFeature"]
 
-from declafe.binary.BinaryFeature import BinaryFeature
+from .BinaryFeature import BinaryFeature
 
 
 @dataclass

@@ -1,7 +1,7 @@
 from typing import Type, Optional, List
 
-from declafe.agg_feature_gen.AggFeatures import AggFeatures
-from declafe.agg_feature_gen.agg_fun import *
+from .AggFeatures import AggFeatures
+from .agg_fun import *
 
 __all__ = ["GroupBy", "groupby"]
 

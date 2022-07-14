@@ -1,8 +1,9 @@
 import pandas as pd
 
-from declafe import FeatureGen, Features
+from declafe import Features
 from declafe.binary import SARFeature
 from declafe.dsl import c, col
+from declafe.feature_gen import FeatureGen
 from declafe.unary import LogFeature, SumFeature
 
 test_df = pd.DataFrame(

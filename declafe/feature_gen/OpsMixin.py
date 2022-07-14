@@ -1,23 +1,23 @@
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-  from declafe import FeatureGen
+  from ..feature_gen import FeatureGen
 
 
 class OpsMixin:
 
   @staticmethod
   def _bc():
-    from declafe.binary.BiComposeFeature import BiComposeFeature
+    from ..binary.BiComposeFeature import BiComposeFeature
     return BiComposeFeature
 
   @staticmethod
   def _conv(a: Any):
-    from declafe.ConstFeature import ConstFeature
+    from ..ConstFeature import ConstFeature
     return ConstFeature.conv(a)
 
   def __eq__(self: "FeatureGen", other):
-    from declafe.binary import EqualFeature, BiComposeFeature
+    from ..binary import EqualFeature, BiComposeFeature
 
     return BiComposeFeature.make(
         left=self, right=self._conv(other), to=EqualFeature)
@@ -26,45 +26,45 @@ class OpsMixin:
     return (self == other).flip_bool()
 
   def __add__(self: "FeatureGen", other):
-    from declafe.binary import AddFeature
+    from ..binary import AddFeature
     return self._bc().make(left=self, right=self._conv(other), to=AddFeature)
 
   def __sub__(self: "FeatureGen", other):
-    from declafe.binary import SubFeature
+    from ..binary import SubFeature
 
     return self._bc().make(self, self._conv(other), SubFeature)
 
   def __mul__(self: "FeatureGen", other):
-    from declafe.binary import ProductFeature
+    from ..binary import ProductFeature
 
     return self._bc().make(self, self._conv(other), ProductFeature)
 
   def __mod__(self: "FeatureGen", other):
-    from declafe.binary import ModFeature
+    from ..binary import ModFeature
 
     return self._bc().make(self, self._conv(other), ModFeature)
 
   def __truediv__(self: "FeatureGen", other: "FeatureGen") -> "FeatureGen":
-    from declafe.binary import DivideFeature
+    from ..binary import DivideFeature
 
     return self._bc().make(self, self._conv(other), DivideFeature)
 
   def __gt__(self: "FeatureGen", other):
-    from declafe.binary import IsGreaterFeature
+    from ..binary import IsGreaterFeature
 
     return self._bc().make(self, self._conv(other), IsGreaterFeature)
 
   def __lt__(self: "FeatureGen", other):
-    from declafe.binary import IsLessFeature
+    from ..binary import IsLessFeature
 
     return self._bc().make(self, self._conv(other), IsLessFeature)
 
   def __ge__(self: "FeatureGen", other):
-    from declafe.binary import GEFeature
+    from ..binary import GEFeature
 
     return self._bc().make(self, self._conv(other), GEFeature)
 
   def __le__(self: "FeatureGen", other):
-    from declafe.binary import LEFeature
+    from ..binary import LEFeature
 
     return self._bc().make(self, self._conv(other), LEFeature)

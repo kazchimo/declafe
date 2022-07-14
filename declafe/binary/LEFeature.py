@@ -4,7 +4,7 @@ import pandas as pd
 
 __all__ = ["LEFeature"]
 
-from declafe.binary.BinaryFeature import BinaryFeature
+from .BinaryFeature import BinaryFeature
 
 
 @dataclass

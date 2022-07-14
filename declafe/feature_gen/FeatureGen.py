@@ -10,7 +10,7 @@ from .ConstructorMixin import ConstructorMixin
 from .OpsMixin import OpsMixin
 
 if TYPE_CHECKING:
-  from declafe import Features
+  from ..Features import Features
 
 
 class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
@@ -54,7 +54,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
   @property
   def to_features(self) -> "Features":
-    from declafe import Features
+    from ..Features import Features
     return Features.one(self)
 
   def to_features_with(self, other: "FeatureGen") -> "Features":

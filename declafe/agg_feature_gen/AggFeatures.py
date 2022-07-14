@@ -2,7 +2,7 @@ from typing import List, Dict
 
 import pandas as pd
 
-from declafe.agg_feature_gen.agg_fun import AggFun
+from .agg_fun import AggFun
 
 
 class AggFeatures:

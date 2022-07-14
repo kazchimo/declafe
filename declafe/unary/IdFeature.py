@@ -6,7 +6,7 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["IdFeature"]
 
-from declafe.dsl import col
+from ..dsl import col
 
 if TYPE_CHECKING:
   from .. import FeatureGen

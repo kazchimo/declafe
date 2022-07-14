@@ -1,7 +1,7 @@
 import pandas as pd
-
-from declafe.feature_gen.FeatureGen import FeatureGen
 import talib
+
+from ..feature_gen import FeatureGen
 
 
 class ADXRFeature(FeatureGen):

@@ -1,19 +1,20 @@
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
-  from declafe import Features, FeatureGen
+  from ..Features import Features
+  from ..feature_gen import FeatureGen
 
 
 class ConstructorMixin:
 
   @staticmethod
   def sar(high: str, low: str) -> "FeatureGen":
-    from declafe.binary import SARFeature
+    from ..binary import SARFeature
     return SARFeature(high, low)
 
   @staticmethod
   def sarext(high: str, low: str) -> "FeatureGen":
-    from declafe.binary import SAREXTFeature
+    from ..binary import SAREXTFeature
     return SAREXTFeature(high, low)
 
   @classmethod
@@ -23,7 +24,7 @@ class ConstructorMixin:
 
   @staticmethod
   def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from declafe.tri.ADXFeature import ADXFeature
+    from ..tri.ADXFeature import ADXFeature
     return ADXFeature(high, low, close, period)
 
   @classmethod
@@ -33,12 +34,12 @@ class ConstructorMixin:
 
   @staticmethod
   def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from declafe.tri import ADXRFeature
+    from ..tri import ADXRFeature
     return ADXRFeature(high, low, close, period)
 
   @staticmethod
   def aroon_up(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.binary import AROONUpFeature
+    from ..binary import AROONUpFeature
     return AROONUpFeature(high, low, period)
 
   @classmethod
@@ -47,7 +48,7 @@ class ConstructorMixin:
 
   @staticmethod
   def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.binary import AROONDownFeature
+    from ..binary import AROONDownFeature
     return AROONDownFeature(high, low, period)
 
   @classmethod
@@ -56,7 +57,7 @@ class ConstructorMixin:
 
   @staticmethod
   def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.binary import AROONOSCFeature
+    from ..binary import AROONOSCFeature
     return AROONOSCFeature(high, low, period)
 
   @classmethod
@@ -69,5 +70,5 @@ class ConstructorMixin:
       high: str = "high",
       low: str = "low",
       close: str = "close") -> "FeatureGen":
-    from declafe.quadri import BOPFeature
+    from ..quadri import BOPFeature
     return BOPFeature(open_col, high, low, close)

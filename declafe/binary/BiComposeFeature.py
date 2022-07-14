@@ -2,11 +2,11 @@ from typing import Type, Dict, Any
 
 import pandas as pd
 
-from declafe import FeatureGen
+from ..feature_gen import FeatureGen
 
 __all__ = ["BiComposeFeature"]
 
-from declafe.binary.BinaryFeature import BinaryFeature
+from .BinaryFeature import BinaryFeature
 
 
 class BiComposeFeature(FeatureGen):
@@ -44,7 +44,7 @@ class BiComposeFeature(FeatureGen):
       right: FeatureGen,
       to: Type[BinaryFeature],
       toKwargs: Dict[str, Any] = None) -> "FeatureGen":
-    from declafe.unary import IdFeature
+    from ..unary import IdFeature
     if isinstance(left, IdFeature) and isinstance(right, IdFeature):
       return to(
           left=left.column_name, right=right.column_name, **(toKwargs or {}))
