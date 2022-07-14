@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
-from typing import List, Type, cast
+from typing import List, Type
 from declafe.unary import *
-from .feature_gen import FeatureGen
+from declafe.feature_gen.FeatureGen import FeatureGen
 import pandas as pd
 
 

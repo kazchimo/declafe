@@ -1,6 +1,6 @@
 import pandas as pd
 
-from declafe.feature_gen import FeatureGen
+from declafe.feature_gen.FeatureGen import FeatureGen
 import talib
 
 

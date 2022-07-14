@@ -2,7 +2,7 @@ from typing import Union
 
 import numpy
 
-from .feature_gen import *
+from declafe.feature_gen.FeatureGen import *
 from .Features import *
 from .ComposedFeature import *
 from .ConstFeature import *
