@@ -5,5 +5,5 @@ venv = ".venv"
 
 [tool.yapfignore]
 ignore_patterns = [
-    "venv/*"
+    ".venv/*"
 ]
