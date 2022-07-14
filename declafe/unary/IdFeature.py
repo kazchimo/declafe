@@ -1,4 +1,4 @@
-from typing import List, TypeGuard
+from typing import List, TypeGuard, TYPE_CHECKING
 
 import pandas as pd
 
@@ -6,8 +6,10 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["IdFeature"]
 
-from .. import FeatureGen
-from declafe.composed import MinuteNFeature
+from declafe.dsl import col
+
+if TYPE_CHECKING:
+  from .. import FeatureGen
 
 
 class IdFeature(UnaryColumnFeature):
@@ -26,25 +28,33 @@ class IdFeature(UnaryColumnFeature):
   def many(columns: List[str]) -> List["IdFeature"]:
     return [IdFeature(c) for c in columns]
 
-  def minute_ns(self, ns: List[int]) -> "MinuteNFeature":
-    from .. import MinuteNFeature
-    return [MinuteNFeature(self.column_name, n) for n in ns]
+  def minute_n(self, n: int) -> "FeatureGen":
+    gen = (col(self.column_name).minute() % n) == 0
+    return gen.as_name_of(f"minute{n}")
 
-  def hour_ns(self, ns: List[int]) -> "HourNFeature":
-    from .. import HourNFeature
-    return [HourNFeature(self.column_name, n) for n in ns]
+  def minute_ns(self, ns: List[int]) -> List["FeatureGen"]:
+    return [self.minute_n(n) for n in ns]
+
+  def hour_n(self, n: int) -> "FeatureGen":
+    gen = (col(self.column_name).hour() % n) == 0
+    return gen.as_name_of(f"hour{n}")
+
+  def hour_ns(self, ns: List[int]) -> List["FeatureGen"]:
+    return [self.hour_n(n) for n in ns]
+
+  def dip_against(self, high_column: str, max_high_period: int) -> "FeatureGen":
+    gen = (col(self.column_name) / col(high_column).moving_max(max_high_period)) - 1
+    return gen.as_name_of(f"dip_{self.column_name}_against_max{max_high_period}_of_{high_column}")
 
   def dip_againsts(self, high_column: str, max_high_periods: List[int]) -> List["FeatureGen"]:
-    from declafe.unary import IdFeature
-    from declafe.composed import DipFeature
+    return [self.dip_against(high_column, p) for p in max_high_periods]
 
-    return [DipFeature(price_column=self.column_name, high_column=high_column, hh_period=p) for p in max_high_periods]
+  def rip_against(self, low_column: str, min_low_period: int) -> "FeatureGen":
+    gen = (col(self.column_name) / col(low_column).moving_min(min_low_period)) - 1
+    return gen.as_name_of(f"rip_{self.column_name}_against_min{min_low_period}_of_{low_column}")
 
   def rip_againsts(self, low_column: str, min_low_periods: List[int]) -> List["FeatureGen"]:
-    from declafe.unary import IdFeature
-    from declafe.composed import RipFeature
-
-    return [RipFeature(price_column=self.column_name, low_column=low_column, ll_period=p) for p in min_low_periods]
+    return [self.rip_against(low_column, p) for p in min_low_periods]
 
   @staticmethod
   def is_id(a: FeatureGen) -> TypeGuard["IdFeature"]:
