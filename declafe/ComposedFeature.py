@@ -2,8 +2,8 @@ from typing import List
 
 import pandas as pd
 
-from declafe.feature_gen.FeatureGen import *
-from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
+from .feature_gen import FeatureGen
+from .unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["ComposedFeature"]
 
