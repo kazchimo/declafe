@@ -1,7 +1,7 @@
 from typing import Type, Optional, List
 
 from declafe.agg_feature_gen.AggFeatures import AggFeatures
-from declafe.agg_feature_gen.agg_fun import CountAgg, AggFun, LastAgg
+from declafe.agg_feature_gen.agg_fun import *
 
 __all__ = ["GroupBy", "groupby"]
 
@@ -21,6 +21,26 @@ class GroupBy:
   @property
   def last(self):
     return self.add_agg(LastAgg)
+
+  @property
+  def max(self):
+    return self.add_agg(MaxAgg)
+
+  @property
+  def min(self):
+    return self.add_agg(MinAgg)
+
+  @property
+  def mean(self):
+    return self.add_agg(MeanAgg)
+
+  @property
+  def nunique(self):
+    return self.add_agg(NUniqueAgg)
+
+  @property
+  def std(self):
+    return self.add_agg(StdAgg)
 
   def add_agg(self, agg: Type[AggFun]):
     return GroupBy(self.by, self.aggs + [agg])
