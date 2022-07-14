@@ -8,6 +8,7 @@ pandas = "*"
 numpy = "*"
 ta-lib = "*"
 pyright = "*"
+typing-extensions = "*"
 
 [dev-packages]
 
