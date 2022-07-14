@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["DayOfWeekFeature"]
 

@@ -1,9 +1,6 @@
-import re
 from dataclasses import dataclass
 
 import pandas as pd
-
-from declafe import FeatureGen
 
 __all__ = ["LEFeature"]
 
