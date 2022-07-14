@@ -1,4 +1,5 @@
-from typing import Type, Optional, List
+import functools
+from typing import Type, Optional, List, Protocol
 
 from .AggFeatures import AggFeatures
 from .agg_fun import *
@@ -6,9 +7,23 @@ from .agg_fun import *
 __all__ = ["GroupBy", "groupby"]
 
 
+class AggConst(Protocol):
+
+  def __call__(self, target: str) -> AggFun:
+    ...
+
+
+def partialclass(cls, *args, **kwds):
+
+  class NewCls(cls):
+    __init__ = functools.partialmethod(cls.__init__, *args, **kwds)
+
+  return NewCls
+
+
 class GroupBy:
 
-  def __init__(self, by: str, aggs: Optional[List[Type[AggFun]]] = None):
+  def __init__(self, by: str, aggs: Optional[List[AggConst]] = None):
     if aggs is None:
       aggs = []
     self.aggs = aggs
@@ -41,6 +56,9 @@ class GroupBy:
   @property
   def std(self):
     return self.add_agg(StdAgg)
+
+  def diff_at(self, at: int):
+    return self.add_agg(partialclass(DiffAtAgg.__init__, at=at))
 
   def add_agg(self, agg: Type[AggFun]):
     return GroupBy(self.by, self.aggs + [agg])

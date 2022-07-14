@@ -1,5 +1,6 @@
 from .AggFun import *
 from .CountAgg import *
+from .DiffAtAgg import *
 from .LastAgg import *
 from .MaxAgg import *
 from .MeanAgg import *
