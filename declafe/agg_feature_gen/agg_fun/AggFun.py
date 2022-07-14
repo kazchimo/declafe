@@ -1,0 +1,28 @@
+from abc import ABC, abstractmethod
+from typing import Any
+
+import pandas as pd
+
+__all__ = ["AggFun"]
+
+
+class AggFun(ABC):
+
+  def __init__(self, target: str):
+    self.target = target
+
+  @abstractmethod
+  def __call__(self, ser: pd.Series) -> Any:
+    raise NotImplementedError
+
+  @property
+  @abstractmethod
+  def fun_name(self) -> str:
+    raise NotImplementedError
+
+  @property
+  def name(self) -> str:
+    return f"{self.fun_name}_of_{self.target}"
+
+  def as_named_agg(self) -> pd.NamedAgg:
+    return pd.NamedAgg(column=self.target, aggfunc=self)
