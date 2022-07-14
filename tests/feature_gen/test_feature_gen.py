@@ -1,8 +1,8 @@
 import pandas as pd
 
-from declafe import FeatureGen, LogFeature, Features
+from declafe import FeatureGen, LogFeature, Features, SumFeature
+from declafe.binary import SARFeature
 from declafe.dsl import c
-from declafe.unary import MovingAverage
 
 test_df = pd.DataFrame(
     {
@@ -67,5 +67,15 @@ class TestMovingSums:
 
     _1.moving_sums([3, 5]).set_features(df1)
     Features.many(
-        MovingAverage(3, _1.feature_name),
-        MovingAverage(5, _1.feature_name)).set_features(df2)
+        SumFeature(3, _1.feature_name),
+        SumFeature(5, _1.feature_name)).set_features(df2)
+
+    assert df1.equals(df2)
+
+
+class TestSar:
+
+  def test_return_sar(self):
+    assert FeatureGen.sar("a", "b")\
+      .gen(test_df)\
+      .equals(SARFeature("a", "b").gen(test_df))
