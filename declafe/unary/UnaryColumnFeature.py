@@ -5,7 +5,7 @@ import pandas as pd
 from declafe.feature_gen import FeatureGen
 
 
-class UnaryColumnFeature(ABC, FeatureGen):
+class UnaryColumnFeature(FeatureGen):
   def __init__(self, column_name: str):
     super().__init__()
     self.column_name = column_name

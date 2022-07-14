@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Type
+from typing import List, Type, cast
 from declafe.unary import *
 from .feature_gen import FeatureGen
 import pandas as pd
@@ -30,8 +30,11 @@ class Features(ClsMixin):
     return [f.feature_name for f in self.feature_gens]
 
   def unary_feature_name_of(self, column_name: str):
-    return [f.feature_name for f in self.feature_gens if
-            isinstance(f, UnaryColumnFeature) and f.column_name == column_name]
+    return [f.feature_name
+            for f in self.feature_gens
+            if isinstance(f, UnaryColumnFeature)
+            and cast(UnaryColumnFeature, f).column_name == column_name
+            ]
 
   def filter_by_name(self, feature_names: List[str]):
     return Features([f for f in self.feature_gens if f.feature_name in feature_names])

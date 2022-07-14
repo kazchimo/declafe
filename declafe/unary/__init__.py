@@ -1,5 +1,5 @@
-from .ComposedUnaryFeature import ComposedUnaryFeature
-from .UnaryColumnFeature import UnaryColumnFeature
+from .ComposedUnaryFeature import *
+from .UnaryColumnFeature import *
 from .IdFeature import *
 from .LagFeature import LagFeature
 from .WeightedMovingAverage import WeightedMovingAverage

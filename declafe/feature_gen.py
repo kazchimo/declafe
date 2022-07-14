@@ -6,8 +6,9 @@ import pandas as pd
 __all__ = ["FeatureGen", "FG"]
 
 if TYPE_CHECKING:
-  from declafe import ComposedFeature, UnaryColumnFeature, BiComposeFeature, Features
+  from declafe import ComposedFeature, BiComposeFeature, Features
   from declafe.unary import IdFeature
+  from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 
 class FeatureGen(ABC):
