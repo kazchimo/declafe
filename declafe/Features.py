@@ -1,8 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Type
+
 from declafe.unary import *
-from declafe.feature_gen.FeatureGen import FeatureGen
-import pandas as pd
 
 
 class ClsMixin:
@@ -84,6 +83,10 @@ class Features(ClsMixin):
   @staticmethod
   def two(feature_gen1: FeatureGen, feature_gen2: FeatureGen) -> "Features":
     return Features([feature_gen1, feature_gen2])
+
+  @staticmethod
+  def many(*args: FeatureGen) -> "Features":
+    return Features(list(args))
 
 
 F = Features

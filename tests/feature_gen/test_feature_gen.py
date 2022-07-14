@@ -1,7 +1,8 @@
 import pandas as pd
 
-from declafe import FeatureGen, LogFeature
+from declafe import FeatureGen, LogFeature, Features
 from declafe.dsl import c
+from declafe.unary import MovingAverage
 
 test_df = pd.DataFrame(
     {
@@ -54,3 +55,17 @@ class TestLog:
         LogFeature("").gen_unary(pd.Series(1, index=test_df.index)))
     assert Double("a").log().gen(test_df).equals(
         LogFeature("").gen_unary(test_df["a"] * 2))
+
+
+class TestMovingSums:
+
+  def test_return_moving_sums(self):
+    df1 = test_df.copy()
+    df2 = test_df.copy()
+    _1.set_feature(df1)
+    _1.set_feature(df2)
+
+    _1.moving_sums([3, 5]).set_features(df1)
+    Features.many(
+        MovingAverage(3, _1.feature_name),
+        MovingAverage(5, _1.feature_name)).set_features(df2)

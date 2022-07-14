@@ -15,6 +15,8 @@ class FeatureGen(ABC):
 
   def __init__(self):
     self.override_feature_name: Optional[str] = None
+    from declafe.Features import Features
+    self.FS = Features
 
   @abstractmethod
   def gen(self, df: pd.DataFrame) -> pd.Series:
@@ -98,8 +100,8 @@ class FeatureGen(ABC):
     from declafe.unary import MovingAverage
     return self.next(MovingAverage, periods=period)
 
-  def moving_sums(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.moving_sum(p) for p in periods]
+  def moving_sums(self, periods: List[int]) -> "Features":
+    return self.FS([self.moving_sum(p) for p in periods])
 
   def moving_sum(self, period: int) -> "FeatureGen":
     from declafe.unary import SumFeature
@@ -109,8 +111,8 @@ class FeatureGen(ABC):
     from declafe.unary import EMAFeature
     return self.next(EMAFeature, periods=period)
 
-  def emas(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.ema(period) for period in periods]
+  def emas(self, periods: List[int]) -> "Features":
+    return Features([self.ema(period) for period in periods])
 
   def wma(self, period: int) -> "FeatureGen":
     from declafe.unary import WeightedMovingAverage
