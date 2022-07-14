@@ -6,7 +6,7 @@ import pandas as pd
 __all__ = ["FeatureGen", "FG"]
 
 if TYPE_CHECKING:
-  from declafe import ComposedFeature, BiComposeFeature, Features
+  from declafe import ComposedFeature, Features
   from declafe.unary import IdFeature
   from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
@@ -236,53 +236,53 @@ class FeatureGen(ABC):
 
   def __add__(self, other):
     from declafe.binary import AddFeature
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     return BiComposeFeature.make(left=self, right=other, to=AddFeature)
 
   def __sub__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import SubFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), SubFeature)
 
   def __mul__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import ProductFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), ProductFeature)
 
   def __mod__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import ModFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), ModFeature)
 
   def __truediv__(self, other: "FeatureGen") -> "FeatureGen":
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import DivideFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), DivideFeature)
 
   def __gt__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import IsGreaterFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), IsGreaterFeature)
 
   def __lt__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import IsLessFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), IsLessFeature)
 
   def __ge__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import GEFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), GEFeature)
 
   def __le__(self, other):
-    from declafe import BiComposeFeature
+    from declafe.binary import BiComposeFeature
     from declafe.binary import LEFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), LEFeature)
