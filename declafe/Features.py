@@ -33,7 +33,7 @@ class Features(ClsMixin):
     return [f.feature_name
             for f in self.feature_gens
             if isinstance(f, UnaryColumnFeature)
-            and cast(UnaryColumnFeature, f).column_name == column_name
+            and f.column_name == column_name
             ]
 
   def filter_by_name(self, feature_names: List[str]):
