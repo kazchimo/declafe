@@ -118,11 +118,11 @@ class FeatureGen(ABC):
     from declafe.unary import WeightedMovingAverage
     return self.next(WeightedMovingAverage, periods=period)
 
-  def wmas(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.wma(period) for period in periods]
+  def wmas(self, periods: List[int]) -> "Features":
+    return Features([self.wma(period) for period in periods])
 
-  def kamas(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.kama(period) for period in periods]
+  def kamas(self, periods: List[int]) -> "Features":
+    return Features([self.kama(period) for period in periods])
 
   def kama(self, period: int) -> "FeatureGen":
     from declafe.unary import KAMAFeature
@@ -140,64 +140,64 @@ class FeatureGen(ABC):
     from declafe.unary import TEMAFeature
     return self.next(TEMAFeature, period=period)
 
-  def temas(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.tema(period) for period in periods]
+  def temas(self, periods: List[int]) -> "Features":
+    return Features([self.tema(period) for period in periods])
 
   def trima(self, period: int) -> "FeatureGen":
     from declafe.unary import TRIMAFeature
     return self.next(TRIMAFeature, period=period)
 
-  def trimas(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.trima(period) for period in periods]
+  def trimas(self, periods: List[int]) -> "Features":
+    return Features([self.trima(period) for period in periods])
 
   def t3(self, period) -> "FeatureGen":
     from declafe.unary import T3Feature
     return self.next(T3Feature, period=period)
 
-  def t3s(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.t3(period) for period in periods]
+  def t3s(self, periods: List[int]) -> "Features":
+    return Features([self.t3(period) for period in periods])
 
   def apo(self) -> "FeatureGen":
     from declafe.unary import APOFeature
     return self.next(APOFeature)
 
-  def moving_midpoints(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.moving_midpoint(p) for p in periods]
+  def moving_midpoints(self, periods: List[int]) -> "Features":
+    return Features([self.moving_midpoint(p) for p in periods])
 
   def moving_midpoint(self, period: int) -> "FeatureGen":
     from declafe.unary import MidpointFeature
     return self.next(MidpointFeature, periods=period)
 
-  def moving_stds(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.moving_std(p) for p in periods]
+  def moving_stds(self, periods: List[int]) -> "Features":
+    return Features([self.moving_std(p) for p in periods])
 
   def moving_std(self, period: int) -> "FeatureGen":
     from declafe.unary import StddevFeature
     return self.next(StddevFeature, periods=period)
 
-  def pct_changes(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.pct_change(p) for p in periods]
+  def pct_changes(self, periods: List[int]) -> "Features":
+    return Features([self.pct_change(p) for p in periods])
 
   def pct_change(self, period: int) -> "FeatureGen":
     from declafe.unary import PctChangeFeature
     return self.next(PctChangeFeature, periods=period)
 
-  def lags(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.lag(p) for p in periods]
+  def lags(self, periods: List[int]) -> "Features":
+    return Features([self.lag(p) for p in periods])
 
   def lag(self, period: int) -> "FeatureGen":
     from declafe.unary import LagFeature
     return self.next(LagFeature, periods=period)
 
-  def moving_maxes(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.moving_max(period) for period in periods]
+  def moving_maxes(self, periods: List[int]) -> "Features":
+    return Features([self.moving_max(period) for period in periods])
 
   def moving_max(self, period: int) -> "FeatureGen":
     from declafe.unary import MaxFeature
     return self.next(MaxFeature, periods=period)
 
-  def moving_mins(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.moving_min(p) for p in periods]
+  def moving_mins(self, periods: List[int]) -> "Features":
+    return Features([self.moving_min(p) for p in periods])
 
   def moving_min(self, period: int) -> "FeatureGen":
     from declafe.unary import MinFeature
@@ -219,15 +219,15 @@ class FeatureGen(ABC):
     from declafe.unary import FlipBoolFeature
     return self.next(FlipBoolFeature)
 
-  def bbands_uppers(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.bbands_upper(period) for period in periods]
+  def bbands_uppers(self, periods: List[int]) -> "Features":
+    return Features([self.bbands_upper(period) for period in periods])
 
   def bbands_upper(self, period: int) -> "FeatureGen":
     from declafe.unary import BBandsUpperFeature
     return self.next(BBandsUpperFeature, periods=period)
 
-  def bbands_lowers(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.bbands_lower(period) for period in periods]
+  def bbands_lowers(self, periods: List[int]) -> "Features":
+    return Features([self.bbands_lower(period) for period in periods])
 
   def bbands_lower(self, period: int) -> "FeatureGen":
     from declafe.unary import BBandsLowerFeature
@@ -307,9 +307,9 @@ class FeatureGen(ABC):
     return SAREXTFeature(high, low)
 
   @staticmethod
-  def adxes(high: str, low: str, close: str,
-            periods: List[int]) -> List["FeatureGen"]:
-    return [FeatureGen.adx(high, low, close, period) for period in periods]
+  def adxes(high: str, low: str, close: str, periods: List[int]) -> "Features":
+    return Features(
+        [FeatureGen.adx(high, low, close, period) for period in periods])
 
   @staticmethod
   def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
@@ -317,9 +317,9 @@ class FeatureGen(ABC):
     return ADXFeature(high, low, close, period)
 
   @staticmethod
-  def adxrs(high: str, low: str, close: str,
-            periods: List[int]) -> List["FeatureGen"]:
-    return [FeatureGen.adx(high, low, close, period) for period in periods]
+  def adxrs(high: str, low: str, close: str, periods: List[int]) -> "Features":
+    return Features(
+        [FeatureGen.adx(high, low, close, period) for period in periods])
 
   @staticmethod
   def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
@@ -332,8 +332,9 @@ class FeatureGen(ABC):
     return AROONUpFeature(high, low, period)
 
   @staticmethod
-  def aroon_ups(high: str, low: str, periods: List[int]) -> List["FeatureGen"]:
-    return [FeatureGen.aroon_up(high, low, period) for period in periods]
+  def aroon_ups(high: str, low: str, periods: List[int]) -> "Features":
+    return Features(
+        [FeatureGen.aroon_up(high, low, period) for period in periods])
 
   @staticmethod
   def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
@@ -341,9 +342,9 @@ class FeatureGen(ABC):
     return AROONDownFeature(high, low, period)
 
   @staticmethod
-  def aroon_downs(high: str, low: str,
-                  periods: List[int]) -> List["FeatureGen"]:
-    return [FeatureGen.aroon_down(high, low, period) for period in periods]
+  def aroon_downs(high: str, low: str, periods: List[int]) -> "Features":
+    return Features(
+        [FeatureGen.aroon_down(high, low, period) for period in periods])
 
   @staticmethod
   def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
@@ -351,8 +352,9 @@ class FeatureGen(ABC):
     return AROONOSCFeature(high, low, period)
 
   @staticmethod
-  def arron_oscs(high: str, low: str, periods: List[int]) -> List["FeatureGen"]:
-    return [FeatureGen.arron_osc(high, low, period) for period in periods]
+  def arron_oscs(high: str, low: str, periods: List[int]) -> "Features":
+    return Features(
+        [FeatureGen.arron_osc(high, low, period) for period in periods])
 
   @staticmethod
   def bop(
