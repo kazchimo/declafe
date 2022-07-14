@@ -2,13 +2,16 @@ import pandas as pd
 
 from declafe import FeatureGen, LogFeature, Features, SumFeature
 from declafe.binary import SARFeature
-from declafe.dsl import c
+from declafe.dsl import c, col
 
 test_df = pd.DataFrame(
     {
         "a": list(range(1, 1001)),
         "b": list(range(1001, 2001))
     })
+
+a = col("a")
+b = col("b")
 
 
 class SimpleGen(FeatureGen):
@@ -79,3 +82,9 @@ class TestSar:
     assert FeatureGen.sar("a", "b")\
       .gen(test_df)\
       .equals(SARFeature("a", "b").gen(test_df))
+
+
+class TestAdd:
+
+  def test_add(self):
+    assert (a + 1).gen(test_df).equals(test_df["a"] + 1)
