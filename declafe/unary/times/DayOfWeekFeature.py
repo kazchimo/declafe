@@ -6,8 +6,6 @@ from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["DayOfWeekFeature"]
 
-regex = "day_of_week_of_(\w+)"
-
 
 @dataclass
 class DayOfWeekFeature(UnaryColumnFeature):

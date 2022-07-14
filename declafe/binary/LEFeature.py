@@ -9,8 +9,6 @@ __all__ = ["LEFeature"]
 
 from declafe.binary.BinaryFeature import BinaryFeature
 
-regex = "(\w+)_is_less_than_equal_(\w+)"
-
 @dataclass
 class LEFeature(BinaryFeature):
   left: str
@@ -21,14 +19,3 @@ class LEFeature(BinaryFeature):
 
   def _feature_name(self) -> str:
     return f"{self.left}_is_less_than_equal_{self.right}"
-
-  @staticmethod
-  def serial_num() -> int:
-    return 24
-
-  @staticmethod
-  def parse(s: str) -> "FeatureGen":
-    match = re.match(regex, s)
-    if match is None:
-      raise ValueError(f"{s}は正しい形式ではありません")
-    return LEFeature(left=match.group(1), right=match.group(2))

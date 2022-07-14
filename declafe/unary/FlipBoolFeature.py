@@ -4,8 +4,6 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["FlipBoolFeature"]
 
-regex = "not_(\w+)"
-
 
 class FlipBoolFeature(UnaryColumnFeature):
 

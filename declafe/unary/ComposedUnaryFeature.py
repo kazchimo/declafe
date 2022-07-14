@@ -6,8 +6,6 @@ from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["ComposedUnaryFeature"]
 
-regex = "composed_of_(.+?)_of_(\w+)"
-
 class ComposedUnaryFeature(UnaryColumnFeature):
 
   def __init__(self, features: List[UnaryColumnFeature], column_name: str):
