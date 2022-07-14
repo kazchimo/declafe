@@ -1,9 +1,13 @@
+from typing import TYPE_CHECKING
+
 import pandas as pd
 
-from declafe import series
 from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["PctChangeFeature"]
+
+if TYPE_CHECKING:
+  from declafe import series
 
 
 class PctChangeFeature(UnaryColumnFeature):
@@ -20,6 +24,6 @@ class PctChangeFeature(UnaryColumnFeature):
     return ser.pct_change(periods=self.periods)
 
   @staticmethod
-  def gen_target(values: series, changes: series) -> pd.Series:
+  def gen_target(values: "series", changes: "series") -> pd.Series:
     """変化率から実際に変化後の値を返す"""
     return values * (1 + changes)

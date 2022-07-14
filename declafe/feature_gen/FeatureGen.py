@@ -85,14 +85,14 @@ class FeatureGen(ABC):
     from declafe.unary import LogFeature
     return self.next(LogFeature)
 
-  def is_up(self, period: int = 1):
+  def is_up(self, period: int = 1) -> "FeatureGen":
     return (self.pct_change(period) > 0).as_name_of(f"is_up{period}")
 
-  def is_down(self, period: int = 1):
+  def is_down(self, period: int = 1) -> "FeatureGen":
     return (self.pct_change(period) < 0).as_name_of(f"is_down{period}")
 
-  def moving_averages(self, periods: List[int]) -> List["FeatureGen"]:
-    return [self.moving_average(p) for p in periods]
+  def moving_averages(self, periods: List[int]) -> "Features":
+    return Features([self.moving_average(p) for p in periods])
 
   def moving_average(self, period: int) -> "FeatureGen":
     from declafe.unary import MovingAverage
