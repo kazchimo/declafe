@@ -28,7 +28,3 @@ class ComposedFeature(FeatureGen):
 
   def _feature_name(self) -> str:
     return self.nexts[-1].feature_name
-
-  @staticmethod
-  def chain(first: FeatureGen, second: FeatureGen) -> "ComposedFeature":
-    return ComposedFeature(head=first, nexts=[second])
