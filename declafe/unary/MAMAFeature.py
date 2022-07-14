@@ -1,7 +1,7 @@
 import pandas as pd
+import talib
 
 from .UnaryColumnFeature import UnaryColumnFeature
-import talib
 
 __all__ = ["MAMAFeature", "FAMAFeature"]
 
