@@ -1,6 +1,6 @@
 import pandas as pd
 
-from lib import series
+from declafe import series
 from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["PctChangeFeature"]
