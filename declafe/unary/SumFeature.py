@@ -4,7 +4,9 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["SumFeature"]
 
+
 class SumFeature(UnaryColumnFeature):
+
   def __init__(self, periods: int, column_name: str):
     super().__init__(column_name)
     self.periods = periods

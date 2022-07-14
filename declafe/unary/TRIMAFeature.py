@@ -16,4 +16,3 @@ class TRIMAFeature(UnaryColumnFeature):
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return talib.TRIMA(ser, timeperiod=self.period)
-

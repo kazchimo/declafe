@@ -4,6 +4,7 @@ __all__ = ["IsLessFeature"]
 
 from declafe.binary.BinaryFeature import BinaryFeature
 
+
 class IsLessFeature(BinaryFeature):
   """check if left is greater than right"""
 

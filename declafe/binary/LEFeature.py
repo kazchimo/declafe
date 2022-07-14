@@ -9,6 +9,7 @@ __all__ = ["LEFeature"]
 
 from declafe.binary.BinaryFeature import BinaryFeature
 
+
 @dataclass
 class LEFeature(BinaryFeature):
   left: str

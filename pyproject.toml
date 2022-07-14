@@ -3,3 +3,7 @@ pythonVersion = "3.10"
 venvPath = "."
 venv = ".venv"
 
+[tool.yapfignore]
+ignore_patterns = [
+    "venv/*"
+]

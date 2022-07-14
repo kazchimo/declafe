@@ -3,7 +3,9 @@ import pandas as pd
 from declafe.binary.BinaryFeature import BinaryFeature
 import talib
 
+
 class AROONDownFeature(BinaryFeature):
+
   def __init__(self, high: str, low: str, period: int):
     self.period = period
     super().__init__(high, low)
@@ -14,7 +16,9 @@ class AROONDownFeature(BinaryFeature):
   def _feature_name(self) -> str:
     return f"AROONDown_{self.period}"
 
+
 class AROONUpFeature(BinaryFeature):
+
   def __init__(self, high: str, low: str, period: int):
     self.period = period
     super().__init__(high, low)

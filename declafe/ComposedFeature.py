@@ -7,6 +7,7 @@ from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["ComposedFeature"]
 
+
 class ComposedFeature(FeatureGen):
 
   def __init__(self, head: FeatureGen, nexts: List[UnaryColumnFeature]):

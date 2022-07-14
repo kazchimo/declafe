@@ -9,6 +9,7 @@ __all__ = ["DayOfWeekFeature"]
 
 @dataclass
 class DayOfWeekFeature(UnaryColumnFeature):
+
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser.apply(lambda x: x.weekday())
 

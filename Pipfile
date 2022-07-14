@@ -10,6 +10,7 @@ ta-lib = "*"
 pyright = "*"
 typing-extensions = "*"
 yapf = "*"
+toml = "*"
 
 [dev-packages]
 

@@ -6,6 +6,7 @@ __all__ = ["GEFeature"]
 
 from declafe.binary.BinaryFeature import BinaryFeature
 
+
 @dataclass
 class GEFeature(BinaryFeature):
   left: str

@@ -7,6 +7,7 @@ __all__ = ["BBandsUpperFeature", "BBandsLowerFeature"]
 
 
 class BBandsUpperFeature(UnaryColumnFeature):
+
   def __init__(self, periods: int, column_name: str, nbdevup: float = 2):
     super().__init__(column_name)
     self.periods = periods
@@ -21,6 +22,7 @@ class BBandsUpperFeature(UnaryColumnFeature):
 
 
 class BBandsLowerFeature(UnaryColumnFeature):
+
   def __init__(self, periods: int, column_name: str, nbdevdn: float = 2):
     super().__init__(column_name)
     self.periods = periods

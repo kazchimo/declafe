@@ -4,6 +4,7 @@ from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["MinuteFeature"]
 
+
 class MinuteFeature(UnaryColumnFeature):
   """対象カラムの分を抜き出す"""
 

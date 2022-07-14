@@ -6,7 +6,9 @@ from declafe.feature_gen import FeatureGen
 
 __all__ = ["ConstFeature"]
 
+
 class ConstFeature(FeatureGen):
+
   def __init__(self, const: Any):
     super().__init__()
     self.const = const

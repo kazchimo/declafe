@@ -3,7 +3,9 @@ import pandas as pd
 from declafe.feature_gen import FeatureGen
 import talib
 
+
 class ADXFeature(FeatureGen):
+
   def __init__(self, high: str, low: str, close: str, period: int):
     super().__init__()
     self.high = high

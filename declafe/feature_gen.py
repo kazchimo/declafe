@@ -12,6 +12,7 @@ if TYPE_CHECKING:
 
 
 class FeatureGen(ABC):
+
   def __init__(self):
     self.override_feature_name: Optional[str] = None
 
@@ -57,24 +58,28 @@ class FeatureGen(ABC):
   def set_feature(self, df: pd.DataFrame) -> None:
     df[self.feature_name] = self.generate(df)
 
-  def next(self, f: Type["UnaryColumnFeature"], *args, **kwargs) -> "FeatureGen":
+  def next(
+      self, f: Type["UnaryColumnFeature"], *args, **kwargs) -> "FeatureGen":
     from declafe.ComposedFeature import ComposedFeature
     from declafe.unary import IdFeature
 
     if isinstance(self, IdFeature):
       return f(column_name=self.column_name, *args, **kwargs)
     else:
-      return ComposedFeature(head=self, nexts=[f(column_name=self.feature_name, *args, **kwargs)])
+      return ComposedFeature(
+          head=self, nexts=[f(column_name=self.feature_name, *args, **kwargs)])
 
   def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
     from declafe.unary import ConsecutiveCountFeature
     return self.next(ConsecutiveCountFeature, target_value=target_value)
 
   def consecutive_up_count(self) -> "FeatureGen":
-    return self.is_up().consecutive_count_of(True).as_name_of(f"consecutive_up_count_of_{self.feature_name}")
+    return self.is_up().consecutive_count_of(True).as_name_of(
+        f"consecutive_up_count_of_{self.feature_name}")
 
   def consecutive_down_count(self) -> "FeatureGen":
-    return self.is_down().consecutive_count_of(True).as_name_of(f"consecutive_down_count_of_{self.feature_name}")
+    return self.is_down().consecutive_count_of(True).as_name_of(
+        f"consecutive_down_count_of_{self.feature_name}")
 
   def log(self) -> "FeatureGen":
     from declafe.unary import LogFeature
@@ -229,7 +234,8 @@ class FeatureGen(ABC):
   def __eq__(self, other):
     from declafe.binary import EqualFeature, BiComposeFeature
 
-    return BiComposeFeature.make(left=self, right=self.__conv_const(other), to=EqualFeature)
+    return BiComposeFeature.make(
+        left=self, right=self.__conv_const(other), to=EqualFeature)
 
   def __ne__(self, other):
     return (self == other).flip_bool()
@@ -267,7 +273,8 @@ class FeatureGen(ABC):
     from declafe.binary import BiComposeFeature
     from declafe.binary import IsGreaterFeature
 
-    return BiComposeFeature.make(self, self.__conv_const(other), IsGreaterFeature)
+    return BiComposeFeature.make(
+        self, self.__conv_const(other), IsGreaterFeature)
 
   def __lt__(self, other):
     from declafe.binary import BiComposeFeature
@@ -298,7 +305,8 @@ class FeatureGen(ABC):
     return SAREXTFeature(high, low)
 
   @staticmethod
-  def adxes(high: str, low: str, close: str, periods: List[int]) -> List["FeatureGen"]:
+  def adxes(high: str, low: str, close: str,
+            periods: List[int]) -> List["FeatureGen"]:
     return [FeatureGen.adx(high, low, close, period) for period in periods]
 
   @staticmethod
@@ -307,7 +315,8 @@ class FeatureGen(ABC):
     return ADXFeature(high, low, close, period)
 
   @staticmethod
-  def adxrs(high: str, low: str, close: str, periods: List[int]) -> List["FeatureGen"]:
+  def adxrs(high: str, low: str, close: str,
+            periods: List[int]) -> List["FeatureGen"]:
     return [FeatureGen.adx(high, low, close, period) for period in periods]
 
   @staticmethod
@@ -330,7 +339,8 @@ class FeatureGen(ABC):
     return AROONDownFeature(high, low, period)
 
   @staticmethod
-  def aroon_downs(high: str, low: str, periods: List[int]) -> List["FeatureGen"]:
+  def aroon_downs(high: str, low: str,
+                  periods: List[int]) -> List["FeatureGen"]:
     return [FeatureGen.aroon_down(high, low, period) for period in periods]
 
   @staticmethod
@@ -343,7 +353,11 @@ class FeatureGen(ABC):
     return [FeatureGen.arron_osc(high, low, period) for period in periods]
 
   @staticmethod
-  def bop(open_col: str = "open", high: str = "high", low: str = "low", close: str = "close") -> "FeatureGen":
+  def bop(
+      open_col: str = "open",
+      high: str = "high",
+      low: str = "low",
+      close: str = "close") -> "FeatureGen":
     from declafe.quadri import BOPFeature
     return BOPFeature(open_col, high, low, close)
 
@@ -354,5 +368,6 @@ class FeatureGen(ABC):
       return c(con)
     else:
       return con
+
 
 FG = FeatureGen

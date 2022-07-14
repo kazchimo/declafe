@@ -8,10 +8,16 @@ __all__ = ["BiComposeFeature"]
 
 from declafe.binary.BinaryFeature import BinaryFeature
 
+
 class BiComposeFeature(FeatureGen):
   """check if left is greater than right"""
 
-  def __init__(self, left: FeatureGen, right: FeatureGen, to: Type[BinaryFeature], toKwargs: Dict[str, Any] = None):
+  def __init__(
+      self,
+      left: FeatureGen,
+      right: FeatureGen,
+      to: Type[BinaryFeature],
+      toKwargs: Dict[str, Any] = None):
     super().__init__()
     self.left = left
     self.right = right
@@ -27,12 +33,20 @@ class BiComposeFeature(FeatureGen):
     return self.to_instance().feature_name
 
   def to_instance(self):
-    return self.to(left=self.left.feature_name, right=self.right.feature_name, **self.toKwargs)
+    return self.to(
+        left=self.left.feature_name,
+        right=self.right.feature_name,
+        **self.toKwargs)
 
   @staticmethod
-  def make(left: FeatureGen, right: FeatureGen, to: Type[BinaryFeature], toKwargs: Dict[str, Any] = None) -> "FeatureGen":
+  def make(
+      left: FeatureGen,
+      right: FeatureGen,
+      to: Type[BinaryFeature],
+      toKwargs: Dict[str, Any] = None) -> "FeatureGen":
     from declafe.unary import IdFeature
     if isinstance(left, IdFeature) and isinstance(right, IdFeature):
-      return to(left=left.column_name, right=right.column_name, **(toKwargs or {}))
+      return to(
+          left=left.column_name, right=right.column_name, **(toKwargs or {}))
     else:
       return BiComposeFeature(left, right, to, toKwargs)

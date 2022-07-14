@@ -6,8 +6,10 @@ from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["DayOfMonthFeature"]
 
+
 @dataclass
 class DayOfMonthFeature(UnaryColumnFeature):
+
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser.apply(lambda x: x.day)
 

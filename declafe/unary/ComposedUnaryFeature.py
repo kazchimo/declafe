@@ -6,6 +6,7 @@ from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["ComposedUnaryFeature"]
 
+
 class ComposedUnaryFeature(UnaryColumnFeature):
 
   def __init__(self, features: List[UnaryColumnFeature], column_name: str):
@@ -26,4 +27,3 @@ class ComposedUnaryFeature(UnaryColumnFeature):
       result = f.gen_unary(result)
 
     return result
-

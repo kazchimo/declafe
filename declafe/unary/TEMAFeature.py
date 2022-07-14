@@ -16,4 +16,3 @@ class TEMAFeature(UnaryColumnFeature):
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return talib.TEMA(ser, timeperiod=self.period)
-

@@ -4,6 +4,7 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["IsPositiveFeature"]
 
+
 class IsPositiveFeature(UnaryColumnFeature):
 
   @property

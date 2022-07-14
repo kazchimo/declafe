@@ -43,15 +43,22 @@ class IdFeature(UnaryColumnFeature):
     return [self.hour_n(n) for n in ns]
 
   def dip_against(self, high_column: str, max_high_period: int) -> "FeatureGen":
-    gen = (col(self.column_name) / col(high_column).moving_max(max_high_period)) - 1
-    return gen.as_name_of(f"dip_{self.column_name}_against_max{max_high_period}_of_{high_column}")
+    gen = (
+        col(self.column_name) /
+        col(high_column).moving_max(max_high_period)) - 1
+    return gen.as_name_of(
+        f"dip_{self.column_name}_against_max{max_high_period}_of_{high_column}")
 
-  def dip_againsts(self, high_column: str, max_high_periods: List[int]) -> List["FeatureGen"]:
+  def dip_againsts(self, high_column: str,
+                   max_high_periods: List[int]) -> List["FeatureGen"]:
     return [self.dip_against(high_column, p) for p in max_high_periods]
 
   def rip_against(self, low_column: str, min_low_period: int) -> "FeatureGen":
-    gen = (col(self.column_name) / col(low_column).moving_min(min_low_period)) - 1
-    return gen.as_name_of(f"rip_{self.column_name}_against_min{min_low_period}_of_{low_column}")
+    gen = (
+        col(self.column_name) / col(low_column).moving_min(min_low_period)) - 1
+    return gen.as_name_of(
+        f"rip_{self.column_name}_against_min{min_low_period}_of_{low_column}")
 
-  def rip_againsts(self, low_column: str, min_low_periods: List[int]) -> List["FeatureGen"]:
+  def rip_againsts(self, low_column: str,
+                   min_low_periods: List[int]) -> List["FeatureGen"]:
     return [self.rip_against(low_column, p) for p in min_low_periods]

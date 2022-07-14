@@ -5,6 +5,7 @@ import talib
 
 
 class SARFeature(BinaryFeature):
+
   def __init__(self, high: str, low: str):
     super().__init__(high, low)
 

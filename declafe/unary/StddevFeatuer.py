@@ -4,8 +4,10 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["StddevFeature"]
 
+
 class StddevFeature(UnaryColumnFeature):
-  def __init__(self, periods: int,  column_name: str, ddof: int = 1):
+
+  def __init__(self, periods: int, column_name: str, ddof: int = 1):
     super().__init__(column_name)
     self.periods = periods
     self.ddof = ddof

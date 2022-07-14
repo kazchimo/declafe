@@ -5,7 +5,9 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["APOFeature"]
 
+
 class APOFeature(UnaryColumnFeature):
+
   @property
   def name(self) -> str:
     return f"APO"

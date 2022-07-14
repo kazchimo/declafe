@@ -6,6 +6,7 @@ __all__ = ["MaxFeature"]
 
 
 class MaxFeature(UnaryColumnFeature):
+
   def __init__(self, periods: int, column_name: str):
     super().__init__(column_name)
     self.periods = periods

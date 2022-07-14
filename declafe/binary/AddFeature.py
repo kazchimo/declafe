@@ -4,7 +4,9 @@ __all__ = ["AddFeature"]
 
 from declafe.binary.BinaryFeature import BinaryFeature
 
+
 class AddFeature(BinaryFeature):
+
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
     return left + right
 

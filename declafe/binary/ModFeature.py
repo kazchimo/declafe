@@ -1,11 +1,12 @@
-
 import pandas as pd
 
 from declafe.binary.BinaryFeature import BinaryFeature
+
 __all__ = ["ModFeature"]
 
 
 class ModFeature(BinaryFeature):
+
   def __init__(self, left: str, right: str):
     super().__init__(left, right)
 

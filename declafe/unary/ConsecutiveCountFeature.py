@@ -6,6 +6,7 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["ConsecutiveCountFeature"]
 
+
 class ConsecutiveCountFeature(UnaryColumnFeature):
   """対象値の連続数を返す"""
 

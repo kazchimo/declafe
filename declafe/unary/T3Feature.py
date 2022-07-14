@@ -16,4 +16,3 @@ class T3Feature(UnaryColumnFeature):
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return talib.T3(ser, timeperiod=self.period)
-

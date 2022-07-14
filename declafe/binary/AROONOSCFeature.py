@@ -3,7 +3,9 @@ import pandas as pd
 from declafe.binary.BinaryFeature import BinaryFeature
 import talib
 
+
 class AROONOSCFeature(BinaryFeature):
+
   def __init__(self, high: str, low: str, period: int):
     self.period = period
     super().__init__(high, low)

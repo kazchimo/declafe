@@ -4,7 +4,9 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["DevisibleFeature"]
 
+
 class DevisibleFeature(UnaryColumnFeature):
+
   def __init__(self, deviser: float, column_name: str):
     super().__init__(column_name)
     self.deviser = deviser

@@ -4,7 +4,9 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["SubConstFeature"]
 
+
 class SubConstFeature(UnaryColumnFeature):
+
   def __init__(self, const: float, column_name: str):
     self.const = const
     super().__init__(column_name=column_name)
