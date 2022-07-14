@@ -1,12 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Type
 
 import pandas as pd
 
 from declafe.feature_gen import FeatureGen
 
 
-class UnaryColumnFeature(FeatureGen, ABC):
+class UnaryColumnFeature(ABC, FeatureGen):
   def __init__(self, column_name: str):
     super().__init__()
     self.column_name = column_name

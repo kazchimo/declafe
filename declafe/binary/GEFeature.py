@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from lib.features import FeatureGen
+from declafe import FeatureGen
 
 __all__ = ["GEFeature"]
 

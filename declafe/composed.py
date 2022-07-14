@@ -1,4 +1,4 @@
-from lib.features import ComposedFeature
+from declafe import ComposedFeature
 from declafe.binary import IsGreaterFeature
 from declafe.binary.BiComposeFeature import BiComposeFeature
 from declafe.binary.IsLessFeature import IsLessFeature
