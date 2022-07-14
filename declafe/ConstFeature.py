@@ -18,3 +18,10 @@ class ConstFeature(FeatureGen):
 
   def _feature_name(self) -> str:
     return f"{self.const}"
+
+  @staticmethod
+  def conv(a: Any) -> "FeatureGen":
+    if not isinstance(a, FeatureGen):
+      return ConstFeature(a)
+    else:
+      return a
