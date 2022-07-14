@@ -5,9 +5,9 @@ import pandas as pd
 
 __all__ = ["FeatureGen"]
 
-from declafe.feature_gen.ChainMixin import ChainMixin
-from declafe.feature_gen.ConstructorMixin import ConstructorMixin
-from declafe.feature_gen.OpsMixin import OpsMixin
+from .ChainMixin import ChainMixin
+from .ConstructorMixin import ConstructorMixin
+from .OpsMixin import OpsMixin
 
 if TYPE_CHECKING:
   from declafe import Features
