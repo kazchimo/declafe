@@ -5,13 +5,15 @@ import pandas as pd
 
 __all__ = ["FeatureGen", "FG"]
 
+from declafe.feature_gen.ConstructorMixin import ConstructorMixin
+
 if TYPE_CHECKING:
   from declafe import ComposedFeature, Features
   from declafe.unary import IdFeature
   from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 
-class FeatureGen(ABC):
+class FeatureGen(ABC, ConstructorMixin):
 
   def __init__(self):
     self.override_feature_name: Optional[str] = None
@@ -20,10 +22,17 @@ class FeatureGen(ABC):
 
   @abstractmethod
   def gen(self, df: pd.DataFrame) -> pd.Series:
+    """
+    generate feature
+    should be side-effect free
+    """
     raise NotImplementedError
 
   def generate(self, df: pd.DataFrame) -> pd.Series:
-    """optimized gen"""
+    """
+    optimized gen
+    side-effect free
+    """
     if self.feature_name in df.columns:
       return df[self.feature_name]
     else:
@@ -295,75 +304,6 @@ class FeatureGen(ABC):
     from declafe.binary import LEFeature
 
     return BiComposeFeature.make(self, self.__conv_const(other), LEFeature)
-
-  @staticmethod
-  def sar(high: str, low: str) -> "FeatureGen":
-    from declafe.binary import SARFeature
-    return SARFeature(high, low)
-
-  @staticmethod
-  def sarext(high: str, low: str) -> "FeatureGen":
-    from declafe.binary import SAREXTFeature
-    return SAREXTFeature(high, low)
-
-  @staticmethod
-  def adxes(high: str, low: str, close: str, periods: List[int]) -> "Features":
-    return Features(
-        [FeatureGen.adx(high, low, close, period) for period in periods])
-
-  @staticmethod
-  def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from declafe.tri.ADXFeature import ADXFeature
-    return ADXFeature(high, low, close, period)
-
-  @staticmethod
-  def adxrs(high: str, low: str, close: str, periods: List[int]) -> "Features":
-    return Features(
-        [FeatureGen.adx(high, low, close, period) for period in periods])
-
-  @staticmethod
-  def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from declafe.tri import ADXRFeature
-    return ADXRFeature(high, low, close, period)
-
-  @staticmethod
-  def aroon_up(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.binary import AROONUpFeature
-    return AROONUpFeature(high, low, period)
-
-  @staticmethod
-  def aroon_ups(high: str, low: str, periods: List[int]) -> "Features":
-    return Features(
-        [FeatureGen.aroon_up(high, low, period) for period in periods])
-
-  @staticmethod
-  def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.binary import AROONDownFeature
-    return AROONDownFeature(high, low, period)
-
-  @staticmethod
-  def aroon_downs(high: str, low: str, periods: List[int]) -> "Features":
-    return Features(
-        [FeatureGen.aroon_down(high, low, period) for period in periods])
-
-  @staticmethod
-  def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.binary import AROONOSCFeature
-    return AROONOSCFeature(high, low, period)
-
-  @staticmethod
-  def arron_oscs(high: str, low: str, periods: List[int]) -> "Features":
-    return Features(
-        [FeatureGen.arron_osc(high, low, period) for period in periods])
-
-  @staticmethod
-  def bop(
-      open_col: str = "open",
-      high: str = "high",
-      low: str = "low",
-      close: str = "close") -> "FeatureGen":
-    from declafe.quadri import BOPFeature
-    return BOPFeature(open_col, high, low, close)
 
   def __conv_const(self, con: Any):
     from declafe.dsl import c
