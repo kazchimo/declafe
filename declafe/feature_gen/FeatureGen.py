@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Optional
 
 import pandas as pd
 
-__all__ = ["FeatureGen", "FG"]
+__all__ = ["FeatureGen"]
 
 from declafe.feature_gen.ChainMixin import ChainMixin
 from declafe.feature_gen.ConstructorMixin import ConstructorMixin
@@ -66,6 +66,3 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
   def set_feature(self, df: pd.DataFrame) -> None:
     df[self.feature_name] = self.generate(df)
-
-
-FG = FeatureGen
