@@ -1,4 +1,4 @@
-from typing import List, TypeGuard, TYPE_CHECKING
+from typing import List, TYPE_CHECKING
 
 import pandas as pd
 
@@ -55,7 +55,3 @@ class IdFeature(UnaryColumnFeature):
 
   def rip_againsts(self, low_column: str, min_low_periods: List[int]) -> List["FeatureGen"]:
     return [self.rip_against(low_column, p) for p in min_low_periods]
-
-  @staticmethod
-  def is_id(a: FeatureGen) -> TypeGuard["IdFeature"]:
-    return isinstance(a, IdFeature)
