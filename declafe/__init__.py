@@ -1,10 +1,11 @@
 from typing import Union
 
 import numpy
+import pandas as pd
 
-from declafe.feature_gen.FeatureGen import *
-from .Features import *
 from .ComposedFeature import *
 from .ConstFeature import *
+from .Features import *
+from .feature_gen.FeatureGen import *
 
 series = Union[pd.Series, numpy.ndarray]

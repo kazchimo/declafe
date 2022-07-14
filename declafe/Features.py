@@ -3,6 +3,8 @@ from typing import List, Type
 
 from declafe.unary import *
 
+__all__ = ["Features", "F"]
+
 
 class ClsMixin:
   moving_average_cls = MovingAverage

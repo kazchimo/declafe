@@ -1,7 +1,8 @@
 from typing import Type, TYPE_CHECKING, Any, List
 
 if TYPE_CHECKING:
-  from declafe import UnaryColumnFeature, FeatureGen, Features
+  from declafe import FeatureGen, Features
+  from declafe.unary import UnaryColumnFeature
 
 
 class ChainMixin:
