@@ -11,8 +11,11 @@ class AggFeatures:
     self.agg_funs = agg_funs
     self.by = by
 
-  def gen(self, df: pd.DataFrame) -> pd.DataFrame:
-    return df.groupby(self.by).agg(**self._named_agg_funs())
+  def gen(self, df: pd.DataFrame, reset_index: bool = True) -> pd.DataFrame:
+    if reset_index:
+      return df.groupby(self.by).agg(**self._named_agg_funs()).reset_index()
+    else:
+      return df.groupby(self.by).agg(**self._named_agg_funs())
 
   def _named_agg_funs(self) -> Dict[str, pd.NamedAgg]:
     return {fun.name: fun.as_named_agg() for fun in self.agg_funs}

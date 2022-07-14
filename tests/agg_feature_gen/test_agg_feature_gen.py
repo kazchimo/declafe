@@ -23,4 +23,4 @@ class TestGen:
         test_df.groupby("a").agg(
             count_of_b=pd.NamedAgg("b", "count"),
             last_of_b=pd.NamedAgg("b", "last"),
-            count_of_c=pd.NamedAgg("c", "count")))
+            count_of_c=pd.NamedAgg("c", "count")).reset_index())
