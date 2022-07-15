@@ -2,9 +2,10 @@ from typing import List
 
 import pandas as pd
 
-from .AsType import AsType
+from .AsType import *
+from .FromTypeAs import *
 
-__all__ = ["AsTypes"]
+__all__ = ["AsTypes", "ATS"]
 
 
 class AsTypes:
@@ -17,9 +18,11 @@ class AsTypes:
       as_type.set_type(df)
 
   @staticmethod
-  def from_type(from_type: str, as_type: str, df: pd.DataFrame) -> "AsTypes":
-    return AsTypes(
-        [
-            AsType(column, as_type)
-            for column in df.select_dtypes(from_type).columns
-        ])
+  def from_type(from_type: str, as_type: str) -> "AsTypes":
+    return AsTypes([FromTypeAs(from_type, as_type)])
+
+  def __add__(self, other: "AsTypes") -> "AsTypes":
+    return AsTypes(self.as_types + other.as_types)
+
+
+ATS = AsTypes

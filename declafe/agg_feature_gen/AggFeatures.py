@@ -17,6 +17,10 @@ class AggFeatures:
     else:
       return df.groupby(self.by).agg(**self._named_agg_funs())
 
+  @property
+  def agg_names(self):
+    return [fun.name for fun in self.agg_funs]
+
   def _named_agg_funs(self) -> Dict[str, pd.NamedAgg]:
     return {fun.name: fun.as_named_agg() for fun in self.agg_funs}
 
