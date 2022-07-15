@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 import pandas as pd
 
@@ -20,6 +20,14 @@ class AsTypes:
   @staticmethod
   def from_type(from_type: str, as_type: str) -> "AsTypes":
     return AsTypes([FromTypeAs(from_type, as_type)])
+
+  @staticmethod
+  def from_types(dict_: Dict[str, str]) -> "AsTypes":
+    return AsTypes(
+        [
+            FromTypeAs(from_type, as_type)
+            for from_type, as_type in dict_.items()
+        ])
 
   def __add__(self, other: "AsTypes") -> "AsTypes":
     return AsTypes(self.as_types + other.as_types)
