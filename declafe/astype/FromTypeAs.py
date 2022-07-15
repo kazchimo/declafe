@@ -1,6 +1,6 @@
 import pandas as pd
 
-from .astype import AsType
+from .AsTypes import AsType
 
 __all__ = ["FromTypeAs"]
 
