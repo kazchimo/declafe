@@ -24,7 +24,7 @@ jobs:
       - name: Install dependecies
         run: pipenv install -d
       - name: Test
-        run: pipenv run test
+        run: pipenv run pytest
   fmt-check:
     runs-on: ubuntu-latest
     steps:
