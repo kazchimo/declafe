@@ -58,7 +58,7 @@ class GroupBy:
     return self.add_agg(StdAgg)
 
   def diff_at(self, at: int):
-    return self.add_agg(partialclass(DiffAtAgg.__init__, at=at))
+    return self.add_agg(partialclass(DiffAtAgg, at=at))
 
   def add_agg(self, agg: Type[AggFun]):
     return GroupBy(self.by, self.aggs + [agg])

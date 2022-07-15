@@ -15,7 +15,7 @@ class TestGen:
   def test_agg(self):
     by_a = groupby("a")
     b_agg = by_a.count.last.target("b")
-    c_agg = by_a.count.target("c")
+    c_agg = by_a.count.diff_at(1).target("c")
     agg = b_agg + c_agg
     res = agg.gen(test_df)
 
@@ -23,4 +23,6 @@ class TestGen:
         test_df.groupby("a").agg(
             count_of_b=pd.NamedAgg("b", "count"),
             last_of_b=pd.NamedAgg("b", "last"),
-            count_of_c=pd.NamedAgg("c", "count")).reset_index())
+            count_of_c=pd.NamedAgg("c", "count"),
+            diff_at1_of_c=pd.NamedAgg("c", lambda ser: ser.diff(1).iloc[1]),
+        ).reset_index())

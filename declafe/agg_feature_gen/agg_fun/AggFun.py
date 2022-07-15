@@ -26,3 +26,9 @@ class AggFun(ABC):
 
   def as_named_agg(self) -> pd.NamedAgg:
     return pd.NamedAgg(column=self.target, aggfunc=self)
+
+  def __eq__(self, other) -> bool:
+    return self.name == other.name
+
+  def __hash__(self):
+    return self.name.__hash__()
