@@ -1,6 +1,6 @@
 import pandas as pd
 
-from declafe.astype import AsType
+from .astype import AsType
 
 __all__ = ["FromTypeAs"]
 
