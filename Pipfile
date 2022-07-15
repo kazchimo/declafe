@@ -7,12 +7,12 @@ name = "pypi"
 pandas = "*"
 numpy = "*"
 ta-lib = "*"
+
+[dev-packages]
 pyright = "*"
 typing-extensions = "*"
 yapf = "*"
 toml = "*"
-
-[dev-packages]
 pytest = "*"
 pytest-watch = "*"
 
