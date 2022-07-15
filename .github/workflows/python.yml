@@ -52,6 +52,4 @@ jobs:
       - name: Install dependecies
         run: pipenv install -d
       - name: Check type hint
-        run: |
-          . $(pipenv --venv)/bin/activate
-          pyright
+        run: pipenv run pyright
