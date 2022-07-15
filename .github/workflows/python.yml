@@ -1,0 +1,49 @@
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+      - name: Install pipenv
+        run: pip install pipenv
+      - name: Install dependecies
+        run: pipenv install -d
+      - name: Test
+        run: pipenv run test
+  fmt-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+      - name: Install pipenv
+        run: pip install pipenv
+      - name: Install dependecies
+        run: pipenv install --dev
+      - name: Check format
+        run: pipenv run fmtcheck
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+      - name: Install pipenv
+        run: pip install pipenv
+      - name: Install dependecies
+        run: pipenv install -d
+      - name: Check type hint
+        run: |
+          . $(pipenv --venv)/bin/activate
+          pyright
