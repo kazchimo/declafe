@@ -66,6 +66,9 @@ class Features:
   def filter_out_gen(self, cls: Type[FeatureGen]):
     return Features([f for f in self.feature_gens if not isinstance(f, cls)])
 
+  def map(self, f: "UnaryColumnFeature") -> "Features":
+    return Features([fg.next(f) for fg in self.feature_gens])
+
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)
