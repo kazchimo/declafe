@@ -68,7 +68,13 @@ jobs:
           sudo make install
       - name: Install pipenv
         run: pip install pipenv
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+      - name: Install pyright
+        run: yarn -D
       - name: Install dependecies
         run: pipenv install -d
       - name: Check type hint
-        run: pipenv run pyright
+        run: yarn run pyright
