@@ -15,6 +15,9 @@ if TYPE_CHECKING:
 
 class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
+  def _self(self) -> "FeatureGen":
+    return self
+
   def __init__(self):
     super().__init__()
     self.override_feature_name: Optional[str] = None
