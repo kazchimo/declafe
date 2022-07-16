@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:kazchimo/declafe.git",
   "author": "kazuki <pharcydetip@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "pyright": "^1.1.260"
+  }
 }
