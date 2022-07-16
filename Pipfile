@@ -9,7 +9,6 @@ numpy = "*"
 ta-lib = "*"
 
 [dev-packages]
-pyright = "*"
 typing-extensions = "*"
 yapf = "*"
 toml = "*"
