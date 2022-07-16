@@ -2,12 +2,11 @@ import pandas as pd
 
 from declafe.agg_feature_gen.GroupBy import groupby
 
-test_df = pd.DataFrame(
-    {
-        "a": list(range(1, 251)) * 4,
-        "b": list(range(1001, 2001)),
-        "c": list(range(2001, 3001))
-    })
+test_df = pd.DataFrame({
+    "a": list(range(1, 251)) * 4,
+    "b": list(range(1001, 2001)),
+    "c": list(range(2001, 3001))
+})
 
 
 class TestGen:

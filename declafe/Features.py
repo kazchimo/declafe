@@ -15,8 +15,9 @@ class Features(ClsMixin):
   feature_gens: List[FeatureGen]
   pre_processes: List[FeatureGen] = field(default_factory=list)
 
-  def set_features(
-      self, temp_df: pd.DataFrame, drop_nan: bool = False) -> pd.DataFrame:
+  def set_features(self,
+                   temp_df: pd.DataFrame,
+                   drop_nan: bool = False) -> pd.DataFrame:
     for p in self.pre_processes:
       p.set_feature(temp_df)
 
@@ -47,11 +48,10 @@ class Features(ClsMixin):
     return feature.feature_name in self.feature_names
 
   def __add__(self, other):
-    return Features(
-        self.feature_gens + [
-            f for f in other.feature_gens
-            if f.feature_name not in self.feature_names
-        ])
+    return Features(self.feature_gens + [
+        f for f in other.feature_gens
+        if f.feature_name not in self.feature_names
+    ])
 
   def add_feature(self, feature_gen: FeatureGen):
     return Features(self.feature_gens + [feature_gen], self.pre_processes)

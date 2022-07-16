@@ -20,5 +20,5 @@ pytest-watch = "*"
 python_version = "3.10"
 
 [scripts]
-fmt = "yapf --style .style.yapf -ir ."
-fmtcheck = "yapf --style .style.yapf -r --diff ."
+fmt = "yapf --style pyproject.toml -ir ."
+fmtcheck = "yapf --style pyproject.toml -r --diff ."

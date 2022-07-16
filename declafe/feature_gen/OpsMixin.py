@@ -19,8 +19,9 @@ class OpsMixin:
   def __eq__(self: "FeatureGen", other):
     from ..binary import EqualFeature, BiComposeFeature
 
-    return BiComposeFeature.make(
-        left=self, right=self._conv(other), to=EqualFeature)
+    return BiComposeFeature.make(left=self,
+                                 right=self._conv(other),
+                                 to=EqualFeature)
 
   def __ne__(self: "FeatureGen", other):
     return (self == other).flip_bool()

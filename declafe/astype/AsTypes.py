@@ -23,11 +23,9 @@ class AsTypes:
 
   @staticmethod
   def from_types(dict_: Dict[str, str]) -> "AsTypes":
-    return AsTypes(
-        [
-            FromTypeAs(from_type, as_type)
-            for from_type, as_type in dict_.items()
-        ])
+    return AsTypes([
+        FromTypeAs(from_type, as_type) for from_type, as_type in dict_.items()
+    ])
 
   def __add__(self, other: "AsTypes") -> "AsTypes":
     return AsTypes(self.as_types + other.as_types)

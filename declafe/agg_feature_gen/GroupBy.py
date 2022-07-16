@@ -64,8 +64,8 @@ class GroupBy:
     return GroupBy(self.by, self.aggs + [agg])
 
   def target(self, target: str):
-    return AggFeatures(
-        by=self.by, agg_funs=[agg(target=target) for agg in self.aggs])
+    return AggFeatures(by=self.by,
+                       agg_funs=[agg(target=target) for agg in self.aggs])
 
   def targets(self, *targets: str):
     return AggFeatures(

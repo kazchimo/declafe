@@ -12,9 +12,8 @@ class ChainMixin:
     from ..Features import Features
     self.FS = Features
 
-  def next(
-      self: "FeatureGen", f: Type["UnaryColumnFeature"], *args,
-      **kwargs) -> "FeatureGen":
+  def next(self: "FeatureGen", f: Type["UnaryColumnFeature"], *args,
+           **kwargs) -> "FeatureGen":
     from ..ComposedFeature import ComposedFeature
     from ..unary import IdFeature
 

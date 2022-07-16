@@ -8,11 +8,10 @@ __all__ = ["MAMAFeature", "FAMAFeature"]
 
 class MAMAFeature(UnaryColumnFeature):
 
-  def __init__(
-      self,
-      column_name: str,
-      fast_limit: float = 0.5,
-      slow_limit: float = 0.05):
+  def __init__(self,
+               column_name: str,
+               fast_limit: float = 0.5,
+               slow_limit: float = 0.05):
     super().__init__(column_name)
     self.fast_limit = fast_limit
     self.slow_limit = slow_limit
@@ -27,11 +26,10 @@ class MAMAFeature(UnaryColumnFeature):
 
 class FAMAFeature(UnaryColumnFeature):
 
-  def __init__(
-      self,
-      column_name: str,
-      fast_limit: float = 0.5,
-      slow_limit: float = 0.05):
+  def __init__(self,
+               column_name: str,
+               fast_limit: float = 0.5,
+               slow_limit: float = 0.05):
     super().__init__(column_name)
     self.fast_limit = fast_limit
     self.slow_limit = slow_limit

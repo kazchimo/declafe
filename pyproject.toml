@@ -7,3 +7,8 @@ venv = ".venv"
 ignore_patterns = [
     ".venv/*"
 ]
+
+[tool.yapf]
+based_on_style = "google"
+spaces_before_comment = 2
+indent_width = 2

@@ -18,8 +18,8 @@ class ConstructorMixin:
     return SAREXTFeature(high, low)
 
   @classmethod
-  def adxes(
-      cls, high: str, low: str, close: str, periods: List[int]) -> "Features":
+  def adxes(cls, high: str, low: str, close: str,
+            periods: List[int]) -> "Features":
     return Features([cls.adx(high, low, close, period) for period in periods])
 
   @staticmethod
@@ -28,8 +28,8 @@ class ConstructorMixin:
     return ADXFeature(high, low, close, period)
 
   @classmethod
-  def adxrs(
-      cls, high: str, low: str, close: str, periods: List[int]) -> "Features":
+  def adxrs(cls, high: str, low: str, close: str,
+            periods: List[int]) -> "Features":
     return Features([cls.adx(high, low, close, period) for period in periods])
 
   @staticmethod
@@ -65,10 +65,9 @@ class ConstructorMixin:
     return Features([cls.arron_osc(high, low, period) for period in periods])
 
   @staticmethod
-  def bop(
-      open_col: str = "open",
-      high: str = "high",
-      low: str = "low",
-      close: str = "close") -> "FeatureGen":
+  def bop(open_col: str = "open",
+          high: str = "high",
+          low: str = "low",
+          close: str = "close") -> "FeatureGen":
     from ..quadri import BOPFeature
     return BOPFeature(open_col, high, low, close)

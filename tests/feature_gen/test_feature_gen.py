@@ -6,11 +6,10 @@ from declafe.dsl import c, col
 from declafe.feature_gen import FeatureGen
 from declafe.unary import LogFeature, SumFeature
 
-test_df = pd.DataFrame(
-    {
-        "a": list(range(1, 1001)),
-        "b": list(range(1001, 2001))
-    })
+test_df = pd.DataFrame({
+    "a": list(range(1, 1001)),
+    "b": list(range(1001, 2001))
+})
 
 a = col("a")
 b = col("b")
@@ -71,9 +70,8 @@ class TestMovingSums:
     _1.set_feature(df2)
 
     _1.moving_sums([3, 5]).set_features(df1)
-    Features.many(
-        SumFeature(3, _1.feature_name),
-        SumFeature(5, _1.feature_name)).set_features(df2)
+    Features.many(SumFeature(3, _1.feature_name),
+                  SumFeature(5, _1.feature_name)).set_features(df2)
 
     assert df1.equals(df2)
 
