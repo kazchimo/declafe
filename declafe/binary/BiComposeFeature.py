@@ -1,4 +1,4 @@
-from typing import Type, Dict, Any
+from typing import Type, Dict, Any, Optional
 
 import pandas as pd
 
@@ -16,7 +16,7 @@ class BiComposeFeature(FeatureGen):
                left: FeatureGen,
                right: FeatureGen,
                to: Type[BinaryFeature],
-               toKwargs: Dict[str, Any] = None):
+               toKwargs: Optional[Dict[str, Any]] = None):
     super().__init__()
     self.left = left
     self.right = right
@@ -40,7 +40,7 @@ class BiComposeFeature(FeatureGen):
   def make(left: FeatureGen,
            right: FeatureGen,
            to: Type[BinaryFeature],
-           toKwargs: Dict[str, Any] = None) -> "FeatureGen":
+           toKwargs: Optional[Dict[str, Any]] = None) -> "FeatureGen":
     from ..unary import IdFeature
     if isinstance(left, IdFeature) and isinstance(right, IdFeature):
       return to(left=left.column_name,
