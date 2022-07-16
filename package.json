@@ -1,0 +1,8 @@
+{
+  "name": "declafe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kazchimo/declafe.git",
+  "author": "kazuki <pharcydetip@gmail.com>",
+  "license": "MIT"
+}
