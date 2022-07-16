@@ -6,12 +6,8 @@ from .unary import *
 __all__ = ["Features", "F"]
 
 
-class ClsMixin:
-  moving_average_cls = MovingAverage
-
-
 @dataclass
-class Features(ClsMixin):
+class Features:
   feature_gens: List[FeatureGen]
   pre_processes: List[FeatureGen] = field(default_factory=list)
 
