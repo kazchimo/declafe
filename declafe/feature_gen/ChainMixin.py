@@ -27,7 +27,8 @@ class ChainMixin:
       return f(column_name=_self.column_name, *args, **kwargs)
     else:
       return ComposedFeature(
-          head=_self, nexts=[f(column_name=_self.feature_name, *args, **kwargs)])
+          head=_self,
+          nexts=[f(column_name=_self.feature_name, *args, **kwargs)])
 
   def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
     from ..unary import ConsecutiveCountFeature

@@ -33,7 +33,9 @@ class OpsMixin:
 
   def __add__(self, other):
     from ..binary import AddFeature
-    return self._bc().make(left=self._self(), right=self._conv(other), to=AddFeature)
+    return self._bc().make(left=self._self(),
+                           right=self._conv(other),
+                           to=AddFeature)
 
   def __sub__(self, other):
     from ..binary import SubFeature
