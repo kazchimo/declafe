@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from typing import Type, TYPE_CHECKING, Any, List
 
 if TYPE_CHECKING:
@@ -12,28 +13,33 @@ class ChainMixin:
     from ..Features import Features
     self.FS = Features
 
-  def next(self: "FeatureGen", f: Type["UnaryColumnFeature"], *args,
+  @abstractmethod
+  def _self(self) -> "FeatureGen":
+    raise NotImplementedError
+
+  def next(self, f: Type["UnaryColumnFeature"], *args,
            **kwargs) -> "FeatureGen":
     from ..ComposedFeature import ComposedFeature
     from ..unary import IdFeature
 
-    if isinstance(self, IdFeature):
-      return f(column_name=self.column_name, *args, **kwargs)
+    _self = self._self()
+    if isinstance(_self, IdFeature):
+      return f(column_name=_self.column_name, *args, **kwargs)
     else:
       return ComposedFeature(
-          head=self, nexts=[f(column_name=self.feature_name, *args, **kwargs)])
+          head=_self, nexts=[f(column_name=_self.feature_name, *args, **kwargs)])
 
   def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
     from ..unary import ConsecutiveCountFeature
     return self.next(ConsecutiveCountFeature, target_value=target_value)
 
-  def consecutive_up_count(self: "FeatureGen") -> "FeatureGen":
+  def consecutive_up_count(self) -> "FeatureGen":
     return self.is_up().consecutive_count_of(True).as_name_of(
-        f"consecutive_up_count_of_{self.feature_name}")
+        f"consecutive_up_count_of_{self._self().feature_name}")
 
-  def consecutive_down_count(self: "FeatureGen") -> "FeatureGen":
+  def consecutive_down_count(self) -> "FeatureGen":
     return self.is_down().consecutive_count_of(True).as_name_of(
-        f"consecutive_down_count_of_{self.feature_name}")
+        f"consecutive_down_count_of_{self._self().feature_name}")
 
   def log(self) -> "FeatureGen":
     from ..unary import LogFeature
