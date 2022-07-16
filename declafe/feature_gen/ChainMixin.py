@@ -191,3 +191,7 @@ class ChainMixin:
   def bbands_lower(self, period: int) -> "FeatureGen":
     from ..unary import BBandsLowerFeature
     return self.next(BBandsLowerFeature, periods=period)
+
+  def round_n(self, round_digit: int) -> "FeatureGen":
+    from ..unary import RoundNFeature
+    return self.next(RoundNFeature, round_digit=round_digit)
