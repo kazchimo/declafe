@@ -1,6 +1,5 @@
 from typing import Any
 
-import numpy as np
 import pandas as pd
 
 from .AggFun import AggFun
@@ -9,7 +8,7 @@ from .AggFun import AggFun
 class MeanAgg(AggFun):
 
   def __call__(self, ser: pd.Series) -> Any:
-    return np.mean(ser)
+    return ser.to_numpy().mean()
 
   @property
   def fun_name(self) -> str:
