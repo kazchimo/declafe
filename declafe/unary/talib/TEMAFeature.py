@@ -1,7 +1,7 @@
 import pandas as pd
-
-from .UnaryColumnFeature import UnaryColumnFeature
 import talib
+
+from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 
 class TEMAFeature(UnaryColumnFeature):

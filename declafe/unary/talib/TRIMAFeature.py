@@ -1,10 +1,10 @@
 import pandas as pd
-
-from .UnaryColumnFeature import UnaryColumnFeature
 import talib
 
+from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
-class T3Feature(UnaryColumnFeature):
+
+class TRIMAFeature(UnaryColumnFeature):
 
   def __init__(self, column_name: str, period: int):
     super().__init__(column_name)
@@ -12,7 +12,7 @@ class T3Feature(UnaryColumnFeature):
 
   @property
   def name(self) -> str:
-    return f"T3_{self.period}"
+    return f"TEMA_{self.period}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.T3(ser, timeperiod=self.period)
+    return talib.TRIMA(ser, timeperiod=self.period)

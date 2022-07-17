@@ -1,7 +1,7 @@
 import pandas as pd
 import talib
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["MAMAFeature", "FAMAFeature"]
 
