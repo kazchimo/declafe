@@ -1,7 +1,7 @@
 import pandas as pd
 import talib
 
-from .BinaryFeature import BinaryFeature
+from declafe.binary.BinaryFeature import BinaryFeature
 
 
 class SAREXTFeature(BinaryFeature):
