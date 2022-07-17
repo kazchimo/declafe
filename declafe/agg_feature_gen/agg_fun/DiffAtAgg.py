@@ -14,7 +14,7 @@ class DiffAtAgg(AggFun):
     self.at = at
 
   def __call__(self, ser: pd.Series) -> Any:
-    return ser.iloc[self.at] - ser.iloc[self.at - 1]
+    return ser.iat[self.at] - ser.iat[self.at - 1]
 
   @property
   def fun_name(self) -> str:
