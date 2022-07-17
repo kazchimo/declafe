@@ -1,1 +1,1 @@
-from .BOPFeature import *
+from declafe.quadri.talib.BOPFeature import *
