@@ -6,6 +6,7 @@ __all__ = ["RoundNFeature"]
 
 
 class RoundNFeature(UnaryColumnFeature):
+
   def __init__(self, column_name: str, round_digit: int):
     super().__init__(column_name)
     self.round_digit = round_digit
