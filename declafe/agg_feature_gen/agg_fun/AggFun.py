@@ -5,6 +5,8 @@ import pandas as pd
 
 __all__ = ["AggFun"]
 
+from ...unary import IdFeature
+
 
 class AggFun(ABC):
 
@@ -23,6 +25,9 @@ class AggFun(ABC):
   @property
   def name(self) -> str:
     return f"{self.fun_name}_of_{self.target}"
+
+  def as_id(self) -> "IdFeature":
+    return IdFeature(self.name)
 
   def as_named_agg(self) -> pd.NamedAgg:
     return pd.NamedAgg(column=self.target, aggfunc=self)
