@@ -1,7 +1,7 @@
 import pandas as pd
 import talib
 
-from ..feature_gen import FeatureGen
+from ...feature_gen import FeatureGen
 
 
 class ADXFeature(FeatureGen):
