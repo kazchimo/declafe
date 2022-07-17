@@ -16,10 +16,10 @@ class Features:
                    drop_nan: bool = False) -> pd.DataFrame:
     df = temp_df
     for p in self.pre_processes:
-      df = p.set_feature(temp_df)
+      df = p.set_feature(df)
 
     for feature_gen in self.feature_gens:
-      df = feature_gen.set_feature(temp_df)
+      df = feature_gen.set_feature(df)
 
     if drop_nan:
       df.dropna(inplace=True)
