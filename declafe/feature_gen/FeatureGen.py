@@ -67,5 +67,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     self.override_feature_name = feature_name
     return self
 
-  def set_feature(self, df: pd.DataFrame) -> None:
-    df[self.feature_name] = self.generate(df)
+  def set_feature(self, df: pd.DataFrame) -> "pd.DataFrame":
+    return pd.concat(
+        [df, pd.DataFrame(self.generate(df), columns=[self.feature_name])],
+        axis=1)

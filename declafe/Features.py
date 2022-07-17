@@ -14,16 +14,17 @@ class Features:
   def set_features(self,
                    temp_df: pd.DataFrame,
                    drop_nan: bool = False) -> pd.DataFrame:
+    df = temp_df
     for p in self.pre_processes:
-      p.set_feature(temp_df)
+      df = p.set_feature(temp_df)
 
     for feature_gen in self.feature_gens:
-      feature_gen.set_feature(temp_df)
+      df = feature_gen.set_feature(temp_df)
 
     if drop_nan:
-      temp_df.dropna(inplace=True)
+      df.dropna(inplace=True)
 
-    return temp_df
+    return df
 
   @property
   def feature_names(self) -> List[str]:
