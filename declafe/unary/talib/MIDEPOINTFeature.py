@@ -1,7 +1,7 @@
 import pandas as pd
-
-from declafe.unary.UnaryColumnFeature import UnaryColumnFeature
 import talib
+
+from ..UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["MidpointFeature"]
 

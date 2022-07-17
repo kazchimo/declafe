@@ -1,7 +1,7 @@
 import pandas as pd
 import talib
 
-from declafe.binary.BinaryFeature import BinaryFeature
+from ..BinaryFeature import BinaryFeature
 
 
 class AROONDownFeature(BinaryFeature):

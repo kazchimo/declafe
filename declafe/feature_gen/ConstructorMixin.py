@@ -24,7 +24,7 @@ class ConstructorMixin:
 
   @staticmethod
   def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from declafe.tri.talib.ADXFeature import ADXFeature
+    from ..tri.talib.ADXFeature import ADXFeature
     return ADXFeature(high, low, close, period)
 
   @classmethod
@@ -34,7 +34,7 @@ class ConstructorMixin:
 
   @staticmethod
   def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from ..tri import ADXRFeature
+    from ..tri.talib.ADXRFeature import ADXRFeature
     return ADXRFeature(high, low, close, period)
 
   @staticmethod

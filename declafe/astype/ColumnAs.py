@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["AsType"]
 
-from declafe.astype import AsType
+from ..astype import AsType
 
 
 class ColumnAs(AsType):
