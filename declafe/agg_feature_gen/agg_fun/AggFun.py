@@ -26,6 +26,7 @@ class AggFun(ABC):
   def name(self) -> str:
     return f"{self.fun_name}_of_{self.target}"
 
+  @property
   def as_id(self) -> "IdFeature":
     return IdFeature(self.name)
 
