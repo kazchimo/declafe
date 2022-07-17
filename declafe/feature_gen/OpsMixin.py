@@ -13,17 +13,17 @@ class OpsMixin:
 
   @staticmethod
   def _bc():
-    from ..binary.BiComposeFeature import BiComposeFeature
+    from declafe.feature_gen.binary import BiComposeFeature
     return BiComposeFeature
 
   @staticmethod
   def _conv(a: Any):
-    from ..ConstFeature import ConstFeature
+    from declafe.feature_gen.ConstFeature import ConstFeature
     return ConstFeature.conv(a)
 
   def __eq__(self, other):
-    from ..binary import BiComposeFeature
-    from ..binary.ops.EqualFeature import EqualFeature
+    from declafe.feature_gen.binary import BiComposeFeature
+    from declafe.feature_gen.binary import EqualFeature
 
     return BiComposeFeature.make(left=self._self(),
                                  right=self._conv(other),
@@ -33,47 +33,47 @@ class OpsMixin:
     return (self == other).flip_bool()
 
   def __add__(self, other):
-    from ..binary import AddFeature
+    from declafe.feature_gen.binary import AddFeature
     return self._bc().make(left=self._self(),
                            right=self._conv(other),
                            to=AddFeature)
 
   def __sub__(self, other):
-    from ..binary import SubFeature
+    from declafe.feature_gen.binary import SubFeature
 
     return self._bc().make(self._self(), self._conv(other), SubFeature)
 
   def __mul__(self, other):
-    from ..binary import ProductFeature
+    from declafe.feature_gen.binary import ProductFeature
 
     return self._bc().make(self._self(), self._conv(other), ProductFeature)
 
   def __mod__(self, other):
-    from ..binary import ModFeature
+    from declafe.feature_gen.binary import ModFeature
 
     return self._bc().make(self._self(), self._conv(other), ModFeature)
 
   def __truediv__(self, other: "FeatureGen") -> "FeatureGen":
-    from ..binary.ops.DivideFeature import DivideFeature
+    from declafe.feature_gen.binary import DivideFeature
 
     return self._bc().make(self._self(), self._conv(other), DivideFeature)
 
   def __gt__(self, other):
-    from ..binary import IsGreaterFeature
+    from declafe.feature_gen.binary import IsGreaterFeature
 
     return self._bc().make(self._self(), self._conv(other), IsGreaterFeature)
 
   def __lt__(self, other):
-    from ..binary import IsLessFeature
+    from declafe.feature_gen.binary import IsLessFeature
 
     return self._bc().make(self._self(), self._conv(other), IsLessFeature)
 
   def __ge__(self, other):
-    from ..binary import GEFeature
+    from declafe.feature_gen.binary import GEFeature
 
     return self._bc().make(self._self(), self._conv(other), GEFeature)
 
   def __le__(self, other):
-    from ..binary import LEFeature
+    from declafe.feature_gen.binary import LEFeature
 
     return self._bc().make(self._self(), self._conv(other), LEFeature)

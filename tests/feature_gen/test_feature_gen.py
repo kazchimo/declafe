@@ -1,10 +1,10 @@
 import pandas as pd
 
 from declafe import Features
-from declafe.binary import SARFeature
-from declafe.dsl import c, col
 from declafe.feature_gen import FeatureGen
-from declafe.unary import LogFeature, SumFeature
+from declafe.feature_gen.binary import SARFeature
+from declafe.feature_gen.dsl import c, col
+from declafe.feature_gen.unary import LogFeature, SumFeature
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),

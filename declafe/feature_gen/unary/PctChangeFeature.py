@@ -7,7 +7,7 @@ from .UnaryColumnFeature import UnaryColumnFeature
 __all__ = ["PctChangeFeature"]
 
 if TYPE_CHECKING:
-  from .. import series
+  from declafe import series
 
 
 class PctChangeFeature(UnaryColumnFeature):

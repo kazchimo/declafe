@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import pandas as pd
 
-from ..feature_gen import FeatureGen
+from declafe.feature_gen import FeatureGen
 
 
 class UnaryColumnFeature(FeatureGen, ABC):

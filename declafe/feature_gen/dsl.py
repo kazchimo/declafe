@@ -4,7 +4,7 @@ from .ConstFeature import ConstFeature
 from .Features import Features
 
 if TYPE_CHECKING:
-  from .unary import IdFeature
+  from declafe.feature_gen.unary import IdFeature
 
 __all__ = ["col", "c", "cols"]
 
@@ -14,7 +14,7 @@ def c(v: Any) -> ConstFeature:
 
 
 def col(column_name: str) -> "IdFeature":
-  from .unary.IdFeature import IdFeature
+  from declafe.feature_gen.unary.IdFeature import IdFeature
   return IdFeature(column_name)
 
 

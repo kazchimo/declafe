@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Type
 
-from .unary import *
+from declafe.feature_gen.unary import *
 
 __all__ = ["Features", "F"]
 

@@ -5,7 +5,7 @@ import pandas as pd
 
 __all__ = ["AggFun"]
 
-from ...unary import IdFeature
+from declafe.feature_gen.unary import IdFeature
 
 
 class AggFun(ABC):

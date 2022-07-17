@@ -7,7 +7,7 @@ from .UnaryColumnFeature import UnaryColumnFeature
 __all__ = ["IdFeature"]
 
 if TYPE_CHECKING:
-  from .. import FeatureGen
+  from declafe import FeatureGen
 
 
 class IdFeature(UnaryColumnFeature):

@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
-  from ..Features import Features
+  from declafe.feature_gen.Features import Features
   from ..feature_gen import FeatureGen
 
 
@@ -9,12 +9,12 @@ class ConstructorMixin:
 
   @staticmethod
   def sar(high: str, low: str) -> "FeatureGen":
-    from ..binary import SARFeature
+    from declafe.feature_gen.binary import SARFeature
     return SARFeature(high, low)
 
   @staticmethod
   def sarext(high: str, low: str) -> "FeatureGen":
-    from ..binary import SAREXTFeature
+    from declafe.feature_gen.binary import SAREXTFeature
     return SAREXTFeature(high, low)
 
   @classmethod
@@ -24,7 +24,7 @@ class ConstructorMixin:
 
   @staticmethod
   def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from ..tri.talib.ADXFeature import ADXFeature
+    from declafe.feature_gen.tri.talib.ADXFeature import ADXFeature
     return ADXFeature(high, low, close, period)
 
   @classmethod
@@ -34,12 +34,12 @@ class ConstructorMixin:
 
   @staticmethod
   def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from ..tri.talib.ADXRFeature import ADXRFeature
+    from declafe.feature_gen.tri.talib import ADXRFeature
     return ADXRFeature(high, low, close, period)
 
   @staticmethod
   def aroon_up(high: str, low: str, period: int) -> "FeatureGen":
-    from ..binary import AROONUpFeature
+    from declafe.feature_gen.binary import AROONUpFeature
     return AROONUpFeature(high, low, period)
 
   @classmethod
@@ -48,7 +48,7 @@ class ConstructorMixin:
 
   @staticmethod
   def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
-    from ..binary import AROONDownFeature
+    from declafe.feature_gen.binary import AROONDownFeature
     return AROONDownFeature(high, low, period)
 
   @classmethod
@@ -57,7 +57,7 @@ class ConstructorMixin:
 
   @staticmethod
   def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
-    from ..binary import AROONOSCFeature
+    from declafe.feature_gen.binary import AROONOSCFeature
     return AROONOSCFeature(high, low, period)
 
   @classmethod
@@ -69,5 +69,5 @@ class ConstructorMixin:
           high: str = "high",
           low: str = "low",
           close: str = "close") -> "FeatureGen":
-    from ..quadri.talib.BOPFeature import BOPFeature
+    from declafe.feature_gen.quadri.talib import BOPFeature
     return BOPFeature(open_col, high, low, close)

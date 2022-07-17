@@ -1,7 +1,7 @@
 import pandas as pd
 
 from declafe import cols
-from declafe.unary import SumFeature
+from declafe.feature_gen.unary import SumFeature
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),
