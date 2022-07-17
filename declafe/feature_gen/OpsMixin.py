@@ -22,7 +22,8 @@ class OpsMixin:
     return ConstFeature.conv(a)
 
   def __eq__(self, other):
-    from ..binary import EqualFeature, BiComposeFeature
+    from ..binary import BiComposeFeature
+    from ..binary.ops.EqualFeature import EqualFeature
 
     return BiComposeFeature.make(left=self._self(),
                                  right=self._conv(other),
@@ -53,7 +54,7 @@ class OpsMixin:
     return self._bc().make(self._self(), self._conv(other), ModFeature)
 
   def __truediv__(self, other: "FeatureGen") -> "FeatureGen":
-    from ..binary import DivideFeature
+    from ..binary.ops.DivideFeature import DivideFeature
 
     return self._bc().make(self._self(), self._conv(other), DivideFeature)
 

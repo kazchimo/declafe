@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["EqualFeature"]
 
-from .BinaryFeature import BinaryFeature
+from ..BinaryFeature import BinaryFeature
 
 
 class EqualFeature(BinaryFeature):

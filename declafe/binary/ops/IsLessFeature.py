@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["IsLessFeature"]
 
-from .BinaryFeature import BinaryFeature
+from ..BinaryFeature import BinaryFeature
 
 
 class IsLessFeature(BinaryFeature):

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from .BinaryFeature import BinaryFeature
+from ..BinaryFeature import BinaryFeature
 
 __all__ = ["ModFeature"]
 

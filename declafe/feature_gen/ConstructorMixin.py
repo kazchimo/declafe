@@ -69,5 +69,5 @@ class ConstructorMixin:
           high: str = "high",
           low: str = "low",
           close: str = "close") -> "FeatureGen":
-    from ..quadri import BOPFeature
+    from ..quadri.talib.BOPFeature import BOPFeature
     return BOPFeature(open_col, high, low, close)
