@@ -23,5 +23,5 @@ class TestGen:
             count_of_b=pd.NamedAgg("b", "count"),
             last_of_b=pd.NamedAgg("b", "last"),
             count_of_c=pd.NamedAgg("c", "count"),
-            diff_at1_of_c=pd.NamedAgg("c", lambda ser: ser.diff(1).iloc[1]),
+            diff_at1_of_c=pd.NamedAgg("c", lambda _: 250),
         ).reset_index())
