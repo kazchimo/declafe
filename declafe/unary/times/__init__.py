@@ -5,8 +5,3 @@ from .MinuteFeature import MinuteFeature
 from .MonthFeature import MonthFeature
 from .SecondFeature import SecondFeature
 from .WeekOfYear import WeekOfYearFeature
-
-TIME_FEATURES = [
-    DayOfWeekFeature, DayOfMonthFeature, HourFeature, MinuteFeature,
-    MonthFeature, SecondFeature, WeekOfYearFeature
-]
