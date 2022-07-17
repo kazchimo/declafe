@@ -1,6 +1,6 @@
 import pandas as pd
 
-from declafe import Features, col
+from declafe import cols
 from declafe.unary import SumFeature
 
 test_df = pd.DataFrame({
@@ -12,9 +12,9 @@ test_df = pd.DataFrame({
 class TestMap:
 
   def test_return_mapped_values(self):
-    fs = Features.many(col("a"), col("b")).map(SumFeature, periods=2)
+    fs = cols(["a", "b"]).map(SumFeature, periods=2)
     df = test_df.copy()
-    fs.set_features(df)
+    df = fs.set_features(df)
 
     assert df["sum_2_of_a"].equals(df["a"].rolling(2).sum())
     assert df["sum_2_of_b"].equals(df["b"].rolling(2).sum())

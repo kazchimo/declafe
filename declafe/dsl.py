@@ -1,7 +1,7 @@
 from typing import Any, TYPE_CHECKING, List
 
-from . import Features
 from .ConstFeature import ConstFeature
+from .Features import Features
 
 if TYPE_CHECKING:
   from .unary import IdFeature

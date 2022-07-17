@@ -66,12 +66,12 @@ class TestMovingSums:
   def test_return_moving_sums(self):
     df1 = test_df.copy()
     df2 = test_df.copy()
-    _1.set_feature(df1)
-    _1.set_feature(df2)
+    df1 = _1.set_feature(df1)
+    df2 = _1.set_feature(df2)
 
-    _1.moving_sums([3, 5]).set_features(df1)
-    Features.many(SumFeature(3, _1.feature_name),
-                  SumFeature(5, _1.feature_name)).set_features(df2)
+    df1 = _1.moving_sums([3, 5]).set_features(df1)
+    df2 = Features.many(SumFeature(3, _1.feature_name),
+                        SumFeature(5, _1.feature_name)).set_features(df2)
 
     assert df1.equals(df2)
 

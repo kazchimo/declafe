@@ -60,7 +60,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     from ..Features import Features
     return Features.one(self)
 
-  def to_features_with(self, other: "FeatureGen") -> "Features":
+  def combine(self, other: "FeatureGen") -> "Features":
     return self.to_features.add_feature(other)
 
   def as_name_of(self, feature_name: str) -> "FeatureGen":
@@ -69,5 +69,4 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
   def set_feature(self, df: pd.DataFrame) -> "pd.DataFrame":
     return pd.concat(
-        [df, pd.DataFrame(self.generate(df), columns=[self.feature_name])],
-        axis=1)
+        [df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
