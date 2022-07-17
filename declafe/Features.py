@@ -6,12 +6,8 @@ from .unary import *
 __all__ = ["Features", "F"]
 
 
-class ClsMixin:
-  moving_average_cls = MovingAverage
-
-
 @dataclass
-class Features(ClsMixin):
+class Features:
   feature_gens: List[FeatureGen]
   pre_processes: List[FeatureGen] = field(default_factory=list)
 
@@ -70,8 +66,8 @@ class Features(ClsMixin):
   def filter_out_gen(self, cls: Type[FeatureGen]):
     return Features([f for f in self.feature_gens if not isinstance(f, cls)])
 
-  def map(self, f: "UnaryColumnFeature") -> "Features":
-    return Features([fg.next(f) for fg in self.feature_gens])
+  def map(self, f: Type["UnaryColumnFeature"], **kwargs) -> "Features":
+    return Features([fg.next(f, **kwargs) for fg in self.feature_gens])
 
   @property
   def feature_count(self) -> int:
