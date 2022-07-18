@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 import pandas as pd
 
-from declafe.feature_gen import FeatureGen
+from ..FeatureGen import FeatureGen
 
 
 class BinaryFeature(FeatureGen, ABC):

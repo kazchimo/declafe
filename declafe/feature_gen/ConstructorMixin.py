@@ -34,12 +34,12 @@ class ConstructorMixin:
 
   @staticmethod
   def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
-    from declafe.feature_gen.tri.talib import ADXRFeature
+    from .tri.talib.ADXRFeature import ADXRFeature
     return ADXRFeature(high, low, close, period)
 
   @staticmethod
   def aroon_up(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.feature_gen.binary import AROONUpFeature
+    from .binary.talib import AROONUpFeature
     return AROONUpFeature(high, low, period)
 
   @classmethod
@@ -48,7 +48,7 @@ class ConstructorMixin:
 
   @staticmethod
   def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.feature_gen.binary import AROONDownFeature
+    from .binary.talib import AROONDownFeature
     return AROONDownFeature(high, low, period)
 
   @classmethod
@@ -57,7 +57,7 @@ class ConstructorMixin:
 
   @staticmethod
   def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
-    from declafe.feature_gen.binary import AROONOSCFeature
+    from .binary.talib import AROONOSCFeature
     return AROONOSCFeature(high, low, period)
 
   @classmethod
@@ -69,5 +69,5 @@ class ConstructorMixin:
           high: str = "high",
           low: str = "low",
           close: str = "close") -> "FeatureGen":
-    from declafe.feature_gen.quadri.talib import BOPFeature
+    from .quadri.talib import BOPFeature
     return BOPFeature(open_col, high, low, close)

@@ -21,9 +21,14 @@ class OpsMixin:
     from declafe.feature_gen.ConstFeature import ConstFeature
     return ConstFeature.conv(a)
 
+  @staticmethod
+  def _bi():
+    import binary
+    return binary
+
   def __eq__(self, other):
-    from declafe.feature_gen.binary import BiComposeFeature
-    from declafe.feature_gen.binary import EqualFeature
+    from .binary import BiComposeFeature
+    from .binary.ops import EqualFeature
 
     return BiComposeFeature.make(left=self._self(),
                                  right=self._conv(other),
@@ -54,7 +59,7 @@ class OpsMixin:
     return self._bc().make(self._self(), self._conv(other), ModFeature)
 
   def __truediv__(self, other: "FeatureGen") -> "FeatureGen":
-    from declafe.feature_gen.binary import DivideFeature
+    from .binary.ops import DivideFeature
 
     return self._bc().make(self._self(), self._conv(other), DivideFeature)
 

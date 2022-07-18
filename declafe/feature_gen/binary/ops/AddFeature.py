@@ -2,7 +2,7 @@ import pandas as pd
 
 __all__ = ["AddFeature"]
 
-from .BinaryFeature import BinaryFeature
+from declafe.feature_gen.binary.BinaryFeature import BinaryFeature
 
 
 class AddFeature(BinaryFeature):
