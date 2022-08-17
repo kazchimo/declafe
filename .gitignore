@@ -1,3 +1,7 @@
 .idea
 __pycache__
 node_modules
+
+dist
+build
+declafe.egg-info
