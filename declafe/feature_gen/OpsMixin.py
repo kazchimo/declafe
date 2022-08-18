@@ -21,11 +21,6 @@ class OpsMixin:
     from declafe.feature_gen.ConstFeature import ConstFeature
     return ConstFeature.conv(a)
 
-  @staticmethod
-  def _bi():
-    import binary
-    return binary
-
   def __eq__(self, other):
     from .binary import BiComposeFeature
     from .binary.ops import EqualFeature
