@@ -1,3 +1,4 @@
+import setuptools
 from setuptools import setup
 from codecs import open
 from os import path
@@ -14,7 +15,7 @@ with open('README.md', encoding='utf-8') as f:
 
 setup(
   name=package_name,
-  version='0.0.1',
+  version='0.0.2',
   description='Declarative feature generation library',
   long_description=long_description,
   long_description_content_type='text/markdown',
@@ -23,7 +24,7 @@ setup(
   author_email='kazchimo@gmail.com',
   license='MIT',
   keywords='machine learning, declarative, feature generation',
-  packages=[package_name],
+  packages=setuptools.find_packages(),
   install_requires=_requirements(),
   classifiers=[
     "Programming Language :: Python :: 3.10"
