@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Optional, Type
 
 import pandas as pd
 
@@ -57,8 +57,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
   @property
   def to_features(self) -> "Features":
-    from declafe.feature_gen.Features import Features
-    return Features.one(self)
+    return self.FS().one(self)
 
   def combine(self, other: "FeatureGen") -> "Features":
     return self.to_features.add_feature(other)
@@ -70,3 +69,13 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
   def set_feature(self, df: pd.DataFrame) -> "pd.DataFrame":
     return pd.concat(
         [df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
+
+  # @property
+  # def _FS(self) -> Type["Features"]:
+  #   from declafe.feature_gen.Features import Features
+  #   return Features
+
+  @staticmethod
+  def FS() -> "Type[Features]":
+    from declafe.feature_gen.Features import Features
+    return Features

@@ -8,6 +8,7 @@ __all__ = ["IdFeature"]
 
 if TYPE_CHECKING:
   from declafe import FeatureGen
+  from declafe.feature_gen.Features import Features
 
 
 class IdFeature(UnaryColumnFeature):
@@ -22,16 +23,16 @@ class IdFeature(UnaryColumnFeature):
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser
 
-  @staticmethod
-  def many(columns: List[str]) -> List["IdFeature"]:
-    return [IdFeature(c) for c in columns]
+  @classmethod
+  def many(cls, columns: List[str]) -> "Features":
+    return cls.FS()([IdFeature(c) for c in columns])
 
   def minute_n(self, n: int) -> "FeatureGen":
     gen = (IdFeature(self.column_name).minute() % n) == 0
     return gen.as_name_of(f"minute{n}")
 
-  def minute_ns(self, ns: List[int]) -> List["FeatureGen"]:
-    return [self.minute_n(n) for n in ns]
+  def minute_ns(self, ns: List[int]) -> "Features":
+    return self.FS()([self.minute_n(n) for n in ns])
 
   def hour_n(self, n: int) -> "FeatureGen":
     gen = (IdFeature(self.column_name).hour() % n) == 0
@@ -47,8 +48,8 @@ class IdFeature(UnaryColumnFeature):
         f"dip_{self.column_name}_against_max{max_high_period}_of_{high_column}")
 
   def dip_againsts(self, high_column: str,
-                   max_high_periods: List[int]) -> List["FeatureGen"]:
-    return [self.dip_against(high_column, p) for p in max_high_periods]
+                   max_high_periods: List[int]) -> "Features":
+    return self.FS()([self.dip_against(high_column, p) for p in max_high_periods])
 
   def rip_against(self, low_column: str, min_low_period: int) -> "FeatureGen":
     gen = (IdFeature(self.column_name) /
@@ -57,5 +58,5 @@ class IdFeature(UnaryColumnFeature):
         f"rip_{self.column_name}_against_min{min_low_period}_of_{low_column}")
 
   def rip_againsts(self, low_column: str,
-                   min_low_periods: List[int]) -> List["FeatureGen"]:
-    return [self.rip_against(low_column, p) for p in min_low_periods]
+                   min_low_periods: List[int]) -> "Features":
+    return self.FS()([self.rip_against(low_column, p) for p in min_low_periods])
