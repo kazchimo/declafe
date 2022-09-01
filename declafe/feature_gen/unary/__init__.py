@@ -25,3 +25,4 @@ from .talib.T3Feature import *
 from .talib.TEMAFeature import *
 from .talib.TRIMAFeature import *
 from .talib.WeightedMovingAverage import WeightedMovingAverage
+from .talib.DEMAFeature import *

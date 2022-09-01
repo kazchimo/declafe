@@ -73,6 +73,13 @@ class ChainMixin:
   def emas(self, periods: List[int]) -> "Features":
     return self.FS([self.ema(period) for period in periods])
 
+  def dema(self, period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary import DEMAFeature
+    return self.next(DEMAFeature, periods=period)
+
+  def demas(self, periods: List[int]) -> "Features":
+    return self.FS([self.dema(period) for period in periods])
+
   def wma(self, period: int) -> "FeatureGen":
     from declafe.feature_gen.unary import WeightedMovingAverage
     return self.next(WeightedMovingAverage, periods=period)
