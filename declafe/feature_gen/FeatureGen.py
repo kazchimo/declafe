@@ -67,13 +67,11 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     return self
 
   def set_feature(self, df: pd.DataFrame) -> "pd.DataFrame":
-    return pd.concat(
-        [df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
-
-  # @property
-  # def _FS(self) -> Type["Features"]:
-  #   from declafe.feature_gen.Features import Features
-  #   return Features
+    if self.feature_name in df.columns:
+      return df
+    else:
+      return pd.concat(
+          [df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
 
   @staticmethod
   def FS() -> "Type[Features]":
