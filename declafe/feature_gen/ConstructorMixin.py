@@ -42,6 +42,16 @@ class ConstructorMixin:
     from .tri.talib.ADXRFeature import ADXRFeature
     return ADXRFeature(high, low, close, period)
 
+  @classmethod
+  def ccis(cls, high: str, low: str, close: str,
+            periods: List[int]) -> "Features":
+    return Features([cls.cci(high, low, close, period) for period in periods])
+
+  @staticmethod
+  def cci(high: str, low: str, close: str, period: int) -> "FeatureGen":
+    from .tri.talib.CCIFeature import CCIFeature
+    return CCIFeature(high, low, close, period)
+
   @staticmethod
   def aroon_up(high: str, low: str, period: int) -> "FeatureGen":
     from .binary.talib import AROONUpFeature
