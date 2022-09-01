@@ -80,6 +80,13 @@ class ChainMixin:
   def demas(self, periods: List[int]) -> "Features":
     return self.FS([self.dema(period) for period in periods])
 
+  def cmo(self, period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.CMOFeature import CMOFeature
+    return self.next(CMOFeature, periods=period)
+
+  def cmos(self, periods: List[int]) -> "Features":
+    return self.FS([self.cmo(period) for period in periods])
+
   def wma(self, period: int) -> "FeatureGen":
     from declafe.feature_gen.unary import WeightedMovingAverage
     return self.next(WeightedMovingAverage, periods=period)
