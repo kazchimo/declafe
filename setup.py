@@ -3,6 +3,7 @@ from setuptools import setup
 from codecs import open
 from os import path
 
+VERSION = "0.0.4"
 
 package_name = "declafe"
 root_dir = path.abspath(path.dirname(__file__))
@@ -15,7 +16,7 @@ with open('README.md', encoding='utf-8') as f:
 
 setup(
   name=package_name,
-  version='0.0.3',
+  version=VERSION,
   description='Declarative feature generation library',
   long_description=long_description,
   long_description_content_type='text/markdown',
