@@ -17,6 +17,11 @@ class ConstructorMixin:
     from declafe.feature_gen.binary import SAREXTFeature
     return SAREXTFeature(high, low)
 
+  @staticmethod
+  def midprice(high: str, low: str) -> "FeatureGen":
+    from declafe.feature_gen.binary import MIDPRICEFeature
+    return MIDPRICEFeature(high, low)
+
   @classmethod
   def adxes(cls, high: str, low: str, close: str,
             periods: List[int]) -> "Features":

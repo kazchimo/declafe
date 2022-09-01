@@ -12,5 +12,6 @@ from .talib.AROONFeature import *
 from .talib.AROONOSCFeature import *
 from .talib.SAREXTFeature import *
 from .talib.SARFeature import *
+from .talib.MIDPRICE import *
 
 ops = ops
