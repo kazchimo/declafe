@@ -90,5 +90,8 @@ class Features:
   def many(*args: FeatureGen) -> "Features":
     return Features(list(args))
 
+  def __iter__(self):
+    return self.feature_gens.__iter__()
+
 
 F = Features
