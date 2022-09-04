@@ -53,8 +53,9 @@ class IdFeature(UnaryColumnFeature):
     return self._FS([self.dip_against(high_column, p) for p in max_high_periods])
 
   def rip_against(self, low_column: str, min_low_period: int) -> "FeatureGen":
-    gen = (IdFeature(self.column_name) /
-           IdFeature(low_column).moving_min(min_low_period)) - 1
+    gen = (
+            IdFeature(self.column_name) / IdFeature(low_column).moving_min(min_low_period)
+           ) - 1
     return gen.as_name_of(
         f"rip_{self.column_name}_against_min{min_low_period}_of_{low_column}")
 

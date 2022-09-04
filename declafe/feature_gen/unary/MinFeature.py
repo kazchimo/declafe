@@ -19,4 +19,4 @@ class MinFeature(UnaryColumnFeature):
     return f"min_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).max()
+    return ser.rolling(self.periods).min()
