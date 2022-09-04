@@ -176,6 +176,10 @@ class ChainMixin:
     from declafe.feature_gen.unary import MinFeature
     return self.next(MinFeature, periods=period)
 
+  def min_comp(self, comp: float) -> "FeatureGen":
+    from declafe.feature_gen.unary.MinCompFeature import MinCompFeature
+    return self.next(MinCompFeature, comp=comp)
+
   def is_positive(self):
     from declafe.feature_gen.unary import IsPositiveFeature
     return self.next(IsPositiveFeature)
