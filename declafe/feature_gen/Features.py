@@ -11,6 +11,22 @@ class Features:
   feature_gens: List[FeatureGen]
   pre_processes: List[FeatureGen] = field(default_factory=list)
 
+  def __post_init__(self):
+    fs: List[FeatureGen] = []
+
+    for fe in self.feature_gens:
+      if all([not f.equals(fe) for f in fs]):
+        fs.append(fe)
+
+    ps: List[FeatureGen] = []
+
+    for pre in self.pre_processes:
+      if all([not p.equals(pre) for p in ps]):
+        ps.append(pre)
+
+    self.feature_gens = fs
+    self.pre_processes = ps
+
   def set_features(self,
                    temp_df: pd.DataFrame,
                    drop_nan: bool = False) -> pd.DataFrame:

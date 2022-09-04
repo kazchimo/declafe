@@ -1,6 +1,6 @@
 import pandas as pd
 
-from declafe import ConstFeature
+from declafe import ConstFeature, Features
 from declafe.feature_gen import FeatureGen
 from declafe.feature_gen.dsl import c, col
 
@@ -42,3 +42,10 @@ class TestEquality:
     gen3 = ConstFeature(1)
     assert gen1.equals(gen2)
     assert not gen1.equals(gen3)
+
+class TestInit:
+  def test_remove_duplicated_gens(self):
+    fs = Features([SimpleGen(), ConstFeature(1), ConstFeature(2).as_name_of("test_gen")])
+
+    assert fs.feature_count == 2
+    assert fs.feature_names == ["test_gen", "1"]
