@@ -18,3 +18,11 @@ class TestMinComp:
 
     assert result.equals(pred)
 
+
+class TestMaxComp:
+  def test_return_max_value(self):
+    df = test_df.copy()
+    result = a.max_comp(500).gen(df)
+    pred = pd.Series([500] * 500 + list(range(501, 1001)))
+
+    assert result.equals(pred)
