@@ -1,6 +1,7 @@
 import pandas as pd
 
 from declafe import col
+from declafe.feature_gen.unary import IdFeature
 
 test_df = pd.DataFrame({
   "a": list(range(1, 1001)),
@@ -27,3 +28,12 @@ class TestDipAgainsts:
     assert result["dip_a_against_max10_of_b"].equals(df["a"] / df["b"].rolling(10).max() - 1)
     assert result["dip_a_against_max20_of_b"].equals(df["a"] / df["b"].rolling(20).max() - 1)
 
+
+class TestMany:
+  def test_create_many_features(self):
+    df = test_df.copy()
+    fs = IdFeature.many(["a", "b"])
+    result = fs.set_features(df)
+
+    assert result["a"].equals(df["a"])
+    assert result["b"].equals(df["b"])
