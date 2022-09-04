@@ -12,6 +12,9 @@ class Features:
   pre_processes: List[FeatureGen] = field(default_factory=list)
 
   def __post_init__(self):
+    """
+    Remove duplicated features and pre_processes
+    """
     fs: List[FeatureGen] = []
 
     for fe in self.feature_gens:
