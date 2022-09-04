@@ -1,10 +1,8 @@
 import pandas as pd
 
-from declafe import Features
+from declafe import ConstFeature
 from declafe.feature_gen import FeatureGen
-from declafe.feature_gen.binary import SARFeature
 from declafe.feature_gen.dsl import c, col
-from declafe.feature_gen.unary import LogFeature, SumFeature
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),
@@ -26,10 +24,6 @@ class SimpleGen(FeatureGen):
 
 _1 = c(1)
 
-
-
-
-
 class TestFeatureName:
 
   def test_return_pre_defined_name_if_not_overrode(self):
@@ -41,4 +35,10 @@ class TestFeatureName:
     gen.as_name_of("overrode")
     assert gen.feature_name == "overrode"
 
-
+class TestEquality:
+  def test_equal_if_same_feature_name(self):
+    gen1 = SimpleGen()
+    gen2 = ConstFeature(1).as_name_of("test_gen")
+    gen3 = ConstFeature(1)
+    assert gen1.equals(gen2)
+    assert not gen1.equals(gen3)
