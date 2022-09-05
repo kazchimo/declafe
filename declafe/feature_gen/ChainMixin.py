@@ -130,9 +130,9 @@ class ChainMixin:
   def t3s(self, periods: List[int]) -> "Features":
     return self.FS([self.t3(period) for period in periods])
 
-  def apo(self) -> "FeatureGen":
+  def apo(self, fastperiod: int, slowperiod: int) -> "FeatureGen":
     from declafe.feature_gen.unary import APOFeature
-    return self.next(APOFeature)
+    return self.next(APOFeature, fastperiod=fastperiod, slowperiod=slowperiod)
 
   def moving_midpoints(self, periods: List[int]) -> "Features":
     return self.FS([self.moving_midpoint(p) for p in periods])
