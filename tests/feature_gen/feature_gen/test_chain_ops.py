@@ -1,4 +1,5 @@
 import pandas as pd
+import talib
 
 from declafe import col, c, FeatureGen, Features
 from declafe.feature_gen.binary import SARFeature
@@ -79,3 +80,7 @@ class TestAdd:
 
   def test_add(self):
     assert (a + 1).gen(test_df).equals(test_df["a"] + 1)
+
+class TestApo:
+  def test_calc_apo(self):
+    assert a.apo(12, 26).gen(test_df).equals(talib.APO(test_df["a"], 12, 26))
