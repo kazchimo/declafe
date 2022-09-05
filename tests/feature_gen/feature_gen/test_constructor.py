@@ -20,3 +20,12 @@ class TestAdx:
     result = FeatureGen.adx("a", "b", "d", 3).gen(df)
 
     assert result.equals(talib.ADX(df["a"], df["b"], df["d"], 3))
+
+class TestAdxes:
+  def test_construct_adxes(self):
+    df = test_df.copy()
+    result = FeatureGen.adxes("a", "b", "d", [3, 5]).set_features(df)
+
+    assert result["ADX_3_of_d"].equals(talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert result["ADX_5_of_d"].equals(talib.ADX(df["a"], df["b"], df["d"], 5))
+

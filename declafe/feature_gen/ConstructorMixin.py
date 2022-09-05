@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Type
 
 if TYPE_CHECKING:
   from declafe.feature_gen.Features import Features
@@ -25,7 +25,7 @@ class ConstructorMixin:
   @classmethod
   def adxes(cls, high: str, low: str, close: str,
             periods: List[int]) -> "Features":
-    return Features([cls.adx(high, low, close, period) for period in periods])
+    return cls._const_fs()([cls.adx(high, low, close, period) for period in periods])
 
   @staticmethod
   def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
@@ -86,3 +86,8 @@ class ConstructorMixin:
           close: str = "close") -> "FeatureGen":
     from .quadri.talib import BOPFeature
     return BOPFeature(open_col, high, low, close)
+
+  @staticmethod
+  def _const_fs() -> Type["Features"]:
+    from declafe.feature_gen.Features import Features
+    return Features
