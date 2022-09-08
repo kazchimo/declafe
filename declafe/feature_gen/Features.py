@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
-from typing import List, Type
+from typing import List, Type, Callable
+import functools
+
 
 from declafe.feature_gen.unary import *
 
@@ -85,6 +87,9 @@ class Features:
 
   def filter_out_gen(self, cls: Type[FeatureGen]):
     return Features([f for f in self.feature_gens if not isinstance(f, cls)])
+
+  def reduce(self, f: Callable[["FeatureGen", "FeatureGen"], "FeatureGen"], initial: "FeatureGen"):
+    return functools.reduce(f, self.feature_gens, initial)
 
   def map(self, f: Type["UnaryColumnFeature"], **kwargs) -> "Features":
     return Features([fg.next(f, **kwargs) for fg in self.feature_gens])

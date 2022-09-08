@@ -1,6 +1,6 @@
 import pandas as pd
 
-from declafe import cols, Features
+from declafe import cols, Features, c
 from declafe.feature_gen.unary import SumFeature
 
 test_df = pd.DataFrame({
@@ -27,5 +27,14 @@ class TestIter:
 
     assert df["a_+_1"].equals(df["a"] + 1)
     assert df["b_+_1"].equals(df["b"] + 1)
+
+class TestReduce:
+  def test_return_reduced_gen(self):
+    fs = cols(["a", "b"]).reduce(lambda x, y: x + y, c(0)).to_features
+    df = test_df.copy()
+    df = fs.set_features(df)
+
+    assert df["0_+_a_+_b"].equals(df["a"] + df["b"])
+
 
 

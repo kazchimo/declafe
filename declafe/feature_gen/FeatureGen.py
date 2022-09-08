@@ -57,7 +57,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
   @property
   def to_features(self) -> "Features":
-    return self.FS().one(self)
+    return self._FS.one(self)
 
   def combine(self, other: "FeatureGen") -> "Features":
     return self.to_features.add_feature(other)
