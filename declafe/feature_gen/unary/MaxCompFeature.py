@@ -13,7 +13,7 @@ class MaxCompFeature(UnaryColumnFeature):
 
   @property
   def name(self) -> str:
-    return f"min_comp_with_{self.comp}"
+    return f"max_comp_with_{self.comp}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser.apply(lambda x: max(x, self.comp))
