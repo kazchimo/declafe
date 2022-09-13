@@ -88,3 +88,7 @@ class TestApo:
 class TestInvert:
   def test_invert(self):
     assert (~a).gen(pd.DataFrame({"a": [True, False]})).equals(pd.Series([False, True]))
+
+class TestLag:
+  def test_lag(self):
+    assert a.lag(1).gen(test_df).equals(test_df["a"].shift(1))
