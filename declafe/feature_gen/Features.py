@@ -58,13 +58,7 @@ class Features:
         if isinstance(f, UnaryColumnFeature) and f.column_name == column_name
     ]
 
-  def filter_by_name(self, feature_names: List[str]):
-    return Features(
-        [f for f in self.feature_gens if f.feature_name in feature_names])
 
-  def filter_not_by_name(self, feature_names: List[str]):
-    return Features(
-        [f for f in self.feature_gens if f.feature_name not in feature_names])
 
   def contains(self, feature: FeatureGen) -> bool:
     return feature.feature_name in self.feature_names
@@ -84,6 +78,16 @@ class Features:
   def show_features(self) -> None:
     for f in self.feature_gens:
       print(f.feature_name)
+  def filter_by_name(self, feature_names: List[str]):
+    return Features(
+        [f for f in self.feature_gens if f.feature_name in feature_names])
+
+  def filter_not_by_name(self, feature_names: List[str]):
+    return Features(
+        [f for f in self.feature_gens if f.feature_name not in feature_names])
+
+  def filter(self, feature: List[FeatureGen]):
+    return Features([f for f in self.feature_gens if Features(feature).contains(f)])
 
   def filter_not(self, features: List["FeatureGen"]) -> "Features":
     return Features(

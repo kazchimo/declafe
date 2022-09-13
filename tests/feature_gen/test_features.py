@@ -53,3 +53,8 @@ class TestFilterNotGen:
   def test_return_filtered_gen(self):
     fs = (cols(["a", "b"]).add_feature(c(1))).filter_not_gen(IdFeature)
     assert fs.feature_names == ["1"]
+
+class TestFilter:
+  def test_return_filtered_gen(self):
+    fs = cols(["a", "b"]).filter([a])
+    assert fs.feature_names == ["a"]
