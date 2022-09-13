@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from datetime import tzinfo
 
 import pandas as pd
@@ -9,9 +8,11 @@ from ..UnaryColumnFeature import UnaryColumnFeature
 __all__ = ["WeekOfYearFeature"]
 
 
-@dataclass
 class WeekOfYearFeature(UnaryColumnFeature):
-  timezone: tzinfo = pytz.timezone("Asia/Tokyo")
+  def __init__(self, column_name: str, timezone: tzinfo = pytz.timezone("Asia/Tokyo")):
+    super().__init__(column_name)
+    self.timezone = timezone
+
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser.apply(lambda x: x.isocalendar()[1])
