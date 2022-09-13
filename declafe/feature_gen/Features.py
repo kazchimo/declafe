@@ -62,6 +62,10 @@ class Features:
     return Features(
         [f for f in self.feature_gens if f.feature_name in feature_names])
 
+  def filter_not_by_name(self, feature_names: List[str]):
+    return Features(
+        [f for f in self.feature_gens if f.feature_name not in feature_names])
+
   def contains(self, feature: FeatureGen) -> bool:
     return feature.feature_name in self.feature_names
 
