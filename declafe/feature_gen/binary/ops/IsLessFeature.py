@@ -15,4 +15,4 @@ class IsLessFeature(BinaryFeature):
     return left < right
 
   def _feature_name(self) -> str:
-    return f"{self.left}_is_less_than_{self.right}"
+    return f"{self.left}_<_{self.right}"

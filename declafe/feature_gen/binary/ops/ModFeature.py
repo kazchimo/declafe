@@ -14,4 +14,4 @@ class ModFeature(BinaryFeature):
     return left % right
 
   def _feature_name(self) -> str:
-    return f"{self.left} % {self.right}"
+    return f"{self.left}_%_{self.right}"
