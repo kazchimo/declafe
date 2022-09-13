@@ -77,3 +77,8 @@ class OpsMixin:
     from declafe.feature_gen.binary import LEFeature
 
     return self._bc().make(self._self(), self._conv(other), LEFeature)
+
+  def __and__(self, other):
+    from declafe.feature_gen.binary.ops.AndFeature import AndFeature
+
+    return self._bc().make(self._self(), self._conv(other), AndFeature)
