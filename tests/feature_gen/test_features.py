@@ -1,12 +1,15 @@
 import pandas as pd
 
-from declafe import cols, Features, c
+from declafe import cols, Features, c, col
 from declafe.feature_gen.unary import SumFeature
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),
     "b": list(range(1001, 2001))
 })
+
+a = col("a")
+b = col("b")
 
 
 class TestMap:
@@ -39,4 +42,9 @@ class TestReduce:
 class TestFilterNotByName:
   def test_return_filtered_gen(self):
     fs = cols(["a", "b"]).filter_not_by_name(["a"])
+    assert fs.feature_names == ["b"]
+
+class TestFilterNot:
+  def test_return_filtered_gen(self):
+    fs = cols(["a", "b"]).filter_not([a])
     assert fs.feature_names == ["b"]

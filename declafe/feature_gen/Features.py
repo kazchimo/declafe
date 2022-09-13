@@ -85,7 +85,7 @@ class Features:
     for f in self.feature_gens:
       print(f.feature_name)
 
-  def filter_out(self, features: List["FeatureGen"]) -> "Features":
+  def filter_not(self, features: List["FeatureGen"]) -> "Features":
     return Features(
         [f for f in self.feature_gens if not Features(features).contains(f)])
 
