@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 import pandas as pd
 
 __all__ = ["GEFeature"]
@@ -7,11 +5,7 @@ __all__ = ["GEFeature"]
 from ..BinaryFeature import BinaryFeature
 
 
-@dataclass
 class GEFeature(BinaryFeature):
-  left: str
-  right: str
-
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
     return left >= right
 
