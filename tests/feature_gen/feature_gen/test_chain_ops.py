@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import talib
 
@@ -92,3 +93,8 @@ class TestInvert:
 class TestLag:
   def test_lag(self):
     assert a.lag(1).gen(test_df).equals(test_df["a"].shift(1))
+
+class TestReplace:
+  def test_replace(self):
+    gen = a.lag(1).replace(np.nan, 99999)
+    assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
