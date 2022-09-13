@@ -89,7 +89,7 @@ class Features:
     return Features(
         [f for f in self.feature_gens if not Features(features).contains(f)])
 
-  def filter_out_gen(self, cls: Type[FeatureGen]):
+  def filter_not_gen(self, cls: Type[FeatureGen]):
     return Features([f for f in self.feature_gens if not isinstance(f, cls)])
 
   def reduce(self, f: Callable[["FeatureGen", "FeatureGen"], "FeatureGen"], initial: "FeatureGen"):

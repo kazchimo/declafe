@@ -1,7 +1,7 @@
 import pandas as pd
 
 from declafe import cols, Features, c, col
-from declafe.feature_gen.unary import SumFeature
+from declafe.feature_gen.unary import SumFeature, IdFeature
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),
@@ -48,3 +48,8 @@ class TestFilterNot:
   def test_return_filtered_gen(self):
     fs = cols(["a", "b"]).filter_not([a])
     assert fs.feature_names == ["b"]
+
+class TestFilterNotGen:
+  def test_return_filtered_gen(self):
+    fs = (cols(["a", "b"]).add_feature(c(1))).filter_not_gen(IdFeature)
+    assert fs.feature_names == ["1"]
