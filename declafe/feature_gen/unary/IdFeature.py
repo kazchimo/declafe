@@ -11,9 +11,7 @@ if TYPE_CHECKING:
   from declafe.feature_gen.Features import Features
 
 
-class IdFeature(UnaryColumnFeature, str):
-  def __new__(cls, *args, **kwargs):
-    return str.__new__(cls, *args, **kwargs)
+class IdFeature(UnaryColumnFeature):
 
   @property
   def name(self) -> str:

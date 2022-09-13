@@ -11,16 +11,6 @@ test_df = pd.DataFrame({
 a = col("a")
 b = col("b")
 
-class TestFeatureName:
-  def test_feature_name(self):
-    assert IdFeature("a").feature_name == "a"
-    assert IdFeature("b").feature_name == "b"
-
-class TestGen:
-  def test_return_column_as_it_is(self):
-    assert a.gen(test_df).equals(test_df["a"])
-    assert b.gen(test_df).equals(test_df["b"])
-
 class TestDipAgainst:
   def test_calc_dip(self):
     df = test_df.copy()
