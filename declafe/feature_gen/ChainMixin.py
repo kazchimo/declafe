@@ -1,6 +1,8 @@
 from abc import abstractmethod
 from typing import Type, TYPE_CHECKING, Any, List, TypeVar
 
+import numpy as np
+
 if TYPE_CHECKING:
   from ..feature_gen import FeatureGen
   from declafe.feature_gen.Features import Features
@@ -222,6 +224,9 @@ class ChainMixin:
   def replace(self, target_value: T, to_value: T) -> "FeatureGen":
     from declafe.feature_gen.unary.ReplaceFeature import ReplaceFeature
     return self.next(ReplaceFeature, target_value=target_value, to_value=to_value)
+
+  def replace_na(self, to_value: Any) -> "FeatureGen":
+    return self.replace(np.nan, to_value)
 
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature

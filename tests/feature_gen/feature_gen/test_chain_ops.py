@@ -98,3 +98,8 @@ class TestReplace:
   def test_replace(self):
     gen = a.lag(1).replace(np.nan, 99999)
     assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
+
+class TestReplaceNa:
+  def test_replace_na(self):
+    gen = a.lag(1).replace_na(99999)
+    assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
