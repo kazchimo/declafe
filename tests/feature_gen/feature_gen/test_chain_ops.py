@@ -84,3 +84,7 @@ class TestAdd:
 class TestApo:
   def test_calc_apo(self):
     assert a.apo(12, 26).gen(test_df).equals(talib.APO(test_df["a"], 12, 26))
+
+class TestInvert:
+  def test_invert(self):
+    assert (~a).gen(pd.DataFrame({"a": [True, False]})).equals(pd.Series([False, True]))

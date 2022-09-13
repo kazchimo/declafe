@@ -217,3 +217,8 @@ class ChainMixin:
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)
+
+
+  def __invert__(self):
+    from declafe.feature_gen.unary.NotFeature import NotFeature
+    return self.next(NotFeature)
