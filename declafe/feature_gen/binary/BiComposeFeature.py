@@ -1,4 +1,4 @@
-from typing import Type, Dict, Any, Optional
+from typing import Type, Dict, Any, Optional, cast
 
 import pandas as pd
 
@@ -40,11 +40,11 @@ class BiComposeFeature(FeatureGen):
     left_name = f"({self.left.feature_name})" if not isinstance(self.left, (ConstFeature, IdFeature)) else self.left.feature_name
     right_name = f"({self.right.feature_name})" if not isinstance(self.right, (ConstFeature, IdFeature)) else self.right.feature_name
 
-    return gen.as_name_of(
+    return cast(BinaryFeature, gen.as_name_of(
       gen.feature_name
       .replace(self.left.feature_name, left_name)
       .replace(self.right.feature_name, right_name)
-    )
+    ))
 
   @staticmethod
   def make(left: FeatureGen,
