@@ -37,7 +37,7 @@ class TestReduce:
     df = test_df.copy()
     df = fs.set_features(df)
 
-    assert df["0_+_a_+_b"].equals(df["a"] + df["b"])
+    assert df["(0_+_a)_+_b"].equals(df["a"] + df["b"])
 
 class TestFilterNotByName:
   def test_return_filtered_gen(self):

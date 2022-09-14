@@ -13,3 +13,9 @@ class TestGen:
     gen = BiComposeFeature(a * 2, b * 3, AddFeature)
 
     assert gen.generate(df).equals(pd.Series([14, 19, 24]))
+
+class TestFeatureName:
+  def test_return_composed_feature_name(self):
+    gen = BiComposeFeature(a * 2, b * 3, AddFeature)
+
+    assert gen.feature_name == "(a_*_2)_+_(b_*_3)"
