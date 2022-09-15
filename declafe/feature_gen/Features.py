@@ -113,6 +113,11 @@ class Features:
     else:
       return Features([f(fg) for fg in self.feature_gens])
 
+  _FM = Callable[["FeatureGen"], Union["Features", List["FeatureGen"]]]
+
+  def flat_map(self, fun: _FM) -> "Features":
+    return Features([f for fg in self.feature_gens for f in fun(fg)])
+
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)

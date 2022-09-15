@@ -115,6 +115,29 @@ class TestMap:
     assert df["b_+_1"].equals(df["b"] + 1)
 
 
+class TestFlatMap:
+
+  def test_flat_map(self):
+    fs = cols(["a", "b"]).flat_map(lambda x: [x + 1, x + 2])
+    df = test_df.copy()
+    df = fs.set_features(df)
+
+    assert df["a_+_1"].equals(df["a"] + 1)
+    assert df["a_+_2"].equals(df["a"] + 2)
+    assert df["b_+_1"].equals(df["b"] + 1)
+    assert df["b_+_2"].equals(df["b"] + 2)
+
+  def test_flat_map_by_features(self):
+    fs = cols(["a", "b"]).flat_map(lambda a: Features([a + 1, a + 2]))
+    df = test_df.copy()
+    df = fs.set_features(df)
+
+    assert df["a_+_1"].equals(df["a"] + 1)
+    assert df["a_+_2"].equals(df["a"] + 2)
+    assert df["b_+_1"].equals(df["b"] + 1)
+    assert df["b_+_2"].equals(df["b"] + 2)
+
+
 class TestIter:
 
   def test_iterate_over_inner_gen(self):
