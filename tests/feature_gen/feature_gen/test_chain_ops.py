@@ -103,3 +103,24 @@ class TestReplaceNa:
   def test_replace_na(self):
     gen = a.lag(1).replace_na(99999)
     assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
+
+class TestConsecutiveCountOf:
+  def test_calc_consecutive_count(self):
+    df = pd.DataFrame({"a": ["a", "b", "b", "c", "b", "b", "b", "a", "b"]})
+    gen = a.consecutive_count_of("b")
+
+    assert gen.gen(df).equals(pd.Series([0, 1, 2, 0, 1, 2, 3, 0, 1]))
+
+class TestConsecutiveUpCount:
+  def test_calc_consecutive_up_count(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
+    gen = a.consecutive_up_count()
+
+    assert gen.gen(df).equals(pd.Series([0, 1, 2, 3, 4, 0, 0, 0, 0, 1]))
+
+class TestConsecutiveDownCount:
+  def test_calc_consecutive_down_count(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
+    gen = a.consecutive_down_count()
+
+    assert gen.gen(df).equals(pd.Series([0, 0, 0, 0, 0, 1, 2, 3, 4, 0]))
