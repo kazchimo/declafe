@@ -12,7 +12,6 @@ from ... import ConstFeature
 
 
 class BiComposeFeature(FeatureGen):
-  """check if left is greater than right"""
 
   def __init__(self,
                left: FeatureGen,
