@@ -7,7 +7,7 @@ from declafe.feature_gen import FeatureGen
 __all__ = ["BiComposeFeature"]
 
 from .BinaryFeature import BinaryFeature
-from ..unary import IdFeature
+from ..unary import IdFeature, UnaryColumnFeature
 from ... import ConstFeature
 
 
@@ -37,8 +37,8 @@ class BiComposeFeature(FeatureGen):
     gen = self.to(left=self.left.feature_name,
                    right=self.right.feature_name,
                    **self.toKwargs)
-    left_name = f"({self.left.feature_name})" if not isinstance(self.left, (ConstFeature, IdFeature)) else self.left.feature_name
-    right_name = f"({self.right.feature_name})" if not isinstance(self.right, (ConstFeature, IdFeature)) else self.right.feature_name
+    left_name = self.__wrap_name(self.left)
+    right_name = self.__wrap_name(self.right)
 
     return cast(BinaryFeature, gen.as_name_of(
       gen.feature_name
@@ -46,6 +46,10 @@ class BiComposeFeature(FeatureGen):
       .replace(self.right.feature_name, right_name)
     ))
 
+  def __wrap_name(self, f: FeatureGen):
+    return f"({f.feature_name})" \
+      if not isinstance(f, (ConstFeature, IdFeature)) \
+      else f.feature_name
   @staticmethod
   def make(left: FeatureGen,
            right: FeatureGen,

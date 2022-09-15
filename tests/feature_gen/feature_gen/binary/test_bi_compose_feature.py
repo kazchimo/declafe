@@ -17,5 +17,7 @@ class TestGen:
 class TestFeatureName:
   def test_return_composed_feature_name(self):
     gen = BiComposeFeature(a * 2, b * 3, AddFeature)
+    unary_gen = BiComposeFeature(a * 2, b.lag(1) * 3, AddFeature)
 
     assert gen.feature_name == "(a_*_2)_+_(b_*_3)"
+    assert unary_gen.feature_name == "(a_*_2)_+_((lag_1_of_b)_*_3)"
