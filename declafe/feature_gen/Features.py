@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Type, Callable
+from typing import List, Type, Callable, Union
 import functools
 
 from declafe.feature_gen.unary import *
@@ -105,8 +105,13 @@ class Features:
              initial: "FeatureGen"):
     return functools.reduce(f, self.feature_gens, initial)
 
-  def map(self, f: Type["UnaryColumnFeature"], **kwargs) -> "Features":
-    return Features([fg.next(f, **kwargs) for fg in self.feature_gens])
+  _F = Union[Type["UnaryColumnFeature"], Callable[["FeatureGen"], "FeatureGen"]]
+
+  def map(self, f: _F, **kwargs) -> "Features":
+    if isinstance(f, UnaryColumnFeature.__class__):
+      return Features([fg.next(f, **kwargs) for fg in self.feature_gens])
+    else:
+      return Features([f(fg) for fg in self.feature_gens])
 
   @property
   def feature_count(self) -> int:

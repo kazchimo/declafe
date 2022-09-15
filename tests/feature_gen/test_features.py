@@ -106,6 +106,14 @@ class TestMap:
     assert df["sum_2_of_a"].equals(df["a"].rolling(2).sum())
     assert df["sum_2_of_b"].equals(df["b"].rolling(2).sum())
 
+  def test_map_by_func(self):
+    fs = cols(["a", "b"]).map(lambda x: x + 1)
+    df = test_df.copy()
+    df = fs.set_features(df)
+
+    assert df["a_+_1"].equals(df["a"] + 1)
+    assert df["b_+_1"].equals(df["b"] + 1)
+
 
 class TestIter:
 
