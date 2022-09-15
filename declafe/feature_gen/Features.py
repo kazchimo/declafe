@@ -50,7 +50,7 @@ class Features:
   def feature_names(self) -> List[str]:
     return [f.feature_name for f in self.feature_gens]
 
-  def unary_feature_name_of(self, column_name: str):
+  def unary_feature_name_of(self, column_name: str) -> List[str]:
     return [
         f.feature_name
         for f in self.feature_gens
@@ -59,6 +59,9 @@ class Features:
 
   def contains(self, feature: FeatureGen) -> bool:
     return feature.feature_name in self.feature_names
+
+  def __contains__(self, item: FeatureGen) -> bool:
+    return self.contains(item)
 
   def __add__(self, other):
     return Features(self.feature_gens + [
@@ -108,6 +111,9 @@ class Features:
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)
+
+  def __len__(self) -> int:
+    return self.feature_count
 
   @staticmethod
   def empty() -> "Features":
