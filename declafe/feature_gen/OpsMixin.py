@@ -6,6 +6,7 @@ if TYPE_CHECKING:
 
 O = Union["FeatureGen", int, float, str, bool]
 
+
 class OpsMixin:
 
   @abstractmethod
@@ -88,5 +89,3 @@ class OpsMixin:
     from declafe.feature_gen.binary.ops.OrFeature import OrFeature
 
     return self._bc().make(self._self(), self._conv(other), OrFeature)
-
-

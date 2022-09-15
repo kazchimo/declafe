@@ -6,6 +6,7 @@ from ..BinaryFeature import BinaryFeature
 
 
 class GEFeature(BinaryFeature):
+
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
     return left >= right
 

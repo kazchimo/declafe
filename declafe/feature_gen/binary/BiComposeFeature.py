@@ -35,21 +35,23 @@ class BiComposeFeature(FeatureGen):
 
   def to_instance(self):
     gen = self.to(left=self.left.feature_name,
-                   right=self.right.feature_name,
-                   **self.toKwargs)
+                  right=self.right.feature_name,
+                  **self.toKwargs)
     left_name = self.__wrap_name(self.left)
     right_name = self.__wrap_name(self.right)
 
-    return cast(BinaryFeature, gen.as_name_of(
-      gen.feature_name
-      .replace(self.left.feature_name, left_name)
-      .replace(self.right.feature_name, right_name)
-    ))
+    return cast(
+        BinaryFeature,
+        gen.as_name_of(
+            gen.feature_name.replace(self.left.feature_name,
+                                     left_name).replace(self.right.feature_name,
+                                                        right_name)))
 
   def __wrap_name(self, f: FeatureGen):
     return f"({f.feature_name})" \
       if not isinstance(f, (ConstFeature, IdFeature)) \
       else f.feature_name
+
   @staticmethod
   def make(left: FeatureGen,
            right: FeatureGen,

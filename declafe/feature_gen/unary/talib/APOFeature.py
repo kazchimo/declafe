@@ -8,7 +8,11 @@ __all__ = ["APOFeature"]
 
 class APOFeature(UnaryColumnFeature):
 
-  def __init__(self, column_name: str, fastperiod: int = 12, slowperiod: int = 26, matype: int = 0):
+  def __init__(self,
+               column_name: str,
+               fastperiod: int = 12,
+               slowperiod: int = 26,
+               matype: int = 0):
     super().__init__(column_name)
     self.fastperiod = fastperiod
     self.slowperiod = slowperiod

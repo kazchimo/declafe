@@ -9,10 +9,12 @@ __all__ = ["WeekOfYearFeature"]
 
 
 class WeekOfYearFeature(UnaryColumnFeature):
-  def __init__(self, column_name: str, timezone: tzinfo = pytz.timezone("Asia/Tokyo")):
+
+  def __init__(self,
+               column_name: str,
+               timezone: tzinfo = pytz.timezone("Asia/Tokyo")):
     super().__init__(column_name)
     self.timezone = timezone
-
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser.apply(lambda x: x.isocalendar()[1])

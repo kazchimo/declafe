@@ -4,7 +4,9 @@ from .UnaryColumnFeature import UnaryColumnFeature
 
 __all__ = ["NotFeature"]
 
+
 class NotFeature(UnaryColumnFeature):
+
   @property
   def name(self) -> str:
     return f"~"

@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from typing import List, Type, Callable
 import functools
 
-
 from declafe.feature_gen.unary import *
 
 __all__ = ["Features", "F"]
@@ -58,8 +57,6 @@ class Features:
         if isinstance(f, UnaryColumnFeature) and f.column_name == column_name
     ]
 
-
-
   def contains(self, feature: FeatureGen) -> bool:
     return feature.feature_name in self.feature_names
 
@@ -78,6 +75,7 @@ class Features:
   def show_features(self) -> None:
     for f in self.feature_gens:
       print(f.feature_name)
+
   def filter_by_name(self, feature_names: List[str]):
     return Features(
         [f for f in self.feature_gens if f.feature_name in feature_names])
@@ -87,7 +85,8 @@ class Features:
         [f for f in self.feature_gens if f.feature_name not in feature_names])
 
   def filter(self, feature: List[FeatureGen]):
-    return Features([f for f in self.feature_gens if Features(feature).contains(f)])
+    return Features(
+        [f for f in self.feature_gens if Features(feature).contains(f)])
 
   def filter_not(self, features: List["FeatureGen"]) -> "Features":
     return Features(
@@ -99,7 +98,8 @@ class Features:
   def filter_not_gen(self, cls: Type[FeatureGen]):
     return Features([f for f in self.feature_gens if not isinstance(f, cls)])
 
-  def reduce(self, f: Callable[["FeatureGen", "FeatureGen"], "FeatureGen"], initial: "FeatureGen"):
+  def reduce(self, f: Callable[["FeatureGen", "FeatureGen"], "FeatureGen"],
+             initial: "FeatureGen"):
     return functools.reduce(f, self.feature_gens, initial)
 
   def map(self, f: Type["UnaryColumnFeature"], **kwargs) -> "Features":

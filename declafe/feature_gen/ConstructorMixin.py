@@ -25,7 +25,8 @@ class ConstructorMixin:
   @classmethod
   def adxes(cls, high: str, low: str, close: str,
             periods: List[int]) -> "Features":
-    return cls._const_fs()([cls.adx(high, low, close, period) for period in periods])
+    return cls._const_fs()(
+        [cls.adx(high, low, close, period) for period in periods])
 
   @staticmethod
   def adx(high: str, low: str, close: str, period: int) -> "FeatureGen":
@@ -35,7 +36,8 @@ class ConstructorMixin:
   @classmethod
   def adxrs(cls, high: str, low: str, close: str,
             periods: List[int]) -> "Features":
-    return cls._const_fs()([cls.adx(high, low, close, period) for period in periods])
+    return cls._const_fs()(
+        [cls.adx(high, low, close, period) for period in periods])
 
   @staticmethod
   def adxr(high: str, low: str, close: str, period: int) -> "FeatureGen":
@@ -44,8 +46,9 @@ class ConstructorMixin:
 
   @classmethod
   def ccis(cls, high: str, low: str, close: str,
-            periods: List[int]) -> "Features":
-    return cls._const_fs()([cls.cci(high, low, close, period) for period in periods])
+           periods: List[int]) -> "Features":
+    return cls._const_fs()(
+        [cls.cci(high, low, close, period) for period in periods])
 
   @staticmethod
   def cci(high: str, low: str, close: str, period: int) -> "FeatureGen":
@@ -59,7 +62,8 @@ class ConstructorMixin:
 
   @classmethod
   def aroon_ups(cls, high: str, low: str, periods: List[int]) -> "Features":
-    return cls._const_fs()([cls.aroon_up(high, low, period) for period in periods])
+    return cls._const_fs()(
+        [cls.aroon_up(high, low, period) for period in periods])
 
   @staticmethod
   def aroon_down(high: str, low: str, period: int) -> "FeatureGen":
@@ -68,7 +72,8 @@ class ConstructorMixin:
 
   @classmethod
   def aroon_downs(cls, high: str, low: str, periods: List[int]) -> "Features":
-    return cls._const_fs()([cls.aroon_down(high, low, period) for period in periods])
+    return cls._const_fs()(
+        [cls.aroon_down(high, low, period) for period in periods])
 
   @staticmethod
   def arron_osc(high: str, low: str, period: int) -> "FeatureGen":
@@ -77,7 +82,8 @@ class ConstructorMixin:
 
   @classmethod
   def arron_oscs(cls, high: str, low: str, periods: List[int]) -> "Features":
-    return cls._const_fs()([cls.arron_osc(high, low, period) for period in periods])
+    return cls._const_fs()(
+        [cls.arron_osc(high, low, period) for period in periods])
 
   @staticmethod
   def bop(open_col: str = "open",

@@ -15,7 +15,9 @@ a = col("a")
 b = col("b")
 _1 = c(1)
 
+
 class TestMinComp:
+
   def test_return_min_value(self):
     df = test_df.copy()
     result = a.min_comp(500).gen(df)
@@ -25,12 +27,14 @@ class TestMinComp:
 
 
 class TestMaxComp:
+
   def test_return_max_value(self):
     df = test_df.copy()
     result = a.max_comp(500).gen(df)
     pred = pd.Series([500] * 500 + list(range(501, 1001)))
 
     assert result.equals(pred)
+
 
 class Double(FeatureGen):
 
@@ -44,14 +48,14 @@ class Double(FeatureGen):
   def _feature_name(self) -> str:
     return "double"
 
-class TestLog:
 
+class TestLog:
 
   def test_return_log(self):
     assert _1.log().gen(test_df).equals(
-      LogFeature("").gen_unary(pd.Series(1, index=test_df.index)))
+        LogFeature("").gen_unary(pd.Series(1, index=test_df.index)))
     assert Double("a").log().gen(test_df).equals(
-      LogFeature("").gen_unary(test_df["a"] * 2))
+        LogFeature("").gen_unary(test_df["a"] * 2))
 
 
 class TestMovingSums:
@@ -82,43 +86,60 @@ class TestAdd:
   def test_add(self):
     assert (a + 1).gen(test_df).equals(test_df["a"] + 1)
 
+
 class TestApo:
+
   def test_calc_apo(self):
     assert a.apo(12, 26).gen(test_df).equals(talib.APO(test_df["a"], 12, 26))
 
+
 class TestInvert:
+
   def test_invert(self):
-    assert (~a).gen(pd.DataFrame({"a": [True, False]})).equals(pd.Series([False, True]))
+    assert (~a).gen(pd.DataFrame({"a": [True, False]
+                                 })).equals(pd.Series([False, True]))
+
 
 class TestLag:
+
   def test_lag(self):
     assert a.lag(1).gen(test_df).equals(test_df["a"].shift(1))
 
+
 class TestReplace:
+
   def test_replace(self):
     gen = a.lag(1).replace(np.nan, 99999)
     assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
 
+
 class TestReplaceNa:
+
   def test_replace_na(self):
     gen = a.lag(1).replace_na(99999)
     assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
 
+
 class TestConsecutiveCountOf:
+
   def test_calc_consecutive_count(self):
     df = pd.DataFrame({"a": ["a", "b", "b", "c", "b", "b", "b", "a", "b"]})
     gen = a.consecutive_count_of("b")
 
     assert gen.gen(df).equals(pd.Series([0, 1, 2, 0, 1, 2, 3, 0, 1]))
 
+
 class TestConsecutiveUpCount:
+
   def test_calc_consecutive_up_count(self):
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
     gen = a.consecutive_up_count()
 
     assert gen.gen(df).equals(pd.Series([0, 1, 2, 3, 4, 0, 0, 0, 0, 1]))
 
+
 class TestConsecutiveDownCount:
+
   def test_calc_consecutive_down_count(self):
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
     gen = a.consecutive_down_count()

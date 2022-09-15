@@ -82,4 +82,3 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
   def _FS(self) -> "Type[Features]":
     from declafe.feature_gen.Features import Features
     return Features
-

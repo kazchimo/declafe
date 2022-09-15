@@ -24,6 +24,7 @@ class SimpleGen(FeatureGen):
 
 _1 = c(1)
 
+
 class TestFeatureName:
 
   def test_return_pre_defined_name_if_not_overrode(self):
@@ -35,7 +36,9 @@ class TestFeatureName:
     gen.as_name_of("overrode")
     assert gen.feature_name == "overrode"
 
+
 class TestEquality:
+
   def test_equal_if_same_feature_name(self):
     gen1 = SimpleGen()
     gen2 = ConstFeature(1).as_name_of("test_gen")
@@ -43,9 +46,14 @@ class TestEquality:
     assert gen1.equals(gen2)
     assert not gen1.equals(gen3)
 
+
 class TestInit:
+
   def test_remove_duplicated_gens(self):
-    fs = Features([SimpleGen(), ConstFeature(1), ConstFeature(2).as_name_of("test_gen")])
+    fs = Features(
+        [SimpleGen(),
+         ConstFeature(1),
+         ConstFeature(2).as_name_of("test_gen")])
 
     assert fs.feature_count == 2
     assert fs.feature_names == ["test_gen", "1"]

@@ -42,20 +42,19 @@ class IdFeature(UnaryColumnFeature):
     return [self.hour_n(n) for n in ns]
 
   def dip_against(self, high_column: str, max_high_period: int) -> "FeatureGen":
-    gen = (
-            IdFeature(self.column_name) / IdFeature(high_column).moving_max(max_high_period)
-          ) - 1
+    gen = (IdFeature(self.column_name) /
+           IdFeature(high_column).moving_max(max_high_period)) - 1
     return gen.as_name_of(
         f"dip_{self.column_name}_against_max{max_high_period}_of_{high_column}")
 
   def dip_againsts(self, high_column: str,
                    max_high_periods: List[int]) -> "Features":
-    return self._FS([self.dip_against(high_column, p) for p in max_high_periods])
+    return self._FS(
+        [self.dip_against(high_column, p) for p in max_high_periods])
 
   def rip_against(self, low_column: str, min_low_period: int) -> "FeatureGen":
-    gen = (
-            IdFeature(self.column_name) / IdFeature(low_column).moving_min(min_low_period)
-           ) - 1
+    gen = (IdFeature(self.column_name) /
+           IdFeature(low_column).moving_min(min_low_period)) - 1
     return gen.as_name_of(
         f"rip_{self.column_name}_against_min{min_low_period}_of_{low_column}")
 
