@@ -17,3 +17,12 @@ class TestAnd:
 class TestOr:
   def test_or(self):
     assert (b1 | b2).gen(test_df).equals(pd.Series([True, True, True, False]))
+
+class TestAdd:
+  def test_add(self):
+    df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    assert (col("a") + col("b")).gen(df).equals(pd.Series([5, 7, 9]))
+
+  def test_with_const(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") + 1).gen(df).equals(pd.Series([2, 3, 4]))

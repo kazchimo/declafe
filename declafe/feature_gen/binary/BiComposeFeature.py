@@ -7,7 +7,7 @@ from declafe.feature_gen import FeatureGen
 __all__ = ["BiComposeFeature"]
 
 from .BinaryFeature import BinaryFeature
-from ..unary import IdFeature, UnaryColumnFeature
+from ..unary import IdFeature
 from ... import ConstFeature
 
 
