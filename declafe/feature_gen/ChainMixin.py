@@ -48,6 +48,10 @@ class ChainMixin:
     from declafe.feature_gen.unary import LogFeature
     return self.next(LogFeature)
 
+  def abs(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.AbsFeature import AbsFeature
+    return self.next(AbsFeature)
+
   def is_up(self, period: int = 1) -> "FeatureGen":
     return (self.pct_change(period) > 0).as_name_of(f"is_up{period}")
 

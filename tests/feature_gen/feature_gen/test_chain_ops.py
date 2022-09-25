@@ -145,3 +145,10 @@ class TestConsecutiveDownCount:
     gen = a.consecutive_down_count()
 
     assert gen.gen(df).equals(pd.Series([0, 0, 0, 0, 0, 1, 2, 3, 4, 0]))
+
+
+class TestAbs:
+
+  def test_abs(self):
+    assert a.abs().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]
+                                    })).equals(pd.Series([1, 2, 3, 4, 5, 6]))
