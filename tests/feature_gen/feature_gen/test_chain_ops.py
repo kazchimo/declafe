@@ -73,14 +73,6 @@ class TestMovingSums:
     assert df1.equals(df2)
 
 
-class TestSar:
-
-  def test_return_sar(self):
-    assert FeatureGen.sar("a", "b") \
-      .gen(test_df) \
-      .equals(SARFeature("a", "b").gen(test_df))
-
-
 class TestAdd:
 
   def test_add(self):
