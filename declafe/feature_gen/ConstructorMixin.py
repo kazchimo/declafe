@@ -106,6 +106,18 @@ class ConstructorMixin:
     return cls._const_fs()(
         [cls.dx(high, low, close, period) for period in periods])
 
+  @classmethod
+  def mfi(cls, high: C, low: C, close: C, volume: C,
+          period: int) -> "FeatureGen":
+    from .quadri.talib.MFIFeature import MFIFeature
+    return MFIFeature(high, low, close, volume, period)
+
+  @classmethod
+  def mfis(cls, high: C, low: C, close: C, volume: C,
+           periods: List[int]) -> "Features":
+    return cls._const_fs()(
+        [cls.mfi(high, low, close, volume, period) for period in periods])
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

@@ -9,12 +9,14 @@ test_df = pd.DataFrame({
     "b": list(range(1001, 2001)),
     "c": list(range(2001, 3001)),
     "d": list(range(3001, 4001)),
+    "v": list(range(4001, 5001)),
 })
 
 a = col("a")
 b = col("b")
 _c = col("c")
 d = col("d")
+v = col("v")
 _1 = c(1)
 
 
@@ -289,3 +291,39 @@ class TestDXES:
 
     assert result["DX_3_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
     assert result["DX_5_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
+
+
+class TestMFI:
+
+  def test_return_mfi(self):
+    df = test_df.copy()
+    result = FeatureGen.mfi("a", "b", "c", "v", 3).gen(df)
+
+    assert result.equals(talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.mfi(a, b, _c, v, 3).gen(df)
+
+    assert result.equals(talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
+
+
+class TestMFIS:
+
+  def test_return_mfis(self):
+    df = test_df.copy()
+    result = FeatureGen.mfis("a", "b", "c", "v", [3, 5]).set_features(df)
+
+    assert result["MFI_a_b_c_v_3"].equals(
+        talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
+    assert result["MFI_a_b_c_v_5"].equals(
+        talib.MFI(df["a"], df["b"], df["c"], df["v"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.mfis(a, b, _c, v, [3, 5]).set_features(df)
+
+    assert result["MFI_a_b_c_v_3"].equals(
+        talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
+    assert result["MFI_a_b_c_v_5"].equals(
+        talib.MFI(df["a"], df["b"], df["c"], df["v"], 5))
