@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Optional, Type, Union
 
 import pandas as pd
 
-__all__ = ["FeatureGen"]
+__all__ = ["FeatureGen", "ColLike"]
 
 from .ChainMixin import ChainMixin
 from .ConstructorMixin import ConstructorMixin
@@ -11,6 +11,8 @@ from .OpsMixin import OpsMixin
 
 if TYPE_CHECKING:
   from declafe.feature_gen.Features import Features
+
+ColLike = Union["FeatureGen", str]
 
 
 class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):

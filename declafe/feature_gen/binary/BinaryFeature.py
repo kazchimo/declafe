@@ -1,16 +1,18 @@
 from abc import ABC, abstractmethod
+from typing import Union
 
 import pandas as pd
 
 from ..FeatureGen import FeatureGen
 
+C = Union[FeatureGen, str]
 
 class BinaryFeature(FeatureGen, ABC):
 
-  def __init__(self, left: str, right: str):
+  def __init__(self, left: C, right: C):
     super().__init__()
-    self.left = left
-    self.right = right
+    self.left = self.to_col(left)
+    self.right = self.to_col(right)
 
   @abstractmethod
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:

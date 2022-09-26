@@ -1,3 +1,3 @@
-from .FeatureGen import *
+from .FeatureGen import FeatureGen
 
 FG = FeatureGen
