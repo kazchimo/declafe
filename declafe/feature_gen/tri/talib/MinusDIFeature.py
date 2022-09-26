@@ -5,12 +5,12 @@ import talib
 
 from declafe.feature_gen import FeatureGen
 
-__all__ = ["DXFeature"]
+__all__ = ["MinusDIFeature"]
 
 C = Union[FeatureGen, str]
 
 
-class DXFeature(FeatureGen):
+class MinusDIFeature(FeatureGen):
 
   def __init__(self, high: C, low: C, close: C, period: int):
     super().__init__()
@@ -20,7 +20,8 @@ class DXFeature(FeatureGen):
     self.period = period
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    return talib.DX(df[self.high], df[self.low], df[self.close], self.period)
+    return talib.MINUS_DI(df[self.high], df[self.low], df[self.close],
+                          self.period)
 
   def _feature_name(self) -> str:
-    return f"DX_{self.high}_{self.low}_{self.close}_{self.period}"
+    return f"MINUS_DI_{self.high}_{self.low}_{self.close}_{self.period}"

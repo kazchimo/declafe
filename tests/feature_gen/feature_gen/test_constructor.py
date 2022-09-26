@@ -282,15 +282,15 @@ class TestDXES:
     df = test_df.copy()
     result = FeatureGen.dxes("a", "b", "c", [3, 5]).set_features(df)
 
-    assert result["DX_3_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
-    assert result["DX_5_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
+    assert result["DX_a_b_c_3"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert result["DX_a_b_c_5"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.dxes(a, b, _c, [3, 5]).set_features(df)
 
-    assert result["DX_3_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
-    assert result["DX_5_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
+    assert result["DX_a_b_c_3"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert result["DX_a_b_c_5"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
 
 
 class TestMFI:
@@ -327,3 +327,39 @@ class TestMFIS:
         talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
     assert result["MFI_a_b_c_v_5"].equals(
         talib.MFI(df["a"], df["b"], df["c"], df["v"], 5))
+
+
+class TestMinusDI:
+
+  def test_return_minus_di(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_di("a", "b", "c", 3).gen(df)
+
+    assert result.equals(talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_di(a, b, _c, 3).gen(df)
+
+    assert result.equals(talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+
+
+class TestMinusDis:
+
+  def test_return_minus_dis(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_dis("a", "b", "c", [3, 5]).set_features(df)
+
+    assert result["MINUS_DI_a_b_c_3"].equals(
+        talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+    assert result["MINUS_DI_a_b_c_5"].equals(
+        talib.MINUS_DI(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_dis(a, b, _c, [3, 5]).set_features(df)
+
+    assert result["MINUS_DI_a_b_c_3"].equals(
+        talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+    assert result["MINUS_DI_a_b_c_5"].equals(
+        talib.MINUS_DI(df["a"], df["b"], df["c"], 5))
