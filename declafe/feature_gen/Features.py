@@ -111,7 +111,7 @@ class Features:
     if isinstance(f, UnaryColumnFeature.__class__):
       return Features([fg.next(f, **kwargs) for fg in self.feature_gens])
     else:
-      return Features([f(fg) for fg in self.feature_gens])
+      return Features([f(fg) for fg in self.feature_gens])  # type: ignore
 
   _FM = Callable[["FeatureGen"], Union["Features", List["FeatureGen"]]]
 
