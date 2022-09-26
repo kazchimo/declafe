@@ -144,3 +144,27 @@ class TestAbs:
   def test_abs(self):
     assert a.abs().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]
                                     })).equals(pd.Series([1, 2, 3, 4, 5, 6]))
+
+
+class TestMACD:
+
+  def test_calc_macd(self):
+    assert a.macd(12, 26, 9)\
+      .gen(test_df)\
+      .equals(talib.MACD(test_df["a"], 12, 26, 9)[0])
+
+
+class TestMACDSignal:
+
+  def test_calc_macd_signal(self):
+    assert a.macd_signal(12, 26, 9)\
+      .gen(test_df)\
+      .equals(talib.MACD(test_df["a"], 12, 26, 9)[1])
+
+
+class TestMACDHist:
+
+  def test_calc_macd_hist(self):
+    assert a.macd_hist(12, 26, 9)\
+      .gen(test_df)\
+      .equals(talib.MACD(test_df["a"], 12, 26, 9)[2])

@@ -220,6 +220,30 @@ class ChainMixin:
     from declafe.feature_gen.unary import BBandsLowerFeature
     return self.next(BBandsLowerFeature, periods=period)
 
+  def macd(self, fastperiod: int, slowperiod: int,
+           signalperiod: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.MACDFeature import MACDFeature
+    return self.next(MACDFeature,
+                     fastperiod=fastperiod,
+                     slowperiod=slowperiod,
+                     signalperiod=signalperiod)
+
+  def macd_signal(self, fastperiod: int, slowperiod: int,
+                  signalperiod: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.MACDFeature import MACDSignalFeature
+    return self.next(MACDSignalFeature,
+                     fastperiod=fastperiod,
+                     slowperiod=slowperiod,
+                     signalperiod=signalperiod)
+
+  def macd_hist(self, fastperiod: int, slowperiod: int,
+                signalperiod: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.MACDFeature import MACDHistFeature
+    return self.next(MACDHistFeature,
+                     fastperiod=fastperiod,
+                     slowperiod=slowperiod,
+                     signalperiod=signalperiod)
+
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)
