@@ -129,6 +129,16 @@ class ConstructorMixin:
     return cls._const_fs()(
         [cls.minus_di(high, low, close, period) for period in periods])
 
+  @classmethod
+  def minus_dm(cls, high: C, low: C, period: int) -> "FeatureGen":
+    from .binary.talib.MinusDMFeature import MinusDMFeature
+    return MinusDMFeature(high, low, period)
+
+  @classmethod
+  def minus_dms(cls, high: C, low: C, periods: List[int]) -> "Features":
+    return cls._const_fs()(
+        [cls.minus_dm(high, low, period) for period in periods])
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

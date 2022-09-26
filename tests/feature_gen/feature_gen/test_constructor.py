@@ -363,3 +363,35 @@ class TestMinusDis:
         talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
     assert result["MINUS_DI_a_b_c_5"].equals(
         talib.MINUS_DI(df["a"], df["b"], df["c"], 5))
+
+
+class TestMinusDM:
+
+  def test_return_minus_dm(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_dm("a", "b", 3).gen(df)
+
+    assert result.equals(talib.MINUS_DM(df["a"], df["b"], 3))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_dm(a, b, 3).gen(df)
+
+    assert result.equals(talib.MINUS_DM(df["a"], df["b"], 3))
+
+
+class TestMinusDMs:
+
+  def test_return_minus_dms(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_dms("a", "b", [3, 5]).set_features(df)
+
+    assert result["MINUS_DM_a_b_3"].equals(talib.MINUS_DM(df["a"], df["b"], 3))
+    assert result["MINUS_DM_a_b_5"].equals(talib.MINUS_DM(df["a"], df["b"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.minus_dms(a, b, [3, 5]).set_features(df)
+
+    assert result["MINUS_DM_a_b_3"].equals(talib.MINUS_DM(df["a"], df["b"], 3))
+    assert result["MINUS_DM_a_b_5"].equals(talib.MINUS_DM(df["a"], df["b"], 5))
