@@ -257,3 +257,35 @@ class TestBop:
     result = FeatureGen.bop(a, b, _c, d).gen(df)
 
     assert result.equals(talib.BOP(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestDX:
+
+  def test_return_dx(self):
+    df = test_df.copy()
+    result = FeatureGen.dx("a", "b", "c", 3).gen(df)
+
+    assert result.equals(talib.DX(df["a"], df["b"], df["c"], 3))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.dx(a, b, _c, 3).gen(df)
+
+    assert result.equals(talib.DX(df["a"], df["b"], df["c"], 3))
+
+
+class TestDXES:
+
+  def test_return_dxes(self):
+    df = test_df.copy()
+    result = FeatureGen.dxes("a", "b", "c", [3, 5]).set_features(df)
+
+    assert result["DX_3_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert result["DX_5_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.dxes(a, b, _c, [3, 5]).set_features(df)
+
+    assert result["DX_3_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert result["DX_5_of_c"].equals(talib.DX(df["a"], df["b"], df["c"], 5))

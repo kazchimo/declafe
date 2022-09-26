@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Optional, Type
+from typing import TYPE_CHECKING, Optional, Type, Union
 
 import pandas as pd
 
@@ -82,3 +82,9 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
   def _FS(self) -> "Type[Features]":
     from declafe.feature_gen.Features import Features
     return Features
+
+  def to_col(self, c: Union["FeatureGen", str]) -> str:
+    if isinstance(c, FeatureGen):
+      return c.feature_name
+    else:
+      return c
