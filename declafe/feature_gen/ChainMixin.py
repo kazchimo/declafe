@@ -244,6 +244,13 @@ class ChainMixin:
                      slowperiod=slowperiod,
                      signalperiod=signalperiod)
 
+  def mom(self, period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.MOMFeature import MOMFeature
+    return self.next(MOMFeature, period=period)
+
+  def moms(self, periods: List[int]) -> "Features":
+    return self.FS([self.mom(period) for period in periods])
+
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)

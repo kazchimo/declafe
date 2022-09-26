@@ -168,3 +168,18 @@ class TestMACDHist:
     assert a.macd_hist(12, 26, 9)\
       .gen(test_df)\
       .equals(talib.MACD(test_df["a"], 12, 26, 9)[2])
+
+
+class TestMOM:
+
+  def test_calc_mom(self):
+    assert a.mom(10).gen(test_df).equals(talib.MOM(test_df["a"], 10))
+
+
+class TestMOMS:
+
+  def test_calc_moms(self):
+    result = a.moms([10, 20]).set_features(test_df)
+
+    assert result["MOM_10_of_a"].equals(talib.MOM(test_df["a"], 10))
+    assert result["MOM_20_of_a"].equals(talib.MOM(test_df["a"], 20))
