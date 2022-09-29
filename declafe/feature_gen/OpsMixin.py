@@ -25,11 +25,11 @@ class OpsMixin:
 
   def __eq__(self, other: O) -> "FeatureGen":
     from .binary import BiComposeFeature
-    from .binary.ops import EqualFeature
+    from .binary.ops import EqFeature
 
     return BiComposeFeature.make(left=self._self(),
                                  right=self._conv(other),
-                                 to=EqualFeature)
+                                 to=EqFeature)
 
   def __ne__(self, other: O) -> "FeatureGen":
     return (cast("FeatureGen", self) == other).flip_bool()
@@ -46,9 +46,9 @@ class OpsMixin:
     return self._bc().make(self._self(), self._conv(other), SubFeature)
 
   def __mul__(self, other: O) -> "FeatureGen":
-    from declafe.feature_gen.binary import ProductFeature
+    from declafe.feature_gen.binary import MulFeature
 
-    return self._bc().make(self._self(), self._conv(other), ProductFeature)
+    return self._bc().make(self._self(), self._conv(other), MulFeature)
 
   def __mod__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary import ModFeature
@@ -61,14 +61,14 @@ class OpsMixin:
     return self._bc().make(self._self(), self._conv(other), DivideFeature)
 
   def __gt__(self, other: O) -> "FeatureGen":
-    from declafe.feature_gen.binary import IsGreaterFeature
+    from declafe.feature_gen.binary import GTFeature
 
-    return self._bc().make(self._self(), self._conv(other), IsGreaterFeature)
+    return self._bc().make(self._self(), self._conv(other), GTFeature)
 
   def __lt__(self, other: O) -> "FeatureGen":
-    from declafe.feature_gen.binary import IsLessFeature
+    from declafe.feature_gen.binary import LTFeature
 
-    return self._bc().make(self._self(), self._conv(other), IsLessFeature)
+    return self._bc().make(self._self(), self._conv(other), LTFeature)
 
   def __ge__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary import GEFeature
