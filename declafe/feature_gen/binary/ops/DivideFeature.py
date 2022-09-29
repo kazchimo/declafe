@@ -2,15 +2,14 @@ import pandas as pd
 
 __all__ = ["DivideFeature"]
 
+from declafe import ColLike
 from ..BinaryFeature import BinaryFeature
 
 
 class DivideFeature(BinaryFeature):
 
-  def __init__(self, left: str, right: str, avoid_zero=True):
+  def __init__(self, left: ColLike, right: ColLike, avoid_zero=True):
     super().__init__(left, right)
-    self.left = left
-    self.right = right
     self.avoid_zero = avoid_zero
 
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
@@ -18,7 +17,7 @@ class DivideFeature(BinaryFeature):
       right = right.replace(0, 1e-10)
 
     if (right == 0).any():
-      raise ValueError(f"{self.right}に0が含まれています")
+      raise ValueError(f"{self.right} contains 0.")
 
     return left / right
 

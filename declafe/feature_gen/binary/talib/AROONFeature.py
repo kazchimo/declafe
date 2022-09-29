@@ -1,12 +1,13 @@
 import pandas as pd
 import talib
 
+from declafe import ColLike
 from ..BinaryFeature import BinaryFeature
 
 
 class AROONDownFeature(BinaryFeature):
 
-  def __init__(self, high: str, low: str, period: int):
+  def __init__(self, high: ColLike, low: ColLike, period: int):
     self.period = period
     super().__init__(high, low)
 
@@ -14,12 +15,12 @@ class AROONDownFeature(BinaryFeature):
     return talib.AROON(left, right, self.period)[0]
 
   def _feature_name(self) -> str:
-    return f"AROONDown_{self.period}"
+    return f"AROONDown_{self.period}_{self.left}_{self.right}"
 
 
 class AROONUpFeature(BinaryFeature):
 
-  def __init__(self, high: str, low: str, period: int):
+  def __init__(self, high: ColLike, low: ColLike, period: int):
     self.period = period
     super().__init__(high, low)
 
@@ -27,4 +28,4 @@ class AROONUpFeature(BinaryFeature):
     return talib.AROON(left, right, self.period)[1]
 
   def _feature_name(self) -> str:
-    return f"AROONUp_{self.period}"
+    return f"AROONUp_{self.period}_{self.left}_{self.right}"

@@ -1,12 +1,13 @@
 import pandas as pd
 import talib
 
+from declafe import ColLike
 from ..BinaryFeature import BinaryFeature
 
 
 class AROONOSCFeature(BinaryFeature):
 
-  def __init__(self, high: str, low: str, period: int):
+  def __init__(self, high: ColLike, low: ColLike, period: int):
     self.period = period
     super().__init__(high, low)
 
@@ -14,4 +15,4 @@ class AROONOSCFeature(BinaryFeature):
     return talib.AROONOSC(left, right, self.period)
 
   def _feature_name(self) -> str:
-    return f"AROONOSC_{self.period}"
+    return f"AROONOSC_{self.period}_{self.left}_{self.right}"

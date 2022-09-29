@@ -6,8 +6,6 @@ from ..BinaryFeature import BinaryFeature
 
 
 class EqualFeature(BinaryFeature):
-  left: str
-  right: str
 
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
     return left == right

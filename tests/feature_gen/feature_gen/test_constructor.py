@@ -81,14 +81,33 @@ class TestSarext:
 class TestMidprice:
 
   def test_return_midprice(self):
-    assert FeatureGen.midprice("a", "b") \
+    assert FeatureGen.midprice("a", "b", 3) \
       .gen(test_df) \
-      .equals(talib.MIDPRICE(test_df["a"], test_df["b"]))
+      .equals(talib.MIDPRICE(test_df["a"], test_df["b"], 3))
 
   def test_accept_col(self):
-    assert FeatureGen.midprice(a, b) \
+    assert FeatureGen.midprice(a, b, 3) \
       .gen(test_df) \
-      .equals(talib.MIDPRICE(test_df["a"], test_df["b"]))
+      .equals(talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+
+
+class TestMidprices:
+
+  def test_return_midprices(self):
+    result = FeatureGen.midprices("a", "b", [3, 5]).set_features(test_df)
+
+    assert result["MIDPRICE_3_a_b"].equals(
+        talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+    assert result["MIDPRICE_5_a_b"].equals(
+        talib.MIDPRICE(test_df["a"], test_df["b"], 5))
+
+  def test_accept_col(self):
+    result = FeatureGen.midprices(a, b, [3, 5]).set_features(test_df)
+
+    assert result["MIDPRICE_3_a_b"].equals(
+        talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+    assert result["MIDPRICE_5_a_b"].equals(
+        talib.MIDPRICE(test_df["a"], test_df["b"], 5))
 
 
 class TestAdxrs:
@@ -171,15 +190,15 @@ class TestAroonUps:
     df = test_df.copy()
     result = FeatureGen.aroon_ups("a", "b", [3, 5]).set_features(df)
 
-    assert result["AROONUp_3"].equals(talib.AROON(df["a"], df["b"], 3)[1])
-    assert result["AROONUp_5"].equals(talib.AROON(df["a"], df["b"], 5)[1])
+    assert result["AROONUp_3_a_b"].equals(talib.AROON(df["a"], df["b"], 3)[1])
+    assert result["AROONUp_5_a_b"].equals(talib.AROON(df["a"], df["b"], 5)[1])
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_ups(a, b, [3, 5]).set_features(df)
 
-    assert result["AROONUp_3"].equals(talib.AROON(df["a"], df["b"], 3)[1])
-    assert result["AROONUp_5"].equals(talib.AROON(df["a"], df["b"], 5)[1])
+    assert result["AROONUp_3_a_b"].equals(talib.AROON(df["a"], df["b"], 3)[1])
+    assert result["AROONUp_5_a_b"].equals(talib.AROON(df["a"], df["b"], 5)[1])
 
 
 class TestAroonDown:
@@ -203,15 +222,15 @@ class TestAroonDowns:
     df = test_df.copy()
     result = FeatureGen.aroon_downs("a", "b", [3, 5]).set_features(df)
 
-    assert result["AROONDown_3"].equals(talib.AROON(df["a"], df["b"], 3)[0])
-    assert result["AROONDown_5"].equals(talib.AROON(df["a"], df["b"], 5)[0])
+    assert result["AROONDown_3_a_b"].equals(talib.AROON(df["a"], df["b"], 3)[0])
+    assert result["AROONDown_5_a_b"].equals(talib.AROON(df["a"], df["b"], 5)[0])
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_downs(a, b, [3, 5]).set_features(df)
 
-    assert result["AROONDown_3"].equals(talib.AROON(df["a"], df["b"], 3)[0])
-    assert result["AROONDown_5"].equals(talib.AROON(df["a"], df["b"], 5)[0])
+    assert result["AROONDown_3_a_b"].equals(talib.AROON(df["a"], df["b"], 3)[0])
+    assert result["AROONDown_5_a_b"].equals(talib.AROON(df["a"], df["b"], 5)[0])
 
 
 class TestArronOsc:
@@ -235,15 +254,15 @@ class TestArronOscs:
     df = test_df.copy()
     result = FeatureGen.arron_oscs("a", "b", [3, 5]).set_features(df)
 
-    assert result["AROONOSC_3"].equals(talib.AROONOSC(df["a"], df["b"], 3))
-    assert result["AROONOSC_5"].equals(talib.AROONOSC(df["a"], df["b"], 5))
+    assert result["AROONOSC_3_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 3))
+    assert result["AROONOSC_5_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.arron_oscs(a, b, [3, 5]).set_features(df)
 
-    assert result["AROONOSC_3"].equals(talib.AROONOSC(df["a"], df["b"], 3))
-    assert result["AROONOSC_5"].equals(talib.AROONOSC(df["a"], df["b"], 5))
+    assert result["AROONOSC_3_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 3))
+    assert result["AROONOSC_5_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 5))
 
 
 class TestBop:

@@ -1,25 +1,21 @@
-from typing import Union
-
 import pandas as pd
 import talib
 
-from declafe.feature_gen import FeatureGen
+from declafe import ColLike
 
 __all__ = ["MinusDMFeature"]
 
-C = Union[FeatureGen, str]
+from declafe.feature_gen.binary import BinaryFeature
 
 
-class MinusDMFeature(FeatureGen):
+class MinusDMFeature(BinaryFeature):
 
-  def __init__(self, high: C, low: C, period: int):
-    super().__init__()
-    self.high = self.to_col(high)
-    self.low = self.to_col(low)
+  def __init__(self, high: ColLike, low: ColLike, period: int):
+    super().__init__(high, low)
     self.period = period
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
-    return talib.MINUS_DM(df[self.high], df[self.low], self.period)
+  def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
+    return talib.MINUS_DM(left, right, self.period)
 
   def _feature_name(self) -> str:
-    return f"MINUS_DM_{self.high}_{self.low}_{self.period}"
+    return f"MINUS_DM_{self.left}_{self.right}_{self.period}"
