@@ -1,22 +1,22 @@
 import pandas as pd
 import talib
 
-from declafe.feature_gen import FeatureGen
+from declafe import ColLike
 
 __all__ = ["CCIFeature"]
 
+from declafe.feature_gen.tri.TriFeature import TriFeature
 
-class CCIFeature(FeatureGen):
 
-  def __init__(self, high: str, low: str, close: str, period: int):
-    super().__init__()
-    self.high = high
-    self.low = low
-    self.close = close
+class CCIFeature(TriFeature):
+
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike, period: int):
+    super().__init__(high, low, close)
     self.period = period
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
-    return talib.CCI(df[self.high], df[self.low], df[self.close], self.period)
+  def trigen(self, col1: pd.Series, col2: pd.Series,
+             col3: pd.Series) -> pd.Series:
+    return talib.CCI(col1, col2, col3, self.period)
 
   def _feature_name(self) -> str:
-    return f"CCI_{self.period}_of_{self.close}"
+    return f"CCI_{self.period}_of_{self.col1}_{self.col2}_{self.col3}"

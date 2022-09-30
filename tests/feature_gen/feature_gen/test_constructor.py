@@ -41,15 +41,19 @@ class TestAdxes:
     df = test_df.copy()
     result = FeatureGen.adxes("a", "b", "d", [3, 5]).set_features(df)
 
-    assert result["ADX_3_of_d"].equals(talib.ADX(df["a"], df["b"], df["d"], 3))
-    assert result["ADX_5_of_d"].equals(talib.ADX(df["a"], df["b"], df["d"], 5))
+    assert result["ADX_3_of_a_b_d"].equals(
+        talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert result["ADX_5_of_a_b_d"].equals(
+        talib.ADX(df["a"], df["b"], df["d"], 5))
 
   def test_accept_column(self):
     df = test_df.copy()
     result = FeatureGen.adxes(a, b, d, [3, 5]).set_features(df)
 
-    assert result["ADX_3_of_d"].equals(talib.ADX(df["a"], df["b"], df["d"], 3))
-    assert result["ADX_5_of_d"].equals(talib.ADX(df["a"], df["b"], df["d"], 5))
+    assert result["ADX_3_of_a_b_d"].equals(
+        talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert result["ADX_5_of_a_b_d"].equals(
+        talib.ADX(df["a"], df["b"], df["d"], 5))
 
 
 class TestSar:
@@ -116,10 +120,10 @@ class TestAdxrs:
     df = test_df.copy()
     result = FeatureGen.adxrs("a", "b", "d", [3, 5]).set_features(df)
 
-    assert result["ADXR_3_of_d"].equals(talib.ADXR(df["a"], df["b"], df["d"],
-                                                   3))
-    assert result["ADXR_5_of_d"].equals(talib.ADXR(df["a"], df["b"], df["d"],
-                                                   5))
+    assert result["ADXR_3_of_a_b_d"].equals(
+        talib.ADXR(df["a"], df["b"], df["d"], 3))
+    assert result["ADXR_5_of_a_b_d"].equals(
+        talib.ADXR(df["a"], df["b"], df["d"], 5))
 
 
 class TestAdxr:
@@ -143,15 +147,19 @@ class TestCcis:
     df = test_df.copy()
     result = FeatureGen.ccis("a", "b", "d", [3, 5]).set_features(df)
 
-    assert result["CCI_3_of_d"].equals(talib.CCI(df["a"], df["b"], df["d"], 3))
-    assert result["CCI_5_of_d"].equals(talib.CCI(df["a"], df["b"], df["d"], 5))
+    assert result["CCI_3_of_a_b_d"].equals(
+        talib.CCI(df["a"], df["b"], df["d"], 3))
+    assert result["CCI_5_of_a_b_d"].equals(
+        talib.CCI(df["a"], df["b"], df["d"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.ccis(a, b, d, [3, 5]).set_features(df)
 
-    assert result["CCI_3_of_d"].equals(talib.CCI(df["a"], df["b"], df["d"], 3))
-    assert result["CCI_5_of_d"].equals(talib.CCI(df["a"], df["b"], df["d"], 5))
+    assert result["CCI_3_of_a_b_d"].equals(
+        talib.CCI(df["a"], df["b"], df["d"], 3))
+    assert result["CCI_5_of_a_b_d"].equals(
+        talib.CCI(df["a"], df["b"], df["d"], 5))
 
 
 class TestCci:
@@ -301,15 +309,19 @@ class TestDXES:
     df = test_df.copy()
     result = FeatureGen.dxes("a", "b", "c", [3, 5]).set_features(df)
 
-    assert result["DX_a_b_c_3"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
-    assert result["DX_a_b_c_5"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
+    assert result["DX_3_of_a_b_c"].equals(talib.DX(df["a"], df["b"], df["c"],
+                                                   3))
+    assert result["DX_5_of_a_b_c"].equals(talib.DX(df["a"], df["b"], df["c"],
+                                                   5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.dxes(a, b, _c, [3, 5]).set_features(df)
 
-    assert result["DX_a_b_c_3"].equals(talib.DX(df["a"], df["b"], df["c"], 3))
-    assert result["DX_a_b_c_5"].equals(talib.DX(df["a"], df["b"], df["c"], 5))
+    assert result["DX_3_of_a_b_c"].equals(talib.DX(df["a"], df["b"], df["c"],
+                                                   3))
+    assert result["DX_5_of_a_b_c"].equals(talib.DX(df["a"], df["b"], df["c"],
+                                                   5))
 
 
 class TestMFI:
@@ -369,18 +381,18 @@ class TestMinusDis:
     df = test_df.copy()
     result = FeatureGen.minus_dis("a", "b", "c", [3, 5]).set_features(df)
 
-    assert result["MINUS_DI_a_b_c_3"].equals(
+    assert result["MINUS_DI_3_of_a_b_c"].equals(
         talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
-    assert result["MINUS_DI_a_b_c_5"].equals(
+    assert result["MINUS_DI_5_of_a_b_c"].equals(
         talib.MINUS_DI(df["a"], df["b"], df["c"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.minus_dis(a, b, _c, [3, 5]).set_features(df)
 
-    assert result["MINUS_DI_a_b_c_3"].equals(
+    assert result["MINUS_DI_3_of_a_b_c"].equals(
         talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
-    assert result["MINUS_DI_a_b_c_5"].equals(
+    assert result["MINUS_DI_5_of_a_b_c"].equals(
         talib.MINUS_DI(df["a"], df["b"], df["c"], 5))
 
 
@@ -437,18 +449,18 @@ class TestPlusDIs:
     df = test_df.copy()
     result = FeatureGen.plus_dis("a", "b", "c", [3, 5]).set_features(df)
 
-    assert result["PLUS_DI_a_b_c_3"].equals(
+    assert result["PLUS_DI_3_of_a_b_c"].equals(
         talib.PLUS_DI(df["a"], df["b"], df["c"], 3))
-    assert result["PLUS_DI_a_b_c_5"].equals(
+    assert result["PLUS_DI_5_of_a_b_c"].equals(
         talib.PLUS_DI(df["a"], df["b"], df["c"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.plus_dis(a, b, _c, [3, 5]).set_features(df)
 
-    assert result["PLUS_DI_a_b_c_3"].equals(
+    assert result["PLUS_DI_3_of_a_b_c"].equals(
         talib.PLUS_DI(df["a"], df["b"], df["c"], 3))
-    assert result["PLUS_DI_a_b_c_5"].equals(
+    assert result["PLUS_DI_5_of_a_b_c"].equals(
         talib.PLUS_DI(df["a"], df["b"], df["c"], 5))
 
 
