@@ -11,12 +11,12 @@ class ConstructorMixin:
   @classmethod
   def sar(cls, high: C, low: C) -> "FeatureGen":
     from declafe.feature_gen.binary import SARFeature
-    return SARFeature(cls.__to_col(high), cls.__to_col(low))
+    return SARFeature(high, low)
 
   @classmethod
   def sarext(cls, high: C, low: C) -> "FeatureGen":
     from declafe.feature_gen.binary import SAREXTFeature
-    return SAREXTFeature(cls.__to_col(high), cls.__to_col(low))
+    return SAREXTFeature(high, low)
 
   @classmethod
   def midprice(cls, high: C, low: C, period: int) -> "FeatureGen":
@@ -36,8 +36,7 @@ class ConstructorMixin:
   @classmethod
   def adx(cls, high: C, low: C, close: C, period: int) -> "FeatureGen":
     from declafe.feature_gen.tri.talib.ADXFeature import ADXFeature
-    return ADXFeature(cls.__to_col(high), cls.__to_col(low),
-                      cls.__to_col(close), period)
+    return ADXFeature(high, low, close, period)
 
   @classmethod
   def adxrs(cls, high: C, low: C, close: C, periods: List[int]) -> "Features":
@@ -47,8 +46,7 @@ class ConstructorMixin:
   @classmethod
   def adxr(cls, high: C, low: C, close: C, period: int) -> "FeatureGen":
     from .tri.talib.ADXRFeature import ADXRFeature
-    return ADXRFeature(cls.__to_col(high), cls.__to_col(low),
-                       cls.__to_col(close), period)
+    return ADXRFeature(high, low, close, period)
 
   @classmethod
   def ccis(cls, high: C, low: C, close: C, periods: List[int]) -> "Features":
@@ -58,13 +56,12 @@ class ConstructorMixin:
   @classmethod
   def cci(cls, high: C, low: C, close: C, period: int) -> "FeatureGen":
     from .tri.talib.CCIFeature import CCIFeature
-    return CCIFeature(cls.__to_col(high), cls.__to_col(low),
-                      cls.__to_col(close), period)
+    return CCIFeature(high, low, close, period)
 
   @classmethod
   def aroon_up(cls, high: C, low: C, period: int) -> "FeatureGen":
     from .binary.talib import AROONUpFeature
-    return AROONUpFeature(cls.__to_col(high), cls.__to_col(low), period)
+    return AROONUpFeature(high, low, period)
 
   @classmethod
   def aroon_ups(cls, high: C, low: C, periods: List[int]) -> "Features":
@@ -74,7 +71,7 @@ class ConstructorMixin:
   @classmethod
   def aroon_down(cls, high: C, low: C, period: int) -> "FeatureGen":
     from .binary.talib import AROONDownFeature
-    return AROONDownFeature(cls.__to_col(high), cls.__to_col(low), period)
+    return AROONDownFeature(high, low, period)
 
   @classmethod
   def aroon_downs(cls, high: C, low: C, periods: List[int]) -> "Features":
@@ -84,7 +81,7 @@ class ConstructorMixin:
   @classmethod
   def arron_osc(cls, high: C, low: C, period: int) -> "FeatureGen":
     from .binary.talib import AROONOSCFeature
-    return AROONOSCFeature(cls.__to_col(high), cls.__to_col(low), period)
+    return AROONOSCFeature(high, low, period)
 
   @classmethod
   def arron_oscs(cls, high: C, low: C, periods: List[int]) -> "Features":
@@ -98,8 +95,7 @@ class ConstructorMixin:
           low: C = "low",
           close: C = "close") -> "FeatureGen":
     from .quadri.talib import BOPFeature
-    return BOPFeature(cls.__to_col(open_col), cls.__to_col(high),
-                      cls.__to_col(low), cls.__to_col(close))
+    return BOPFeature(open_col, high, low, close)
 
   @classmethod
   def dx(cls, high: C, low: C, close: C, period: int) -> "FeatureGen":
@@ -169,9 +165,3 @@ class ConstructorMixin:
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
     return Features
-
-  @staticmethod
-  def __to_col(col: C) -> str:
-    if isinstance(col, str):
-      return col
-    return col.feature_name
