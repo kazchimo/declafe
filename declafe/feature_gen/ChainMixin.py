@@ -258,6 +258,13 @@ class ChainMixin:
                      fast_period=fast_period,
                      slow_period=slow_period)
 
+  def rsi(self, period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.RSIFeature import RSIFeature
+    return self.next(RSIFeature, period=period)
+
+  def rsis(self, periods: List[int]) -> "Features":
+    return self.FS([self.rsi(period) for period in periods])
+
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)
