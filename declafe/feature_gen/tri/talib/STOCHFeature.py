@@ -39,7 +39,7 @@ class STOCHSlowkFeature(TriFeature):
 
   def _feature_name(self) -> str:
     return f"STOCH_slowk_{self.fastk_period}_{self.slowk_period}_{self.slowd_period}_{self.slowk_matype}_" \
-           f"{self.slowd_matype}_of_{self.col1.name}_{self.col2.name}_{self.col3.name}"
+           f"{self.slowd_matype}_of_{self.col1}_{self.col2}_{self.col3}"
 
 
 class STOCHSlowdFeature(TriFeature):
@@ -73,4 +73,4 @@ class STOCHSlowdFeature(TriFeature):
 
   def _feature_name(self) -> str:
     return f"STOCH_slowd_{self.fastk_period}_{self.slowk_period}_{self.slowd_period}_{self.slowk_matype}_" \
-           f"{self.slowd_matype}_of_{self.col1.name}_{self.col2.name}_{self.col3.name}"
+           f"{self.slowd_matype}_of_{self.col1}_{self.col2}_{self.col3}"
