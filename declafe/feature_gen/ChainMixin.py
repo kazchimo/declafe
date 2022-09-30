@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Type, TYPE_CHECKING, Any, List, TypeVar
+from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast
 
 import numpy as np
 
@@ -7,6 +7,7 @@ if TYPE_CHECKING:
   from ..feature_gen import FeatureGen
   from declafe.feature_gen.Features import Features
   from declafe.feature_gen.unary import UnaryColumnFeature
+  from .. import ColLike
 
 
 class ChainMixin:
@@ -271,6 +272,10 @@ class ChainMixin:
 
   def replace_na(self, to_value: Any) -> "FeatureGen":
     return self.replace(np.nan, to_value)
+
+  def max_with(self, col: "ColLike") -> "FeatureGen":
+    from declafe.feature_gen.binary.MaxWith import MaxWithFeature
+    return MaxWithFeature(cast("FeatureGen", self), col)
 
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature

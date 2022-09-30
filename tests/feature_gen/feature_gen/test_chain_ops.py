@@ -189,3 +189,18 @@ class TestPPO:
 
   def test_calc_ppo(self):
     assert a.ppo(26, 9).gen(test_df).equals(talib.PPO(test_df["a"], 26, 9))
+
+
+class TestMaxWith:
+
+  def test_max_with(self):
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
+    result = col("c1").max_with("b").gen(df)
+
+    assert result.equals(pd.Series([1, 2, 4]))
+
+  def test_accept_feature_gen(self):
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
+    result = col("c1").max_with(col("b")).gen(df)
+
+    assert result.equals(pd.Series([1, 2, 4]))
