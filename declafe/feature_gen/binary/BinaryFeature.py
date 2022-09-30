@@ -1,15 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import Union
 
 import pandas as pd
 
-from ..FeatureGen import FeatureGen
+from ..FeatureGen import FeatureGen, ColLike
 
-C = Union[FeatureGen, str]
 
 class BinaryFeature(FeatureGen, ABC):
 
-  def __init__(self, left: C, right: C):
+  def __init__(self, left: ColLike, right: ColLike):
     super().__init__()
     self.left = self.to_col(left)
     self.right = self.to_col(right)
