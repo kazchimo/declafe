@@ -345,18 +345,18 @@ class TestMFIS:
     df = test_df.copy()
     result = FeatureGen.mfis("a", "b", "c", "v", [3, 5]).set_features(df)
 
-    assert result["MFI_a_b_c_v_3"].equals(
+    assert result["MFI_3_of_a_b_c_v"].equals(
         talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
-    assert result["MFI_a_b_c_v_5"].equals(
+    assert result["MFI_5_of_a_b_c_v"].equals(
         talib.MFI(df["a"], df["b"], df["c"], df["v"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.mfis(a, b, _c, v, [3, 5]).set_features(df)
 
-    assert result["MFI_a_b_c_v_3"].equals(
+    assert result["MFI_3_of_a_b_c_v"].equals(
         talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
-    assert result["MFI_a_b_c_v_5"].equals(
+    assert result["MFI_5_of_a_b_c_v"].equals(
         talib.MFI(df["a"], df["b"], df["c"], df["v"], 5))
 
 

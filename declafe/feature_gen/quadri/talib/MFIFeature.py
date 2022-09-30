@@ -1,26 +1,20 @@
-from typing import Union
-
 import pandas as pd
 import talib
 
-from declafe.feature_gen import FeatureGen
+from declafe import ColLike
+from declafe.feature_gen.quadri.QuadriFeature import QuadriFeature
 
-C = Union[FeatureGen, str]
 
+class MFIFeature(QuadriFeature):
 
-class MFIFeature(FeatureGen):
-
-  def __init__(self, high: C, low: C, close: C, volume: C, period: int):
-    super().__init__()
-    self.high = self.to_col(high)
-    self.low = self.to_col(low)
-    self.close = self.to_col(close)
-    self.volume = self.to_col(volume)
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
+               volume: ColLike, period: int):
+    super().__init__(high, low, close, volume)
     self.period = period
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
-    return talib.MFI(df[self.high], df[self.low], df[self.close],
-                     df[self.volume], self.period)
+  def quadrigen(self, col1: pd.Series, col2: pd.Series, col3: pd.Series,
+                col4: pd.Series) -> pd.Series:
+    return talib.MFI(col1, col2, col3, col4, self.period)
 
   def _feature_name(self) -> str:
-    return f"MFI_{self.high}_{self.low}_{self.close}_{self.volume}_{self.period}"
+    return f"MFI_{self.period}_of_{self.col1}_{self.col2}_{self.col3}_{self.col4}"
