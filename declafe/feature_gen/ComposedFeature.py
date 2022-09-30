@@ -1,16 +1,18 @@
-from typing import List
+from typing import List, TYPE_CHECKING
 
 import pandas as pd
 
 from declafe.feature_gen import FeatureGen
-from declafe.feature_gen.unary import UnaryColumnFeature
 
 __all__ = ["ComposedFeature"]
+
+if TYPE_CHECKING:
+  from declafe.feature_gen.unary.UnaryColumnFeature import UnaryColumnFeature
 
 
 class ComposedFeature(FeatureGen):
 
-  def __init__(self, head: FeatureGen, nexts: List[UnaryColumnFeature]):
+  def __init__(self, head: FeatureGen, nexts: List["UnaryColumnFeature"]):
     self.head = head
     self.nexts = nexts
     super().__init__()

@@ -1,15 +1,19 @@
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
 import pandas as pd
 
 from declafe.feature_gen import FeatureGen
 
+if TYPE_CHECKING:
+  from declafe import ColLike
+
 
 class UnaryColumnFeature(FeatureGen, ABC):
 
-  def __init__(self, column_name: str):
+  def __init__(self, column_name: "ColLike"):
     super().__init__()
-    self.column_name = column_name
+    self.column_name = self.to_col(column_name)
 
   @property
   @abstractmethod
