@@ -277,6 +277,10 @@ class ChainMixin:
     from declafe.feature_gen.binary.MaxWith import MaxWithFeature
     return MaxWithFeature(cast("FeatureGen", self), col)
 
+  def min_with(self, col: "ColLike") -> "FeatureGen":
+    from declafe.feature_gen.binary.MinWith import MinWithFeature
+    return MinWithFeature(cast("FeatureGen", self), col)
+
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature
     return self.next(NotFeature)

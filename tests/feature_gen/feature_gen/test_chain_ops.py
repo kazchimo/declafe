@@ -204,3 +204,18 @@ class TestMaxWith:
     result = col("c1").max_with(col("b")).gen(df)
 
     assert result.equals(pd.Series([1, 2, 4]))
+
+
+class TestMinWith:
+
+  def test_min_with(self):
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
+    result = col("c1").min_with("b").gen(df)
+
+    assert result.equals(pd.Series([0, 1, 3]))
+
+  def test_accept_feature_gen(self):
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
+    result = col("c1").min_with(col("b")).gen(df)
+
+    assert result.equals(pd.Series([0, 1, 3]))
