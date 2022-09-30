@@ -251,6 +251,12 @@ class ChainMixin:
   def moms(self, periods: List[int]) -> "Features":
     return self.FS([self.mom(period) for period in periods])
 
+  def ppo(self, fast_period: int, slow_period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.PPOFeature import PPOFeature
+    return self.next(PPOFeature,
+                     fast_period=fast_period,
+                     slow_period=slow_period)
+
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)

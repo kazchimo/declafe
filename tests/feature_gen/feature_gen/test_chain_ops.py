@@ -183,3 +183,9 @@ class TestMOMS:
 
     assert result["MOM_10_of_a"].equals(talib.MOM(test_df["a"], 10))
     assert result["MOM_20_of_a"].equals(talib.MOM(test_df["a"], 20))
+
+
+class TestPPO:
+
+  def test_calc_ppo(self):
+    assert a.ppo(26, 9).gen(test_df).equals(talib.PPO(test_df["a"], 26, 9))
