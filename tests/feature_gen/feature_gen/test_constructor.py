@@ -494,3 +494,37 @@ class TestPlusDMS:
 
     assert result["PLUS_DM_a_b_3"].equals(talib.PLUS_DM(df["a"], df["b"], 3))
     assert result["PLUS_DM_a_b_5"].equals(talib.PLUS_DM(df["a"], df["b"], 5))
+
+
+class TestSTOCHSlowd:
+
+  def test_return_stoch(self):
+    df = test_df.copy()
+    result = FeatureGen.stoch_slowd("a", "b", "c", 5, 3, 10).gen(df)
+
+    assert result.equals(
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1])
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.stoch_slowd(a, b, _c, 5, 3, 10).gen(df)
+
+    assert result.equals(
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1])
+
+
+class TestSTOCHSlowk:
+
+  def test_return_stoch(self):
+    df = test_df.copy()
+    result = FeatureGen.stoch_slowk("a", "b", "c", 5, 3, 10).gen(df)
+
+    assert result.equals(
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0])
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.stoch_slowk(a, b, _c, 5, 3, 10).gen(df)
+
+    assert result.equals(
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0])

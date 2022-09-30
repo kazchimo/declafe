@@ -1,0 +1,76 @@
+import pandas as pd
+import talib
+
+from declafe import ColLike
+
+__all__ = ["STOCHSlowdFeature"]
+
+from declafe.feature_gen.tri.TriFeature import TriFeature
+
+
+class STOCHSlowkFeature(TriFeature):
+
+  def __init__(self,
+               high: ColLike,
+               low: ColLike,
+               close: ColLike,
+               fastk_period: int,
+               slowk_period: int,
+               slowd_period: int,
+               slowk_matype: int = 0,
+               slowd_matype: int = 0):
+    super().__init__(high, low, close)
+    self.fastk_period = fastk_period
+    self.slowk_period = slowk_period
+    self.slowd_period = slowd_period
+    self.slowk_matype = slowk_matype
+    self.slowd_matype = slowd_matype
+
+  def trigen(self, col1: pd.Series, col2: pd.Series,
+             col3: pd.Series) -> pd.Series:
+    return talib.STOCH(col1,
+                       col2,
+                       col3,
+                       fastk_period=self.fastk_period,
+                       slowk_period=self.slowk_period,
+                       slowd_period=self.slowd_period,
+                       slowk_matype=self.slowk_matype,
+                       slowd_matype=self.slowd_matype)[0]
+
+  def _feature_name(self) -> str:
+    return f"STOCH_slowk_{self.fastk_period}_{self.slowk_period}_{self.slowd_period}_{self.slowk_matype}_" \
+           f"{self.slowd_matype}_of_{self.col1.name}_{self.col2.name}_{self.col3.name}"
+
+
+class STOCHSlowdFeature(TriFeature):
+
+  def __init__(self,
+               high: ColLike,
+               low: ColLike,
+               close: ColLike,
+               fastk_period: int,
+               slowk_period: int,
+               slowd_period: int,
+               slowk_matype: int = 0,
+               slowd_matype: int = 0):
+    super().__init__(high, low, close)
+    self.fastk_period = fastk_period
+    self.slowk_period = slowk_period
+    self.slowd_period = slowd_period
+    self.slowk_matype = slowk_matype
+    self.slowd_matype = slowd_matype
+
+  def trigen(self, col1: pd.Series, col2: pd.Series,
+             col3: pd.Series) -> pd.Series:
+    return talib.STOCH(col1,
+                       col2,
+                       col3,
+                       fastk_period=self.fastk_period,
+                       slowk_period=self.slowk_period,
+                       slowd_period=self.slowd_period,
+                       slowk_matype=self.slowk_matype,
+                       slowd_matype=self.slowd_matype)[1]
+
+  def _feature_name(self) -> str:
+    return f"STOCH_slowd_{self.fastk_period}_{self.slowk_period}_{self.slowd_period}_{self.slowk_matype}_" \
+           f"{self.slowd_matype}_of_{self.col1.name}_{self.col2.name}_{self.col3.name}"

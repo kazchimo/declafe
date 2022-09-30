@@ -161,6 +161,46 @@ class ConstructorMixin:
     return cls._const_fs()(
         [cls.plus_dm(high, low, period) for period in periods])
 
+  @classmethod
+  def stoch_slowd(cls,
+                  high: C,
+                  low: C,
+                  close: C,
+                  fastk_period: int,
+                  slowk_period: int,
+                  slowd_period: int,
+                  slowd_matype: int = 0,
+                  slowk_matype: int = 0) -> "FeatureGen":
+    from .tri.talib.STOCHFeature import STOCHSlowdFeature
+    return STOCHSlowdFeature(high=high,
+                             low=low,
+                             close=close,
+                             fastk_period=fastk_period,
+                             slowk_period=slowk_period,
+                             slowd_period=slowd_period,
+                             slowd_matype=slowd_matype,
+                             slowk_matype=slowk_matype)
+
+  @classmethod
+  def stoch_slowk(cls,
+                  high: C,
+                  low: C,
+                  close: C,
+                  fastk_period: int,
+                  slowk_period: int,
+                  slowd_period: int,
+                  slowd_matype: int = 0,
+                  slowk_matype: int = 0) -> "FeatureGen":
+    from .tri.talib.STOCHFeature import STOCHSlowkFeature
+    return STOCHSlowkFeature(high=high,
+                             low=low,
+                             close=close,
+                             fastk_period=fastk_period,
+                             slowk_period=slowk_period,
+                             slowd_period=slowd_period,
+                             slowd_matype=slowd_matype,
+                             slowk_matype=slowk_matype)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
