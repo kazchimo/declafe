@@ -138,6 +138,17 @@ class TestFlatMap:
     assert df["b_+_2"].equals(df["b"] + 2)
 
 
+class TestZipWith:
+
+  def test_zip_with(self):
+    df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9]})
+    fs = cols(["a", "b"]).zip_with(cols(["b", "c"]), lambda f, ff: f + ff)
+    df = fs.set_features(df)
+
+    assert df["a_+_b"].equals(df["a"] + df["b"])
+    assert df["b_+_c"].equals(df["b"] + df["c"])
+
+
 class TestIter:
 
   def test_iterate_over_inner_gen(self):

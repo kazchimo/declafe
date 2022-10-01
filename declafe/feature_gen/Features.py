@@ -123,6 +123,11 @@ class Features:
   def flat_map(self, fun: _FM) -> "Features":
     return Features([f for fg in self.feature_gens for f in fun(fg)])
 
+  def zip_with(self, fs: "Features", f: Callable[["FeatureGen", "FeatureGen"],
+                                                 "FeatureGen"]):
+    return Features(
+        [f(f1, f2) for f1, f2 in zip(self.feature_gens, fs.feature_gens)])
+
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)
