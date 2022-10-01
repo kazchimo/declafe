@@ -128,6 +128,9 @@ class Features:
     return Features(
         [f(f1, f2) for f1, f2 in zip(self.feature_gens, fs.feature_gens)])
 
+  def extract(self, df: pd.DataFrame) -> pd.DataFrame:
+    return df[self.feature_names]
+
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)

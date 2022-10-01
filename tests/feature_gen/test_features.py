@@ -204,6 +204,12 @@ class TestFeatureCount:
     assert len(cols(["a", "b"])) == 2
 
 
+class TestExtract:
+
+  def test_extract(self):
+    assert cols(["a", "b"]).extract(test_df).equals(test_df[["a", "b"]])
+
+
 class TestStatic:
 
   class TestEmpty:
