@@ -233,6 +233,17 @@ class ConstructorMixin:
                               fastd_period=fastd_period,
                               fastd_matype=fastd_matype)
 
+  @classmethod
+  def ultosc(cls, high: C, low: C, close: C, timeperiod1: int, timeperiod2: int,
+             timeperiod3: int) -> "FeatureGen":
+    from .tri.talib.ULTOSCFeature import ULTOSCFeature
+    return ULTOSCFeature(high=high,
+                         low=low,
+                         close=close,
+                         timeperiod1=timeperiod1,
+                         timeperiod2=timeperiod2,
+                         timeperiod3=timeperiod3)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

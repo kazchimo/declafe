@@ -558,3 +558,18 @@ class TestSTOCHFFastd:
     result = FeatureGen.stochf_fastd(a, b, _c, 5, 3).gen(df)
 
     assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])
+
+
+class TestULTOSC:
+
+  def test_return_ultosc(self):
+    df = test_df.copy()
+    result = FeatureGen.ultosc("a", "b", "c", 3, 5, 7).gen(df)
+
+    assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.ultosc(a, b, _c, 3, 5, 7).gen(df)
+
+    assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
