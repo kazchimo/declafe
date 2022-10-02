@@ -690,3 +690,39 @@ class TestATRS:
         talib.ATR(df["a"], df["b"], df["c"], 3))
     assert result["ATR_5_of_a_b_c"].equals(
         talib.ATR(df["a"], df["b"], df["c"], 5))
+
+
+class TestNATR:
+
+  def test_return_natr(self):
+    df = test_df.copy()
+    result = FeatureGen.natr("a", "b", "c", 5).gen(df)
+
+    assert result.equals(talib.NATR(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.natr(a, b, _c, 5).gen(df)
+
+    assert result.equals(talib.NATR(df["a"], df["b"], df["c"], 5))
+
+
+class TestNATRS:
+
+  def test_return_natrs(self):
+    df = test_df.copy()
+    result = FeatureGen.natrs("a", "b", "c", [3, 5]).set_features(df)
+
+    assert result["NATR_3_of_a_b_c"].equals(
+        talib.NATR(df["a"], df["b"], df["c"], 3))
+    assert result["NATR_5_of_a_b_c"].equals(
+        talib.NATR(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.natrs(a, b, _c, [3, 5]).set_features(df)
+
+    assert result["NATR_3_of_a_b_c"].equals(
+        talib.NATR(df["a"], df["b"], df["c"], 3))
+    assert result["NATR_5_of_a_b_c"].equals(
+        talib.NATR(df["a"], df["b"], df["c"], 5))
