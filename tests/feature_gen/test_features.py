@@ -210,6 +210,23 @@ class TestExtract:
     assert cols(["a", "b"]).extract(test_df).equals(test_df[["a", "b"]])
 
 
+class TestAsTypeNumAll:
+
+  def test_return_all_features_as_type_num(self):
+    fs = Features.many(a.as_type("int64"), b).as_type_auto_num_all()
+    df = fs.set_features(test_df.copy())
+
+    assert df["a"].dtype == "int64"
+    assert df["b"].dtype == "int16"
+
+  def test_override(self):
+    fs = Features.many(a.as_type("int64"), b).as_type_auto_num_all(True)
+    df = fs.set_features(test_df.copy())
+
+    assert df["a"].dtype == "int16"
+    assert df["b"].dtype == "int16"
+
+
 class TestStatic:
 
   class TestEmpty:

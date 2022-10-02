@@ -131,6 +131,9 @@ class Features:
   def extract(self, df: pd.DataFrame) -> pd.DataFrame:
     return df[self.feature_names]
 
+  def as_type_auto_num_all(self, override: bool = False):
+    return self.map(lambda f: f.as_type_auto_num(override))
+
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)

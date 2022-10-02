@@ -98,3 +98,10 @@ class TestAsTypeAutoNum:
     assert f5.generate(test_df).dtype == "float16"
     assert f6.generate(test_df).dtype == "float32"
     assert f7.generate(test_df).dtype == "float64"
+
+  def test_override(self):
+    f = SimpleGen().as_type("float64").as_type_auto_num()
+    f2 = SimpleGen().as_type("float64").as_type_auto_num(True)
+
+    assert f.generate(test_df).dtype == "float64"
+    assert f2.generate(test_df).dtype == "int8"

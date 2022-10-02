@@ -45,8 +45,11 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
       if self.feature_name in df.columns \
       else self.gen(df)
 
-    dt = infer_min_numeric_type(
-        result) if self.dtype == "numeric_auto" else self.dtype
+    print(self.dtype)
+
+    dt = infer_min_numeric_type(result) \
+      if self.dtype == "numeric_auto" \
+      else self.dtype
 
     return result.astype(dt) if dt else result
 
@@ -77,18 +80,20 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     return self
 
   def set_feature(self, df: pd.DataFrame) -> "pd.DataFrame":
-    if self.feature_name in df.columns:
-      return df
-    else:
-      return pd.concat(
-          [df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
+    temp_df = df.drop(
+        columns=[self.feature_name]) if self.feature_name in df.columns else df
+
+    return pd.concat(
+        [temp_df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
 
   def as_type(self, dtype: DTypes) -> "FeatureGen":
     self.dtype = dtype
     return self
 
-  def as_type_auto_num(self) -> "FeatureGen":
-    self.dtype = "numeric_auto"
+  def as_type_auto_num(self, override: bool = False) -> "FeatureGen":
+    if self.dtype is None or override:
+      self.dtype = "numeric_auto"
+
     return self
 
   @staticmethod
