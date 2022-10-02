@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from declafe import ConstFeature, Features
@@ -77,3 +78,23 @@ class TestAsType:
 
     assert f.generate(test_df).dtype == "int8"
     assert ff.generate(test_df).dtype == "category"
+
+
+class TestAsTypeAutoNum:
+
+  def test_as_type_auto_num(self):
+    f = SimpleGen().as_type_auto_num()
+    f2 = ConstFeature(2**8 + 1).as_type_auto_num()
+    f3 = ConstFeature(2**16 + 1).as_type_auto_num()
+    f4 = ConstFeature(2**32 + 1).as_type_auto_num()
+    f5 = ConstFeature(2**8 + 0.1).as_type_auto_num()
+    f6 = ConstFeature(np.finfo(np.float16).max + 1).as_type_auto_num()
+    f7 = ConstFeature(np.finfo(np.float32).max + 1).as_type_auto_num()
+
+    assert f.generate(test_df).dtype == "int8"
+    assert f2.generate(test_df).dtype == "int16"
+    assert f3.generate(test_df).dtype == "int32"
+    assert f4.generate(test_df).dtype == "int64"
+    assert f5.generate(test_df).dtype == "float16"
+    assert f6.generate(test_df).dtype == "float32"
+    assert f7.generate(test_df).dtype == "float64"

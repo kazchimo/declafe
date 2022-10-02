@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Optional, Type, Union
+from typing import TYPE_CHECKING, Optional, Type, Union, Literal
 
 import pandas as pd
 
@@ -8,6 +8,7 @@ __all__ = ["FeatureGen", "ColLike"]
 from .ChainMixin import ChainMixin
 from .ConstructorMixin import ConstructorMixin
 from .OpsMixin import OpsMixin
+from .infer_dtype import infer_min_numeric_type
 from .types import DTypes
 
 if TYPE_CHECKING:
@@ -24,7 +25,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
   def __init__(self):
     super().__init__()
     self.override_feature_name: Optional[str] = None
-    self.dtype: Optional[DTypes] = None
+    self.dtype: Optional[Union[DTypes, Literal["numeric_auto"]]] = None
 
   @abstractmethod
   def gen(self, df: pd.DataFrame) -> pd.Series:
@@ -39,10 +40,15 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     optimized gen
     side-effect free
     """
+
     result = df[self.feature_name] \
       if self.feature_name in df.columns \
       else self.gen(df)
-    return result.astype(self.dtype) if self.dtype else result
+
+    dt = infer_min_numeric_type(
+        result) if self.dtype == "numeric_auto" else self.dtype
+
+    return result.astype(dt) if dt else result
 
   @abstractmethod
   def _feature_name(self) -> str:
@@ -79,6 +85,10 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
 
   def as_type(self, dtype: DTypes) -> "FeatureGen":
     self.dtype = dtype
+    return self
+
+  def as_type_auto_num(self) -> "FeatureGen":
+    self.dtype = "numeric_auto"
     return self
 
   @staticmethod
