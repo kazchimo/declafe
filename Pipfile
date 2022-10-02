@@ -16,6 +16,7 @@ pytest = "*"
 jupyter = "*"
 pytest-watch = "*"
 pyright = "*"
+pytest-parallel = "*"
 
 [requires]
 python_version = "3.10"
