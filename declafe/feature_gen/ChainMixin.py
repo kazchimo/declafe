@@ -265,6 +265,50 @@ class ChainMixin:
   def rsis(self, periods: List[int]) -> "Features":
     return self.FS([self.rsi(period) for period in periods])
 
+  def stochrsi_fastk(self,
+                     period: int,
+                     fastk_period: int,
+                     fastd_period: int,
+                     fastd_matype: int = 0) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.STOCHRSI import STOCHRSIFastkFeature
+    return self.next(STOCHRSIFastkFeature,
+                     period=period,
+                     fastk_period=fastk_period,
+                     fastd_period=fastd_period,
+                     fastd_matype=fastd_matype)
+
+  def stochrsi_fastks(self,
+                      periods: List[int],
+                      fastk_period: int,
+                      fastd_period: int,
+                      fastd_matype: int = 0) -> "Features":
+    return self.FS([
+        self.stochrsi_fastk(period, fastk_period, fastd_period, fastd_matype)
+        for period in periods
+    ])
+
+  def stochrsi_fastd(self,
+                     period: int,
+                     fastk_period: int,
+                     fastd_period: int,
+                     fastd_matype: int = 0) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.STOCHRSI import STOCHRSIFastdFeature
+    return self.next(STOCHRSIFastdFeature,
+                     period=period,
+                     fastk_period=fastk_period,
+                     fastd_period=fastd_period,
+                     fastd_matype=fastd_matype)
+
+  def stochrsi_fastds(self,
+                      periods: List[int],
+                      fastk_period: int,
+                      fastd_period: int,
+                      fastd_matype: int = 0) -> "Features":
+    return self.FS([
+        self.stochrsi_fastd(period, fastk_period, fastd_period, fastd_matype)
+        for period in periods
+    ])
+
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)

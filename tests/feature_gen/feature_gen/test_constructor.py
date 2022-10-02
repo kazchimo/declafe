@@ -543,3 +543,18 @@ class TestSTOCHFFastk:
     result = FeatureGen.stochf_fastk(a, b, _c, 5, 3).gen(df)
 
     assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0])
+
+
+class TestSTOCHFFastd:
+
+  def test_return_stoch(self):
+    df = test_df.copy()
+    result = FeatureGen.stochf_fastd("a", "b", "c", 5, 3).gen(df)
+
+    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.stochf_fastd(a, b, _c, 5, 3).gen(df)
+
+    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])

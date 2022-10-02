@@ -234,3 +234,41 @@ class TestMinWith:
     result = col("c1").min_with(col("b")).gen(df)
 
     assert result.equals(pd.Series([0, 1, 3]))
+
+
+class TestSTOCHRSIFastk:
+
+  def test_calc_stochrsi_fastk(self):
+    assert a.stochrsi_fastk(10, 5, 3)\
+      .gen(test_df)\
+      .equals(talib.STOCHRSI(test_df["a"], 10, 5, 3)[0])
+
+
+class TestSTOCHRSIFastks:
+
+  def test_calc_stochrsi_fastks(self):
+    result = a.stochrsi_fastks([10, 20], 5, 3).set_features(test_df)
+
+    assert result["STOCHRSI_fastk_10_5_3_0_of_a"].equals(
+        talib.STOCHRSI(test_df["a"], 10, 5, 3)[0])
+    assert result["STOCHRSI_fastk_20_5_3_0_of_a"].equals(
+        talib.STOCHRSI(test_df["a"], 20, 5, 3)[0])
+
+
+class STOCHRSIFastd:
+
+  def test_calc_stochrsi_fastd(self):
+    assert a.stochrsi_fastd(10, 5, 3)\
+      .gen(test_df)\
+      .equals(talib.STOCHRSI(test_df["a"], 10, 5, 3)[1])
+
+
+class STOCHRSIFastds:
+
+  def test_calc_stochrsi_fastds(self):
+    result = a.stochrsi_fastds([10, 20], 5, 3).set_features(test_df)
+
+    assert result["STOCHRSI_fastd_10_5_3_0_of_a"].equals(
+        talib.STOCHRSI(test_df["a"], 10, 5, 3)[1])
+    assert result["STOCHRSI_fastd_20_5_3_0_of_a"].equals(
+        talib.STOCHRSI(test_df["a"], 20, 5, 3)[1])
