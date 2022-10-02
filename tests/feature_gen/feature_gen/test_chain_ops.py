@@ -324,3 +324,10 @@ class TestHTLeadSine:
 
   def test_calc_ht_sine(self):
     assert a.ht_leadsine().gen(test_df).equals(talib.HT_SINE(test_df["a"])[1])
+
+
+class TestHTTrendmode:
+
+  def test_calc_ht_trendmode(self):
+    assert a.ht_trendmode().gen(test_df).equals(talib.HT_TRENDMODE(
+        test_df["a"]))

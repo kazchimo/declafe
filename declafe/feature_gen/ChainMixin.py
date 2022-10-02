@@ -363,6 +363,10 @@ class ChainMixin:
     from declafe.feature_gen.unary.talib.HTSineFeature import HTLeadsineFeature
     return self.next(HTLeadsineFeature)
 
+  def ht_trendmode(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.HTTrendmodeFeature import HTTrendModeFeature
+    return self.next(HTTrendModeFeature)
+
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature
     return self.next(NotFeature)
