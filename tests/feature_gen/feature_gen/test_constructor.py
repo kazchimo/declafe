@@ -609,3 +609,18 @@ class TestWillrs:
         talib.WILLR(df["a"], df["b"], df["c"], 3))
     assert result["WILLR_5_of_a_b_c"].equals(
         talib.WILLR(df["a"], df["b"], df["c"], 5))
+
+
+class TestAD:
+
+  def test_return_ad(self):
+    df = test_df.copy()
+    result = FeatureGen.ad("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.AD(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.ad(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.AD(df["a"], df["b"], df["c"], df["d"]))

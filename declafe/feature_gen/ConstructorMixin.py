@@ -254,6 +254,11 @@ class ConstructorMixin:
     return cls._const_fs()(
         [cls.willr(high, low, close, period) for period in periods])
 
+  @classmethod
+  def ad(cls, high: C, low: C, close: C, volume: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.ADFeature import ADFeature
+    return ADFeature(high=high, low=low, close=close, volume=volume)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
