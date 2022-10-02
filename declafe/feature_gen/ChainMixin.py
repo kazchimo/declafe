@@ -347,6 +347,14 @@ class ChainMixin:
     from declafe.feature_gen.unary.talib.HT_DCPHASEFeature import HT_DCPHASEFeature
     return self.next(HT_DCPHASEFeature)
 
+  def ht_phasor_inphase(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.HT_PHASORFeature import HT_PHASORInphaseFeature
+    return self.next(HT_PHASORInphaseFeature)
+
+  def ht_phasor_quadrature(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.HT_PHASORFeature import HT_PHASORQuadratureFeature
+    return self.next(HT_PHASORQuadratureFeature)
+
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature
     return self.next(NotFeature)

@@ -298,3 +298,17 @@ class TestHT_DCPHASE:
 
   def test_calc_ht_dcp(self):
     assert a.ht_dcphase().gen(test_df).equals(talib.HT_DCPHASE(test_df["a"]))
+
+
+class TestHTPhasorInphase:
+
+  def test_calc_ht_phasor_inphase(self):
+    assert a.ht_phasor_inphase().gen(test_df).equals(
+        talib.HT_PHASOR(test_df["a"])[0])
+
+
+class TestHTPhasorQuadrature:
+
+  def test_calc_ht_phasor_quadrature(self):
+    assert a.ht_phasor_quadrature().gen(test_df).equals(
+        talib.HT_PHASOR(test_df["a"])[1])
