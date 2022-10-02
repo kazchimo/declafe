@@ -292,3 +292,9 @@ class TestHT_DCPERIOD:
 
   def test_calc_ht_dcp(self):
     assert a.ht_dcperiod().gen(test_df).equals(talib.HT_DCPERIOD(test_df["a"]))
+
+
+class TestHT_DCPHASE:
+
+  def test_calc_ht_dcp(self):
+    assert a.ht_dcphase().gen(test_df).equals(talib.HT_DCPHASE(test_df["a"]))

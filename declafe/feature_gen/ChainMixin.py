@@ -343,6 +343,10 @@ class ChainMixin:
     from declafe.feature_gen.unary.talib.HT_DCPERIODFeature import HT_DCPERIODFeature
     return self.next(HT_DCPERIODFeature)
 
+  def ht_dcphase(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.HT_DCPHASEFeature import HT_DCPHASEFeature
+    return self.next(HT_DCPHASEFeature)
+
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature
     return self.next(NotFeature)
