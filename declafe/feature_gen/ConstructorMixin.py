@@ -259,6 +259,17 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.ADFeature import ADFeature
     return ADFeature(high=high, low=low, close=close, volume=volume)
 
+  @classmethod
+  def adosc(cls, high: C, low: C, close: C, volume: C, fastperiod: int,
+            slowperiod: int) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.ADOSCFeature import ADOSCFeature
+    return ADOSCFeature(high=high,
+                        low=low,
+                        close=close,
+                        volume=volume,
+                        fastperiod=fastperiod,
+                        slowperiod=slowperiod)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

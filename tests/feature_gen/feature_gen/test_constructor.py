@@ -624,3 +624,18 @@ class TestAD:
     result = FeatureGen.ad(a, b, _c, d).gen(df)
 
     assert result.equals(talib.AD(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestADOSC:
+
+  def test_return_adosc(self):
+    df = test_df.copy()
+    result = FeatureGen.adosc("a", "b", "c", "d", 3, 5).gen(df)
+
+    assert result.equals(talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.adosc(a, b, _c, d, 3, 5).gen(df)
+
+    assert result.equals(talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5))
