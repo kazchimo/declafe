@@ -339,6 +339,10 @@ class ChainMixin:
     from declafe.feature_gen.binary.MinWith import MinWithFeature
     return MinWithFeature(cast("FeatureGen", self), col)
 
+  def ht_dcperiod(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.HT_DCPERIODFeature import HT_DCPERIODFeature
+    return self.next(HT_DCPERIODFeature)
+
   def __invert__(self) -> "FeatureGen":
     from declafe.feature_gen.unary.NotFeature import NotFeature
     return self.next(NotFeature)

@@ -286,3 +286,9 @@ class TestTRIXes:
 
     assert result["TRIX_10_of_a"].equals(talib.TRIX(test_df["a"], 10))
     assert result["TRIX_20_of_a"].equals(talib.TRIX(test_df["a"], 20))
+
+
+class TestHT_DCPERIOD:
+
+  def test_calc_ht_dcp(self):
+    assert a.ht_dcperiod().gen(test_df).equals(talib.HT_DCPERIOD(test_df["a"]))
