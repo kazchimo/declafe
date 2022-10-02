@@ -312,3 +312,15 @@ class TestHTPhasorQuadrature:
   def test_calc_ht_phasor_quadrature(self):
     assert a.ht_phasor_quadrature().gen(test_df).equals(
         talib.HT_PHASOR(test_df["a"])[1])
+
+
+class TestHTSine:
+
+  def test_calc_ht_sine(self):
+    assert a.ht_sine().gen(test_df).equals(talib.HT_SINE(test_df["a"])[0])
+
+
+class TestHTLeadSine:
+
+  def test_calc_ht_sine(self):
+    assert a.ht_leadsine().gen(test_df).equals(talib.HT_SINE(test_df["a"])[1])
