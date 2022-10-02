@@ -295,6 +295,11 @@ class ConstructorMixin:
     return cls._const_fs()(
         [cls.natr(high, low, close, period) for period in periods])
 
+  @classmethod
+  def trange(cls, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.tri.talib.TRANGEFeature import TRANGEFeature
+    return TRANGEFeature(high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

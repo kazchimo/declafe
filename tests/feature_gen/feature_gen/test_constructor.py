@@ -726,3 +726,18 @@ class TestNATRS:
         talib.NATR(df["a"], df["b"], df["c"], 3))
     assert result["NATR_5_of_a_b_c"].equals(
         talib.NATR(df["a"], df["b"], df["c"], 5))
+
+
+class TestTRANGE:
+
+  def test_return_trange(self):
+    df = test_df.copy()
+    result = FeatureGen.trange("a", "b", "c").gen(df)
+
+    assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.trange(a, b, _c).gen(df)
+
+    assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
