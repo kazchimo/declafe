@@ -639,3 +639,18 @@ class TestADOSC:
     result = FeatureGen.adosc(a, b, _c, d, 3, 5).gen(df)
 
     assert result.equals(talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5))
+
+
+class TestOBV:
+
+  def test_return_obv(self):
+    df = test_df.copy()
+    result = FeatureGen.obv("a", "b").gen(df)
+
+    assert result.equals(talib.OBV(df["a"], df["b"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.obv(a, b).gen(df)
+
+    assert result.equals(talib.OBV(df["a"], df["b"]))

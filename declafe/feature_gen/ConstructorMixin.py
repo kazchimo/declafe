@@ -270,6 +270,11 @@ class ConstructorMixin:
                         fastperiod=fastperiod,
                         slowperiod=slowperiod)
 
+  @classmethod
+  def obv(cls, close: C, volume: C) -> "FeatureGen":
+    from declafe.feature_gen.binary.talib.OBVFeature import OBVFeature
+    return OBVFeature(close=close, volume=volume)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
