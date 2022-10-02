@@ -8,6 +8,7 @@ __all__ = ["FeatureGen", "ColLike"]
 from .ChainMixin import ChainMixin
 from .ConstructorMixin import ConstructorMixin
 from .OpsMixin import OpsMixin
+from .types import DTypes
 
 if TYPE_CHECKING:
   from declafe.feature_gen.Features import Features
@@ -23,6 +24,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
   def __init__(self):
     super().__init__()
     self.override_feature_name: Optional[str] = None
+    self.dtype: Optional[DTypes] = None
 
   @abstractmethod
   def gen(self, df: pd.DataFrame) -> pd.Series:
@@ -37,10 +39,10 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     optimized gen
     side-effect free
     """
-    if self.feature_name in df.columns:
-      return df[self.feature_name]
-    else:
-      return self.gen(df)
+    result = df[self.feature_name] \
+      if self.feature_name in df.columns \
+      else self.gen(df)
+    return result.astype(self.dtype) if self.dtype else result
 
   @abstractmethod
   def _feature_name(self) -> str:
@@ -74,6 +76,10 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
     else:
       return pd.concat(
           [df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
+
+  def as_type(self, dtype: DTypes) -> "FeatureGen":
+    self.dtype = dtype
+    return self
 
   @staticmethod
   def FS() -> "Type[Features]":

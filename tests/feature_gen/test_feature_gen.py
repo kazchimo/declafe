@@ -67,3 +67,13 @@ class TestToStr:
 
     assert str(f) == "test_gen"
     assert str(ff) == "1"
+
+
+class TestAsType:
+
+  def test_as_type(self):
+    f = SimpleGen().as_type("int8")
+    ff = ConstFeature(1).as_type("category")
+
+    assert f.generate(test_df).dtype == "int8"
+    assert ff.generate(test_df).dtype == "category"
