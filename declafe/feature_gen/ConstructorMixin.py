@@ -275,6 +275,16 @@ class ConstructorMixin:
     from declafe.feature_gen.binary.talib.OBVFeature import OBVFeature
     return OBVFeature(close=close, volume=volume)
 
+  @classmethod
+  def atr(cls, high: C, low: C, close: C, timeperiod: int) -> "FeatureGen":
+    from declafe.feature_gen.tri.talib.ATRFeature import ATRFeature
+    return ATRFeature(high=high, low=low, close=close, timeperiod=timeperiod)
+
+  @classmethod
+  def atrs(cls, high: C, low: C, close: C, periods: List[int]) -> "Features":
+    return cls._const_fs()(
+        [cls.atr(high, low, close, period) for period in periods])
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

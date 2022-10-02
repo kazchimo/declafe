@@ -654,3 +654,39 @@ class TestOBV:
     result = FeatureGen.obv(a, b).gen(df)
 
     assert result.equals(talib.OBV(df["a"], df["b"]))
+
+
+class TestATR:
+
+  def test_return_atr(self):
+    df = test_df.copy()
+    result = FeatureGen.atr("a", "b", "c", 5).gen(df)
+
+    assert result.equals(talib.ATR(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.atr(a, b, _c, 5).gen(df)
+
+    assert result.equals(talib.ATR(df["a"], df["b"], df["c"], 5))
+
+
+class TestATRS:
+
+  def test_return_atrs(self):
+    df = test_df.copy()
+    result = FeatureGen.atrs("a", "b", "c", [3, 5]).set_features(df)
+
+    assert result["ATR_3_of_a_b_c"].equals(
+        talib.ATR(df["a"], df["b"], df["c"], 3))
+    assert result["ATR_5_of_a_b_c"].equals(
+        talib.ATR(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.atrs(a, b, _c, [3, 5]).set_features(df)
+
+    assert result["ATR_3_of_a_b_c"].equals(
+        talib.ATR(df["a"], df["b"], df["c"], 3))
+    assert result["ATR_5_of_a_b_c"].equals(
+        talib.ATR(df["a"], df["b"], df["c"], 5))
