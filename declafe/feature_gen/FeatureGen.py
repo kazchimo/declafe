@@ -90,3 +90,6 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
       return c.feature_name
     else:
       return c
+
+  def __str__(self):
+    return self.feature_name

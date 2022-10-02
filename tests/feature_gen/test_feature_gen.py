@@ -57,3 +57,13 @@ class TestInit:
 
     assert fs.feature_count == 2
     assert fs.feature_names == ["test_gen", "1"]
+
+
+class TestToStr:
+
+  def test_to_str(self):
+    f = SimpleGen()
+    ff = ConstFeature(1)
+
+    assert str(f) == "test_gen"
+    assert str(ff) == "1"
