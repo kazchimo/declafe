@@ -244,6 +244,16 @@ class ConstructorMixin:
                          timeperiod2=timeperiod2,
                          timeperiod3=timeperiod3)
 
+  @classmethod
+  def willr(cls, high: C, low: C, close: C, timeperiod: int) -> "FeatureGen":
+    from .tri.talib.WILLRFeature import WILLRFeature
+    return WILLRFeature(high=high, low=low, close=close, timeperiod=timeperiod)
+
+  @classmethod
+  def willrs(cls, high: C, low: C, close: C, periods: List[int]) -> "Features":
+    return cls._const_fs()(
+        [cls.willr(high, low, close, period) for period in periods])
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

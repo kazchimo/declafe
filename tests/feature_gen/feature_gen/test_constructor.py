@@ -573,3 +573,39 @@ class TestULTOSC:
     result = FeatureGen.ultosc(a, b, _c, 3, 5, 7).gen(df)
 
     assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
+
+
+class TestWillr:
+
+  def test_return_willr(self):
+    df = test_df.copy()
+    result = FeatureGen.willr("a", "b", "c", 5).gen(df)
+
+    assert result.equals(talib.WILLR(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.willr(a, b, _c, 5).gen(df)
+
+    assert result.equals(talib.WILLR(df["a"], df["b"], df["c"], 5))
+
+
+class TestWillrs:
+
+  def test_return_willrs(self):
+    df = test_df.copy()
+    result = FeatureGen.willrs("a", "b", "c", [3, 5]).set_features(df)
+
+    assert result["WILLR_3_of_a_b_c"].equals(
+        talib.WILLR(df["a"], df["b"], df["c"], 3))
+    assert result["WILLR_5_of_a_b_c"].equals(
+        talib.WILLR(df["a"], df["b"], df["c"], 5))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.willrs(a, b, _c, [3, 5]).set_features(df)
+
+    assert result["WILLR_3_of_a_b_c"].equals(
+        talib.WILLR(df["a"], df["b"], df["c"], 3))
+    assert result["WILLR_5_of_a_b_c"].equals(
+        talib.WILLR(df["a"], df["b"], df["c"], 5))
