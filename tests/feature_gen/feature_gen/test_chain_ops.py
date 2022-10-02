@@ -3,7 +3,6 @@ import pandas as pd
 import talib
 
 from declafe import col, c, FeatureGen, Features
-from declafe.feature_gen.binary import SARFeature
 from declafe.feature_gen.unary import LogFeature, SumFeature
 
 test_df = pd.DataFrame({
@@ -272,3 +271,18 @@ class STOCHRSIFastds:
         talib.STOCHRSI(test_df["a"], 10, 5, 3)[1])
     assert result["STOCHRSI_fastd_20_5_3_0_of_a"].equals(
         talib.STOCHRSI(test_df["a"], 20, 5, 3)[1])
+
+
+class TestTRIX:
+
+  def test_calc_trix(self):
+    assert a.trix(10).gen(test_df).equals(talib.TRIX(test_df["a"], 10))
+
+
+class TestTRIXes:
+
+  def test_calc_trixes(self):
+    result = a.trixes([10, 20]).set_features(test_df)
+
+    assert result["TRIX_10_of_a"].equals(talib.TRIX(test_df["a"], 10))
+    assert result["TRIX_20_of_a"].equals(talib.TRIX(test_df["a"], 20))

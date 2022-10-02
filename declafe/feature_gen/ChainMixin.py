@@ -309,6 +309,13 @@ class ChainMixin:
         for period in periods
     ])
 
+  def trix(self, period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.talib.TrixFeature import TRIXFeature
+    return self.next(TRIXFeature, period=period)
+
+  def trixes(self, periods: List[int]) -> "Features":
+    return self.FS([self.trix(period) for period in periods])
+
   def round_n(self, round_digit: int) -> "FeatureGen":
     from declafe.feature_gen.unary import RoundNFeature
     return self.next(RoundNFeature, round_digit=round_digit)
