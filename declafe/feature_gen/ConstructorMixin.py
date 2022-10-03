@@ -300,6 +300,11 @@ class ConstructorMixin:
     from declafe.feature_gen.tri.talib.TRANGEFeature import TRANGEFeature
     return TRANGEFeature(high=high, low=low, close=close)
 
+  @classmethod
+  def cdl2crows(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDL2CROWSFeature import CDL2CROWSFeature
+    return CDL2CROWSFeature(opn=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

@@ -741,3 +741,18 @@ class TestTRANGE:
     result = FeatureGen.trange(a, b, _c).gen(df)
 
     assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
+
+
+class TestCDL2CROWS:
+
+  def test_return_cdl2crows(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl2crows("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl2crows(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]))
