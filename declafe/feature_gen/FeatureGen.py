@@ -45,8 +45,6 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
       if self.feature_name in df.columns \
       else self.gen(df)
 
-    print(self.dtype)
-
     dt = infer_min_numeric_type(result) \
       if self.dtype == "numeric_auto" \
       else self.dtype
