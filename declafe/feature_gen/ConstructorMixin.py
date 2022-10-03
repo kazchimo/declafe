@@ -9,6 +9,11 @@ class ConstructorMixin:
   C = Union["FeatureGen", str]
 
   @classmethod
+  def cond(cls, test: C, true: C, false: C) -> "FeatureGen":
+    from declafe.feature_gen.tri.CondFeature import CondFeature
+    return CondFeature(test_col=test, true_col=true, false_col=false)
+
+  @classmethod
   def sar(cls, high: C, low: C) -> "FeatureGen":
     from declafe.feature_gen.binary import SARFeature
     return SARFeature(high, low)

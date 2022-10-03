@@ -33,6 +33,10 @@ class ChainMixin:
           head=_self,
           nexts=[f(column_name=_self.feature_name, *args, **kwargs)])
 
+  def of_cond(self, true_col: "ColLike", false_col: "ColLike"):
+    from declafe.feature_gen.tri.CondFeature import CondFeature
+    return CondFeature(self._self(), true_col, false_col)
+
   def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
     from declafe.feature_gen.unary import ConsecutiveCountFeature
     return self.next(ConsecutiveCountFeature, target_value=target_value)

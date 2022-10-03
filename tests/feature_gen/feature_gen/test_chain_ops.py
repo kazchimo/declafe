@@ -15,6 +15,19 @@ b = col("b")
 _1 = c(1)
 
 
+class TestCond:
+
+  def test_cond(self):
+    df = pd.DataFrame({
+        "cond": [True, False],
+        "a": [1, 2],
+        "b": [3, 4],
+    })
+    f = col("cond").of_cond(col("a"), col("b"))
+
+    assert f.generate(df).equals(pd.Series([1, 4]))
+
+
 class TestMinComp:
 
   def test_return_min_value(self):
