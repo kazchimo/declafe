@@ -756,3 +756,20 @@ class TestCDL2CROWS:
     result = FeatureGen.cdl2crows(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDL3BLACKCROWS:
+
+  def test_return_cdl3blackcrows(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3blackcrows("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDL3BLACKCROWS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3blackcrows(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDL3BLACKCROWS(df["a"], df["b"], df["c"], df["d"]))
