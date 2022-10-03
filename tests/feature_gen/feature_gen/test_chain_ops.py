@@ -28,6 +28,17 @@ class TestCond:
     assert f.generate(df).equals(pd.Series([1, 4]))
 
 
+class TestAccumulate:
+
+  def test_accumulate(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    f = a.accumulate("sum", lambda x, y: x + y)
+    f2 = a.accumulate("find_latest_three", lambda x, y: x if x % 3 == 0 else y)
+
+    f.generate(df).equals(pd.Series([1, 3, 6, 10, 15, 21]))
+    f2.generate(df).equals(pd.Series([1, 2, 3, 3, 3, 6]))
+
+
 class TestMinComp:
 
   def test_return_min_value(self):

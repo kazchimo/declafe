@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast
+from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable
 
 import numpy as np
 
@@ -36,6 +36,11 @@ class ChainMixin:
   def of_cond(self, true_col: "ColLike", false_col: "ColLike"):
     from declafe.feature_gen.tri.CondFeature import CondFeature
     return CondFeature(self._self(), true_col, false_col)
+
+  def accumulate(self, ops_name: str, ops_func: Callable[[Any, Any],
+                                                         Any]) -> "FeatureGen":
+    from declafe.feature_gen.unary.AccumulateFeature import AccumulateFeature
+    return self.next(AccumulateFeature, ops_name=ops_name, ops_func=ops_func)
 
   def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
     from declafe.feature_gen.unary import ConsecutiveCountFeature
