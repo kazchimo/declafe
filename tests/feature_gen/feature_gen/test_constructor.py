@@ -245,13 +245,13 @@ class TestArronOsc:
 
   def test_return_arron_osc(self):
     df = test_df.copy()
-    result = FeatureGen.arron_osc("a", "b", 3).gen(df)
+    result = FeatureGen.aroon_osc("a", "b", 3).gen(df)
 
     assert result.equals(talib.AROONOSC(df["a"], df["b"], 3))
 
   def test_accept_col(self):
     df = test_df.copy()
-    result = FeatureGen.arron_osc(a, b, 3).gen(df)
+    result = FeatureGen.aroon_osc(a, b, 3).gen(df)
 
     assert result.equals(talib.AROONOSC(df["a"], df["b"], 3))
 
@@ -260,14 +260,14 @@ class TestArronOscs:
 
   def test_return_arron_oscs(self):
     df = test_df.copy()
-    result = FeatureGen.arron_oscs("a", "b", [3, 5]).set_features(df)
+    result = FeatureGen.aroon_oscs("a", "b", [3, 5]).set_features(df)
 
     assert result["AROONOSC_3_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 3))
     assert result["AROONOSC_5_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 5))
 
   def test_accept_col(self):
     df = test_df.copy()
-    result = FeatureGen.arron_oscs(a, b, [3, 5]).set_features(df)
+    result = FeatureGen.aroon_oscs(a, b, [3, 5]).set_features(df)
 
     assert result["AROONOSC_3_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 3))
     assert result["AROONOSC_5_a_b"].equals(talib.AROONOSC(df["a"], df["b"], 5))

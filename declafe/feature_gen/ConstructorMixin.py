@@ -79,14 +79,14 @@ class ConstructorMixin:
         [cls.aroon_down(high, low, period) for period in periods])
 
   @classmethod
-  def arron_osc(cls, high: C, low: C, period: int) -> "FeatureGen":
+  def aroon_osc(cls, high: C, low: C, period: int) -> "FeatureGen":
     from .binary.talib import AROONOSCFeature
     return AROONOSCFeature(high, low, period)
 
   @classmethod
-  def arron_oscs(cls, high: C, low: C, periods: List[int]) -> "Features":
+  def aroon_oscs(cls, high: C, low: C, periods: List[int]) -> "Features":
     return cls._const_fs()(
-        [cls.arron_osc(high, low, period) for period in periods])
+        [cls.aroon_osc(high, low, period) for period in periods])
 
   @classmethod
   def bop(cls,
