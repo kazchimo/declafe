@@ -315,6 +315,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDL3INSIDEFeature import CDL3INSIDEFeature
     return CDL3INSIDEFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdl3linestrike(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDL3LINESTRIKEFeature import CDL3LINESTRIKEFeature
+    return CDL3LINESTRIKEFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
