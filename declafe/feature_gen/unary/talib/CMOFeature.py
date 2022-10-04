@@ -14,7 +14,7 @@ class CMOFeature(UnaryColumnFeature):
 
   @property
   def name(self) -> str:
-    return f"CMO"
+    return f"CMO_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return talib.CMO(ser, self.periods)
