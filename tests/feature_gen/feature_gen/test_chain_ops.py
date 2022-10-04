@@ -39,6 +39,16 @@ class TestAccumulate:
     f2.generate(df).equals(pd.Series([1, 2, 3, 3, 3, 6]))
 
 
+class TestExistWithin:
+
+  def test_exist_within(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    f = a.exist_within(3, 3)
+
+    assert f.generate(df).equals(
+        pd.Series([False, False, True, True, True, False]))
+
+
 class TestMinComp:
 
   def test_return_min_value(self):

@@ -42,6 +42,12 @@ class ChainMixin:
     from declafe.feature_gen.unary.AccumulateFeature import AccumulateFeature
     return self.next(AccumulateFeature, ops_name=ops_name, ops_func=ops_func)
 
+  def exist_within(self, target_value: Any, period: int) -> "FeatureGen":
+    from declafe.feature_gen.unary.ExistWithinFeature import ExistWithinFeature
+    return self.next(ExistWithinFeature,
+                     target_value=target_value,
+                     period=period)
+
   def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
     from declafe.feature_gen.unary import ConsecutiveCountFeature
     return self.next(ConsecutiveCountFeature, target_value=target_value)
