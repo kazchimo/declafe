@@ -901,3 +901,18 @@ class TestCDLADVANCEBLOCK:
 
     assert result.equals(
         talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLBELTHOLD:
+
+  def test_return_cdlbelthold(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlbelthold("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlbelthold(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]))
