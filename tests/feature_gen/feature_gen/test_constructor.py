@@ -1161,3 +1161,17 @@ class TestCDLHANGINGMAN:
 
     assert result.equals(talib.CDLHANGINGMAN(df["a"], df["b"], df["c"],
                                              df["d"]))
+
+class TestCDLHARAMI:
+
+  def test_return_cdlharami(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlharami("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlharami(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]))
