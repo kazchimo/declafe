@@ -451,6 +451,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLGRAVESTONEDOJIFeature import CDLGRAVESTONEDOJIFeature
     return CDLGRAVESTONEDOJIFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlhammer(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLHAMMERFeature import CDLHAMMERFeature
+    return CDLHAMMERFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
