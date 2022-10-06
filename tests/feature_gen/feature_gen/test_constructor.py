@@ -1177,18 +1177,34 @@ class TestCDLHARAMI:
 
     assert result.equals(talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]))
 
+
 class TestCDLHARAMICROSS:
 
   def test_return_cdlharamicross(self):
     df = test_df.copy()
     result = FeatureGen.cdlharamicross("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHARAMICROSS(df["a"], df["b"], df["c"],
-                                              df["d"]))
+    assert result.equals(
+        talib.CDLHARAMICROSS(df["a"], df["b"], df["c"], df["d"]))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlharamicross(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHARAMICROSS(df["a"], df["b"], df["c"],
-                                              df["d"]))
+    assert result.equals(
+        talib.CDLHARAMICROSS(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLHIGHWAVE:
+
+  def test_return_cdlhighwave(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlhighwave("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlhighwave(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]))
