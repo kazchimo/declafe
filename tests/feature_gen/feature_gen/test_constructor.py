@@ -1468,3 +1468,18 @@ class TestCDLMORNINGSTAR:
 
     assert result.equals(
         talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLONNECK:
+
+  def test_return_cdlonneck(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlonneck("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlonneck(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]))
