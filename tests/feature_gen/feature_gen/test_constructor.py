@@ -931,3 +931,20 @@ class TestCDLBREAKAWAY:
     result = FeatureGen.cdlbreakaway(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLCLOSINGMARUBOZU:
+
+  def test_return_cdlclosingmarubozu(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlclosingmarubozu("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlclosingmarubozu(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
