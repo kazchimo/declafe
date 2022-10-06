@@ -1387,3 +1387,18 @@ class TestCDLLONGLINE:
     result = FeatureGen.cdllongline(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLMARUBOZU:
+
+  def test_return_cdlmarubozu(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlmarubozu("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlmarubozu(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
