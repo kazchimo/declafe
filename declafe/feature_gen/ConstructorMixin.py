@@ -416,6 +416,16 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLENGULFINGFeature import CDLENGULFINGFeature
     return CDLENGULFINGFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdleveningdojistar(cls, open: C, high: C, low: C, close: C,
+                         penetration: float) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLEVENINGDOJISTARFeature import CDLEVENINGDOJISTARFeature
+    return CDLEVENINGDOJISTARFeature(open=open,
+                                     high=high,
+                                     low=low,
+                                     close=close,
+                                     penetration=penetration)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

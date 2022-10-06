@@ -1061,3 +1061,20 @@ class TestCDLENGULFING:
     result = FeatureGen.cdlengulfing(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLEVENINGDOJISTAR:
+
+  def test_return_cdleveningdojistar(self):
+    df = test_df.copy()
+    result = FeatureGen.cdleveningdojistar("a", "b", "c", "d", 0).gen(df)
+
+    assert result.equals(
+        talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdleveningdojistar(a, b, _c, d, 0).gen(df)
+
+    assert result.equals(
+        talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0))
