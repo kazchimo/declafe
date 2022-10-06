@@ -15,8 +15,10 @@ class CDLMATHOLDFeature(QuadriFeature):
       high: ColLike,
       low: ColLike,
       close: ColLike,
+      penetration: float = 0,
   ):
     super().__init__(open, high, low, close)
+    self.penetration = penetration
 
   def quadrigen(self, col1: pd.Series, col2: pd.Series, col3: pd.Series,
                 col4: pd.Series) -> pd.Series:
@@ -25,7 +27,8 @@ class CDLMATHOLDFeature(QuadriFeature):
         col2,
         col3,
         col4,
+        penetration=self.penetration,
     )
 
   def _feature_name(self) -> str:
-    return f"CDLMATHOLD_{self.col1}_{self.col2}_{self.col3}_{self.col4}"
+    return f"CDLMATHOLD{self.penetration}_{self.col1}_{self.col2}_{self.col3}_{self.col4}"

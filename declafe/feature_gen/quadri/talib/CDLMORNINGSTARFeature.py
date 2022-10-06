@@ -4,10 +4,10 @@ import talib
 from declafe import ColLike
 from declafe.feature_gen.quadri.QuadriFeature import QuadriFeature
 
-__all__ = ["CDLMORNINGDOJISTARFeature"]
+__all__ = ["CDLMORNINGSTARFeature"]
 
 
-class CDLMORNINGDOJISTARFeature(QuadriFeature):
+class CDLMORNINGSTARFeature(QuadriFeature):
 
   def __init__(
       self,
@@ -22,7 +22,7 @@ class CDLMORNINGDOJISTARFeature(QuadriFeature):
 
   def quadrigen(self, col1: pd.Series, col2: pd.Series, col3: pd.Series,
                 col4: pd.Series) -> pd.Series:
-    return talib.CDLMORNINGDOJISTAR(
+    return talib.CDLMORNINGSTAR(
         col1,
         col2,
         col3,
@@ -31,4 +31,4 @@ class CDLMORNINGDOJISTARFeature(QuadriFeature):
     )
 
   def _feature_name(self) -> str:
-    return f"CDLMORNINGDOJISTAR{self.penetration}_{self.col1}_{self.col2}_{self.col3}_{self.col4}"
+    return f"CDLMORNINGSTAR{self.penetration}_{self.col1}_{self.col2}_{self.col3}_{self.col4}"

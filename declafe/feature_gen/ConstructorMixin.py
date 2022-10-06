@@ -546,15 +546,46 @@ class ConstructorMixin:
     return CDLMATCHINGLOWFeature(open=open, high=high, low=low, close=close)
 
   @classmethod
-  def cdlmathold(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+  def cdlmathold(cls,
+                 open: C,
+                 high: C,
+                 low: C,
+                 close: C,
+                 penetration: float = 0) -> "FeatureGen":
     from declafe.feature_gen.quadri.talib.CDLMATHOLDFeature import CDLMATHOLDFeature
-    return CDLMATHOLDFeature(open=open, high=high, low=low, close=close)
+    return CDLMATHOLDFeature(open=open,
+                             high=high,
+                             low=low,
+                             close=close,
+                             penetration=penetration)
 
   @classmethod
-  def cdlmorningdojistar(cls, open: C, high: C, low: C,
-                         close: C) -> "FeatureGen":
+  def cdlmorningdojistar(cls,
+                         open: C,
+                         high: C,
+                         low: C,
+                         close: C,
+                         penetration: float = 0) -> "FeatureGen":
     from declafe.feature_gen.quadri.talib.CDLMORNINGDOJISTARFeature import CDLMORNINGDOJISTARFeature
-    return CDLMORNINGDOJISTARFeature(open=open, high=high, low=low, close=close)
+    return CDLMORNINGDOJISTARFeature(open=open,
+                                     high=high,
+                                     low=low,
+                                     close=close,
+                                     penetration=penetration)
+
+  @classmethod
+  def cdlmorningstar(cls,
+                     open: C,
+                     high: C,
+                     low: C,
+                     close: C,
+                     penetration: float = 0) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLMORNINGSTARFeature import CDLMORNINGSTARFeature
+    return CDLMORNINGSTARFeature(open=open,
+                                 high=high,
+                                 low=low,
+                                 close=close,
+                                 penetration=penetration)
 
   @staticmethod
   def _const_fs() -> Type["Features"]:

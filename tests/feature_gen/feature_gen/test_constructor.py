@@ -1451,3 +1451,20 @@ class TestCDLMORNINGDOJISTAR:
 
     assert result.equals(
         talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLMORNINGSTAR:
+
+  def test_return_cdlmorningstar(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlmorningstar("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlmorningstar(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]))
