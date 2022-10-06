@@ -833,3 +833,20 @@ class TestCDL3OUTSIDE:
     result = FeatureGen.cdl3outside(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDL3STARSINSOUTH:
+
+  def test_return_cdl3starsinsouth(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3starsinsouth("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3starsinsouth(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]))
