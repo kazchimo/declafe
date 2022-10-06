@@ -1321,3 +1321,20 @@ class TestCDLKICKING:
     result = FeatureGen.cdlkicking(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLKICKING(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLKICKINGBYLENGTH:
+
+  def test_return_cdlkickingbylength(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlkickingbylength("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlkickingbylength(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]))
