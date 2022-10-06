@@ -341,6 +341,16 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDL3WHITESOLDIERSFeature import CDL3WHITESOLDIERSFeature
     return CDL3WHITESOLDIERSFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlabandonedbaby(cls, open: C, high: C, low: C, close: C,
+                       penetration: float) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLABANDONEDBABYFeature import CDLABANDONEDBABYFeature
+    return CDLABANDONEDBABYFeature(open=open,
+                                   high=high,
+                                   low=low,
+                                   close=close,
+                                   penetration=penetration)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

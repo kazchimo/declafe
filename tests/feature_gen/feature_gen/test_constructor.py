@@ -867,3 +867,20 @@ class TestCDL3WHITESOLDIERS:
 
     assert result.equals(
         talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLABANDONEDBABY:
+
+  def test_return_cdlabandonedbaby(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlabandonedbaby("a", "b", "c", "d", 0).gen(df)
+
+    assert result.equals(
+        talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlabandonedbaby(a, b, _c, d, 0).gen(df)
+
+    assert result.equals(
+        talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0))
