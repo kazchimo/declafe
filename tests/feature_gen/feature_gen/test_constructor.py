@@ -1208,3 +1208,18 @@ class TestCDLHIGHWAVE:
     result = FeatureGen.cdlhighwave(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLHIKKAKE:
+
+  def test_return_cdlhikkake(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlhikkake("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlhikkake(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]))

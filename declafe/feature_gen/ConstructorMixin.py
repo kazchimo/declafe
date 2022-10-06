@@ -476,6 +476,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLHIGHWAVEFeature import CDLHIGHWAVEFeature
     return CDLHIGHWAVEFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlhikkake(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLHIKKAKEFeature import CDLHIKKAKEFeature
+    return CDLHIKKAKEFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
