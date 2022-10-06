@@ -999,3 +999,18 @@ class TestCDLDARKCLOUDCOVER:
 
     assert result.equals(
         talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0))
+
+
+class TestCDLDOJI:
+
+  def test_return_cdldoji(self):
+    df = test_df.copy()
+    result = FeatureGen.cdldoji("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLDOJI(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdldoji(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLDOJI(df["a"], df["b"], df["c"], df["d"]))
