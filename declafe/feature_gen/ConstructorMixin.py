@@ -466,6 +466,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLHARAMIFeature import CDLHARAMIFeature
     return CDLHARAMIFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlharamicross(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLHARAMICROSSFeature import CDLHARAMICROSSFeature
+    return CDLHARAMICROSSFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
