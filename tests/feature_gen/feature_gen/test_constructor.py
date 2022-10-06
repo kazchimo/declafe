@@ -1355,3 +1355,20 @@ class TestCDLLADDERBOTTOM:
 
     assert result.equals(
         talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLLONGLEGGEDDOJI:
+
+  def test_return_cdllongleggeddoji(self):
+    df = test_df.copy()
+    result = FeatureGen.cdllongleggeddoji("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdllongleggeddoji(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]))
