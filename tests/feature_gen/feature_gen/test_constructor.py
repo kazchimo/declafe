@@ -1484,6 +1484,7 @@ class TestCDLONNECK:
 
     assert result.equals(talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]))
 
+
 class TestCDLPIERCING:
 
   def test_return_cdlpiercing(self):
@@ -1497,3 +1498,20 @@ class TestCDLPIERCING:
     result = FeatureGen.cdlpiercing(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLPIERCING(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLRICKSHAWMAN:
+
+  def test_return_cdlrickshawman(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlrickshawman("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlrickshawman(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]))
