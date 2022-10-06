@@ -426,6 +426,16 @@ class ConstructorMixin:
                                      close=close,
                                      penetration=penetration)
 
+  @classmethod
+  def cdleveningstar(cls, open: C, high: C, low: C, close: C,
+                     penetration: float) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLEVENINGSTARFeature import CDLEVENINGSTARFeature
+    return CDLEVENINGSTARFeature(open=open,
+                                 high=high,
+                                 low=low,
+                                 close=close,
+                                 penetration=penetration)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

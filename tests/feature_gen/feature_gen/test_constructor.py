@@ -1078,3 +1078,20 @@ class TestCDLEVENINGDOJISTAR:
 
     assert result.equals(
         talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0))
+
+
+class TestCDLEVENINGSTAR:
+
+  def test_return_cdleveningstar(self):
+    df = test_df.copy()
+    result = FeatureGen.cdleveningstar("a", "b", "c", "d", 0).gen(df)
+
+    assert result.equals(
+        talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdleveningstar(a, b, _c, d, 0).gen(df)
+
+    assert result.equals(
+        talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0))
