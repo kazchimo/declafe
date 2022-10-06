@@ -335,6 +335,12 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDL3STARSINSOUTHFeature import CDL3STARSINSOUTHFeature
     return CDL3STARSINSOUTHFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdl3whitesoldiers(cls, open: C, high: C, low: C,
+                        close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDL3WHITESOLDIERSFeature import CDL3WHITESOLDIERSFeature
+    return CDL3WHITESOLDIERSFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

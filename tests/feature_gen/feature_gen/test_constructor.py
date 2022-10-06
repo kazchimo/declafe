@@ -850,3 +850,20 @@ class TestCDL3STARSINSOUTH:
 
     assert result.equals(
         talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDL3WHITESOLDIERS:
+
+  def test_return_cdl3whitesoldiers(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3whitesoldiers("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3whitesoldiers(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]))
