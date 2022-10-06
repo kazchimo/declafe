@@ -818,3 +818,18 @@ class TestCDL3LINESTRIKE:
 
     assert result.equals(
         talib.CDL3LINESTRIKE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDL3OUTSIDE:
+
+  def test_return_cdl3outside(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3outside("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdl3outside(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]))
