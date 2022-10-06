@@ -550,6 +550,12 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLMATHOLDFeature import CDLMATHOLDFeature
     return CDLMATHOLDFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlmorningdojistar(cls, open: C, high: C, low: C,
+                         close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLMORNINGDOJISTARFeature import CDLMORNINGDOJISTARFeature
+    return CDLMORNINGDOJISTARFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

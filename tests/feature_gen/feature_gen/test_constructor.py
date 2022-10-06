@@ -1434,3 +1434,20 @@ class TestCDLMATHOLD:
     result = FeatureGen.cdlmathold(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLMATHOLD(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLMORNINGDOJISTAR:
+
+  def test_return_cdlmorningdojistar(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlmorningdojistar("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlmorningdojistar(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
