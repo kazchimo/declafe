@@ -592,6 +592,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLONNECKFeature import CDLONNECKFeature
     return CDLONNECKFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlpiercing(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLPIERCINGFeature import CDLPIERCINGFeature
+    return CDLPIERCINGFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
