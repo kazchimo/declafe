@@ -1046,3 +1046,18 @@ class TestCDLDRAGONFLYDOJI:
 
     assert result.equals(
         talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLENGULFING:
+
+  def test_return_cdlengulfing(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlengulfing("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlengulfing(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]))
