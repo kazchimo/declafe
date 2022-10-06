@@ -884,3 +884,20 @@ class TestCDLABANDONEDBABY:
 
     assert result.equals(
         talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0))
+
+
+class TestCDLADVANCEBLOCK:
+
+  def test_return_cdladvanceblock(self):
+    df = test_df.copy()
+    result = FeatureGen.cdladvanceblock("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdladvanceblock(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]))
