@@ -1095,3 +1095,20 @@ class TestCDLEVENINGSTAR:
 
     assert result.equals(
         talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0))
+
+
+class TestCDLGAPSIDESIDEWHITE:
+
+  def test_return_cdlgapsidesidewhite(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlgapsidesidewhite("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlgapsidesidewhite(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]))
