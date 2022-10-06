@@ -508,6 +508,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLINVERTEDHAMMERFeature import CDLINVERTEDHAMMERFeature
     return CDLINVERTEDHAMMERFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlkicking(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLKICKINGFeature import CDLKICKINGFeature
+    return CDLKICKINGFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
