@@ -1112,3 +1112,20 @@ class TestCDLGAPSIDESIDEWHITE:
 
     assert result.equals(
         talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLGRAVESTONEDOJI:
+
+  def test_return_cdlgravestonedoji(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlgravestonedoji("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLGRAVESTONEDOJI(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlgravestonedoji(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLGRAVESTONEDOJI(df["a"], df["b"], df["c"], df["d"]))
