@@ -361,6 +361,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLBELTHOLDFeature import CDLBELTHOLDFeature
     return CDLBELTHOLDFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlbreakaway(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLBREAKAWAYFeature import CDLBREAKAWAYFeature
+    return CDLBREAKAWAYFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

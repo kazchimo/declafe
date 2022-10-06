@@ -916,3 +916,18 @@ class TestCDLBELTHOLD:
     result = FeatureGen.cdlbelthold(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLBREAKAWAY:
+
+  def test_return_cdlbreakaway(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlbreakaway("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlbreakaway(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]))
