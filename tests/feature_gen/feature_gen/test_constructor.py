@@ -1029,3 +1029,20 @@ class TestCDLDOJISTAR:
     result = FeatureGen.cdldojistar(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLDRAGONFLYDOJI:
+
+  def test_return_cdldragonflydoji(self):
+    df = test_df.copy()
+    result = FeatureGen.cdldragonflydoji("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdldragonflydoji(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]))
