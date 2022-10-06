@@ -965,3 +965,20 @@ class TestCDLCONCEALBABYSWALL:
 
     assert result.equals(
         talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLCOUNTERATTACK:
+
+  def test_return_cdlcounterattack(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlcounterattack("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlcounterattack(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]))
