@@ -948,3 +948,20 @@ class TestCDLCLOSINGMARUBOZU:
 
     assert result.equals(
         talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLCONCEALBABYSWALL:
+
+  def test_return_cdlconcealbabyswall(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlconcealbabyswall("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlconcealbabyswall(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]))
