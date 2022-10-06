@@ -1257,3 +1257,20 @@ class TestCDLHOMINGPIGEON:
 
     assert result.equals(
         talib.CDLHOMINGPIGEON(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLIDENTICAL3CROWS:
+
+  def test_return_cdlidentical3crows(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlidentical3crows("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlidentical3crows(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]))
