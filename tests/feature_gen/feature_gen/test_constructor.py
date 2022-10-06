@@ -1372,3 +1372,18 @@ class TestCDLLONGLEGGEDDOJI:
 
     assert result.equals(
         talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLLONGLINE:
+
+  def test_return_cdllongline(self):
+    df = test_df.copy()
+    result = FeatureGen.cdllongline("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdllongline(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]))
