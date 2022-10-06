@@ -1338,3 +1338,20 @@ class TestCDLKICKINGBYLENGTH:
 
     assert result.equals(
         talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLLADDERBOTTOM:
+
+  def test_return_cdlladderbottom(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlladderbottom("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlladderbottom(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]))
