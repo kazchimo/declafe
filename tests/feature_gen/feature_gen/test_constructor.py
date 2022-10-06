@@ -1274,3 +1274,18 @@ class TestCDLIDENTICAL3CROWS:
 
     assert result.equals(
         talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLINNECK:
+
+  def test_return_cdlinneck(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlinneck("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLINNECK(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlinneck(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLINNECK(df["a"], df["b"], df["c"], df["d"]))
