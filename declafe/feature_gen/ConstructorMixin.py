@@ -386,6 +386,16 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLCOUNTERATTACKFeature import CDLCOUNTERATTACKFeature
     return CDLCOUNTERATTACKFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdldarkcloudcover(cls, open: C, high: C, low: C, close: C,
+                        penetration: float) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLDARKCLOUDCOVERFeature import CDLDARKCLOUDCOVERFeature
+    return CDLDARKCLOUDCOVERFeature(open=open,
+                                    high=high,
+                                    low=low,
+                                    close=close,
+                                    penetration=penetration)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

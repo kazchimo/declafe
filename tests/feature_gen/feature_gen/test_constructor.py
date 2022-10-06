@@ -982,3 +982,20 @@ class TestCDLCOUNTERATTACK:
 
     assert result.equals(
         talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLDARKCLOUDCOVER:
+
+  def test_return_cdldarkcloudcover(self):
+    df = test_df.copy()
+    result = FeatureGen.cdldarkcloudcover("a", "b", "c", "d", 0).gen(df)
+
+    assert result.equals(
+        talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdldarkcloudcover(a, b, _c, d, 0).gen(df)
+
+    assert result.equals(
+        talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0))
