@@ -1223,3 +1223,20 @@ class TestCDLHIKKAKE:
     result = FeatureGen.cdlhikkake(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLHIKKAKEMOD:
+
+  def test_return_cdlhikkakemod(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlhikkakemod("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLHIKKAKEMOD(df["a"], df["b"], df["c"],
+                                             df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlhikkakemod(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLHIKKAKEMOD(df["a"], df["b"], df["c"],
+                                             df["d"]))
