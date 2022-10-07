@@ -1598,3 +1598,20 @@ class TestCDLSPINNINGTOP:
 
     assert result.equals(
         talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLSTALLEDPATTERN:
+
+  def test_return_cdlstalledpattern(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlstalledpattern("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlstalledpattern(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]))
