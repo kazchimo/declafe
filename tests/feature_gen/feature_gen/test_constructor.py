@@ -1515,3 +1515,20 @@ class TestCDLRICKSHAWMAN:
 
     assert result.equals(
         talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLRISEFALL3METHODS:
+
+  def test_return_cdlrisefall3methods(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlrisefall3methods("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlrisefall3methods(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]))
