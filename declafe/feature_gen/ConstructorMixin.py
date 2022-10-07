@@ -643,6 +643,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLSTICKSANDWICHFeature import CDLSTICKSANDWICHFeature
     return CDLSTICKSANDWICHFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdltakuri(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLTAKURIFeature import CDLTAKURIFeature
+    return CDLTAKURIFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
