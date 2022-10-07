@@ -1663,3 +1663,19 @@ class TestCDLTASUKIGAP:
 
     assert result.equals(
         talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]))
+
+class TestCDLTHRUSTING:
+
+  def test_return_cdlthrusting(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlthrusting("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlthrusting(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]))
