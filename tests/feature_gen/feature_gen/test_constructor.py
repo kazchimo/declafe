@@ -1566,3 +1566,18 @@ class TestCDLSHOOTINGSTAR:
 
     assert result.equals(
         talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLSHORTLINE:
+
+  def test_return_cdlshortline(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlshortline("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlshortline(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]))
