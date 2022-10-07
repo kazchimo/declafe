@@ -1581,3 +1581,20 @@ class TestCDLSHORTLINE:
     result = FeatureGen.cdlshortline(a, b, _c, d).gen(df)
 
     assert result.equals(talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLSPINNINGTOP:
+
+  def test_return_cdlspinningtop(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlspinningtop("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlspinningtop(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]))
