@@ -1646,4 +1646,20 @@ class TestCDLTAKURI:
     df = test_df.copy()
     result = FeatureGen.cdltakuri(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLTAKURI(df["a"], df["b"], df["c"], df["d"]))
+    assert result.equals(talib.CDLTAKURI(df["a"], df["b"], df["c"], df["d"]))CDLTASUKIGAP
+
+class TestCDLTASUKIGAP:
+
+  def test_return_cdltasukigap(self):
+    df = test_df.copy()
+    result = FeatureGen.cdltasukigap("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdltasukigap(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]))
