@@ -663,6 +663,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLTRISTARFeature import CDLTRISTARFeature
     return CDLTRISTARFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlunique3river(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLUNIQUE3RIVERFeature import CDLUNIQUE3RIVERFeature
+    return CDLUNIQUE3RIVERFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
