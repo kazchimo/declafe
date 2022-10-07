@@ -1549,3 +1549,20 @@ class TestCDLSEPARATINGLINES:
 
     assert result.equals(
         talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLSHOOTINGSTAR:
+
+  def test_return_cdlshootingstar(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlshootingstar("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlshootingstar(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]))
