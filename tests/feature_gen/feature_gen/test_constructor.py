@@ -1679,3 +1679,17 @@ class TestCDLTHRUSTING:
 
     assert result.equals(
         talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]))
+
+class TestCDLTRISTAR:
+
+  def test_return_cdltristar(self):
+    df = test_df.copy()
+    result = FeatureGen.cdltristar("a", "b", "c", "d").gen(df)
+
+    assert result.equals(talib.CDLTRISTAR(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdltristar(a, b, _c, d).gen(df)
+
+    assert result.equals(talib.CDLTRISTAR(df["a"], df["b"], df["c"], df["d"]))
