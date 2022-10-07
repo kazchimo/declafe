@@ -1726,3 +1726,20 @@ class TestCDLUPSIDEGAP2CROWS:
 
     assert result.equals(
         talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLXSIDEGAP3METHODS:
+
+  def test_return_cdlxsidegap3methods(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlxsidegap3methods("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLXSIDEGAP3METHODS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlxsidegap3methods(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLXSIDEGAP3METHODS(df["a"], df["b"], df["c"], df["d"]))
