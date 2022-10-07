@@ -1709,3 +1709,20 @@ class TestCDLUNIQUE3RIVER:
 
     assert result.equals(
         talib.CDLUNIQUE3RIVER(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLUPSIDEGAP2CROWS:
+
+  def test_return_cdlupsidegap2crows(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlupsidegap2crows("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlupsidegap2crows(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]))

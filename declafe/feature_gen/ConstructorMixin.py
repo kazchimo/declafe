@@ -668,6 +668,12 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLUNIQUE3RIVERFeature import CDLUNIQUE3RIVERFeature
     return CDLUNIQUE3RIVERFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlupsidegap2crows(cls, open: C, high: C, low: C,
+                         close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLUPSIDEGAP2CROWSFeature import CDLUPSIDEGAP2CROWSFeature
+    return CDLUPSIDEGAP2CROWSFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
