@@ -638,6 +638,11 @@ class ConstructorMixin:
     from declafe.feature_gen.quadri.talib.CDLSTALLEDPATTERNFeature import CDLSTALLEDPATTERNFeature
     return CDLSTALLEDPATTERNFeature(open=open, high=high, low=low, close=close)
 
+  @classmethod
+  def cdlsticksandwich(cls, open: C, high: C, low: C, close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLSTICKSANDWICHFeature import CDLSTICKSANDWICHFeature
+    return CDLSTICKSANDWICHFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features

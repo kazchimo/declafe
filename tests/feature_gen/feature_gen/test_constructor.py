@@ -1615,3 +1615,20 @@ class TestCDLSTALLEDPATTERN:
 
     assert result.equals(
         talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLSTICKSANDWICH:
+
+  def test_return_cdlsticksandwich(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlsticksandwich("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLSTICKSANDWICH(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlsticksandwich(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLSTICKSANDWICH(df["a"], df["b"], df["c"], df["d"]))
