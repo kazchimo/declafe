@@ -1532,3 +1532,20 @@ class TestCDLRISEFALL3METHODS:
 
     assert result.equals(
         talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]))
+
+
+class TestCDLSEPARATINGLINES:
+
+  def test_return_cdlseparatinglines(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlseparatinglines("a", "b", "c", "d").gen(df)
+
+    assert result.equals(
+        talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]))
+
+  def test_accept_col(self):
+    df = test_df.copy()
+    result = FeatureGen.cdlseparatinglines(a, b, _c, d).gen(df)
+
+    assert result.equals(
+        talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]))

@@ -611,6 +611,12 @@ class ConstructorMixin:
                                       low=low,
                                       close=close)
 
+  @classmethod
+  def cdlseparatinglines(cls, open: C, high: C, low: C,
+                         close: C) -> "FeatureGen":
+    from declafe.feature_gen.quadri.talib.CDLSEPARATINGLINESFeature import CDLSEPARATINGLINESFeature
+    return CDLSEPARATINGLINESFeature(open=open, high=high, low=low, close=close)
+
   @staticmethod
   def _const_fs() -> Type["Features"]:
     from declafe.feature_gen.Features import Features
