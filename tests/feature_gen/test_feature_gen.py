@@ -115,3 +115,19 @@ class TestAsTypeAutoNum:
 
     assert f.generate(test_df).dtype == "float64"
     assert f2.generate(test_df).dtype == "int8"
+
+
+class TestSetFeature:
+
+  def test_use_exist_value_if_cached_type(self):
+
+    class RaiseGen(FeatureGen):
+
+      def gen(self, df: pd.DataFrame) -> pd.Series:
+        raise Exception("This should not be called")
+
+      def _feature_name(self) -> str:
+        return "a"
+
+    gen = RaiseGen()
+    gen.set_feature(test_df)
