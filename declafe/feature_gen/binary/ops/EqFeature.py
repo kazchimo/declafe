@@ -8,7 +8,7 @@ from ..BinaryFeature import BinaryFeature
 class EqFeature(BinaryFeature):
 
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
-    return left == right
+    return (left == right).astype(bool)
 
   def _feature_name(self) -> str:
     return f"{self.left}_==_{self.right}"

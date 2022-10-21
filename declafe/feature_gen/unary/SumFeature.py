@@ -16,4 +16,4 @@ class SumFeature(UnaryColumnFeature):
     return f"sum_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).sum()
+    return ser.rolling(self.periods).sum(engine=self.engine)

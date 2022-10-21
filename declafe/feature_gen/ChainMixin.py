@@ -1,7 +1,8 @@
 from abc import abstractmethod
-from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable
+from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable, Literal
 
 import numpy as np
+import pandas as pd
 
 if TYPE_CHECKING:
   from ..feature_gen import FeatureGen
@@ -36,6 +37,11 @@ class ChainMixin:
   def of_cond(self, true_col: "ColLike", false_col: "ColLike"):
     from declafe.feature_gen.tri.CondFeature import CondFeature
     return CondFeature(self._self(), true_col, false_col)
+
+  def then(self, func: Callable[[pd.Series], pd.Series],
+           op_name: str) -> "FeatureGen":
+    from declafe.feature_gen.unary.FromFuncFeature import FromFuncFeature
+    return self.next(FromFuncFeature, func=func, op_name=op_name)
 
   def accumulate(self, ops_name: str, ops_func: Callable[[Any, Any],
                                                          Any]) -> "FeatureGen":
@@ -210,31 +216,64 @@ class ChainMixin:
     from declafe.feature_gen.unary import IsPositiveFeature
     return self.next(IsPositiveFeature)
 
-  def minute(self):
+  def second(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.times.SecondFeature import SecondFeature
+    return self.next(SecondFeature)
+
+  def minute(self) -> "FeatureGen":
     from declafe.feature_gen.unary.times import MinuteFeature
     return self.next(MinuteFeature)
+
+  def minute_n(self, n: int) -> "FeatureGen":
+    return ((self.minute() % n) == 0)\
+      .as_bool()\
+      .as_name_of(f"minute_{n}_of_{self._self().feature_name}")
+
+  def minute_ns(self, ns: List[int]) -> "Features":
+    return self.FS([self.minute_n(n) for n in ns])
 
   def hour(self):
     from declafe.feature_gen.unary.times import HourFeature
     return self.next(HourFeature)
 
+  def hour_n(self, n: int) -> "FeatureGen":
+    return ((self.hour() % n) == 0)\
+      .as_bool()\
+      .as_name_of(f"hour_{n}_of_{self._self().feature_name}")
+
+  def hour_ns(self, ns: List[int]) -> "Features":
+    return self.FS([self.hour_n(n) for n in ns])
+
+  def day_of_week(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.times import DayOfWeekFeature
+    return self.next(DayOfWeekFeature)
+
+  def day_of_month(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.times import DayOfMonthFeature
+    return self.next(DayOfMonthFeature)
+
+  def to_datetime(self, unit: Literal["D", "s", "ms", "us",
+                                      "ns"]) -> "FeatureGen":
+    from declafe.feature_gen.unary.times.ToDatetimeFeature import ToDatetimeFeature
+    return self.next(ToDatetimeFeature, unit=unit)
+
   def flip_bool(self):
     from declafe.feature_gen.unary import FlipBoolFeature
     return self.next(FlipBoolFeature)
 
-  def bbands_uppers(self, periods: List[int]) -> "Features":
-    return self.FS([self.bbands_upper(period) for period in periods])
+  def bbands_uppers(self, periods: List[int], nbdevup: float) -> "Features":
+    return self.FS([self.bbands_upper(period, nbdevup) for period in periods])
 
-  def bbands_upper(self, period: int) -> "FeatureGen":
+  def bbands_upper(self, period: int, nbdevup: float) -> "FeatureGen":
     from declafe.feature_gen.unary import BBandsUpperFeature
-    return self.next(BBandsUpperFeature, periods=period)
+    return self.next(BBandsUpperFeature, periods=period, nbdevup=nbdevup)
 
-  def bbands_lowers(self, periods: List[int]) -> "Features":
-    return self.FS([self.bbands_lower(period) for period in periods])
+  def bbands_lowers(self, periods: List[int], nbdevdn: float) -> "Features":
+    return self.FS([self.bbands_lower(period, nbdevdn) for period in periods])
 
-  def bbands_lower(self, period: int) -> "FeatureGen":
+  def bbands_lower(self, period: int, nbdevdn: float) -> "FeatureGen":
     from declafe.feature_gen.unary import BBandsLowerFeature
-    return self.next(BBandsLowerFeature, periods=period)
+    return self.next(BBandsLowerFeature, periods=period, nbdevdn=nbdevdn)
 
   def macd(self, fastperiod: int, slowperiod: int,
            signalperiod: int) -> "FeatureGen":

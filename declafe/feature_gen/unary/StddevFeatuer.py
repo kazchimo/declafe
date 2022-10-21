@@ -21,4 +21,4 @@ class StddevFeature(UnaryColumnFeature):
     return f"stdN-{self.ddof}_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).std(self.ddof)
+    return ser.rolling(self.periods).std(self.ddof, engine=self.engine)

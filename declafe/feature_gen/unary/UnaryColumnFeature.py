@@ -13,6 +13,7 @@ class UnaryColumnFeature(FeatureGen, ABC):
 
   def __init__(self, column_name: "ColLike"):
     super().__init__()
+    self.orig_column_name = column_name
     self.column_name = self.to_col(column_name)
 
   @property
@@ -25,7 +26,12 @@ class UnaryColumnFeature(FeatureGen, ABC):
     raise NotImplementedError
 
   def _feature_name(self) -> str:
-    return f"{self.name}_of_{self.column_name}"
+    from declafe.feature_gen.unary import IdFeature
+    from declafe import ConstFeature
+    name = self.column_name if isinstance(self.orig_column_name,
+                                          (IdFeature, ConstFeature,
+                                           str)) else f"({self.column_name})"
+    return f"{self.name}_of_{name}"
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
     return self.gen_unary(df[self.column_name])

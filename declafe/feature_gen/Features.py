@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Type, Callable, Union, TYPE_CHECKING
+from typing import List, Type, Callable, Union, TYPE_CHECKING, Literal
 import functools
 
 __all__ = ["Features", "F"]
@@ -133,6 +133,9 @@ class Features:
 
   def as_type_auto_num_all(self, override: bool = False):
     return self.map(lambda f: f.as_type_auto_num(override))
+
+  def set_engine(self, engine: Literal["cython", "numba"]):
+    return self.map(lambda f: f.set_engine(engine))
 
   @property
   def feature_count(self) -> int:

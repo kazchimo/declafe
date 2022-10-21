@@ -18,4 +18,4 @@ class MedFeature(UnaryColumnFeature):
     return f"med_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).median()
+    return ser.rolling(self.periods).median(engine=self.engine)

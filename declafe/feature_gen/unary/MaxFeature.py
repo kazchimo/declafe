@@ -19,4 +19,4 @@ class MaxFeature(UnaryColumnFeature):
     return f"max_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).max()
+    return ser.rolling(self.periods).max(engine=self.engine)

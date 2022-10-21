@@ -27,20 +27,6 @@ class IdFeature(UnaryColumnFeature):
   def many(cls, columns: List[str]) -> "Features":
     return cls.FS()([IdFeature(c) for c in columns])
 
-  def minute_n(self, n: int) -> "FeatureGen":
-    gen = (IdFeature(self.column_name).minute() % n) == 0
-    return gen.as_name_of(f"minute{n}")
-
-  def minute_ns(self, ns: List[int]) -> "Features":
-    return self._FS([self.minute_n(n) for n in ns])
-
-  def hour_n(self, n: int) -> "FeatureGen":
-    gen = (IdFeature(self.column_name).hour() % n) == 0
-    return gen.as_name_of(f"hour{n}")
-
-  def hour_ns(self, ns: List[int]) -> List["FeatureGen"]:
-    return [self.hour_n(n) for n in ns]
-
   def dip_against(self, high_column: str, max_high_period: int) -> "FeatureGen":
     gen = (IdFeature(self.column_name) /
            IdFeature(high_column).moving_max(max_high_period)) - 1

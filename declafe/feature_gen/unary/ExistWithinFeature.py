@@ -26,4 +26,4 @@ class ExistWithinFeature(UnaryColumnFeature):
       return self.target_value in x.values
 
     return ser.rolling(self.period, min_periods=1, axis=0)\
-      .apply(f).astype(bool)
+      .apply(f, engine=self.engine).astype(bool)

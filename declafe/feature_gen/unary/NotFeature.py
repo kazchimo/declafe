@@ -15,4 +15,4 @@ class NotFeature(UnaryColumnFeature):
     return "~" + self.column_name
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ~ser
+    return (~ser).astype(bool)
