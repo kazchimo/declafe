@@ -80,6 +80,16 @@ class TestAsType:
     assert ff.generate(test_df).dtype == "category"
 
 
+class TestAsBool:
+
+  def test_as_bool(self):
+    f = SimpleGen().as_bool()
+    ff = ConstFeature(1).as_bool()
+
+    assert f.generate(test_df).dtype == "bool"
+    assert ff.generate(test_df).dtype == "bool"
+
+
 class TestAsTypeAutoNum:
 
   def test_as_type_auto_num(self):

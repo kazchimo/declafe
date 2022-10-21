@@ -4,6 +4,7 @@ import talib
 
 from declafe import col, c, FeatureGen, Features
 from declafe.feature_gen.unary import LogFeature, SumFeature
+from datetime import datetime
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),
@@ -26,6 +27,21 @@ class TestCond:
     f = col("cond").of_cond(col("a"), col("b"))
 
     assert f.generate(df).equals(pd.Series([1, 4]))
+
+
+class TestThen:
+
+  def test_thena(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5]})
+    f = Features.many(
+        a.then(lambda s: s + 1, "plus_one"),
+        a.then(lambda s: s.rolling(2).max(), "max_rolling"),
+    )
+
+    result = f.set_features(df)
+
+    assert result["plus_one_of_a"].equals(pd.Series([2, 3, 4, 5, 6]))
+    assert result["max_rolling_of_a"].equals(pd.Series([np.nan, 2, 3, 4, 5]))
 
 
 class TestAccumulate:
@@ -104,6 +120,16 @@ class TestMovingSums:
                         SumFeature(5, _1.feature_name)).set_features(df2)
 
     assert df1.equals(df2)
+
+
+class TestMovingMax:
+
+  def test_return_moving_max(self):
+    f = a.moving_max(3).set_engine("numba")
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
+
+    assert f.gen(df).equals(pd.Series([np.nan, np.nan, 3, 4, 5, 6, 7, 8, 9,
+                                       10]))
 
 
 class TestAdd:
@@ -269,6 +295,42 @@ class TestMinWith:
     assert result.equals(pd.Series([0, 1, 3]))
 
 
+class TestBbandsUpper:
+
+  def test_calc_bbands_upper(self):
+    assert a.bbands_upper(5, 2).gen(test_df).equals(
+        talib.BBANDS(test_df["a"], 5, 2)[0])
+
+
+class TestBbandsUppers:
+
+  def test_calc_bbands_uppers(self):
+    result = a.bbands_uppers([5, 10], 2).set_features(test_df)
+
+    assert result["bbands_upper2_5_of_a"].equals(
+        talib.BBANDS(test_df["a"], 5, 2)[0])
+    assert result["bbands_upper2_10_of_a"].equals(
+        talib.BBANDS(test_df["a"], 10, 2)[0])
+
+
+class TestBBandsLower:
+
+  def test_calc_bbands_lower(self):
+    assert a.bbands_lower(5, 2).gen(test_df).equals(
+        talib.BBANDS(test_df["a"], 5, 2)[2])
+
+
+class TestBBandsLowers:
+
+  def test_calc_bbands_lowers(self):
+    result = a.bbands_lowers([5, 10], 2).set_features(test_df)
+
+    assert result["bbands_lower2_5_of_a"].equals(
+        talib.BBANDS(test_df["a"], 5, 2)[2])
+    assert result["bbands_lower2_10_of_a"].equals(
+        talib.BBANDS(test_df["a"], 10, 2)[2])
+
+
 class TestSTOCHRSIFastk:
 
   def test_calc_stochrsi_fastk(self):
@@ -365,3 +427,141 @@ class TestHTTrendmode:
   def test_calc_ht_trendmode(self):
     assert a.ht_trendmode().gen(test_df).equals(talib.HT_TRENDMODE(
         test_df["a"]))
+
+
+class TestSecond:
+
+  def test_calc_second(self):
+    df = pd.DataFrame(
+        {"a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 0, 0, 1),
+        ]})
+
+    assert a.second().gen(df).equals(pd.Series([0, 1]))
+
+
+class TestMinute:
+
+  def test_calc_minute(self):
+    df = pd.DataFrame(
+        {"a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 0, 1, 1),
+        ]})
+
+    assert a.minute().gen(df).equals(pd.Series([0, 1]))
+
+
+class TestMinuteN:
+
+  def test_calc_minute_n(self):
+    df = pd.DataFrame({
+        "a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 0, 1, 1),
+            datetime(2018, 1, 1, 0, 2, 2),
+        ]
+    })
+
+    assert a.minute_n(2).gen(df).equals(pd.Series([True, False, True]))
+
+
+class TestMinuteNs:
+
+  def test_calc_minute_ns(self):
+    df = pd.DataFrame({
+        "a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 0, 1, 1),
+            datetime(2018, 1, 1, 0, 2, 2),
+            datetime(2018, 1, 1, 0, 3, 3),
+        ]
+    })
+
+    result = a.minute_ns([2, 3]).set_features(df)
+
+    assert result["minute_2_of_a"].equals(pd.Series([True, False, True, False]))
+    assert result["minute_3_of_a"].equals(pd.Series([True, False, False, True]))
+
+
+class TestHour:
+
+  def test_calc_hour(self):
+    df = pd.DataFrame(
+        {"a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 1, 0, 1),
+        ]})
+
+    assert a.hour().gen(df).equals(pd.Series([0, 1]))
+
+
+class TestHourN:
+
+  def test_calc_hour_n(self):
+    df = pd.DataFrame({
+        "a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 1, 1, 1),
+            datetime(2018, 1, 1, 2, 2, 2),
+        ]
+    })
+
+    assert a.hour_n(2).gen(df).equals(pd.Series([True, False, True]))
+
+
+class TestHourNs:
+
+  def test_calc_hour_ns(self):
+    df = pd.DataFrame({
+        "a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 1, 1, 1),
+            datetime(2018, 1, 1, 2, 2, 2),
+            datetime(2018, 1, 1, 3, 3, 3),
+        ]
+    })
+
+    result = a.hour_ns([2, 3]).set_features(df)
+
+    assert result["hour_2_of_a"].equals(pd.Series([True, False, True, False]))
+    assert result["hour_3_of_a"].equals(pd.Series([True, False, False, True]))
+
+
+class TestDayOfWeek:
+
+  def test_calc_day_of_week(self):
+    df = pd.DataFrame(
+        {"a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 2, 0, 0, 1),
+        ]})
+
+    assert a.day_of_week().gen(df).equals(pd.Series([0, 1]))
+
+
+class TestDayOfMonth:
+
+  def test_calc_day_of_month(self):
+    df = pd.DataFrame({
+        "a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 2, 0, 0, 1),
+            datetime(2018, 1, 3, 0, 0, 1),
+        ]
+    })
+
+    assert a.day_of_month().gen(df).equals(pd.Series([1, 2, 3]))
+
+
+class ToDatetime:
+
+  def test_to_datetime(self):
+    df = pd.DataFrame({"a": [1665194183, 1665194184]})
+
+    assert a.to_datetime("s").gen(df).equals(
+        pd.Series([
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 1, 0, 0),
+        ]))
