@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Optional, Type, Union, Literal
+from typing import TYPE_CHECKING, Optional, Type, Union, Literal, Callable
 
 import pandas as pd
 
@@ -98,6 +98,12 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
       self.dtype = "numeric_auto"
 
     return self
+
+  def con_aps(self, f: Callable[["FeatureGen"], "Features"]) -> "Features":
+    return self.to_features + f(self)
+
+  def con_ap(self, f: Callable[["FeatureGen"], "FeatureGen"]) -> "Features":
+    return self.to_features.add_feature(f(self))
 
   def set_engine(self, engine: Engine) -> "FeatureGen":
     self.engine = engine

@@ -131,3 +131,34 @@ class TestSetFeature:
 
     gen = RaiseGen()
     gen.set_feature(test_df)
+
+
+class TestConAp:
+
+  def test_return_self_with_features_by_callable(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5]})
+    f = a.con_ap(lambda x: x.moving_sum(2))
+
+    result = f.set_features(df)
+
+    assert result.equals(
+        pd.DataFrame({
+            "a": [1, 2, 3, 4, 5],
+            "sum_2_of_a": [np.nan, 3, 5, 7, 9]
+        }))
+
+
+class TestConAps:
+
+  def test_return_self_with_features_by_callable(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5]})
+    f = a.con_aps(lambda x: x.moving_sums([2, 3]))
+
+    result = f.set_features(df)
+
+    assert result.equals(
+        pd.DataFrame({
+            "a": [1, 2, 3, 4, 5],
+            "sum_2_of_a": [np.nan, 3, 5, 7, 9],
+            "sum_3_of_a": [np.nan, np.nan, 6, 9, 12]
+        }))
