@@ -6,6 +6,7 @@ import pandas as pd
 __all__ = ["FeatureGen", "ColLike"]
 
 from .ChainMixin import ChainMixin
+from .ComplexFeatureMixin import ComplexFeatureMixin
 from .ConstructorMixin import ConstructorMixin
 from .OpsMixin import OpsMixin
 from .infer_dtype import infer_min_numeric_type
@@ -18,7 +19,8 @@ ColLike = Union["FeatureGen", str]
 Engine = Literal["cython", "numba"]
 
 
-class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin):
+class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
+                 ComplexFeatureMixin):
 
   def _self(self) -> "FeatureGen":
     return self
