@@ -40,25 +40,40 @@ class OpsMixin:
                            right=self._conv(other),
                            to=AddFeature)
 
+  def __radd__(self, other: O) -> "FeatureGen":
+    return self.__add__(other)
+
   def __sub__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary import SubFeature
 
     return self._bc().make(self._self(), self._conv(other), SubFeature)
+
+  def __rsub__(self, other: O) -> "FeatureGen":
+    return self._conv(other).__sub__(self._self())
 
   def __mul__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary import MulFeature
 
     return self._bc().make(self._self(), self._conv(other), MulFeature)
 
+  def __rmul__(self, other: O) -> "FeatureGen":
+    return self.__mul__(other)
+
   def __mod__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary import ModFeature
 
     return self._bc().make(self._self(), self._conv(other), ModFeature)
 
+  def __rmod__(self, other: O) -> "FeatureGen":
+    return self._conv(other).__mod__(self._self())
+
   def __truediv__(self, other: O) -> "FeatureGen":
     from .binary.ops import DivideFeature
 
     return self._bc().make(self._self(), self._conv(other), DivideFeature)
+
+  def __rtruediv__(self, other: O) -> "FeatureGen":
+    return self._conv(other).__truediv__(self._self())
 
   def __gt__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary import GTFeature
@@ -85,7 +100,13 @@ class OpsMixin:
 
     return self._bc().make(self._self(), self._conv(other), AndFeature)
 
+  def __rand__(self, other: O) -> "FeatureGen":
+    return self.__and__(other)
+
   def __or__(self, other: O) -> "FeatureGen":
     from declafe.feature_gen.binary.ops.OrFeature import OrFeature
 
     return self._bc().make(self._self(), self._conv(other), OrFeature)
+
+  def __ror__(self, other: O) -> "FeatureGen":
+    return self.__or__(other)

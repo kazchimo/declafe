@@ -45,6 +45,10 @@ class TestAdd:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert (col("a") + 1).gen(df).equals(pd.Series([2, 3, 4]))
 
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (1 + col("a")).gen(df).equals(pd.Series([2, 3, 4]))
+
 
 class TestSub:
 
@@ -55,6 +59,11 @@ class TestSub:
   def test_with_const(self):
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert (col("a") - 1).gen(df).equals(pd.Series([0, 1, 2]))
+
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    print((1 - col("a")).gen(df))
+    assert (1 - col("a")).gen(df).equals(pd.Series([0, -1, -2]))
 
 
 class TestMul:
@@ -67,6 +76,10 @@ class TestMul:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert (col("a") * 2).gen(df).equals(pd.Series([2, 4, 6]))
 
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (2 * col("a")).gen(df).equals(pd.Series([2, 4, 6]))
+
 
 class TestMod:
 
@@ -78,6 +91,10 @@ class TestMod:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert (col("a") % 2).gen(df).equals(pd.Series([1, 0, 1]))
 
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (2 % col("a")).gen(df).equals(pd.Series([0, 0, 2]))
+
 
 class TestTrueDiv:
 
@@ -88,6 +105,10 @@ class TestTrueDiv:
   def test_with_const(self):
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert (col("a") / 2).gen(df).equals(pd.Series([0.5, 1, 1.5]))
+
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (2 / col("a")).gen(df).equals(pd.Series([2, 1, 0.6666666666666666]))
 
 
 class TestGt:
@@ -141,8 +162,19 @@ class TestAnd:
   def test_and(self):
     assert (b1 & b2).gen(test_df).equals(pd.Series([True, False, False, False]))
 
+  def test_with_const(self):
+    assert (b1 & True).gen(test_df).equals(pd.Series([True, False, True,
+                                                      False]))
+    assert (b1 & False).gen(test_df).equals(
+        pd.Series([False, False, False, False]))
+
 
 class TestOr:
 
   def test_or(self):
     assert (b1 | b2).gen(test_df).equals(pd.Series([True, True, True, False]))
+
+  def test_with_const(self):
+    assert (b1 | True).gen(test_df).equals(pd.Series([True, True, True, True]))
+    assert (b1 | False).gen(test_df).equals(
+        pd.Series([True, False, True, False]))
