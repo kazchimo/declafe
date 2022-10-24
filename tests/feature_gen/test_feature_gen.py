@@ -162,3 +162,15 @@ class TestConAps:
             "sum_2_of_a": [np.nan, 3, 5, 7, 9],
             "sum_3_of_a": [np.nan, np.nan, 6, 9, 12]
         }))
+
+
+class TestAsNameOf:
+
+  def test_change_name(self):
+    df = pd.DataFrame({"b": [1, 2, 3, 4, 5]})
+    fs = a.as_name_of("b").to_features
+
+    df = fs.set_features(df)
+
+    assert fs.feature_names == ["b"]
+    assert df.equals(pd.DataFrame({"b": [1, 2, 3, 4, 5]}))
