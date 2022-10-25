@@ -170,6 +170,22 @@ class TestReduce:
     assert df["(0_+_a)_+_b"].equals(df["a"] + df["b"])
 
 
+class TestFilterByDtype:
+
+  def test_return_filtered_gen(self):
+    fs = Features.many(c(1).as_type("int64"),
+                       c(2).as_type("float64")).filter_by_dtype("int64")
+    assert fs.feature_gens == [c(1).as_type("int64")]
+
+
+class TestFilterNotByDtype:
+
+  def test_return_filtered_gen(self):
+    fs = Features.many(c(1).as_type("int64"),
+                       c(2).as_type("float64")).filter_not_by_dtype("int64")
+    assert fs.feature_gens == [c(2).as_type("float64")]
+
+
 class TestFilterNot:
 
   def test_return_filtered_gen(self):

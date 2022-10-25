@@ -6,6 +6,8 @@ __all__ = ["Features", "F"]
 
 import pandas as pd
 
+from declafe.feature_gen.types import DTypes
+
 if TYPE_CHECKING:
   from declafe.feature_gen.FeatureGen import FeatureGen
 
@@ -91,6 +93,19 @@ class Features:
   def filter_not_by_name(self, feature_names: List[str]):
     return Features(
         [f for f in self.feature_gens if f.feature_name not in feature_names])
+
+  def filter_by_dtype(self, dtypes: Union[DTypes, List[DTypes]]) -> "Features":
+    if isinstance(dtypes, str):
+      dtypes = [dtypes]
+
+    return Features([f for f in self if f.dtype in dtypes])
+
+  def filter_not_by_dtype(self, dtypes: Union[DTypes,
+                                              List[DTypes]]) -> "Features":
+    if isinstance(dtypes, str):
+      dtypes = [dtypes]
+
+    return Features([f for f in self if f.dtype not in dtypes])
 
   def filter(self, feature: List["FeatureGen"]):
     return Features(
