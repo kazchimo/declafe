@@ -26,6 +26,7 @@ pandas = "*"
 numpy = "*"
 ta-lib = "*"
 numba = "*"
+dill = "^0.3.6"
 
 
 [tool.poetry.dev-dependencies]
