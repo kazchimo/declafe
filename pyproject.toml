@@ -12,3 +12,31 @@ ignore_patterns = [
 based_on_style = "google"
 spaces_before_comment = 2
 indent_width = 2
+
+[tool.poetry]
+name = "declafe"
+version = "0.1.0"
+description = ""
+authors = ["kazuki <pharcydetip@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "*"
+numpy = "*"
+ta-lib = "*"
+numba = "*"
+
+
+[tool.poetry.dev-dependencies]
+typing-extensions = "*"
+yapf = "*"
+toml = "*"
+pytest = "*"
+jupyter = "*"
+pytest-watch = "*"
+pyright = "*"
+pytest-parallel = "*"
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
