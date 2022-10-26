@@ -40,13 +40,16 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     optimized gen
     """
 
-    result = df[self.feature_name] \
-      if self.feature_name in df.columns \
-      else self.gen(df)
+    try:
+      result = df[self.feature_name] \
+        if self.feature_name in df.columns \
+        else self.gen(df)
 
-    dt = infer_min_numeric_type(result) \
-      if self.dtype == "numeric_auto" \
-      else self.dtype
+      dt = infer_min_numeric_type(result) \
+        if self.dtype == "numeric_auto" \
+        else self.dtype
+    except Exception as e:
+      raise Exception(f"Failed to generate {self.feature_name}") from e
 
     return result.astype(dt) if dt else result
 
