@@ -110,16 +110,11 @@ class TestLog:
 class TestMovingSums:
 
   def test_return_moving_sums(self):
-    df1 = test_df.copy()
-    df2 = test_df.copy()
-    df1 = _1.set_feature(df1)
-    df2 = _1.set_feature(df2)
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.moving_sums([2, 3]).set_features(df)
 
-    df1 = _1.moving_sums([3, 5]).set_features(df1)
-    df2 = Features.many(SumFeature(3, _1.feature_name),
-                        SumFeature(5, _1.feature_name)).set_features(df2)
-
-    assert df1.equals(df2)
+    assert df["sum_2_of_a"].equals(pd.Series([np.nan, 3, 5, 7, 9, 11]))
+    assert df["sum_3_of_a"].equals(pd.Series([np.nan, np.nan, 6, 9, 12, 15]))
 
 
 class TestMovingMax:

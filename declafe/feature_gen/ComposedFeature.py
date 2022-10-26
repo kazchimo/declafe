@@ -25,6 +25,7 @@ class ComposedFeature(FeatureGen):
     result = self.head.generate(df)
 
     for f in self.nexts:
+      df[f.feature_name] = result
       result = f.gen_unary(result)
 
     return result

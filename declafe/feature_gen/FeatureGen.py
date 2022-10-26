@@ -33,16 +33,11 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
 
   @abstractmethod
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    """
-    generate feature
-    should be side-effect free
-    """
     raise NotImplementedError
 
   def generate(self, df: pd.DataFrame) -> pd.Series:
     """
     optimized gen
-    side-effect free
     """
 
     result = df[self.feature_name] \
