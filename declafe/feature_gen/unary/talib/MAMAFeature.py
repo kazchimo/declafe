@@ -1,12 +1,12 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["MAMAFeature", "FAMAFeature"]
 
 
-class MAMAFeature(UnaryColumnFeature):
+class MAMAFeature(UnaryFeature):
 
   def __init__(self,
                column_name: str,
@@ -24,7 +24,7 @@ class MAMAFeature(UnaryColumnFeature):
     return talib.MAMA(ser, self.fast_limit, self.slow_limit)[0]
 
 
-class FAMAFeature(UnaryColumnFeature):
+class FAMAFeature(UnaryFeature):
 
   def __init__(self,
                column_name: str,

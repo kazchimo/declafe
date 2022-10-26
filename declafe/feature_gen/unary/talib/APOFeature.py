@@ -1,12 +1,12 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["APOFeature"]
 
 
-class APOFeature(UnaryColumnFeature):
+class APOFeature(UnaryFeature):
 
   def __init__(self,
                column_name: str,

@@ -2,14 +2,14 @@ from typing import TypeVar
 
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["ReplaceFeature"]
 
 T = TypeVar("T")
 
 
-class ReplaceFeature(UnaryColumnFeature):
+class ReplaceFeature(UnaryFeature):
 
   def __init__(self, column_name: str, target_value: T, to_value: T):
     super().__init__(column_name)

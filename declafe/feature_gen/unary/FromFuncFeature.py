@@ -2,10 +2,10 @@ from typing import Callable
 
 import pandas as pd
 
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class FromFuncFeature(UnaryColumnFeature):
+class FromFuncFeature(UnaryFeature):
 
   def __init__(self, column_name: str, func: Callable[[pd.Series], pd.Series],
                op_name: str):

@@ -1,10 +1,10 @@
 import pandas as pd
 import talib
 
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class HT_PHASORInphaseFeature(UnaryColumnFeature):
+class HT_PHASORInphaseFeature(UnaryFeature):
 
   @property
   def name(self) -> str:
@@ -14,7 +14,7 @@ class HT_PHASORInphaseFeature(UnaryColumnFeature):
     return talib.HT_PHASOR(ser)[0]
 
 
-class HT_PHASORQuadratureFeature(UnaryColumnFeature):
+class HT_PHASORQuadratureFeature(UnaryFeature):
 
   @property
   def name(self) -> str:

@@ -1,11 +1,11 @@
 import pandas as pd
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["MonthFeature"]
 
 
-class MonthFeature(UnaryColumnFeature):
+class MonthFeature(UnaryFeature):
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return ser.apply(lambda x: x.month)

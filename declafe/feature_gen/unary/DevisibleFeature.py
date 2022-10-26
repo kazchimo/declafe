@@ -1,11 +1,11 @@
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["DevisibleFeature"]
 
 
-class DevisibleFeature(UnaryColumnFeature):
+class DevisibleFeature(UnaryFeature):
 
   def __init__(self, deviser: float, column_name: str):
     super().__init__(column_name)

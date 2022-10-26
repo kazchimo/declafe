@@ -4,10 +4,10 @@ import numpy as np
 import pandas as pd
 
 from declafe import ColLike
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class AccumulateFeature(UnaryColumnFeature):
+class AccumulateFeature(UnaryFeature):
 
   def __init__(self, column_name: ColLike, ops_name: str,
                ops_func: Callable[[Any, Any], Any]):

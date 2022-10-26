@@ -1,12 +1,12 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["BBandsUpperFeature", "BBandsLowerFeature"]
 
 
-class BBandsUpperFeature(UnaryColumnFeature):
+class BBandsUpperFeature(UnaryFeature):
 
   def __init__(self,
                periods: int,
@@ -26,7 +26,7 @@ class BBandsUpperFeature(UnaryColumnFeature):
     return f"bbands_upper{self.nbdevup}_{self.periods}"
 
 
-class BBandsLowerFeature(UnaryColumnFeature):
+class BBandsLowerFeature(UnaryFeature):
 
   def __init__(self,
                periods: int,

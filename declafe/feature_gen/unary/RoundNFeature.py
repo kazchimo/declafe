@@ -1,11 +1,11 @@
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["RoundNFeature"]
 
 
-class RoundNFeature(UnaryColumnFeature):
+class RoundNFeature(UnaryFeature):
 
   def __init__(self, column_name: str, round_digit: int):
     super().__init__(column_name)

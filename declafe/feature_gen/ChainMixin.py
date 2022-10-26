@@ -7,7 +7,7 @@ import pandas as pd
 if TYPE_CHECKING:
   from ..feature_gen import FeatureGen
   from declafe.feature_gen.Features import Features
-  from declafe.feature_gen.unary import UnaryColumnFeature
+  from declafe.feature_gen.unary import UnaryFeature
   from .. import ColLike
 
 
@@ -21,8 +21,7 @@ class ChainMixin:
   def _self(self) -> "FeatureGen":
     raise NotImplementedError
 
-  def next(self, f: Type["UnaryColumnFeature"], *args,
-           **kwargs) -> "FeatureGen":
+  def next(self, f: Type["UnaryFeature"], *args, **kwargs) -> "FeatureGen":
     from declafe.feature_gen.ComposedFeature import ComposedFeature
     from declafe.feature_gen.unary import IdFeature
 

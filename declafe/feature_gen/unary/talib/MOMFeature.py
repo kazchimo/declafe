@@ -1,12 +1,12 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["MOMFeature"]
 
 
-class MOMFeature(UnaryColumnFeature):
+class MOMFeature(UnaryFeature):
 
   def __init__(self, period: int, column_name: str):
     super().__init__(column_name)

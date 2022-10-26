@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["PctChangeFeature"]
 
@@ -10,7 +10,7 @@ if TYPE_CHECKING:
   from declafe import series
 
 
-class PctChangeFeature(UnaryColumnFeature):
+class PctChangeFeature(UnaryFeature):
 
   def __init__(self, periods: int, column_name: str):
     super().__init__(column_name)

@@ -2,10 +2,10 @@ import pandas as pd
 import talib
 
 from declafe import ColLike
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class STOCHRSIFastkFeature(UnaryColumnFeature):
+class STOCHRSIFastkFeature(UnaryFeature):
 
   def __init__(self,
                column_name: ColLike,
@@ -31,7 +31,7 @@ class STOCHRSIFastkFeature(UnaryColumnFeature):
                           fastd_matype=self.fastd_matype)[0]
 
 
-class STOCHRSIFastdFeature(UnaryColumnFeature):
+class STOCHRSIFastdFeature(UnaryFeature):
 
   def __init__(self,
                column_name: ColLike,

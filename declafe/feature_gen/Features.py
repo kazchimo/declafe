@@ -11,7 +11,7 @@ from declafe.feature_gen.types import DTypes
 if TYPE_CHECKING:
   from declafe.feature_gen.FeatureGen import FeatureGen
 
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
 @dataclass
@@ -61,7 +61,7 @@ class Features:
     return [
         f.feature_name
         for f in self.feature_gens
-        if isinstance(f, UnaryColumnFeature) and f.column_name == column_name
+        if isinstance(f, UnaryFeature) and f.column_name == column_name
     ]
 
   def contains(self, feature: "FeatureGen") -> bool:
@@ -125,10 +125,10 @@ class Features:
              initial: "FeatureGen"):
     return functools.reduce(f, self.feature_gens, initial)
 
-  _F = Union[Type["UnaryColumnFeature"], Callable[["FeatureGen"], "FeatureGen"]]
+  _F = Union[Type["UnaryFeature"], Callable[["FeatureGen"], "FeatureGen"]]
 
   def map(self, f: _F, **kwargs) -> "Features":
-    if isinstance(f, UnaryColumnFeature.__class__):
+    if isinstance(f, UnaryFeature.__class__):
       return Features([fg.next(f, **kwargs) for fg in self.feature_gens])
     else:
       return Features([f(fg) for fg in self.feature_gens])  # type: ignore

@@ -2,10 +2,10 @@ import pandas as pd
 import talib
 
 from declafe import ColLike
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class RSIFeature(UnaryColumnFeature):
+class RSIFeature(UnaryFeature):
 
   def __init__(self, column_name: ColLike, period: int):
     super().__init__(column_name)

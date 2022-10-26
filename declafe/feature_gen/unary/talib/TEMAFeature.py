@@ -1,10 +1,10 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 
-class TEMAFeature(UnaryColumnFeature):
+class TEMAFeature(UnaryFeature):
 
   def __init__(self, column_name: str, period: int):
     super().__init__(column_name)

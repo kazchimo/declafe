@@ -1,11 +1,11 @@
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["FlipBoolFeature"]
 
 
-class FlipBoolFeature(UnaryColumnFeature):
+class FlipBoolFeature(UnaryFeature):
 
   @property
   def name(self) -> str:

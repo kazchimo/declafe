@@ -1,11 +1,11 @@
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["LagFeature"]
 
 
-class LagFeature(UnaryColumnFeature):
+class LagFeature(UnaryFeature):
   """
   ラグ特徴量を追加する
   過去のデータを使用することしか想定していない

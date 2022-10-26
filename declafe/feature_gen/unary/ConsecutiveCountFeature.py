@@ -2,12 +2,12 @@ from typing import Any
 
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["ConsecutiveCountFeature"]
 
 
-class ConsecutiveCountFeature(UnaryColumnFeature):
+class ConsecutiveCountFeature(UnaryFeature):
   """対象値の連続数を返す"""
 
   def __init__(self, column_name: str, target_value: Any = 1):

@@ -2,14 +2,14 @@ from typing import Any
 
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["ExistWithinFeature"]
 
 from ... import ColLike
 
 
-class ExistWithinFeature(UnaryColumnFeature):
+class ExistWithinFeature(UnaryFeature):
 
   def __init__(self, column_name: ColLike, target_value: Any, period: int):
     super().__init__(column_name)

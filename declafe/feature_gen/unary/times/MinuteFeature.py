@@ -1,11 +1,11 @@
 import pandas as pd
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["MinuteFeature"]
 
 
-class MinuteFeature(UnaryColumnFeature):
+class MinuteFeature(UnaryFeature):
   """対象カラムの分を抜き出す"""
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:

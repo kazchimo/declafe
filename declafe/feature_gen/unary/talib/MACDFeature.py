@@ -1,12 +1,12 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["MACDFeature"]
 
 
-class MACDFeature(UnaryColumnFeature):
+class MACDFeature(UnaryFeature):
 
   def __init__(self, column_name: str, fastperiod: int, slowperiod: int,
                signalperiod: int):
@@ -24,7 +24,7 @@ class MACDFeature(UnaryColumnFeature):
                       self.signalperiod)[0]
 
 
-class MACDSignalFeature(UnaryColumnFeature):
+class MACDSignalFeature(UnaryFeature):
 
   def __init__(self, column_name: str, fastperiod: int, slowperiod: int,
                signalperiod: int):
@@ -42,7 +42,7 @@ class MACDSignalFeature(UnaryColumnFeature):
                       self.signalperiod)[1]
 
 
-class MACDHistFeature(UnaryColumnFeature):
+class MACDHistFeature(UnaryFeature):
 
   def __init__(self, column_name: str, fastperiod: int, slowperiod: int,
                signalperiod: int):

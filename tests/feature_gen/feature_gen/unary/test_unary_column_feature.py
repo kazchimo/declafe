@@ -1,10 +1,10 @@
 import pandas as pd
 
 from declafe import ColLike
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class Mul2Feature(UnaryColumnFeature):
+class Mul2Feature(UnaryFeature):
 
   def __init__(self, column_name: ColLike):
     super().__init__(column_name)

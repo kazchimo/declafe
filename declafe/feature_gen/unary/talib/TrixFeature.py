@@ -2,10 +2,10 @@ import pandas as pd
 import talib
 
 from declafe import ColLike
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 
-class TRIXFeature(UnaryColumnFeature):
+class TRIXFeature(UnaryFeature):
 
   def __init__(self, column_name: ColLike, period: int):
     super().__init__(column_name)

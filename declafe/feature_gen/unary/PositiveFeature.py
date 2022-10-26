@@ -1,11 +1,11 @@
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["IsPositiveFeature"]
 
 
-class IsPositiveFeature(UnaryColumnFeature):
+class IsPositiveFeature(UnaryFeature):
 
   @property
   def name(self) -> str:

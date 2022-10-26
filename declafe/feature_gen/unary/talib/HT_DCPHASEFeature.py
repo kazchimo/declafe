@@ -1,10 +1,10 @@
 import pandas as pd
 import talib
 
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class HT_DCPHASEFeature(UnaryColumnFeature):
+class HT_DCPHASEFeature(UnaryFeature):
 
   @property
   def name(self) -> str:

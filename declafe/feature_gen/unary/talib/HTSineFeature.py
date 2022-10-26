@@ -1,10 +1,10 @@
 import pandas as pd
 import talib
 
-from declafe.feature_gen.unary import UnaryColumnFeature
+from declafe.feature_gen.unary import UnaryFeature
 
 
-class HTSineFeature(UnaryColumnFeature):
+class HTSineFeature(UnaryFeature):
 
   @property
   def name(self) -> str:
@@ -14,7 +14,7 @@ class HTSineFeature(UnaryColumnFeature):
     return talib.HT_SINE(ser)[0]
 
 
-class HTLeadsineFeature(UnaryColumnFeature):
+class HTLeadsineFeature(UnaryFeature):
 
   @property
   def name(self) -> str:

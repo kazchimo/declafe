@@ -3,12 +3,12 @@ from typing import Literal
 import pandas as pd
 
 from declafe import ColLike
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 Unit = Literal["D", "s", "ms", "us", "ns"]
 
 
-class ToDatetimeFeature(UnaryColumnFeature):
+class ToDatetimeFeature(UnaryFeature):
 
   def __init__(self, column_name: ColLike, unit: Unit):
     super().__init__(column_name)

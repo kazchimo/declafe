@@ -1,12 +1,12 @@
 import numpy as np
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["AbsFeature"]
 
 
-class AbsFeature(UnaryColumnFeature):
+class AbsFeature(UnaryFeature):
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     return np.abs(ser)

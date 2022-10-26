@@ -1,12 +1,12 @@
 import numpy as np
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["LogFeature"]
 
 
-class LogFeature(UnaryColumnFeature):
+class LogFeature(UnaryFeature):
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
     if not pd.api.types.is_numeric_dtype(ser):

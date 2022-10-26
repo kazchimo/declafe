@@ -9,7 +9,7 @@ if TYPE_CHECKING:
   from declafe import ColLike
 
 
-class UnaryColumnFeature(FeatureGen, ABC):
+class UnaryFeature(FeatureGen, ABC):
 
   def __init__(self, column_name: "ColLike"):
     super().__init__()

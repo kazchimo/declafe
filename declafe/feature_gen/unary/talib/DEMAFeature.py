@@ -1,12 +1,12 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["DEMAFeature"]
 
 
-class DEMAFeature(UnaryColumnFeature):
+class DEMAFeature(UnaryFeature):
   """double exponential moving average"""
 
   def __init__(self, periods: int, column_name: str):

@@ -1,11 +1,11 @@
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryColumnFeature
+from .UnaryColumnFeature import UnaryFeature
 
 __all__ = ["SumFeature"]
 
 
-class SumFeature(UnaryColumnFeature):
+class SumFeature(UnaryFeature):
 
   def __init__(self, periods: int, column_name: str):
     super().__init__(column_name)

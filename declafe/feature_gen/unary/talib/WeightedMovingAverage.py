@@ -1,10 +1,10 @@
 import pandas as pd
 import talib
 
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 
-class WeightedMovingAverage(UnaryColumnFeature):
+class WeightedMovingAverage(UnaryFeature):
   periods: int
 
   def __init__(self, column_name: str, periods: int):

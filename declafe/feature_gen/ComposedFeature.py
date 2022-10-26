@@ -7,12 +7,12 @@ from declafe.feature_gen import FeatureGen
 __all__ = ["ComposedFeature"]
 
 if TYPE_CHECKING:
-  from declafe.feature_gen.unary.UnaryColumnFeature import UnaryColumnFeature
+  from declafe.feature_gen.unary.UnaryColumnFeature import UnaryFeature
 
 
 class ComposedFeature(FeatureGen):
 
-  def __init__(self, head: FeatureGen, nexts: List["UnaryColumnFeature"]):
+  def __init__(self, head: FeatureGen, nexts: List["UnaryFeature"]):
     self.head = head
     self.nexts = nexts
     super().__init__()

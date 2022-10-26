@@ -2,12 +2,12 @@ import pandas as pd
 import talib
 
 from declafe import ColLike
-from ..UnaryColumnFeature import UnaryColumnFeature
+from ..UnaryColumnFeature import UnaryFeature
 
 __all__ = ["PPOFeature"]
 
 
-class PPOFeature(UnaryColumnFeature):
+class PPOFeature(UnaryFeature):
 
   def __init__(self,
                column_name: ColLike,
