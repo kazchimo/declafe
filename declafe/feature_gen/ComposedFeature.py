@@ -22,11 +22,16 @@ class ComposedFeature(FeatureGen):
       raise ValueError("nextsが空です")
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    result = self.head.generate(df)
+    result = self.head.generate(df) \
+      if self.head.feature_name not in df.columns \
+      else df[self.head.feature_name]
 
     for f in self.nexts:
-      df[f.feature_name] = result
-      result = f.gen_unary(result)
+      if f.feature_name in df.columns:
+        result = df[f.feature_name]
+      else:
+        result = f.gen_unary(result)
+        df[f.feature_name] = result
 
     return result
 
