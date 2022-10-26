@@ -13,7 +13,6 @@ class TestGen:
     fs = a.moving_sum(2).moving_max(2).to_features
 
     result = fs.set_features(df)
-    print(result)
 
     assert result.equals(
         pd.DataFrame({
