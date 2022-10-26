@@ -1,4 +1,3 @@
-from .ComposedUnaryFeature import *
 from .ConsecutiveCountFeature import *
 from .DevisibleFeature import DevisibleFeature
 from .FlipBoolFeature import FlipBoolFeature
