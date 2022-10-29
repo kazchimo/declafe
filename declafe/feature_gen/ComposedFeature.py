@@ -1,4 +1,5 @@
-from typing import List, TYPE_CHECKING, Optional
+import warnings
+from typing import List, TYPE_CHECKING
 
 import pandas as pd
 
@@ -22,19 +23,21 @@ class ComposedFeature(FeatureGen):
       raise ValueError("nextsが空です")
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    result = self.head.generate(df)
-    df[self.head.feature_name] = result
+    with warnings.catch_warnings():
+      warnings.simplefilter("ignore")
+      result = self.head.generate(df)
+      df[self.head.feature_name] = result
 
-    for i, f in enumerate(self.nexts):
-      if f.feature_name in df.columns:
-        result = df[f.feature_name]
-      else:
-        result = f.gen_unary(result)
+      for i, f in enumerate(self.nexts):
+        if f.feature_name in df.columns:
+          result = df[f.feature_name]
+        else:
+          result = f.gen_unary(result)
 
-        if i != len(self.nexts) - 1:
-          df[f.feature_name] = result
+          if i != len(self.nexts) - 1:
+            df[f.feature_name] = result
 
-    return result
+      return result
 
   def _feature_name(self) -> str:
     return self.nexts[-1].feature_name
