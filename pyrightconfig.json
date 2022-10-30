@@ -10,5 +10,6 @@
   "reportUnusedFunction": true,
   "reportUnusedVariable": true,
   "reportDuplicateImport": true,
-  "strictListInference": true
+  "strictListInference": true,
+  "strictDictionaryInference": true
 }
