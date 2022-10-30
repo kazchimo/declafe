@@ -38,6 +38,10 @@ jupyter = "*"
 pytest-watch = "*"
 pyright = "*"
 pytest-parallel = "*"
+
+[tool.poetry.group.dev.dependencies]
+twine = "^4.0.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
