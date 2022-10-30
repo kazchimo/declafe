@@ -3,7 +3,7 @@ from datetime import tzinfo
 import pandas as pd
 import pytz
 
-from ..UnaryColumnFeature import UnaryFeature
+from ..UnaryFeature import UnaryFeature
 
 __all__ = ["WeekOfYearFeature"]
 

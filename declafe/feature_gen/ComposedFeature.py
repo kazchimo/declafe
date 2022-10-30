@@ -8,7 +8,7 @@ from declafe.feature_gen import FeatureGen
 __all__ = ["ComposedFeature"]
 
 if TYPE_CHECKING:
-  from declafe.feature_gen.unary.UnaryColumnFeature import UnaryFeature
+  from declafe.feature_gen.unary.UnaryFeature import UnaryFeature
 
 
 class ComposedFeature(FeatureGen):

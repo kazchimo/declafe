@@ -1,7 +1,7 @@
 import pandas as pd
 import talib
 
-from .UnaryColumnFeature import UnaryFeature
+from .UnaryFeature import UnaryFeature
 
 __all__ = ["MovingAverage"]
 

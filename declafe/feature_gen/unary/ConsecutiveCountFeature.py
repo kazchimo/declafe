@@ -2,7 +2,7 @@ from typing import Any
 
 import pandas as pd
 
-from .UnaryColumnFeature import UnaryFeature
+from .UnaryFeature import UnaryFeature
 
 __all__ = ["ConsecutiveCountFeature"]
 

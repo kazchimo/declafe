@@ -1,6 +1,6 @@
 import pandas as pd
 
-from ..UnaryColumnFeature import UnaryFeature
+from ..UnaryFeature import UnaryFeature
 
 __all__ = ["MinuteFeature"]
 

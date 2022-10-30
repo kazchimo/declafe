@@ -13,7 +13,7 @@ from .PositiveFeature import *
 from .RoundNFeature import *
 from .StddevFeatuer import StddevFeature
 from .SumFeature import *
-from .UnaryColumnFeature import *
+from .UnaryFeature import *
 from .talib.APOFeature import *
 from .talib.BBandsFeature import *
 from .talib.EMAFeature import *

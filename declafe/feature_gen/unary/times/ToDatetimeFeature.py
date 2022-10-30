@@ -3,7 +3,7 @@ from typing import Literal
 import pandas as pd
 
 from declafe import ColLike
-from ..UnaryColumnFeature import UnaryFeature
+from ..UnaryFeature import UnaryFeature
 
 Unit = Literal["D", "s", "ms", "us", "ns"]
 

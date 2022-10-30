@@ -2,7 +2,7 @@ import pandas as pd
 import talib
 
 from declafe import ColLike
-from ..UnaryColumnFeature import UnaryFeature
+from ..UnaryFeature import UnaryFeature
 
 __all__ = ["PPOFeature"]
 
