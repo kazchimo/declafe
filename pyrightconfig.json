@@ -3,5 +3,6 @@
   "ignore": [
     "build",
     "tests"
-  ]
+  ],
+  "reportUnusedImport": true
 }
