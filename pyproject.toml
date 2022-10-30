@@ -26,6 +26,7 @@ pandas = "*"
 numpy = "*"
 ta-lib = "*"
 numba = "*"
+tqdm = "^4.64.1"
 
 
 [tool.poetry.dev-dependencies]
