@@ -7,7 +7,6 @@ from .UnaryFeature import UnaryFeature
 __all__ = ["IdFeature"]
 
 if TYPE_CHECKING:
-  from declafe import FeatureGen
   from declafe.feature_gen.Features import Features
 
 

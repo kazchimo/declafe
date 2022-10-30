@@ -1,4 +1,4 @@
-from .BiComposeFeature import BiComposeFeature
+from .BiComposeFeature import *
 from .ops import *
 from .ops.AddFeature import *
 from .ops.GEFeature import *
