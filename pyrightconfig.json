@@ -6,5 +6,6 @@
   ],
   "reportUnusedImport": true,
   "reportUnusedClass": true,
-  "reportUnusedFunction": true
+  "reportUnusedFunction": true,
+  "reportUnusedVariable": true
 }
