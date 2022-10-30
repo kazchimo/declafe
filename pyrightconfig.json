@@ -13,5 +13,6 @@
   "strictListInference": true,
   "strictDictionaryInference": true,
   "strictSetInference": true,
-  "strictParameterNoneValue": true
+  "strictParameterNoneValue": true,
+  "enableTypeIgnoreComments": true
 }
