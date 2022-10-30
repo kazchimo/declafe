@@ -518,7 +518,7 @@ class TestHourNs:
         ]
     })
 
-    result = a.hour_ns([2, 3]).set_features(df)
+    result = a.hour_ns([2, 3]).set_features(df, show_progress=True)
 
     assert result["hour_2_of_a"].equals(pd.Series([True, False, True, False]))
     assert result["hour_3_of_a"].equals(pd.Series([True, False, False, True]))

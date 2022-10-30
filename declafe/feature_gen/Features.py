@@ -5,6 +5,7 @@ import functools
 __all__ = ["Features", "F"]
 
 import pandas as pd
+from tqdm import tqdm
 
 from declafe.feature_gen.types import DTypes
 
@@ -40,12 +41,16 @@ class Features:
 
   def set_features(self,
                    temp_df: pd.DataFrame,
+                   show_progress: bool = False,
                    drop_nan: bool = False) -> pd.DataFrame:
     df = temp_df
     for p in self.pre_processes:
       df = p.set_feature(df)
 
-    for feature_gen in self.feature_gens:
+    wrap_iter = (lambda i: tqdm(i, desc="Feature generation progress")) if show_progress \
+      else lambda x: x
+
+    for feature_gen in wrap_iter(self.feature_gens):
       df = feature_gen.set_feature(df)
 
     if drop_nan:
