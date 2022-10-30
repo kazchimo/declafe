@@ -4,5 +4,6 @@
     "build",
     "tests"
   ],
-  "reportUnusedImport": true
+  "reportUnusedImport": true,
+  "reportUnusedClass": true
 }
