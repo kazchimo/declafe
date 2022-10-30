@@ -12,5 +12,6 @@
   "reportDuplicateImport": true,
   "strictListInference": true,
   "strictDictionaryInference": true,
-  "strictSetInference": true
+  "strictSetInference": true,
+  "strictParameterNoneValue": true
 }
