@@ -17,7 +17,8 @@ class CondFeature(TriFeature):
         "test": col1,
         "true": col2,
         "false": col3
-    }).apply(lambda x: x["true"] if x["test"] else x["false"], axis=1)
+    }).apply(lambda x: x["true"]
+             if x["test"] else x["false"], axis=1)  # type: ignore
 
   def _feature_name(self) -> str:
     return f"if_{self.col1}_then_{self.col2}_else_{self.col3}"
