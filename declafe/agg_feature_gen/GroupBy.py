@@ -15,7 +15,7 @@ class AggConst(Protocol):
 
 def partialclass(cls, *args, **kwds):
 
-  class NewCls(cls):
+  class NewCls(cls):  # type: ignore
     __init__ = functools.partialmethod(cls.__init__, *args, **kwds)
 
   return NewCls
