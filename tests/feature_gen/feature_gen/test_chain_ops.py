@@ -127,7 +127,7 @@ class TestMovingSums:
 class TestMovingMax:
 
   def test_return_moving_max(self):
-    f = a.moving_max(3).set_engine("numba")
+    f = a.moving_max(3)
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
 
     assert np.array_equal(f.gen(df),

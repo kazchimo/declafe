@@ -17,7 +17,6 @@ if TYPE_CHECKING:
   from declafe.feature_gen.Features import Features
 
 ColLike = Union["FeatureGen", str]
-Engine = Literal["cython", "numba"]
 
 
 class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
@@ -30,7 +29,6 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     super().__init__()
     self.override_feature_name: Optional[str] = None
     self.dtype: Optional[Union[DTypes, Literal["numeric_auto"]]] = None
-    self._engine: Optional[Engine] = None
 
   @abstractmethod
   def gen(self, df: pd.DataFrame) -> np.ndarray:
@@ -107,14 +105,6 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
 
   def con_ap(self, f: Callable[["FeatureGen"], "FeatureGen"]) -> "Features":
     return self.to_features.add_feature(f(self))
-
-  def set_engine(self, engine: Engine) -> "FeatureGen":
-    self._engine = engine
-    return self
-
-  @property
-  def engine(self) -> Optional[Engine]:
-    return self._engine  # type: ignore
 
   @staticmethod
   def FS() -> "Type[Features]":
