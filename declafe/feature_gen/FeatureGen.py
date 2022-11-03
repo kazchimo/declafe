@@ -41,7 +41,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     optimized gen
     """
     try:
-      result = df[self.feature_name].values \
+      result = df[self.feature_name].to_numpy() \
         if self.feature_name in df.columns \
         else self.gen(df)
 

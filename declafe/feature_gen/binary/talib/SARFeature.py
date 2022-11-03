@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..BinaryFeature import BinaryFeature
@@ -6,7 +6,7 @@ from ..BinaryFeature import BinaryFeature
 
 class SARFeature(BinaryFeature):
 
-  def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
+  def bigen(self, left: np.ndarray, right: np.ndarray) -> np.ndarray:
     return talib.SAR(left.astype(float), right.astype(float))
 
   def _feature_name(self) -> str:

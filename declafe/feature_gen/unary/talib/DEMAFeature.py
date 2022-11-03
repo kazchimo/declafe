@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -17,5 +17,5 @@ class DEMAFeature(UnaryFeature):
   def name(self) -> str:
     return f"DEMA_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.DEMA(ser, self.periods)

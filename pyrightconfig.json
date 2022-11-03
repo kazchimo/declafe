@@ -27,7 +27,6 @@
   "reportOptionalContextManager": true,
   "reportOptionalOperand": true,
   "reportTypedDictNotRequiredAccess": true,
-  "reportUntypedFunctionDecorator": true,
   "reportUntypedClassDecorator": true,
   "reportUntypedBaseClass": true,
   "reportUntypedNamedTuple": true,

@@ -1,7 +1,6 @@
 from typing import Any
 
 import numpy as np
-import pandas as pd
 from numba import jit
 
 from .UnaryFeature import UnaryFeature
@@ -22,7 +21,7 @@ class ExistWithinFeature(UnaryFeature):
   def name(self) -> str:
     return f"{self.target_value}_exist_within_{self.period}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     tv = self.target_value
     p = self.period
 

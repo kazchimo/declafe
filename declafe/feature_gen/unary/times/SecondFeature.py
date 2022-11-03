@@ -1,7 +1,6 @@
 from datetime import datetime
 
 import numpy as np
-import pandas as pd
 
 from ..UnaryFeature import UnaryFeature
 
@@ -10,7 +9,7 @@ __all__ = ["SecondFeature"]
 
 class SecondFeature(UnaryFeature):
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     gen = np.frompyfunc(
         lambda x: datetime.utcfromtimestamp(x / 1000_000_000).second, 1, 1)
     return gen(ser)

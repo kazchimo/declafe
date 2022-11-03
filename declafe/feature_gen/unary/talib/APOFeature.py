@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -22,6 +22,6 @@ class APOFeature(UnaryFeature):
   def name(self) -> str:
     return f"APO{self.fastperiod}_{self.slowperiod}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.APO(ser.astype("float"), self.fastperiod, self.slowperiod,
                      self.matype)

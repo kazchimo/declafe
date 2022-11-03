@@ -1,4 +1,7 @@
-import pandas as pd
+from typing import cast
+
+import numpy as np
+from numba import jit
 
 from .UnaryFeature import UnaryFeature
 
@@ -17,5 +20,16 @@ class MedFeature(UnaryFeature):
   def name(self) -> str:
     return f"med_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).median(engine=self.engine)
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    p = self.periods
+
+    @jit(nopython=True)
+    def gen(idx: int) -> float:
+      a = ser[idx - p + 1:idx + 1]
+
+      if len(a) == 0:
+        return np.nan
+      else:
+        return cast(float, np.median(a))
+
+    return np.frompyfunc(gen, 1, 1)(np.arange(len(ser))).astype("float")

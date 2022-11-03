@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 from numba import jit
 
 from .UnaryFeature import UnaryFeature
@@ -20,7 +19,7 @@ class MinFeature(UnaryFeature):
   def name(self) -> str:
     return f"min_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     p = self.periods
 
     @jit(nopython=True)

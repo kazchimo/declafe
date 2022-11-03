@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 from .UnaryFeature import UnaryFeature
 
@@ -20,6 +19,6 @@ class LagFeature(UnaryFeature):
   def name(self) -> str:
     return f"lag_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> np.ndarray:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return np.where(
         np.arange(len(ser)) < self.periods, np.nan, np.roll(ser, self.periods))

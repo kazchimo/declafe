@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe.feature_gen.unary import UnaryFeature
@@ -10,7 +10,7 @@ class HT_PHASORInphaseFeature(UnaryFeature):
   def name(self) -> str:
     return f"HT_PHASOR_inphase"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.HT_PHASOR(ser.astype(float))[0]
 
 
@@ -20,5 +20,5 @@ class HT_PHASORQuadratureFeature(UnaryFeature):
   def name(self) -> str:
     return f"HT_PHASOR_quadrature"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.HT_PHASOR(ser.astype(float))[1]

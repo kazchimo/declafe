@@ -14,8 +14,8 @@ class BinaryFeature(FeatureGen, ABC):
     self.right = self.to_col(right)
 
   @abstractmethod
-  def bigen(self, left: np.ndarray, right: np.ndarray) -> pd.Series:
+  def bigen(self, left: np.ndarray, right: np.ndarray) -> np.ndarray:
     raise NotImplementedError()
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
     return self.bigen(df[self.left].to_numpy(), df[self.right].to_numpy())

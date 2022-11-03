@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 __all__ = ["DivideFeature"]
 
@@ -13,7 +12,7 @@ class DivideFeature(BinaryFeature):
     super().__init__(left, right)
     self.avoid_zero = avoid_zero
 
-  def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
+  def bigen(self, left: np.ndarray, right: np.ndarray) -> np.ndarray:
     if self.avoid_zero:
       right = np.where(right == 0, 1e-10, right)
 

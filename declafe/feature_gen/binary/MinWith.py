@@ -1,14 +1,13 @@
-import pandas as pd
-
 __all__ = ["MinWithFeature"]
 
-from declafe.feature_gen.binary.BinaryFeature import BinaryFeature
 import numpy as np
+
+from declafe.feature_gen.binary.BinaryFeature import BinaryFeature
 
 
 class MinWithFeature(BinaryFeature):
 
-  def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
+  def bigen(self, left: np.ndarray, right: np.ndarray) -> np.ndarray:
     return np.minimum(left, right)
 
   def _feature_name(self) -> str:

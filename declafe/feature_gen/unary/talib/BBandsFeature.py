@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -18,7 +18,7 @@ class BBandsUpperFeature(UnaryFeature):
     self.nbdevup = nbdevup
     self.matype = matype
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.BBANDS(ser.astype(float), self.periods, self.nbdevup, 2,
                         self.matype)[0]
 
@@ -39,7 +39,7 @@ class BBandsLowerFeature(UnaryFeature):
     self.nbdevdn = nbdevdn
     self.matype = matype
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.BBANDS(ser.astype(float), self.periods, 2, self.nbdevdn,
                         self.matype)[2]
 

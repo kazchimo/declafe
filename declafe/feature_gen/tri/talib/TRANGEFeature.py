@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe import ColLike
@@ -15,8 +15,8 @@ class TRANGEFeature(TriFeature):
   ):
     super().__init__(high, low, close)
 
-  def trigen(self, col1: pd.Series, col2: pd.Series,
-             col3: pd.Series) -> pd.Series:
+  def trigen(self, col1: np.ndarray, col2: np.ndarray,
+             col3: np.ndarray) -> np.ndarray:
     return talib.TRANGE(col1.astype(float), col2.astype(float), col3.astype(float))
 
   def _feature_name(self) -> str:

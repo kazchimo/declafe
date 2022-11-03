@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -16,5 +16,5 @@ class MOMFeature(UnaryFeature):
   def name(self) -> str:
     return f"MOM_{self.period}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.MOM(ser.astype(float), self.period)

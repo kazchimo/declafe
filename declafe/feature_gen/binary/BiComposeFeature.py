@@ -1,5 +1,6 @@
 from typing import Type, Dict, Any, Optional, cast
 
+import numpy as np
 import pandas as pd
 
 from declafe.feature_gen import FeatureGen
@@ -24,7 +25,7 @@ class BiComposeFeature(FeatureGen):
     self.to = to
     self.toKwargs = toKwargs or {}
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
     left = self.left.generate(df)
     right = self.right.generate(df)
     return self.to_instance().bigen(left, right)

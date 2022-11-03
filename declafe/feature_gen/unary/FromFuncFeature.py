@@ -1,7 +1,6 @@
 from typing import Callable
 
 import numpy as np
-import pandas as pd
 
 from declafe.feature_gen.unary import UnaryFeature
 

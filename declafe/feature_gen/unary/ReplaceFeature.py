@@ -1,7 +1,6 @@
 from typing import TypeVar
 
 import numpy as np
-import pandas as pd
 
 from .UnaryFeature import UnaryFeature
 
@@ -21,7 +20,7 @@ class ReplaceFeature(UnaryFeature):
   def name(self) -> str:
     return f"replace_with_{self.target_value}"
 
-  def gen_unary(self, ser: pd.Series) -> np.ndarray:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     if np.isnan(self.target_value):
       return np.where(np.isnan(ser), self.to_value, ser)
     else:
