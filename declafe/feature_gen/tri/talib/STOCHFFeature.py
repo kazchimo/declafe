@@ -21,9 +21,9 @@ class STOCHFFastkFeature(TriFeature):
 
   def trigen(self, col1: pd.Series, col2: pd.Series,
              col3: pd.Series) -> pd.Series:
-    return talib.STOCHF(col1,
-                        col2,
-                        col3,
+    return talib.STOCHF(col1.astype(float),
+                        col2.astype(float),
+                        col3.astype(float),
                         fastk_period=self.fastk_period,
                         fastd_period=self.fastd_period,
                         fastd_matype=self.fastd_matype)[0]
@@ -48,9 +48,9 @@ class STOCHFFastdFeature(TriFeature):
 
   def trigen(self, col1: pd.Series, col2: pd.Series,
              col3: pd.Series) -> pd.Series:
-    return talib.STOCHF(col1,
-                        col2,
-                        col3,
+    return talib.STOCHF(col1.astype(float),
+                        col2.astype(float),
+                        col3.astype(float),
                         fastk_period=self.fastk_period,
                         fastd_period=self.fastd_period,
                         fastd_matype=self.fastd_matype)[1]

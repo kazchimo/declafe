@@ -40,13 +40,13 @@ class TestAdx:
     df = test_df.copy()
     result = FeatureGen.adx("a", "b", "d", 3).gen(df)
 
-    assert result.equals(talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADX(df["a"], df["b"], df["d"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.adx(a, b, d, 3).gen(df)
 
-    assert result.equals(talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADX(df["a"], df["b"], df["d"], 3), True)
 
 
 class TestAdxes:
@@ -146,13 +146,15 @@ class TestAdxr:
     df = test_df.copy()
     result = FeatureGen.adxr("a", "b", "d", 3).gen(df)
 
-    assert result.equals(talib.ADXR(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADXR(df["a"], df["b"], df["d"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.adxr(a, b, d, 3).gen(df)
 
-    assert result.equals(talib.ADXR(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADXR(df["a"], df["b"], df["d"], 3),
+                          True)
 
 
 class TestCcis:
@@ -182,13 +184,13 @@ class TestCci:
     df = test_df.copy()
     result = FeatureGen.cci("a", "b", "d", 3).gen(df)
 
-    assert result.equals(talib.CCI(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.CCI(df["a"], df["b"], df["d"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cci(a, b, d, 3).gen(df)
 
-    assert result.equals(talib.CCI(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.CCI(df["a"], df["b"], df["d"], 3), True)
 
 
 class TestAroonUp:
@@ -308,13 +310,13 @@ class TestDX:
     df = test_df.copy()
     result = FeatureGen.dx("a", "b", "c", 3).gen(df)
 
-    assert result.equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.DX(df["a"], df["b"], df["c"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.dx(a, b, _c, 3).gen(df)
 
-    assert result.equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.DX(df["a"], df["b"], df["c"], 3), True)
 
 
 class TestDXES:
@@ -380,13 +382,15 @@ class TestMinusDI:
     df = test_df.copy()
     result = FeatureGen.minus_di("a", "b", "c", 3).gen(df)
 
-    assert result.equals(talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.MINUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.minus_di(a, b, _c, 3).gen(df)
 
-    assert result.equals(talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.MINUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
 
 class TestMinusDis:
@@ -448,13 +452,15 @@ class TestPlusDI:
     df = test_df.copy()
     result = FeatureGen.plus_di("a", "b", "c", 3).gen(df)
 
-    assert result.equals(talib.PLUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.PLUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.plus_di(a, b, _c, 3).gen(df)
 
-    assert result.equals(talib.PLUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.PLUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
 
 class TestPlusDIs:
@@ -516,15 +522,17 @@ class TestSTOCHSlowd:
     df = test_df.copy()
     result = FeatureGen.stoch_slowd("a", "b", "c", 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stoch_slowd(a, b, _c, 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1], True)
 
 
 class TestSTOCHSlowk:
@@ -533,15 +541,17 @@ class TestSTOCHSlowk:
     df = test_df.copy()
     result = FeatureGen.stoch_slowk("a", "b", "c", 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stoch_slowk(a, b, _c, 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0], True)
 
 
 class TestSTOCHFFastk:
@@ -550,13 +560,17 @@ class TestSTOCHFFastk:
     df = test_df.copy()
     result = FeatureGen.stochf_fastk("a", "b", "c", 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0],
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stochf_fastk(a, b, _c, 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0],
+                          True)
 
 
 class TestSTOCHFFastd:
@@ -565,13 +579,17 @@ class TestSTOCHFFastd:
     df = test_df.copy()
     result = FeatureGen.stochf_fastd("a", "b", "c", 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1],
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stochf_fastd(a, b, _c, 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1],
+                          True)
 
 
 class TestULTOSC:
@@ -580,13 +598,17 @@ class TestULTOSC:
     df = test_df.copy()
     result = FeatureGen.ultosc("a", "b", "c", 3, 5, 7).gen(df)
 
-    assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
+    assert np.array_equal(result,
+                          talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.ultosc(a, b, _c, 3, 5, 7).gen(df)
 
-    assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
+    assert np.array_equal(result,
+                          talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7),
+                          True)
 
 
 class TestWillr:
@@ -595,13 +617,15 @@ class TestWillr:
     df = test_df.copy()
     result = FeatureGen.willr("a", "b", "c", 5).gen(df)
 
-    assert result.equals(talib.WILLR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.WILLR(df["a"], df["b"], df["c"], 5),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.willr(a, b, _c, 5).gen(df)
 
-    assert result.equals(talib.WILLR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.WILLR(df["a"], df["b"], df["c"], 5),
+                          True)
 
 
 class TestWillrs:
@@ -676,13 +700,13 @@ class TestATR:
     df = test_df.copy()
     result = FeatureGen.atr("a", "b", "c", 5).gen(df)
 
-    assert result.equals(talib.ATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.ATR(df["a"], df["b"], df["c"], 5), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.atr(a, b, _c, 5).gen(df)
 
-    assert result.equals(talib.ATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.ATR(df["a"], df["b"], df["c"], 5), True)
 
 
 class TestATRS:
@@ -712,13 +736,15 @@ class TestNATR:
     df = test_df.copy()
     result = FeatureGen.natr("a", "b", "c", 5).gen(df)
 
-    assert result.equals(talib.NATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.NATR(df["a"], df["b"], df["c"], 5),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.natr(a, b, _c, 5).gen(df)
 
-    assert result.equals(talib.NATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.NATR(df["a"], df["b"], df["c"], 5),
+                          True)
 
 
 class TestNATRS:
@@ -748,13 +774,13 @@ class TestTRANGE:
     df = test_df.copy()
     result = FeatureGen.trange("a", "b", "c").gen(df)
 
-    assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
+    assert np.array_equal(result, talib.TRANGE(df["a"], df["b"], df["c"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.trange(a, b, _c).gen(df)
 
-    assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
+    assert np.array_equal(result, talib.TRANGE(df["a"], df["b"], df["c"]), True)
 
 
 class TestCDL2CROWS:

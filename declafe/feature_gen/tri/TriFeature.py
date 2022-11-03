@@ -19,4 +19,5 @@ class TriFeature(FeatureGen, ABC):
     raise NotImplementedError()
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    return self.trigen(df[self.col1], df[self.col2], df[self.col3])
+    return self.trigen(df[self.col1].values, df[self.col2].values,
+                       df[self.col3].values)

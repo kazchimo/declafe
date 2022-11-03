@@ -14,7 +14,7 @@ class NATRFeature(TriFeature):
 
   def trigen(self, col1: pd.Series, col2: pd.Series,
              col3: pd.Series) -> pd.Series:
-    return talib.NATR(col1, col2, col3, timeperiod=self.timeperiod)
+    return talib.NATR(col1.astype(float), col2.astype(float), col3.astype(float), timeperiod=self.timeperiod)
 
   def _feature_name(self) -> str:
     return f"NATR_{self.timeperiod}_of_{self.col1}_{self.col2}_{self.col3}"

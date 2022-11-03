@@ -28,9 +28,9 @@ class STOCHSlowkFeature(TriFeature):
 
   def trigen(self, col1: pd.Series, col2: pd.Series,
              col3: pd.Series) -> pd.Series:
-    return talib.STOCH(col1,
-                       col2,
-                       col3,
+    return talib.STOCH(col1.astype(float),
+                       col2.astype(float),
+                       col3.astype(float),
                        fastk_period=self.fastk_period,
                        slowk_period=self.slowk_period,
                        slowd_period=self.slowd_period,
@@ -62,9 +62,9 @@ class STOCHSlowdFeature(TriFeature):
 
   def trigen(self, col1: pd.Series, col2: pd.Series,
              col3: pd.Series) -> pd.Series:
-    return talib.STOCH(col1,
-                       col2,
-                       col3,
+    return talib.STOCH(col1.astype(float),
+                       col2.astype(float),
+                       col3.astype(float),
                        fastk_period=self.fastk_period,
                        slowk_period=self.slowk_period,
                        slowd_period=self.slowd_period,
