@@ -3,7 +3,7 @@ from setuptools import setup
 from codecs import open
 from os import path
 
-VERSION = "0.0.36"
+VERSION = "0.0.37"
 
 package_name = "declafe"
 root_dir = path.abspath(path.dirname(__file__))
