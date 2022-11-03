@@ -52,6 +52,10 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     if dt == "category":
       dt = "int"
 
+    assert len(df) == len(
+        result
+    ), f"len(df)={len(df)}, len(result)={len(result)}, feature_name={self.feature_name}"
+
     return result.astype(dt) if dt else result
 
   @abstractmethod
@@ -84,8 +88,11 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     temp_df = df.drop(
         columns=[self.feature_name]) if self.feature_name in df.columns else df
 
-    return pd.concat(
-        [temp_df, pd.DataFrame({self.feature_name: self.generate(df)})], axis=1)
+    return pd.concat([
+        temp_df,
+        pd.DataFrame({self.feature_name: self.generate(df)}, index=df.index)
+    ],
+                     axis=1)
 
   def as_type(self, dtype: DTypes) -> "FeatureGen":
     self.dtype = dtype
