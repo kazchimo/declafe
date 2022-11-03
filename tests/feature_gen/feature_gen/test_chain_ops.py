@@ -603,19 +603,33 @@ class TestMonth:
     assert (a.month().generate(df) == np.array([1, 5, 8])).all()
 
 
-class ToDatetime:
+class TestToDatetime:
 
   def test_to_datetime(self):
     df = pd.DataFrame({"a": [1665194183, 1665194184]})
     df2 = pd.DataFrame({"a": [1665194183000, 1665194184000]})
 
-    assert a.to_datetime("s").gen(df).equals(
+    assert np.array_equal(
+        a.to_datetime("s").gen(df),
         pd.Series([
-            datetime(2018, 1, 1, 0, 0, 0),
-            datetime(2018, 1, 1, 1, 0, 0),
+            datetime(2022, 10, 8, 1, 56, 23),
+            datetime(2022, 10, 8, 1, 56, 24),
         ]))
-    assert a.to_datetime("ms").gen(df2).equals(
+    assert np.array_equal(
+        a.to_datetime("ms").gen(df2),
         pd.Series([
-            datetime(2018, 1, 1, 0, 0, 0),
-            datetime(2018, 1, 1, 1, 0, 0),
+            datetime(2022, 10, 8, 1, 56, 23),
+            datetime(2022, 10, 8, 1, 56, 24),
         ]))
+
+
+class TestChain:
+
+  def test_calc_chain(self):
+    tdf = pd.DataFrame({"a": [1665194183000, 1665194184000]})
+    dt = a.to_datetime("ms")
+    fs = Features.many(a, dt, dt.minute())
+
+    tdf = fs.set_features(tdf, show_progress=True)
+
+    assert np.array_equal(tdf["minute_of_to_datetime_of_a"].values, [56, 56])
