@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from .UnaryFeature import UnaryFeature
@@ -16,4 +17,4 @@ class MinCompFeature(UnaryFeature):
     return f"min_comp_with_{self.comp}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.apply(lambda x: min(x, self.comp))
+    return np.minimum(ser, self.comp)

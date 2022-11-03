@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from .UnaryFeature import UnaryFeature
@@ -16,4 +17,4 @@ class MaxCompFeature(UnaryFeature):
     return f"max_comp_with_{self.comp}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.apply(lambda x: max(x, self.comp))
+    return np.maximum(ser, self.comp)

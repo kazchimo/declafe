@@ -11,4 +11,4 @@ class HTTrendModeFeature(UnaryFeature):
     return f"HT_TRENDMODE"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_TRENDMODE(ser)
+    return talib.HT_TRENDMODE(ser.astype(float))

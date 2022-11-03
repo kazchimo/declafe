@@ -11,7 +11,7 @@ class HT_PHASORInphaseFeature(UnaryFeature):
     return f"HT_PHASOR_inphase"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_PHASOR(ser)[0]
+    return talib.HT_PHASOR(ser.astype(float))[0]
 
 
 class HT_PHASORQuadratureFeature(UnaryFeature):
@@ -21,4 +21,4 @@ class HT_PHASORQuadratureFeature(UnaryFeature):
     return f"HT_PHASOR_quadrature"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_PHASOR(ser)[1]
+    return talib.HT_PHASOR(ser.astype(float))[1]

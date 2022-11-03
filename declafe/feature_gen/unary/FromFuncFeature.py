@@ -1,5 +1,6 @@
 from typing import Callable
 
+import numpy as np
 import pandas as pd
 
 from declafe.feature_gen.unary import UnaryFeature
@@ -7,7 +8,7 @@ from declafe.feature_gen.unary import UnaryFeature
 
 class FromFuncFeature(UnaryFeature):
 
-  def __init__(self, column_name: str, func: Callable[[pd.Series], pd.Series],
+  def __init__(self, column_name: str, func: Callable[[np.ndarray], np.ndarray],
                op_name: str):
     super().__init__(column_name)
     self.func = func
@@ -17,5 +18,5 @@ class FromFuncFeature(UnaryFeature):
   def name(self) -> str:
     return self.op_name
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return self.func(ser)

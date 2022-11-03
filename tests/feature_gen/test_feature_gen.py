@@ -77,7 +77,7 @@ class TestAsType:
     ff = ConstFeature(1).as_type("category")
 
     assert f.generate(test_df).dtype == "int8"
-    assert ff.generate(test_df).dtype == "category"
+    assert ff.generate(test_df).dtype == "int64"
 
 
 class TestAsBool:

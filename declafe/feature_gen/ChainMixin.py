@@ -251,6 +251,10 @@ class ChainMixin:
     from declafe.feature_gen.unary.times import DayOfMonthFeature
     return self.next(DayOfMonthFeature)
 
+  def month(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.times import MonthFeature
+    return self.next(MonthFeature)
+
   def to_datetime(self, unit: Literal["D", "s", "ms", "us",
                                       "ns"]) -> "FeatureGen":
     from declafe.feature_gen.unary.times.ToDatetimeFeature import ToDatetimeFeature

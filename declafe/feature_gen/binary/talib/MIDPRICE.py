@@ -14,7 +14,7 @@ class MIDPRICEFeature(BinaryFeature):
     super().__init__(high, low)
 
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
-    return talib.MIDPRICE(left, right, self.period)
+    return talib.MIDPRICE(left.astype(float), right.astype(float), self.period)
 
   def _feature_name(self) -> str:
     return f"MIDPRICE_{self.period}_{self.left}_{self.right}"

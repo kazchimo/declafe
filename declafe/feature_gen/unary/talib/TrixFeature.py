@@ -16,4 +16,4 @@ class TRIXFeature(UnaryFeature):
     return f"TRIX_{self.period}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.TRIX(ser, timeperiod=self.period)
+    return talib.TRIX(ser.astype(float), timeperiod=self.period)

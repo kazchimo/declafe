@@ -23,4 +23,5 @@ class APOFeature(UnaryFeature):
     return f"APO{self.fastperiod}_{self.slowperiod}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.APO(ser, self.fastperiod, self.slowperiod, self.matype)
+    return talib.APO(ser.astype("float"), self.fastperiod, self.slowperiod,
+                     self.matype)

@@ -17,4 +17,4 @@ class MOMFeature(UnaryFeature):
     return f"MOM_{self.period}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.MOM(ser, self.period)
+    return talib.MOM(ser.astype(float), self.period)

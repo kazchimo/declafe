@@ -1,6 +1,8 @@
 from typing import TYPE_CHECKING
 
+import numpy as np
 import pandas as pd
+from scipy.ndimage import shift
 
 from .UnaryFeature import UnaryFeature
 
@@ -21,7 +23,8 @@ class PctChangeFeature(UnaryFeature):
     return f"pct_change_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.pct_change(periods=self.periods)
+    r = ser / shift(ser.astype(float), self.periods, cval=np.NaN) - 1
+    return r
 
   @staticmethod
   def gen_target(values: "series", changes: "series") -> pd.Series:

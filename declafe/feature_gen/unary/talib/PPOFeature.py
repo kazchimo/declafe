@@ -24,4 +24,5 @@ class PPOFeature(UnaryFeature):
     return f"PPO_{self.fast_period}_{self.slow_period}_{self.matype}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.PPO(ser, self.fast_period, self.slow_period, self.matype)
+    return talib.PPO(ser.astype(float), self.fast_period, self.slow_period,
+                     self.matype)

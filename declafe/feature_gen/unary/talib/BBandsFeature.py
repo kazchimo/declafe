@@ -19,7 +19,8 @@ class BBandsUpperFeature(UnaryFeature):
     self.matype = matype
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.BBANDS(ser, self.periods, self.nbdevup, 2, self.matype)[0]
+    return talib.BBANDS(ser.astype(float), self.periods, self.nbdevup, 2,
+                        self.matype)[0]
 
   @property
   def name(self) -> str:
@@ -39,7 +40,8 @@ class BBandsLowerFeature(UnaryFeature):
     self.matype = matype
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.BBANDS(ser, self.periods, 2, self.nbdevdn, self.matype)[2]
+    return talib.BBANDS(ser.astype(float), self.periods, 2, self.nbdevdn,
+                        self.matype)[2]
 
   @property
   def name(self) -> str:

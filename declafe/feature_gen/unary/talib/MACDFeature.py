@@ -20,7 +20,7 @@ class MACDFeature(UnaryFeature):
     return f"MACD_{self.fastperiod}_{self.slowperiod}_{self.signalperiod}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.MACD(ser, self.fastperiod, self.slowperiod,
+    return talib.MACD(ser.astype(float), self.fastperiod, self.slowperiod,
                       self.signalperiod)[0]
 
 
@@ -38,7 +38,7 @@ class MACDSignalFeature(UnaryFeature):
     return f"MACD_signal_{self.fastperiod}_{self.slowperiod}_{self.signalperiod}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.MACD(ser, self.fastperiod, self.slowperiod,
+    return talib.MACD(ser.astype(float), self.fastperiod, self.slowperiod,
                       self.signalperiod)[1]
 
 
@@ -56,5 +56,5 @@ class MACDHistFeature(UnaryFeature):
     return f"MACD_hist_{self.fastperiod}_{self.slowperiod}_{self.signalperiod}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.MACD(ser, self.fastperiod, self.slowperiod,
+    return talib.MACD(ser.astype(float), self.fastperiod, self.slowperiod,
                       self.signalperiod)[2]

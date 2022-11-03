@@ -12,7 +12,7 @@ class AROONOSCFeature(BinaryFeature):
     super().__init__(high, low)
 
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
-    return talib.AROONOSC(left, right, self.period)
+    return talib.AROONOSC(left.astype(float), right.astype(float), self.period)
 
   def _feature_name(self) -> str:
     return f"AROONOSC_{self.period}_{self.left}_{self.right}"

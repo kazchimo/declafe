@@ -30,7 +30,7 @@ class ComposedFeature(FeatureGen):
 
       for i, f in enumerate(self.nexts):
         if f.feature_name in df.columns:
-          result = df[f.feature_name]
+          result = df[f.feature_name].values
         else:
           result = f.gen_unary(result)
 

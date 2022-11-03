@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import talib
 
@@ -72,40 +73,40 @@ class TestAdxes:
 class TestSar:
 
   def test_return_sar(self):
-    assert FeatureGen.sar("a", "b") \
-      .gen(test_df) \
-      .equals(SARFeature("a", "b").gen(test_df))
+    assert np.array_equal(
+        FeatureGen.sar("a", "b").gen(test_df),
+        SARFeature("a", "b").gen(test_df), True)
 
   def test_accept_col(self):
-    assert FeatureGen.sar(a, b) \
-      .gen(test_df) \
-      .equals(SARFeature("a", "b").gen(test_df))
+    assert np.array_equal(
+        FeatureGen.sar(a, b).gen(test_df),
+        SARFeature("a", "b").gen(test_df), True)
 
 
 class TestSarext:
 
   def test_return_sarext(self):
-    assert FeatureGen.sarext("a", "b") \
-      .gen(test_df) \
-      .equals(talib.SAREXT(test_df["a"], test_df["b"]))
+    assert np.array_equal(
+        FeatureGen.sarext("a", "b").gen(test_df),
+        talib.SAREXT(test_df["a"], test_df["b"]), True)
 
   def test_accept_col(self):
-    assert FeatureGen.sarext(a, b) \
-      .gen(test_df) \
-      .equals(talib.SAREXT(test_df["a"], test_df["b"]))
+    assert np.array_equal(
+        FeatureGen.sarext(a, b).gen(test_df),
+        talib.SAREXT(test_df["a"], test_df["b"]), True)
 
 
 class TestMidprice:
 
   def test_return_midprice(self):
-    assert FeatureGen.midprice("a", "b", 3) \
-      .gen(test_df) \
-      .equals(talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+    assert np.array_equal(
+        FeatureGen.midprice("a", "b", 3).gen(test_df),
+        talib.MIDPRICE(test_df["a"], test_df["b"], 3), True)
 
   def test_accept_col(self):
-    assert FeatureGen.midprice(a, b, 3) \
-      .gen(test_df) \
-      .equals(talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+    assert np.array_equal(
+        FeatureGen.midprice(a, b, 3).gen(test_df),
+        talib.MIDPRICE(test_df["a"], test_df["b"], 3), True)
 
 
 class TestMidprices:
@@ -196,13 +197,13 @@ class TestAroonUp:
     df = test_df.copy()
     result = FeatureGen.aroon_up("a", "b", 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[1])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[1], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_up(a, b, 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[1])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[1], True)
 
 
 class TestAroonUps:
@@ -228,13 +229,13 @@ class TestAroonDown:
     df = test_df.copy()
     result = FeatureGen.aroon_down("a", "b", 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[0])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[0], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_down(a, b, 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[0])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[0], True)
 
 
 class TestAroonDowns:
@@ -260,13 +261,13 @@ class TestArronOsc:
     df = test_df.copy()
     result = FeatureGen.aroon_osc("a", "b", 3).gen(df)
 
-    assert result.equals(talib.AROONOSC(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.AROONOSC(df["a"], df["b"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_osc(a, b, 3).gen(df)
 
-    assert result.equals(talib.AROONOSC(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.AROONOSC(df["a"], df["b"], 3), True)
 
 
 class TestArronOscs:
@@ -415,13 +416,13 @@ class TestMinusDM:
     df = test_df.copy()
     result = FeatureGen.minus_dm("a", "b", 3).gen(df)
 
-    assert result.equals(talib.MINUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.MINUS_DM(df["a"], df["b"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.minus_dm(a, b, 3).gen(df)
 
-    assert result.equals(talib.MINUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.MINUS_DM(df["a"], df["b"], 3), True)
 
 
 class TestMinusDMs:
@@ -483,13 +484,13 @@ class TestPlusDM:
     df = test_df.copy()
     result = FeatureGen.plus_dm("a", "b", 3).gen(df)
 
-    assert result.equals(talib.PLUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.PLUS_DM(df["a"], df["b"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.plus_dm(a, b, 3).gen(df)
 
-    assert result.equals(talib.PLUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.PLUS_DM(df["a"], df["b"], 3), True)
 
 
 class TestPlusDMS:
@@ -660,13 +661,13 @@ class TestOBV:
     df = test_df.copy()
     result = FeatureGen.obv("a", "b").gen(df)
 
-    assert result.equals(talib.OBV(df["a"], df["b"]))
+    assert np.array_equal(result, talib.OBV(df["a"], df["b"]))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.obv(a, b).gen(df)
 
-    assert result.equals(talib.OBV(df["a"], df["b"]))
+    assert np.array_equal(result, talib.OBV(df["a"], df["b"]))
 
 
 class TestATR:

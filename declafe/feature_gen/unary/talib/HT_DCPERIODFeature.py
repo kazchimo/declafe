@@ -11,4 +11,4 @@ class HT_DCPERIODFeature(UnaryFeature):
     return f"HT_DCPERIOD"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_DCPERIOD(ser)
+    return talib.HT_DCPERIOD(ser.astype(float))

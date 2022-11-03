@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from .UnaryFeature import UnaryFeature
@@ -15,5 +16,9 @@ class SumFeature(UnaryFeature):
   def name(self) -> str:
     return f"sum_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).sum(engine=self.engine)
+  def gen_unary(self, ser: pd.Series) -> np.ndarray:
+    v = np.ones(self.periods)
+    return np.concatenate([
+        np.full(self.periods - 1, np.nan),
+        np.convolve(ser[::-1], v, "valid")[::-1]
+    ])

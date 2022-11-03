@@ -1,4 +1,6 @@
+import numpy as np
 import pandas as pd
+from numba import jit
 
 from .UnaryFeature import UnaryFeature
 
@@ -19,4 +21,15 @@ class MaxFeature(UnaryFeature):
     return f"max_{self.periods}"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.rolling(self.periods).max(engine=self.engine)
+    p = self.periods
+
+    @jit(nopython=True)
+    def gen(idx: int) -> float:
+      a = ser[idx - p + 1:idx + 1]
+
+      if len(a) == 0:
+        return np.nan
+      else:
+        return max(a)
+
+    return np.frompyfunc(gen, 1, 1)(np.arange(len(ser))).astype("float")

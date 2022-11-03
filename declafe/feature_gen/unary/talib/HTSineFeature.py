@@ -11,7 +11,7 @@ class HTSineFeature(UnaryFeature):
     return f"HT_SINE"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_SINE(ser)[0]
+    return talib.HT_SINE(ser.astype(float))[0]
 
 
 class HTLeadsineFeature(UnaryFeature):
@@ -21,4 +21,4 @@ class HTLeadsineFeature(UnaryFeature):
     return f"HT_LEADSINE"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_SINE(ser)[1]
+    return talib.HT_SINE(ser.astype(float))[1]

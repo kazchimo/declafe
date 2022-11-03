@@ -34,7 +34,7 @@ class UnaryFeature(FeatureGen, ABC):
     return f"{self.name}_of_{name}"
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    return self.gen_unary(df[self.column_name])
+    return self.gen_unary(df[self.column_name].to_numpy())
 
   @abstractmethod
   def gen_unary(self, ser: pd.Series) -> pd.Series:

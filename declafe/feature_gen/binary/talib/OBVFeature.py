@@ -14,7 +14,7 @@ class OBVFeature(BinaryFeature):
     super().__init__(close, volume)
 
   def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
-    return talib.OBV(left, right)
+    return talib.OBV(left.astype(float), right.astype(float))
 
   def _feature_name(self) -> str:
     return f"OBV_{self.left}_{self.right}"

@@ -11,4 +11,4 @@ class HT_DCPHASEFeature(UnaryFeature):
     return f"HT_DCPHASE"
 
   def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.HT_DCPHASE(ser)
+    return talib.HT_DCPHASE(ser.astype(float))
