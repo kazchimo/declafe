@@ -20,4 +20,4 @@ class MovingAverage(UnaryFeature):
     return f"sma_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.SMA(ser, self.periods)
+    return talib.SMA(ser.astype(float), self.periods)

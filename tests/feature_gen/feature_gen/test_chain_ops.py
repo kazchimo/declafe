@@ -114,6 +114,37 @@ class TestLog:
         LogFeature("").gen_unary(test_df["a"] * 2))
 
 
+class TestMovingAverage:
+
+  def test_return_moving_average(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+
+    assert np.array_equal(
+        a.moving_average(3).gen(df), pd.Series([np.nan, np.nan, 2, 3, 4, 5]),
+        True)
+
+
+class TestMovingAverages:
+
+  def test_return_moving_averages(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.moving_averages([2, 3]).set_features(df)
+
+    assert np.array_equal(df["sma_2_of_a"],
+                          pd.Series([np.nan, 1.5, 2.5, 3.5, 4.5, 5.5]), True)
+    assert np.array_equal(df["sma_3_of_a"],
+                          pd.Series([np.nan, np.nan, 2, 3, 4, 5]), True)
+
+
+class TestMovingSum:
+
+  def test_return_moving_sum(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(
+        a.moving_sum(3).gen(df), pd.Series([np.nan, np.nan, 6, 9, 12, 15]),
+        True)
+
+
 class TestMovingSums:
 
   def test_return_moving_sums(self):
@@ -226,6 +257,48 @@ class TestAbs:
     assert np.array_equal(
         a.abs().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
         pd.Series([1, 2, 3, 4, 5, 6]), True)
+
+
+class TestIsUp:
+
+  def test_is_up(self):
+    assert np.array_equal(
+        a.is_up().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
+        pd.Series([False, False, False, True, True, True]), True)
+
+
+class TestIsDown:
+
+  def test_is_down(self):
+    assert np.array_equal(
+        a.is_down().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
+        pd.Series([False, True, True, False, False, False]), True)
+
+
+class TestMovingStd:
+
+  def test_moving_std(self):
+    res = a.moving_std(3).gen(pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]}))
+
+    assert np.array_equal(res, [
+        np.nan, np.nan, 0.816496580927726, 0.816496580927726, 0.816496580927726,
+        0.816496580927726
+    ], True)
+
+
+class TestMovingStds:
+
+  def test_moving_stds(self):
+    res = a.moving_stds([3, 5
+                        ]).set_features(pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]}))
+
+    assert np.array_equal(res["std_3_of_a"], [
+        np.nan, np.nan, 0.816496580927726, 0.816496580927726, 0.816496580927726,
+        0.816496580927726
+    ], True)
+    assert np.array_equal(res["std_5_of_a"], [
+        np.nan, np.nan, np.nan, np.nan, 1.4142135623730951, 1.4142135623730951
+    ], True)
 
 
 class TestMACD:

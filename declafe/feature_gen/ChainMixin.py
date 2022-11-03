@@ -74,10 +74,10 @@ class ChainMixin:
     return self.next(AbsFeature)
 
   def is_up(self, period: int = 1) -> "FeatureGen":
-    return (self.pct_change(period) > 0).as_name_of(f"is_up{period}")
+    return ((self._self() - self.lag(1)) > 0).as_name_of(f"is_up{period}")
 
   def is_down(self, period: int = 1) -> "FeatureGen":
-    return (self.pct_change(period) < 0).as_name_of(f"is_down{period}")
+    return ((self._self() - self.lag(1)) < 0).as_name_of(f"is_down{period}")
 
   def moving_averages(self, periods: List[int]) -> "Features":
     return self.FS([self.moving_average(p) for p in periods])

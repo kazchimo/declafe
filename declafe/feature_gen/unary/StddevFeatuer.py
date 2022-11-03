@@ -8,10 +8,9 @@ __all__ = ["StddevFeature"]
 
 class StddevFeature(UnaryFeature):
 
-  def __init__(self, periods: int, column_name: str, ddof: int = 1):
+  def __init__(self, periods: int, column_name: str):
     super().__init__(column_name)
     self.periods = periods
-    self.ddof = ddof
 
   def __post_init__(self):
     if self.periods < 2:
@@ -19,11 +18,10 @@ class StddevFeature(UnaryFeature):
 
   @property
   def name(self) -> str:
-    return f"stdN-{self.ddof}_{self.periods}"
+    return f"std_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     p = self.periods
-    dd = self.ddof
 
     @jit(nopython=True)
     def gen(idx: int) -> float:
@@ -32,6 +30,6 @@ class StddevFeature(UnaryFeature):
       if len(a) == 0:
         return np.nan
       else:
-        return np.std(a, ddof=dd)  # type: ignore
+        return np.std(a)  # type: ignore
 
     return np.frompyfunc(gen, 1, 1)(np.arange(len(ser))).astype("float")
