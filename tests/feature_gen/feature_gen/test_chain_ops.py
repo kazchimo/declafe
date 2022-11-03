@@ -607,8 +607,14 @@ class ToDatetime:
 
   def test_to_datetime(self):
     df = pd.DataFrame({"a": [1665194183, 1665194184]})
+    df2 = pd.DataFrame({"a": [1665194183000, 1665194184000]})
 
     assert a.to_datetime("s").gen(df).equals(
+        pd.Series([
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 1, 1, 0, 0),
+        ]))
+    assert a.to_datetime("ms").gen(df2).equals(
         pd.Series([
             datetime(2018, 1, 1, 0, 0, 0),
             datetime(2018, 1, 1, 1, 0, 0),
