@@ -1,6 +1,7 @@
 import warnings
 from typing import List, TYPE_CHECKING
 
+import numpy as np
 import pandas as pd
 
 from declafe.feature_gen import FeatureGen
@@ -22,7 +23,7 @@ class ComposedFeature(FeatureGen):
     if len(self.nexts) == 0:
       raise ValueError("nextsが空です")
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
     with warnings.catch_warnings():
       warnings.simplefilter("ignore")
       result = self.head.generate(df)
@@ -30,7 +31,7 @@ class ComposedFeature(FeatureGen):
 
       for i, f in enumerate(self.nexts):
         if f.feature_name in df.columns:
-          result = df[f.feature_name]
+          result = df[f.feature_name].to_numpy()
         else:
           result = f.gen_unary(result)
 

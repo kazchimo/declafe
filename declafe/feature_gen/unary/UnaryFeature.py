@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
+import numpy as np
 import pandas as pd
 
 from declafe.feature_gen import FeatureGen
@@ -33,9 +34,9 @@ class UnaryFeature(FeatureGen, ABC):
                                            str)) else f"({self.column_name})"
     return f"{self.name}_of_{name}"
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
-    return self.gen_unary(df[self.column_name])
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
+    return self.gen_unary(df[self.column_name].to_numpy())
 
   @abstractmethod
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     raise NotImplementedError

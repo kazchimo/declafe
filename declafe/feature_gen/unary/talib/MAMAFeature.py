@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -20,7 +20,7 @@ class MAMAFeature(UnaryFeature):
   def name(self) -> str:
     return f"mama{self.fast_limit}-{self.slow_limit}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.MAMA(ser, self.fast_limit, self.slow_limit)[0]
 
 
@@ -38,5 +38,5 @@ class FAMAFeature(UnaryFeature):
   def name(self) -> str:
     return f"fama{self.fast_limit}-{self.slow_limit}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.MAMA(ser, self.fast_limit, self.slow_limit)[1]

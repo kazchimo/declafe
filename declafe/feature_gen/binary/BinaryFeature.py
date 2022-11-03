@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import numpy as np
 import pandas as pd
 
 from ..FeatureGen import FeatureGen, ColLike
@@ -13,8 +14,8 @@ class BinaryFeature(FeatureGen, ABC):
     self.right = self.to_col(right)
 
   @abstractmethod
-  def bigen(self, left: pd.Series, right: pd.Series) -> pd.Series:
+  def bigen(self, left: np.ndarray, right: np.ndarray) -> np.ndarray:
     raise NotImplementedError()
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
-    return self.bigen(df[self.left], df[self.right])
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
+    return self.bigen(df[self.left].to_numpy(), df[self.right].to_numpy())

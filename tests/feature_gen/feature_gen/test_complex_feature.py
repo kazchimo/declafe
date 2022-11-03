@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from declafe import col
@@ -18,7 +19,7 @@ class TestDipAgainst:
     f = a.dip_against("b", 10)
     result = f.gen(df)
 
-    assert result.equals(df["a"] / df["b"].rolling(10).max() - 1)
+    assert np.array_equal(result, df["a"] / df["b"].rolling(10).max() - 1, True)
 
 
 class TestDipAgainsts:
@@ -44,7 +45,7 @@ class TestRipAgainst:
     result = f.gen(df)
     pred = df["a"] / df["b"].rolling(10).min() - 1
 
-    assert result.equals(pred)
+    assert np.array_equal(result, pred, True)
 
 
 class TestRipAgainsts:

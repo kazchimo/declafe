@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Optional, Type, Union, Literal, Callable
 
+import numpy as np
 import pandas as pd
 
 __all__ = ["FeatureGen", "ColLike"]
@@ -32,16 +33,15 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     self._engine: Optional[Engine] = None
 
   @abstractmethod
-  def gen(self, df: pd.DataFrame) -> pd.Series:
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
     raise NotImplementedError
 
-  def generate(self, df: pd.DataFrame) -> pd.Series:
+  def generate(self, df: pd.DataFrame) -> np.ndarray:
     """
     optimized gen
     """
-
     try:
-      result = df[self.feature_name] \
+      result = df[self.feature_name].to_numpy() \
         if self.feature_name in df.columns \
         else self.gen(df)
 
@@ -50,6 +50,9 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
         else self.dtype
     except Exception as e:
       raise Exception(f"Failed to generate {self.feature_name}") from e
+
+    if dt == "category":
+      dt = "int"
 
     return result.astype(dt) if dt else result
 

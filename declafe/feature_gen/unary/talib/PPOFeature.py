@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe import ColLike
@@ -23,5 +23,6 @@ class PPOFeature(UnaryFeature):
   def name(self) -> str:
     return f"PPO_{self.fast_period}_{self.slow_period}_{self.matype}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.PPO(ser, self.fast_period, self.slow_period, self.matype)
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    return talib.PPO(ser.astype(float), self.fast_period, self.slow_period,
+                     self.matype)

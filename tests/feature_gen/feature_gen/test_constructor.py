@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import talib
 
@@ -39,13 +40,13 @@ class TestAdx:
     df = test_df.copy()
     result = FeatureGen.adx("a", "b", "d", 3).gen(df)
 
-    assert result.equals(talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADX(df["a"], df["b"], df["d"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.adx(a, b, d, 3).gen(df)
 
-    assert result.equals(talib.ADX(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADX(df["a"], df["b"], df["d"], 3), True)
 
 
 class TestAdxes:
@@ -72,40 +73,40 @@ class TestAdxes:
 class TestSar:
 
   def test_return_sar(self):
-    assert FeatureGen.sar("a", "b") \
-      .gen(test_df) \
-      .equals(SARFeature("a", "b").gen(test_df))
+    assert np.array_equal(
+        FeatureGen.sar("a", "b").gen(test_df),
+        SARFeature("a", "b").gen(test_df), True)
 
   def test_accept_col(self):
-    assert FeatureGen.sar(a, b) \
-      .gen(test_df) \
-      .equals(SARFeature("a", "b").gen(test_df))
+    assert np.array_equal(
+        FeatureGen.sar(a, b).gen(test_df),
+        SARFeature("a", "b").gen(test_df), True)
 
 
 class TestSarext:
 
   def test_return_sarext(self):
-    assert FeatureGen.sarext("a", "b") \
-      .gen(test_df) \
-      .equals(talib.SAREXT(test_df["a"], test_df["b"]))
+    assert np.array_equal(
+        FeatureGen.sarext("a", "b").gen(test_df),
+        talib.SAREXT(test_df["a"], test_df["b"]), True)
 
   def test_accept_col(self):
-    assert FeatureGen.sarext(a, b) \
-      .gen(test_df) \
-      .equals(talib.SAREXT(test_df["a"], test_df["b"]))
+    assert np.array_equal(
+        FeatureGen.sarext(a, b).gen(test_df),
+        talib.SAREXT(test_df["a"], test_df["b"]), True)
 
 
 class TestMidprice:
 
   def test_return_midprice(self):
-    assert FeatureGen.midprice("a", "b", 3) \
-      .gen(test_df) \
-      .equals(talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+    assert np.array_equal(
+        FeatureGen.midprice("a", "b", 3).gen(test_df),
+        talib.MIDPRICE(test_df["a"], test_df["b"], 3), True)
 
   def test_accept_col(self):
-    assert FeatureGen.midprice(a, b, 3) \
-      .gen(test_df) \
-      .equals(talib.MIDPRICE(test_df["a"], test_df["b"], 3))
+    assert np.array_equal(
+        FeatureGen.midprice(a, b, 3).gen(test_df),
+        talib.MIDPRICE(test_df["a"], test_df["b"], 3), True)
 
 
 class TestMidprices:
@@ -145,13 +146,15 @@ class TestAdxr:
     df = test_df.copy()
     result = FeatureGen.adxr("a", "b", "d", 3).gen(df)
 
-    assert result.equals(talib.ADXR(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADXR(df["a"], df["b"], df["d"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.adxr(a, b, d, 3).gen(df)
 
-    assert result.equals(talib.ADXR(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.ADXR(df["a"], df["b"], df["d"], 3),
+                          True)
 
 
 class TestCcis:
@@ -181,13 +184,13 @@ class TestCci:
     df = test_df.copy()
     result = FeatureGen.cci("a", "b", "d", 3).gen(df)
 
-    assert result.equals(talib.CCI(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.CCI(df["a"], df["b"], df["d"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cci(a, b, d, 3).gen(df)
 
-    assert result.equals(talib.CCI(df["a"], df["b"], df["d"], 3))
+    assert np.array_equal(result, talib.CCI(df["a"], df["b"], df["d"], 3), True)
 
 
 class TestAroonUp:
@@ -196,13 +199,13 @@ class TestAroonUp:
     df = test_df.copy()
     result = FeatureGen.aroon_up("a", "b", 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[1])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[1], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_up(a, b, 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[1])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[1], True)
 
 
 class TestAroonUps:
@@ -228,13 +231,13 @@ class TestAroonDown:
     df = test_df.copy()
     result = FeatureGen.aroon_down("a", "b", 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[0])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[0], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_down(a, b, 3).gen(df)
 
-    assert result.equals(talib.AROON(df["a"], df["b"], 3)[0])
+    assert np.array_equal(result, talib.AROON(df["a"], df["b"], 3)[0], True)
 
 
 class TestAroonDowns:
@@ -260,13 +263,13 @@ class TestArronOsc:
     df = test_df.copy()
     result = FeatureGen.aroon_osc("a", "b", 3).gen(df)
 
-    assert result.equals(talib.AROONOSC(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.AROONOSC(df["a"], df["b"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.aroon_osc(a, b, 3).gen(df)
 
-    assert result.equals(talib.AROONOSC(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.AROONOSC(df["a"], df["b"], 3), True)
 
 
 class TestArronOscs:
@@ -292,13 +295,15 @@ class TestBop:
     df = test_df.copy()
     result = FeatureGen.bop("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.BOP(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result, talib.BOP(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.bop(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.BOP(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result, talib.BOP(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestDX:
@@ -307,13 +312,13 @@ class TestDX:
     df = test_df.copy()
     result = FeatureGen.dx("a", "b", "c", 3).gen(df)
 
-    assert result.equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.DX(df["a"], df["b"], df["c"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.dx(a, b, _c, 3).gen(df)
 
-    assert result.equals(talib.DX(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.DX(df["a"], df["b"], df["c"], 3), True)
 
 
 class TestDXES:
@@ -343,13 +348,17 @@ class TestMFI:
     df = test_df.copy()
     result = FeatureGen.mfi("a", "b", "c", "v", 3).gen(df)
 
-    assert result.equals(talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
+    assert np.array_equal(result,
+                          talib.MFI(df["a"], df["b"], df["c"], df["v"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.mfi(a, b, _c, v, 3).gen(df)
 
-    assert result.equals(talib.MFI(df["a"], df["b"], df["c"], df["v"], 3))
+    assert np.array_equal(result,
+                          talib.MFI(df["a"], df["b"], df["c"], df["v"], 3),
+                          True)
 
 
 class TestMFIS:
@@ -379,13 +388,15 @@ class TestMinusDI:
     df = test_df.copy()
     result = FeatureGen.minus_di("a", "b", "c", 3).gen(df)
 
-    assert result.equals(talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.MINUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.minus_di(a, b, _c, 3).gen(df)
 
-    assert result.equals(talib.MINUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.MINUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
 
 class TestMinusDis:
@@ -415,13 +426,13 @@ class TestMinusDM:
     df = test_df.copy()
     result = FeatureGen.minus_dm("a", "b", 3).gen(df)
 
-    assert result.equals(talib.MINUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.MINUS_DM(df["a"], df["b"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.minus_dm(a, b, 3).gen(df)
 
-    assert result.equals(talib.MINUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.MINUS_DM(df["a"], df["b"], 3), True)
 
 
 class TestMinusDMs:
@@ -447,13 +458,15 @@ class TestPlusDI:
     df = test_df.copy()
     result = FeatureGen.plus_di("a", "b", "c", 3).gen(df)
 
-    assert result.equals(talib.PLUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.PLUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.plus_di(a, b, _c, 3).gen(df)
 
-    assert result.equals(talib.PLUS_DI(df["a"], df["b"], df["c"], 3))
+    assert np.array_equal(result, talib.PLUS_DI(df["a"], df["b"], df["c"], 3),
+                          True)
 
 
 class TestPlusDIs:
@@ -483,13 +496,13 @@ class TestPlusDM:
     df = test_df.copy()
     result = FeatureGen.plus_dm("a", "b", 3).gen(df)
 
-    assert result.equals(talib.PLUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.PLUS_DM(df["a"], df["b"], 3), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.plus_dm(a, b, 3).gen(df)
 
-    assert result.equals(talib.PLUS_DM(df["a"], df["b"], 3))
+    assert np.array_equal(result, talib.PLUS_DM(df["a"], df["b"], 3), True)
 
 
 class TestPlusDMS:
@@ -515,15 +528,17 @@ class TestSTOCHSlowd:
     df = test_df.copy()
     result = FeatureGen.stoch_slowd("a", "b", "c", 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stoch_slowd(a, b, _c, 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[1], True)
 
 
 class TestSTOCHSlowk:
@@ -532,15 +547,17 @@ class TestSTOCHSlowk:
     df = test_df.copy()
     result = FeatureGen.stoch_slowk("a", "b", "c", 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0], True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stoch_slowk(a, b, _c, 5, 3, 10).gen(df)
 
-    assert result.equals(
-        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0])
+    assert np.array_equal(
+        result,
+        talib.STOCH(df["a"], df["b"], df["c"], 5, 3, slowd_period=10)[0], True)
 
 
 class TestSTOCHFFastk:
@@ -549,13 +566,17 @@ class TestSTOCHFFastk:
     df = test_df.copy()
     result = FeatureGen.stochf_fastk("a", "b", "c", 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0],
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stochf_fastk(a, b, _c, 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[0],
+                          True)
 
 
 class TestSTOCHFFastd:
@@ -564,13 +585,17 @@ class TestSTOCHFFastd:
     df = test_df.copy()
     result = FeatureGen.stochf_fastd("a", "b", "c", 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1],
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.stochf_fastd(a, b, _c, 5, 3).gen(df)
 
-    assert result.equals(talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1])
+    assert np.array_equal(result,
+                          talib.STOCHF(df["a"], df["b"], df["c"], 5, 3)[1],
+                          True)
 
 
 class TestULTOSC:
@@ -579,13 +604,17 @@ class TestULTOSC:
     df = test_df.copy()
     result = FeatureGen.ultosc("a", "b", "c", 3, 5, 7).gen(df)
 
-    assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
+    assert np.array_equal(result,
+                          talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.ultosc(a, b, _c, 3, 5, 7).gen(df)
 
-    assert result.equals(talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7))
+    assert np.array_equal(result,
+                          talib.ULTOSC(df["a"], df["b"], df["c"], 3, 5, 7),
+                          True)
 
 
 class TestWillr:
@@ -594,13 +623,15 @@ class TestWillr:
     df = test_df.copy()
     result = FeatureGen.willr("a", "b", "c", 5).gen(df)
 
-    assert result.equals(talib.WILLR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.WILLR(df["a"], df["b"], df["c"], 5),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.willr(a, b, _c, 5).gen(df)
 
-    assert result.equals(talib.WILLR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.WILLR(df["a"], df["b"], df["c"], 5),
+                          True)
 
 
 class TestWillrs:
@@ -630,13 +661,15 @@ class TestAD:
     df = test_df.copy()
     result = FeatureGen.ad("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.AD(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result, talib.AD(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.ad(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.AD(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result, talib.AD(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestADOSC:
@@ -645,13 +678,17 @@ class TestADOSC:
     df = test_df.copy()
     result = FeatureGen.adosc("a", "b", "c", "d", 3, 5).gen(df)
 
-    assert result.equals(talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5))
+    assert np.array_equal(result,
+                          talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.adosc(a, b, _c, d, 3, 5).gen(df)
 
-    assert result.equals(talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5))
+    assert np.array_equal(result,
+                          talib.ADOSC(df["a"], df["b"], df["c"], df["d"], 3, 5),
+                          True)
 
 
 class TestOBV:
@@ -660,13 +697,13 @@ class TestOBV:
     df = test_df.copy()
     result = FeatureGen.obv("a", "b").gen(df)
 
-    assert result.equals(talib.OBV(df["a"], df["b"]))
+    assert np.array_equal(result, talib.OBV(df["a"], df["b"]))
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.obv(a, b).gen(df)
 
-    assert result.equals(talib.OBV(df["a"], df["b"]))
+    assert np.array_equal(result, talib.OBV(df["a"], df["b"]))
 
 
 class TestATR:
@@ -675,13 +712,13 @@ class TestATR:
     df = test_df.copy()
     result = FeatureGen.atr("a", "b", "c", 5).gen(df)
 
-    assert result.equals(talib.ATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.ATR(df["a"], df["b"], df["c"], 5), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.atr(a, b, _c, 5).gen(df)
 
-    assert result.equals(talib.ATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.ATR(df["a"], df["b"], df["c"], 5), True)
 
 
 class TestATRS:
@@ -711,13 +748,15 @@ class TestNATR:
     df = test_df.copy()
     result = FeatureGen.natr("a", "b", "c", 5).gen(df)
 
-    assert result.equals(talib.NATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.NATR(df["a"], df["b"], df["c"], 5),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.natr(a, b, _c, 5).gen(df)
 
-    assert result.equals(talib.NATR(df["a"], df["b"], df["c"], 5))
+    assert np.array_equal(result, talib.NATR(df["a"], df["b"], df["c"], 5),
+                          True)
 
 
 class TestNATRS:
@@ -747,13 +786,13 @@ class TestTRANGE:
     df = test_df.copy()
     result = FeatureGen.trange("a", "b", "c").gen(df)
 
-    assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
+    assert np.array_equal(result, talib.TRANGE(df["a"], df["b"], df["c"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.trange(a, b, _c).gen(df)
 
-    assert result.equals(talib.TRANGE(df["a"], df["b"], df["c"]))
+    assert np.array_equal(result, talib.TRANGE(df["a"], df["b"], df["c"]), True)
 
 
 class TestCDL2CROWS:
@@ -762,13 +801,17 @@ class TestCDL2CROWS:
     df = test_df.copy()
     result = FeatureGen.cdl2crows("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl2crows(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDL2CROWS(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDL3BLACKCROWS:
@@ -777,15 +820,15 @@ class TestCDL3BLACKCROWS:
     df = test_df.copy()
     result = FeatureGen.cdl3blackcrows("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDL3BLACKCROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3BLACKCROWS(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl3blackcrows(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDL3BLACKCROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3BLACKCROWS(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDL3INSIDE:
@@ -794,13 +837,17 @@ class TestCDL3INSIDE:
     df = test_df.copy()
     result = FeatureGen.cdl3inside("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDL3INSIDE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDL3INSIDE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl3inside(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDL3INSIDE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDL3INSIDE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDL3LINESTRIKE:
@@ -809,15 +856,15 @@ class TestCDL3LINESTRIKE:
     df = test_df.copy()
     result = FeatureGen.cdl3linestrike("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDL3LINESTRIKE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3LINESTRIKE(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl3linestrike(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDL3LINESTRIKE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3LINESTRIKE(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDL3OUTSIDE:
@@ -826,13 +873,17 @@ class TestCDL3OUTSIDE:
     df = test_df.copy()
     result = FeatureGen.cdl3outside("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl3outside(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDL3OUTSIDE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDL3STARSINSOUTH:
@@ -841,15 +892,17 @@ class TestCDL3STARSINSOUTH:
     df = test_df.copy()
     result = FeatureGen.cdl3starsinsouth("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl3starsinsouth(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3STARSINSOUTH(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDL3WHITESOLDIERS:
@@ -858,15 +911,17 @@ class TestCDL3WHITESOLDIERS:
     df = test_df.copy()
     result = FeatureGen.cdl3whitesoldiers("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdl3whitesoldiers(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDL3WHITESOLDIERS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLABANDONEDBABY:
@@ -875,15 +930,17 @@ class TestCDLABANDONEDBABY:
     df = test_df.copy()
     result = FeatureGen.cdlabandonedbaby("a", "b", "c", "d", 0).gen(df)
 
-    assert result.equals(
-        talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlabandonedbaby(a, b, _c, d, 0).gen(df)
 
-    assert result.equals(
-        talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLABANDONEDBABY(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
 
 class TestCDLADVANCEBLOCK:
@@ -892,15 +949,15 @@ class TestCDLADVANCEBLOCK:
     df = test_df.copy()
     result = FeatureGen.cdladvanceblock("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdladvanceblock(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLADVANCEBLOCK(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLBELTHOLD:
@@ -909,13 +966,17 @@ class TestCDLBELTHOLD:
     df = test_df.copy()
     result = FeatureGen.cdlbelthold("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlbelthold(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLBELTHOLD(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLBREAKAWAY:
@@ -924,13 +985,15 @@ class TestCDLBREAKAWAY:
     df = test_df.copy()
     result = FeatureGen.cdlbreakaway("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlbreakaway(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLBREAKAWAY(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLCLOSINGMARUBOZU:
@@ -939,15 +1002,17 @@ class TestCDLCLOSINGMARUBOZU:
     df = test_df.copy()
     result = FeatureGen.cdlclosingmarubozu("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlclosingmarubozu(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLCLOSINGMARUBOZU(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLCONCEALBABYSWALL:
@@ -956,15 +1021,17 @@ class TestCDLCONCEALBABYSWALL:
     df = test_df.copy()
     result = FeatureGen.cdlconcealbabyswall("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlconcealbabyswall(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLCONCEALBABYSWALL(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLCOUNTERATTACK:
@@ -973,15 +1040,17 @@ class TestCDLCOUNTERATTACK:
     df = test_df.copy()
     result = FeatureGen.cdlcounterattack("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlcounterattack(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLCOUNTERATTACK(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLDARKCLOUDCOVER:
@@ -990,15 +1059,17 @@ class TestCDLDARKCLOUDCOVER:
     df = test_df.copy()
     result = FeatureGen.cdldarkcloudcover("a", "b", "c", "d", 0).gen(df)
 
-    assert result.equals(
-        talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdldarkcloudcover(a, b, _c, d, 0).gen(df)
 
-    assert result.equals(
-        talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLDARKCLOUDCOVER(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
 
 class TestCDLDOJI:
@@ -1007,13 +1078,17 @@ class TestCDLDOJI:
     df = test_df.copy()
     result = FeatureGen.cdldoji("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLDOJI(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdldoji(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLDOJI(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLDOJISTAR:
@@ -1022,13 +1097,17 @@ class TestCDLDOJISTAR:
     df = test_df.copy()
     result = FeatureGen.cdldojistar("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLDOJISTAR(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdldojistar(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLDOJISTAR(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLDRAGONFLYDOJI:
@@ -1037,15 +1116,17 @@ class TestCDLDRAGONFLYDOJI:
     df = test_df.copy()
     result = FeatureGen.cdldragonflydoji("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdldragonflydoji(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLDRAGONFLYDOJI(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLENGULFING:
@@ -1054,13 +1135,15 @@ class TestCDLENGULFING:
     df = test_df.copy()
     result = FeatureGen.cdlengulfing("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlengulfing(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLENGULFING(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLEVENINGDOJISTAR:
@@ -1069,15 +1152,17 @@ class TestCDLEVENINGDOJISTAR:
     df = test_df.copy()
     result = FeatureGen.cdleveningdojistar("a", "b", "c", "d", 0).gen(df)
 
-    assert result.equals(
-        talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdleveningdojistar(a, b, _c, d, 0).gen(df)
 
-    assert result.equals(
-        talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLEVENINGDOJISTAR(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
 
 class TestCDLEVENINGSTAR:
@@ -1086,15 +1171,17 @@ class TestCDLEVENINGSTAR:
     df = test_df.copy()
     result = FeatureGen.cdleveningstar("a", "b", "c", "d", 0).gen(df)
 
-    assert result.equals(
-        talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdleveningstar(a, b, _c, d, 0).gen(df)
 
-    assert result.equals(
-        talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0))
+    assert np.array_equal(
+        result, talib.CDLEVENINGSTAR(df["a"], df["b"], df["c"], df["d"], 0),
+        True)
 
 
 class TestCDLGAPSIDESIDEWHITE:
@@ -1103,15 +1190,17 @@ class TestCDLGAPSIDESIDEWHITE:
     df = test_df.copy()
     result = FeatureGen.cdlgapsidesidewhite("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlgapsidesidewhite(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLGAPSIDESIDEWHITE(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLGRAVESTONEDOJI:
@@ -1120,15 +1209,17 @@ class TestCDLGRAVESTONEDOJI:
     df = test_df.copy()
     result = FeatureGen.cdlgravestonedoji("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLGRAVESTONEDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLGRAVESTONEDOJI(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlgravestonedoji(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLGRAVESTONEDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLGRAVESTONEDOJI(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLHAMMER:
@@ -1137,13 +1228,17 @@ class TestCDLHAMMER:
     df = test_df.copy()
     result = FeatureGen.cdlhammer("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHAMMER(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHAMMER(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlhammer(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHAMMER(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHAMMER(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLHANGINGMAN:
@@ -1152,15 +1247,15 @@ class TestCDLHANGINGMAN:
     df = test_df.copy()
     result = FeatureGen.cdlhangingman("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHANGINGMAN(df["a"], df["b"], df["c"],
-                                             df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHANGINGMAN(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlhangingman(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHANGINGMAN(df["a"], df["b"], df["c"],
-                                             df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHANGINGMAN(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLHARAMI:
@@ -1169,13 +1264,17 @@ class TestCDLHARAMI:
     df = test_df.copy()
     result = FeatureGen.cdlharami("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlharami(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHARAMI(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLHARAMICROSS:
@@ -1184,15 +1283,15 @@ class TestCDLHARAMICROSS:
     df = test_df.copy()
     result = FeatureGen.cdlharamicross("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLHARAMICROSS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHARAMICROSS(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlharamicross(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLHARAMICROSS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHARAMICROSS(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLHIGHWAVE:
@@ -1201,13 +1300,17 @@ class TestCDLHIGHWAVE:
     df = test_df.copy()
     result = FeatureGen.cdlhighwave("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlhighwave(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHIGHWAVE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLHIKKAKE:
@@ -1216,13 +1319,17 @@ class TestCDLHIKKAKE:
     df = test_df.copy()
     result = FeatureGen.cdlhikkake("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlhikkake(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLHIKKAKE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLHIKKAKEMOD:
@@ -1231,15 +1338,15 @@ class TestCDLHIKKAKEMOD:
     df = test_df.copy()
     result = FeatureGen.cdlhikkakemod("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLHIKKAKEMOD(df["a"], df["b"], df["c"],
-                                             df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHIKKAKEMOD(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlhikkakemod(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLHIKKAKEMOD(df["a"], df["b"], df["c"],
-                                             df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHIKKAKEMOD(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLHOMINGPIGEON:
@@ -1248,15 +1355,15 @@ class TestCDLHOMINGPIGEON:
     df = test_df.copy()
     result = FeatureGen.cdlhomingpigeon("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLHOMINGPIGEON(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHOMINGPIGEON(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlhomingpigeon(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLHOMINGPIGEON(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLHOMINGPIGEON(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLIDENTICAL3CROWS:
@@ -1265,15 +1372,17 @@ class TestCDLIDENTICAL3CROWS:
     df = test_df.copy()
     result = FeatureGen.cdlidentical3crows("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlidentical3crows(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLIDENTICAL3CROWS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLINNECK:
@@ -1282,13 +1391,17 @@ class TestCDLINNECK:
     df = test_df.copy()
     result = FeatureGen.cdlinneck("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLINNECK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLINNECK(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlinneck(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLINNECK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLINNECK(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLINVERTEDHAMMER:
@@ -1297,15 +1410,17 @@ class TestCDLINVERTEDHAMMER:
     df = test_df.copy()
     result = FeatureGen.cdlinvertedhammer("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLINVERTEDHAMMER(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLINVERTEDHAMMER(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlinvertedhammer(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLINVERTEDHAMMER(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLINVERTEDHAMMER(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLKICKING:
@@ -1314,13 +1429,17 @@ class TestCDLKICKING:
     df = test_df.copy()
     result = FeatureGen.cdlkicking("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLKICKING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLKICKING(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlkicking(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLKICKING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLKICKING(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLKICKINGBYLENGTH:
@@ -1329,15 +1448,17 @@ class TestCDLKICKINGBYLENGTH:
     df = test_df.copy()
     result = FeatureGen.cdlkickingbylength("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlkickingbylength(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLKICKINGBYLENGTH(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLLADDERBOTTOM:
@@ -1346,15 +1467,15 @@ class TestCDLLADDERBOTTOM:
     df = test_df.copy()
     result = FeatureGen.cdlladderbottom("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlladderbottom(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLLADDERBOTTOM(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLLONGLEGGEDDOJI:
@@ -1363,15 +1484,17 @@ class TestCDLLONGLEGGEDDOJI:
     df = test_df.copy()
     result = FeatureGen.cdllongleggeddoji("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdllongleggeddoji(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLLONGLEGGEDDOJI(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLLONGLINE:
@@ -1380,13 +1503,17 @@ class TestCDLLONGLINE:
     df = test_df.copy()
     result = FeatureGen.cdllongline("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdllongline(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLLONGLINE(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLMARUBOZU:
@@ -1395,13 +1522,17 @@ class TestCDLMARUBOZU:
     df = test_df.copy()
     result = FeatureGen.cdlmarubozu("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLMARUBOZU(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlmarubozu(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLMARUBOZU(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLMARUBOZU(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLMATCHINGLOW:
@@ -1410,15 +1541,15 @@ class TestCDLMATCHINGLOW:
     df = test_df.copy()
     result = FeatureGen.cdlmatchinglow("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLMATCHINGLOW(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLMATCHINGLOW(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlmatchinglow(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLMATCHINGLOW(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLMATCHINGLOW(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLMATHOLD:
@@ -1427,13 +1558,17 @@ class TestCDLMATHOLD:
     df = test_df.copy()
     result = FeatureGen.cdlmathold("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLMATHOLD(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLMATHOLD(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlmathold(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLMATHOLD(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLMATHOLD(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLMORNINGDOJISTAR:
@@ -1442,15 +1577,17 @@ class TestCDLMORNINGDOJISTAR:
     df = test_df.copy()
     result = FeatureGen.cdlmorningdojistar("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlmorningdojistar(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLMORNINGDOJISTAR(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLMORNINGSTAR:
@@ -1459,15 +1596,15 @@ class TestCDLMORNINGSTAR:
     df = test_df.copy()
     result = FeatureGen.cdlmorningstar("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlmorningstar(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLMORNINGSTAR(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLONNECK:
@@ -1476,13 +1613,17 @@ class TestCDLONNECK:
     df = test_df.copy()
     result = FeatureGen.cdlonneck("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlonneck(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLONNECK(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLPIERCING:
@@ -1491,13 +1632,17 @@ class TestCDLPIERCING:
     df = test_df.copy()
     result = FeatureGen.cdlpiercing("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLPIERCING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLPIERCING(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlpiercing(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLPIERCING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLPIERCING(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLRICKSHAWMAN:
@@ -1506,15 +1651,15 @@ class TestCDLRICKSHAWMAN:
     df = test_df.copy()
     result = FeatureGen.cdlrickshawman("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlrickshawman(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLRICKSHAWMAN(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLRISEFALL3METHODS:
@@ -1523,15 +1668,17 @@ class TestCDLRISEFALL3METHODS:
     df = test_df.copy()
     result = FeatureGen.cdlrisefall3methods("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlrisefall3methods(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLRISEFALL3METHODS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLSEPARATINGLINES:
@@ -1540,15 +1687,17 @@ class TestCDLSEPARATINGLINES:
     df = test_df.copy()
     result = FeatureGen.cdlseparatinglines("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlseparatinglines(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSEPARATINGLINES(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLSHOOTINGSTAR:
@@ -1557,15 +1706,15 @@ class TestCDLSHOOTINGSTAR:
     df = test_df.copy()
     result = FeatureGen.cdlshootingstar("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlshootingstar(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSHOOTINGSTAR(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLSHORTLINE:
@@ -1574,13 +1723,15 @@ class TestCDLSHORTLINE:
     df = test_df.copy()
     result = FeatureGen.cdlshortline("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlshortline(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSHORTLINE(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLSPINNINGTOP:
@@ -1589,15 +1740,15 @@ class TestCDLSPINNINGTOP:
     df = test_df.copy()
     result = FeatureGen.cdlspinningtop("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlspinningtop(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSPINNINGTOP(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLSTALLEDPATTERN:
@@ -1606,15 +1757,17 @@ class TestCDLSTALLEDPATTERN:
     df = test_df.copy()
     result = FeatureGen.cdlstalledpattern("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlstalledpattern(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSTALLEDPATTERN(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLSTICKSANDWICH:
@@ -1623,15 +1776,17 @@ class TestCDLSTICKSANDWICH:
     df = test_df.copy()
     result = FeatureGen.cdlsticksandwich("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLSTICKSANDWICH(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSTICKSANDWICH(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlsticksandwich(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLSTICKSANDWICH(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLSTICKSANDWICH(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLTAKURI:
@@ -1640,13 +1795,17 @@ class TestCDLTAKURI:
     df = test_df.copy()
     result = FeatureGen.cdltakuri("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLTAKURI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLTAKURI(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdltakuri(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLTAKURI(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLTAKURI(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLTASUKIGAP:
@@ -1655,13 +1814,15 @@ class TestCDLTASUKIGAP:
     df = test_df.copy()
     result = FeatureGen.cdltasukigap("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdltasukigap(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLTASUKIGAP(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLTHRUSTING:
@@ -1670,13 +1831,15 @@ class TestCDLTHRUSTING:
     df = test_df.copy()
     result = FeatureGen.cdlthrusting("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlthrusting(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLTHRUSTING(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLTRISTAR:
@@ -1685,13 +1848,17 @@ class TestCDLTRISTAR:
     df = test_df.copy()
     result = FeatureGen.cdltristar("a", "b", "c", "d").gen(df)
 
-    assert result.equals(talib.CDLTRISTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLTRISTAR(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdltristar(a, b, _c, d).gen(df)
 
-    assert result.equals(talib.CDLTRISTAR(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(result,
+                          talib.CDLTRISTAR(df["a"], df["b"], df["c"], df["d"]),
+                          True)
 
 
 class TestCDLUNIQUE3RIVER:
@@ -1700,15 +1867,15 @@ class TestCDLUNIQUE3RIVER:
     df = test_df.copy()
     result = FeatureGen.cdlunique3river("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLUNIQUE3RIVER(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLUNIQUE3RIVER(df["a"], df["b"], df["c"], df["d"]), True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlunique3river(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLUNIQUE3RIVER(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLUNIQUE3RIVER(df["a"], df["b"], df["c"], df["d"]), True)
 
 
 class TestCDLUPSIDEGAP2CROWS:
@@ -1717,15 +1884,17 @@ class TestCDLUPSIDEGAP2CROWS:
     df = test_df.copy()
     result = FeatureGen.cdlupsidegap2crows("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlupsidegap2crows(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLUPSIDEGAP2CROWS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
 
 class TestCDLXSIDEGAP3METHODS:
@@ -1734,12 +1903,14 @@ class TestCDLXSIDEGAP3METHODS:
     df = test_df.copy()
     result = FeatureGen.cdlxsidegap3methods("a", "b", "c", "d").gen(df)
 
-    assert result.equals(
-        talib.CDLXSIDEGAP3METHODS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLXSIDEGAP3METHODS(df["a"], df["b"], df["c"], df["d"]),
+        True)
 
   def test_accept_col(self):
     df = test_df.copy()
     result = FeatureGen.cdlxsidegap3methods(a, b, _c, d).gen(df)
 
-    assert result.equals(
-        talib.CDLXSIDEGAP3METHODS(df["a"], df["b"], df["c"], df["d"]))
+    assert np.array_equal(
+        result, talib.CDLXSIDEGAP3METHODS(df["a"], df["b"], df["c"], df["d"]),
+        True)

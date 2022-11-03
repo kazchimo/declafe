@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe import ColLike
@@ -15,5 +15,5 @@ class RSIFeature(UnaryFeature):
   def name(self) -> str:
     return f"RSI_{self.period}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.RSI(ser, timeperiod=self.period)
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    return talib.RSI(ser.astype(float), timeperiod=self.period)

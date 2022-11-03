@@ -1,6 +1,6 @@
 from typing import Any
 
-import pandas as pd
+import numpy as np
 
 from .UnaryFeature import UnaryFeature
 
@@ -14,10 +14,13 @@ class ConsecutiveCountFeature(UnaryFeature):
     super().__init__(column_name)
     self.target_value = target_value
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     """see: https://stackoverflow.com/questions/27626542/counting-consecutive-positive-values-in-python-pandas-array"""
-    ser = (ser == self.target_value)
-    return ser * (ser.groupby((ser != ser.shift()).cumsum()).cumcount() + 1)
+    condition = (ser == self.target_value)
+    gen_arr = np.frompyfunc(lambda b: np.arange(b), 1, 1)
+    res = gen_arr(np.bincount(np.cumsum(condition != np.roll(condition, 1))))
+
+    return condition * (np.concatenate(res) + 1)
 
   @property
   def name(self) -> str:

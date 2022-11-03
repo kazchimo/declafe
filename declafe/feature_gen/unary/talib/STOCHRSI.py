@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe import ColLike
@@ -23,8 +23,8 @@ class STOCHRSIFastkFeature(UnaryFeature):
   def name(self) -> str:
     return f"STOCHRSI_fastk_{self.period}_{self.fastk_period}_{self.fastd_period}_{self.fastd_matype}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.STOCHRSI(ser,
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    return talib.STOCHRSI(ser.astype(float),
                           timeperiod=self.period,
                           fastk_period=self.fastk_period,
                           fastd_period=self.fastd_period,
@@ -49,8 +49,8 @@ class STOCHRSIFastdFeature(UnaryFeature):
   def name(self) -> str:
     return f"STOCHRSI_fastd_{self.period}_{self.fastk_period}_{self.fastd_period}_{self.fastd_matype}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return talib.STOCHRSI(ser,
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    return talib.STOCHRSI(ser.astype(float),
                           timeperiod=self.period,
                           fastk_period=self.fastk_period,
                           fastd_period=self.fastd_period,

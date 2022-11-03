@@ -1,15 +1,14 @@
 from typing import Optional
 
 import numpy as np
-import pandas as pd
 
 from declafe.feature_gen.types import NumericDTypes
 
 
-def infer_min_numeric_type(col: pd.Series) -> Optional[NumericDTypes]:
+def infer_min_numeric_type(col: np.ndarray) -> Optional[NumericDTypes]:
   numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 
-  col_type = col.dtypes
+  col_type = col.dtype
 
   dt: Optional[NumericDTypes] = None
 

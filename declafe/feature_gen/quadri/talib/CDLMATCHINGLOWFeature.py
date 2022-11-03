@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe import ColLike
@@ -18,13 +18,13 @@ class CDLMATCHINGLOWFeature(QuadriFeature):
   ):
     super().__init__(open, high, low, close)
 
-  def quadrigen(self, col1: pd.Series, col2: pd.Series, col3: pd.Series,
-                col4: pd.Series) -> pd.Series:
+  def quadrigen(self, col1: np.ndarray, col2: np.ndarray, col3: np.ndarray,
+                col4: np.ndarray) -> np.ndarray:
     return talib.CDLMATCHINGLOW(
-        col1,
-        col2,
-        col3,
-        col4,
+        col1.astype(float),
+        col2.astype(float),
+        col3.astype(float),
+        col4.astype(float),
     )
 
   def _feature_name(self) -> str:

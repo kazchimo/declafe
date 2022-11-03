@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from declafe import ColLike
@@ -14,11 +14,11 @@ class ULTOSCFeature(TriFeature):
     self.timeperiod2 = timeperiod2
     self.timeperiod3 = timeperiod3
 
-  def trigen(self, col1: pd.Series, col2: pd.Series,
-             col3: pd.Series) -> pd.Series:
-    return talib.ULTOSC(col1,
-                        col2,
-                        col3,
+  def trigen(self, col1: np.ndarray, col2: np.ndarray,
+             col3: np.ndarray) -> np.ndarray:
+    return talib.ULTOSC(col1.astype(float),
+                        col2.astype(float),
+                        col3.astype(float),
                         timeperiod1=self.timeperiod1,
                         timeperiod2=self.timeperiod2,
                         timeperiod3=self.timeperiod3)

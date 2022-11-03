@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+import numpy as np
 import pandas as pd
 
 from declafe import FeatureGen, ColLike
@@ -16,10 +17,10 @@ class QuadriFeature(FeatureGen, ABC):
     self.col4 = self.to_col(col4)
 
   @abstractmethod
-  def quadrigen(self, col1: pd.Series, col2: pd.Series, col3: pd.Series,
-                col4: pd.Series) -> pd.Series:
+  def quadrigen(self, col1: np.ndarray, col2: np.ndarray, col3: np.ndarray,
+                col4: np.ndarray) -> np.ndarray:
     raise NotImplementedError()
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
-    return self.quadrigen(df[self.col1], df[self.col2], df[self.col3],
-                          df[self.col4])
+  def gen(self, df: pd.DataFrame) -> np.ndarray:
+    return self.quadrigen(df[self.col1].to_numpy(), df[self.col2].to_numpy(),
+                          df[self.col3].to_numpy(), df[self.col4].to_numpy())

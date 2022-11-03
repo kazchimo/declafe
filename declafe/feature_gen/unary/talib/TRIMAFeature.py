@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -14,5 +14,5 @@ class TRIMAFeature(UnaryFeature):
   def name(self) -> str:
     return f"TEMA_{self.period}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.TRIMA(ser, timeperiod=self.period)

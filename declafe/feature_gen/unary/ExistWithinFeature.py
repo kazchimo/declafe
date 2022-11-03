@@ -1,6 +1,7 @@
 from typing import Any
 
-import pandas as pd
+import numpy as np
+from numba import jit
 
 from .UnaryFeature import UnaryFeature
 
@@ -20,10 +21,12 @@ class ExistWithinFeature(UnaryFeature):
   def name(self) -> str:
     return f"{self.target_value}_exist_within_{self.period}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    tv = self.target_value
+    p = self.period
 
-    def f(x: pd.Series) -> bool:
-      return self.target_value in x.values
+    @jit(nopython=True)
+    def check(idx: int) -> bool:
+      return tv in ser[idx - p + 1:idx + 1]
 
-    return ser.rolling(self.period, min_periods=1, axis=0)\
-      .apply(f, engine=self.engine).astype(bool)
+    return np.frompyfunc(check, 1, 1)(np.arange(len(ser)))

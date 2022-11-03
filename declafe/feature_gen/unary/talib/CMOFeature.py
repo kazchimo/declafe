@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 import talib
 
 from ..UnaryFeature import UnaryFeature
@@ -16,5 +16,5 @@ class CMOFeature(UnaryFeature):
   def name(self) -> str:
     return f"CMO_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return talib.CMO(ser, self.periods)

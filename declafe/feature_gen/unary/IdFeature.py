@@ -1,6 +1,6 @@
 from typing import List, TYPE_CHECKING
 
-import pandas as pd
+import numpy as np
 
 from .UnaryFeature import UnaryFeature
 
@@ -19,7 +19,7 @@ class IdFeature(UnaryFeature):
   def _feature_name(self) -> str:
     return self.column_name
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return ser
 
   @classmethod

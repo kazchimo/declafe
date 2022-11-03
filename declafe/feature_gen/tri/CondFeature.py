@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from declafe import ColLike
@@ -11,8 +12,8 @@ class CondFeature(TriFeature):
   def __init__(self, test_col: ColLike, true_col: ColLike, false_col: ColLike):
     super().__init__(test_col, true_col, false_col)
 
-  def trigen(self, col1: pd.Series, col2: pd.Series,
-             col3: pd.Series) -> pd.Series:
+  def trigen(self, col1: np.ndarray, col2: np.ndarray,
+             col3: np.ndarray) -> np.ndarray:
     return pd.DataFrame({
         "test": col1,
         "true": col2,

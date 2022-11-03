@@ -1,5 +1,6 @@
 from typing import Literal
 
+import numpy as np
 import pandas as pd
 
 from declafe import ColLike
@@ -18,5 +19,5 @@ class ToDatetimeFeature(UnaryFeature):
   def name(self) -> str:
     return "to_datetime"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return pd.to_datetime(ser, unit=self.unit)
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    return pd.to_datetime(ser, unit=self.unit).values

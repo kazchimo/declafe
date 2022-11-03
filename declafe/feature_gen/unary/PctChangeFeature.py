@@ -1,13 +1,9 @@
-from typing import TYPE_CHECKING
-
-import pandas as pd
+import numpy as np
+from scipy.ndimage import shift
 
 from .UnaryFeature import UnaryFeature
 
 __all__ = ["PctChangeFeature"]
-
-if TYPE_CHECKING:
-  from declafe import series
 
 
 class PctChangeFeature(UnaryFeature):
@@ -20,10 +16,6 @@ class PctChangeFeature(UnaryFeature):
   def name(self) -> str:
     return f"pct_change_{self.periods}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.pct_change(periods=self.periods)
-
-  @staticmethod
-  def gen_target(values: "series", changes: "series") -> pd.Series:
-    """変化率から実際に変化後の値を返す"""
-    return values * (1 + changes)
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    r = ser / shift(ser.astype(float), self.periods, cval=np.NaN) - 1
+    return r

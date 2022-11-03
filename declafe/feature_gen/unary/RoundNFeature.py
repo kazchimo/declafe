@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 
 from .UnaryFeature import UnaryFeature
 
@@ -15,5 +15,5 @@ class RoundNFeature(UnaryFeature):
   def name(self) -> str:
     return f"round{self.round_digit}"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return ser.round(self.round_digit)

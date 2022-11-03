@@ -1,6 +1,6 @@
-from datetime import tzinfo
+from datetime import tzinfo, datetime
 
-import pandas as pd
+import numpy as np
 import pytz
 
 from ..UnaryFeature import UnaryFeature
@@ -16,8 +16,11 @@ class WeekOfYearFeature(UnaryFeature):
     super().__init__(column_name)
     self.timezone = timezone
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
-    return ser.apply(lambda x: x.isocalendar()[1])
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
+    gen = np.frompyfunc(
+        lambda x: datetime.utcfromtimestamp(x / 1000_000_000).isocalendar()[1], 1, 1)
+
+    return gen(ser)
 
   @property
   def name(self) -> str:

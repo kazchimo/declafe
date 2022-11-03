@@ -1,4 +1,4 @@
-import pandas as pd
+import numpy as np
 
 from .UnaryFeature import UnaryFeature
 
@@ -11,5 +11,5 @@ class IsPositiveFeature(UnaryFeature):
   def name(self) -> str:
     return f"is_positive"
 
-  def gen_unary(self, ser: pd.Series) -> pd.Series:
+  def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     return ser > 0
