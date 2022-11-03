@@ -1,5 +1,3 @@
-from typing import cast
-
 import numpy as np
 from numba import jit
 
@@ -33,6 +31,6 @@ class StddevFeature(UnaryFeature):
       if len(a) == 0:
         return np.nan
       else:
-        return cast(float, np.std(a, ddof=self.ddof))
+        return np.std(a, ddof=self.ddof)  # type: ignore
 
     return np.frompyfunc(gen, 1, 1)(np.arange(len(ser))).astype("float")

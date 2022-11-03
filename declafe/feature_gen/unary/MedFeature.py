@@ -1,5 +1,3 @@
-from typing import cast
-
 import numpy as np
 from numba import jit
 
@@ -30,6 +28,6 @@ class MedFeature(UnaryFeature):
       if len(a) == 0:
         return np.nan
       else:
-        return cast(float, np.median(a))
+        return np.median(a)  # type: ignore
 
     return np.frompyfunc(gen, 1, 1)(np.arange(len(ser))).astype("float")
