@@ -21,5 +21,5 @@ class QuadriFeature(FeatureGen, ABC):
     raise NotImplementedError()
 
   def gen(self, df: pd.DataFrame) -> pd.Series:
-    return self.quadrigen(df[self.col1], df[self.col2], df[self.col3],
-                          df[self.col4])
+    return self.quadrigen(df[self.col1].values, df[self.col2].values,
+                          df[self.col3].values, df[self.col4].values)

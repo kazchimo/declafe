@@ -23,10 +23,10 @@ class CDLMORNINGSTARFeature(QuadriFeature):
   def quadrigen(self, col1: pd.Series, col2: pd.Series, col3: pd.Series,
                 col4: pd.Series) -> pd.Series:
     return talib.CDLMORNINGSTAR(
-        col1,
-        col2,
-        col3,
-        col4,
+        col1.astype(float),
+        col2.astype(float),
+        col3.astype(float),
+        col4.astype(float),
         penetration=self.penetration,
     )
 
