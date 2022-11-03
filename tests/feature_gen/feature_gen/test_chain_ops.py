@@ -135,6 +135,17 @@ class TestMovingMax:
                           True)
 
 
+class TestMovingMin:
+
+  def test_return_moving_min(self):
+    f = a.moving_min(3)
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
+
+    assert np.array_equal(f.gen(df),
+                          np.array([np.nan, np.nan, 1, 2, 3, 4, 5, 6, 7, 8]),
+                          True)
+
+
 class TestAdd:
 
   def test_add(self):
