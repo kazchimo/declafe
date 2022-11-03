@@ -23,6 +23,7 @@ class StddevFeature(UnaryFeature):
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     p = self.periods
+    dd = self.ddof
 
     @jit(nopython=True)
     def gen(idx: int) -> float:
@@ -31,6 +32,6 @@ class StddevFeature(UnaryFeature):
       if len(a) == 0:
         return np.nan
       else:
-        return np.std(a, ddof=self.ddof)  # type: ignore
+        return np.std(a, ddof=dd)  # type: ignore
 
     return np.frompyfunc(gen, 1, 1)(np.arange(len(ser))).astype("float")
