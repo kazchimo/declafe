@@ -546,6 +546,7 @@ class TestSecond:
         ]})
 
     assert (a.second().gen(df) == pd.Series([0, 1])).all()
+    assert a.second().gen(df).dtype == np.int64
 
 
 class TestMinute:
@@ -558,6 +559,7 @@ class TestMinute:
         ]})
 
     assert (a.minute().gen(df) == (pd.Series([0, 1]))).all()
+    assert a.minute().gen(df).dtype == int
 
 
 class TestMinuteN:
@@ -602,6 +604,7 @@ class TestHour:
         ]})
 
     assert (a.hour().generate(df) == (np.array([0, 1]))).all()
+    assert a.hour().generate(df).dtype == "int"
 
 
 class TestHourN:
@@ -646,6 +649,20 @@ class TestDayOfWeek:
         ]})
 
     assert (a.day_of_week().gen(df) == (np.array([0, 1]))).all()
+    assert a.day_of_week().gen(df).dtype == "int"
+
+
+class TestWeekOfYear:
+
+  def test_calc_week_of_year(self):
+    df = pd.DataFrame(
+        {"a": [
+            datetime(2018, 1, 1, 0, 0, 0),
+            datetime(2018, 1, 2, 0, 0, 1),
+        ]})
+
+    assert (a.week_of_year().gen(df) == (np.array([1, 1]))).all()
+    assert a.week_of_year().gen(df).dtype == "int"
 
 
 class TestDayOfMonth:
@@ -660,6 +677,7 @@ class TestDayOfMonth:
     })
 
     assert (a.day_of_month().generate(df) == np.array([1, 2, 3])).all()
+    assert a.day_of_month().generate(df).dtype == "int"
 
 
 class TestMonth:
@@ -674,6 +692,7 @@ class TestMonth:
     })
 
     assert (a.month().generate(df) == np.array([1, 5, 8])).all()
+    assert a.month().generate(df).dtype == "int"
 
 
 class TestToDatetime:

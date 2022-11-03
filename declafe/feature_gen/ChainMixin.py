@@ -247,6 +247,10 @@ class ChainMixin:
     from declafe.feature_gen.unary.times import DayOfWeekFeature
     return self.next(DayOfWeekFeature)
 
+  def week_of_year(self) -> "FeatureGen":
+    from declafe.feature_gen.unary.times import WeekOfYearFeature
+    return self.next(WeekOfYearFeature)
+
   def day_of_month(self) -> "FeatureGen":
     from declafe.feature_gen.unary.times import DayOfMonthFeature
     return self.next(DayOfMonthFeature)
