@@ -132,6 +132,19 @@ class TestSetFeature:
     gen = RaiseGen()
     gen.set_feature(test_df)
 
+  def test_handle_non_zero_origin_index(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5]}, index=[1, 2, 3, 4, 5])
+    f = Features.many(a, a * 2, a.moving_average(2))
+
+    result = f.set_features(df)
+
+    assert result.index.equals(df.index)
+    assert result["a"].equals(pd.Series([1, 2, 3, 4, 5], index=[1, 2, 3, 4, 5]))
+    assert result["a_*_2"].equals(
+        pd.Series([2, 4, 6, 8, 10], index=[1, 2, 3, 4, 5]))
+    assert result["sma_2_of_a"].equals(
+        pd.Series([np.nan, 1.5, 2.5, 3.5, 4.5], index=[1, 2, 3, 4, 5]))
+
 
 class TestConAp:
 
