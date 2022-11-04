@@ -18,7 +18,7 @@ class ReplaceFeature(UnaryFeature):
 
   @property
   def name(self) -> str:
-    return f"replace_with_{self.target_value}"
+    return f"replace_{self.target_value}_to_{self.to_value}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     if np.isnan(self.target_value):
