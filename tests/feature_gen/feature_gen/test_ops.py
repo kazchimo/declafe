@@ -24,6 +24,12 @@ class TestEq:
     assert np.array_equal((b1 == False).gen(test_df),
                           pd.Series([False, True, False, True]))
 
+  def test_handle_float(self):
+    assert np.array_equal((b1 == 1.0).gen(test_df),
+                          pd.Series([True, False, True, False]))
+    assert np.array_equal((b1 == 0.0).gen(test_df),
+                          pd.Series([False, True, False, True]))
+
 
 class TestNe:
 
@@ -35,6 +41,12 @@ class TestNe:
     assert np.array_equal((b1 != True).gen(test_df),
                           pd.Series([False, True, False, True]))
     assert np.array_equal((b1 != False).gen(test_df),
+                          pd.Series([True, False, True, False]))
+
+  def test_handle_float(self):
+    assert np.array_equal((b1 != 1.0).gen(test_df),
+                          pd.Series([False, True, False, True]))
+    assert np.array_equal((b1 != 0.0).gen(test_df),
                           pd.Series([True, False, True, False]))
 
 
@@ -128,6 +140,11 @@ class TestGt:
     assert np.array_equal((col("a") > 2).gen(df),
                           pd.Series([False, False, True]))
 
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert np.array_equal((2 > col("a")).gen(df),
+                          pd.Series([True, False, False]))
+
 
 class TestLt:
 
@@ -140,6 +157,11 @@ class TestLt:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((col("a") < 2).gen(df),
                           pd.Series([True, False, False]))
+
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert np.array_equal((2 < col("a")).gen(df),
+                          pd.Series([False, False, True]))
 
 
 class TestGe:
@@ -154,6 +176,11 @@ class TestGe:
     assert np.array_equal((col("a") >= 2).gen(df),
                           pd.Series([False, True, True]))
 
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert np.array_equal((2 >= col("a")).gen(df),
+                          pd.Series([True, True, False]))
+
 
 class TestLe:
 
@@ -166,6 +193,11 @@ class TestLe:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((col("a") <= 2).gen(df),
                           pd.Series([True, True, False]))
+
+  def test_from_left(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert np.array_equal((2 <= col("a")).gen(df),
+                          pd.Series([False, True, True]))
 
 
 class TestAnd:
@@ -180,6 +212,18 @@ class TestAnd:
     assert np.array_equal((b1 & False).gen(test_df),
                           pd.Series([False, False, False, False]))
 
+  def test_from_left(self):
+    assert np.array_equal((True & b1).gen(test_df),
+                          pd.Series([True, False, True, False]))
+    assert np.array_equal((False & b1).gen(test_df),
+                          pd.Series([False, False, False, False]))
+
+  def test_handle_float(self):
+    assert np.array_equal((b1 & 1.0).gen(test_df),
+                          pd.Series([True, False, True, False]))
+    assert np.array_equal((b1 & 0.0).gen(test_df),
+                          pd.Series([False, False, False, False]))
+
 
 class TestOr:
 
@@ -191,4 +235,16 @@ class TestOr:
     assert np.array_equal((b1 | True).gen(test_df),
                           pd.Series([True, True, True, True]))
     assert np.array_equal((b1 | False).gen(test_df),
+                          pd.Series([True, False, True, False]))
+
+  def test_from_left(self):
+    assert np.array_equal((True | b1).gen(test_df),
+                          pd.Series([True, True, True, True]))
+    assert np.array_equal((False | b1).gen(test_df),
+                          pd.Series([True, False, True, False]))
+
+  def test_handle_float(self):
+    assert np.array_equal((b1 | 1.0).gen(test_df),
+                          pd.Series([True, True, True, True]))
+    assert np.array_equal((b1 | 0.0).gen(test_df),
                           pd.Series([True, False, True, False]))
