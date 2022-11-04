@@ -20,4 +20,4 @@ class KAMAFeature(UnaryFeature):
     return f"kama_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.KAMA(ser, self.periods)
+    return talib.KAMA(ser.astype(float), self.periods)

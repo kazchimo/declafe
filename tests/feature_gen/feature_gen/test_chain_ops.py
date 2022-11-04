@@ -155,6 +155,198 @@ class TestMovingSums:
     assert df["sum_3_of_a"].equals(pd.Series([np.nan, np.nan, 6, 9, 12, 15]))
 
 
+class TestEma:
+
+  def test_return_ema(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.ema(3).generate(df), talib.EMA(df["a"], 3), True)
+
+
+class TestEmas:
+
+  def test_return_emas(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.emas([2, 3]).set_features(df)
+
+    assert df["EMA_2_of_a"].equals(pd.Series(talib.EMA(df["a"], 2)))
+    assert df["EMA_3_of_a"].equals(pd.Series(talib.EMA(df["a"], 3)))
+
+
+class TestDema:
+
+  def test_return_dema(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.dema(3).generate(df), talib.DEMA(df["a"], 3), True)
+
+
+class TestDemas:
+
+  def test_return_demas(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.demas([2, 3]).set_features(df)
+
+    assert df["DEMA_2_of_a"].equals(pd.Series(talib.DEMA(df["a"], 2)))
+    assert df["DEMA_3_of_a"].equals(pd.Series(talib.DEMA(df["a"], 3)))
+
+
+class TestCmo:
+
+  def test_return_cmo(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.cmo(3).generate(df), talib.CMO(df["a"], 3), True)
+
+
+class TestCmos:
+
+  def test_return_cmos(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.cmos([2, 3]).set_features(df)
+
+    assert df["CMO_2_of_a"].equals(pd.Series(talib.CMO(df["a"], 2)))
+    assert df["CMO_3_of_a"].equals(pd.Series(talib.CMO(df["a"], 3)))
+
+
+class TestWma:
+
+  def test_return_wma(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.wma(3).generate(df), talib.WMA(df["a"], 3), True)
+
+
+class TestWmas:
+
+  def test_return_wmas(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.wmas([2, 3]).set_features(df)
+
+    assert df["wma_2_of_a"].equals(pd.Series(talib.WMA(df["a"], 2)))
+    assert df["wma_3_of_a"].equals(pd.Series(talib.WMA(df["a"], 3)))
+
+
+class TestKama:
+
+  def test_return_kama(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.kama(3).generate(df), talib.KAMA(df["a"], 3), True)
+
+
+class TestKamas:
+
+  def test_return_kamas(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.kamas([2, 3]).set_features(df)
+
+    assert df["kama_2_of_a"].equals(pd.Series(talib.KAMA(df["a"], 2)))
+    assert df["kama_3_of_a"].equals(pd.Series(talib.KAMA(df["a"], 3)))
+
+
+class TestMama:
+
+  def test_return_mama(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.mama().to_features.set_features(df)
+
+    assert df["mama0.5-0.05_of_a"].equals(pd.Series(talib.MAMA(df["a"])[0]))
+
+
+class TestFama:
+
+  def test_return_fama(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.fama().to_features.set_features(df)
+
+    assert df["fama0.5-0.05_of_a"].equals(pd.Series(talib.MAMA(df["a"])[1]))
+
+
+class TestTema:
+
+  def test_return_tema(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.tema(3).generate(df), talib.TEMA(df["a"], 3), True)
+
+
+class TestTemas:
+
+  def test_return_temas(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.temas([2, 3]).set_features(df)
+
+    assert df["TEMA_2_of_a"].equals(pd.Series(talib.TEMA(df["a"], 2)))
+    assert df["TEMA_3_of_a"].equals(pd.Series(talib.TEMA(df["a"], 3)))
+
+
+class TestTrima:
+
+  def test_return_trima(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(
+        a.trima(3).generate(df), talib.TRIMA(df["a"], 3), True)
+
+
+class TestTrimas:
+
+  def test_return_trimas(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.trimas([2, 3]).set_features(df)
+
+    assert df["TRIMA_2_of_a"].equals(pd.Series(talib.TRIMA(df["a"], 2)))
+    assert df["TRIMA_3_of_a"].equals(pd.Series(talib.TRIMA(df["a"], 3)))
+
+
+class TestT3:
+
+  def test_return_t3(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(a.t3(3).generate(df), talib.T3(df["a"], 3), True)
+
+
+class TestT3s:
+
+  def test_return_t3s(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.t3s([2, 3]).set_features(df)
+
+    assert df["T3_2_of_a"].equals(pd.Series(talib.T3(df["a"], 2)))
+    assert df["T3_3_of_a"].equals(pd.Series(talib.T3(df["a"], 3)))
+
+
+class TestMovingMidpoint:
+
+  def test_return_moving_midpoint(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    assert np.array_equal(
+        a.moving_midpoint(3).generate(df), talib.MIDPOINT(df["a"], 3), True)
+
+
+class TestPctChange:
+
+  def test_return_pct_change(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+
+    assert np.array_equal(
+        a.pct_change(3).generate(df), [np.nan, np.nan, np.nan, 3.0, 1.5, 1.0],
+        True)
+
+
+class TestPctChanges:
+
+  def test_return_pct_changes(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    df = a.pct_changes([2, 3]).set_features(df)
+
+    assert df["pct_change_2_of_a"].equals(
+        pd.Series([
+            np.nan,
+            np.nan,
+            2.0,
+            1.0,
+            0.6666666666666667,
+            0.5,
+        ]))
+    assert df["pct_change_3_of_a"].equals(
+        pd.Series([np.nan, np.nan, np.nan, 3.0, 1.5, 1.0]))
+
+
 class TestMovingMax:
 
   def test_return_moving_max(self):
@@ -166,6 +358,19 @@ class TestMovingMax:
                           True)
 
 
+class TestMovingMaxes:
+
+  def test_return_moving_maxes(self):
+    f = a.moving_maxes([2, 3])
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
+    df = f.set_features(df)
+
+    assert df["max_2_of_a"].equals(
+        pd.Series([np.nan, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+    assert df["max_3_of_a"].equals(
+        pd.Series([np.nan, np.nan, 3, 4, 5, 6, 7, 8, 9, 10]))
+
+
 class TestMovingMin:
 
   def test_return_moving_min(self):
@@ -175,6 +380,39 @@ class TestMovingMin:
     assert np.array_equal(f.gen(df),
                           np.array([np.nan, np.nan, 1, 2, 3, 4, 5, 6, 7, 8]),
                           True)
+
+
+class TestMovingMins:
+
+  def test_return_moving_mins(self):
+    f = a.moving_mins([2, 3])
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
+    df = f.set_features(df)
+
+    assert df["min_2_of_a"].equals(
+        pd.Series([np.nan, 1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    assert df["min_3_of_a"].equals(
+        pd.Series([np.nan, np.nan, 1, 2, 3, 4, 5, 6, 7, 8]))
+
+
+class TestIsPositive:
+
+  def test_return_is_positive(self):
+    f = a.is_positive()
+    df = pd.DataFrame({"a": [-1, 0, 1, 2, -2]})
+    result = f.generate(df)
+
+    assert np.array_equal(result, pd.Series([False, False, True, True, False]))
+
+
+class TestRoundN:
+
+  def test_return_round_n(self):
+    f = a.round_n(2)
+    df = pd.DataFrame({"a": [1.234, 2.345, 3.456]})
+    result = f.generate(df)
+
+    assert np.array_equal(result, pd.Series([1.23, 2.35, 3.46]))
 
 
 class TestAdd:
@@ -204,11 +442,17 @@ class TestInvert:
 class TestLag:
 
   def test_lag(self):
-    print(a.lag(1).generate(test_df))
-    print(test_df["a"].shift(1).values)
     assert np.array_equal(a.lag(1).generate(test_df),
                           test_df["a"].shift(1).values,
                           equal_nan=True)
+
+
+class TestLags:
+
+  def test_lags(self):
+    df = a.lags([1, 2]).set_features(test_df)
+    assert df["lag_1_of_a"].equals(test_df["a"].shift(1))
+    assert df["lag_2_of_a"].equals(test_df["a"].shift(2))
 
 
 class TestReplace:

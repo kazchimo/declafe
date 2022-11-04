@@ -18,4 +18,4 @@ class DEMAFeature(UnaryFeature):
     return f"DEMA_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.DEMA(ser, self.periods)
+    return talib.DEMA(ser.astype(float), self.periods)

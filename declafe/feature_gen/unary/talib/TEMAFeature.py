@@ -15,4 +15,4 @@ class TEMAFeature(UnaryFeature):
     return f"TEMA_{self.period}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.TEMA(ser, timeperiod=self.period)
+    return talib.TEMA(ser.astype(float), timeperiod=self.period)

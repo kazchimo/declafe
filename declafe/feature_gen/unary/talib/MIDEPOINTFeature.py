@@ -20,4 +20,4 @@ class MidpointFeature(UnaryFeature):
     return f"midpoint_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.MIDPOINT(ser, self.periods)
+    return talib.MIDPOINT(ser.astype(float), self.periods)

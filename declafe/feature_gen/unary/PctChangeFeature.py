@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.ndimage import shift
+from numba import jit
 
 from .UnaryFeature import UnaryFeature
 
@@ -17,5 +17,18 @@ class PctChangeFeature(UnaryFeature):
     return f"pct_change_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    r = ser / shift(ser.astype(float), self.periods, cval=np.NaN) - 1
-    return r
+    p = self.periods
+    s = ser
+
+    @jit(nopython=True)
+    def gen(idx: int) -> float:
+      pre_idx = idx - p
+
+      if 0 <= pre_idx < len(s):
+        return s[idx] / s[pre_idx] - 1
+      else:
+        return np.nan
+
+    f = np.frompyfunc(gen, 1, 1)
+
+    return f(np.arange(len(ser))).astype("float")

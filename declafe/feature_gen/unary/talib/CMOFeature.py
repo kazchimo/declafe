@@ -17,4 +17,4 @@ class CMOFeature(UnaryFeature):
     return f"CMO_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.CMO(ser, self.periods)
+    return talib.CMO(ser.astype(float), self.periods)

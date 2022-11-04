@@ -18,4 +18,4 @@ class EMAFeature(UnaryFeature):
     return f"EMA_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.EMA(ser, self.periods)
+    return talib.EMA(ser.astype(float), self.periods)

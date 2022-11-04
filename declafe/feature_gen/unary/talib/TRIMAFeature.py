@@ -12,7 +12,7 @@ class TRIMAFeature(UnaryFeature):
 
   @property
   def name(self) -> str:
-    return f"TEMA_{self.period}"
+    return f"TRIMA_{self.period}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.TRIMA(ser, timeperiod=self.period)
+    return talib.TRIMA(ser.astype(float), timeperiod=self.period)

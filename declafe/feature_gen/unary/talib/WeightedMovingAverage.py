@@ -16,4 +16,4 @@ class WeightedMovingAverage(UnaryFeature):
     return f"wma_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.WMA(ser, self.periods)
+    return talib.WMA(ser.astype(float), self.periods)

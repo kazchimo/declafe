@@ -21,7 +21,7 @@ class MAMAFeature(UnaryFeature):
     return f"mama{self.fast_limit}-{self.slow_limit}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.MAMA(ser, self.fast_limit, self.slow_limit)[0]
+    return talib.MAMA(ser.astype(float), self.fast_limit, self.slow_limit)[0]
 
 
 class FAMAFeature(UnaryFeature):
@@ -39,4 +39,4 @@ class FAMAFeature(UnaryFeature):
     return f"fama{self.fast_limit}-{self.slow_limit}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.MAMA(ser, self.fast_limit, self.slow_limit)[1]
+    return talib.MAMA(ser.astype(float), self.fast_limit, self.slow_limit)[1]

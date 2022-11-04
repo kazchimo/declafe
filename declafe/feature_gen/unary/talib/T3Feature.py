@@ -15,4 +15,4 @@ class T3Feature(UnaryFeature):
     return f"T3_{self.period}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return talib.T3(ser, timeperiod=self.period)
+    return talib.T3(ser.astype(float), timeperiod=self.period)
