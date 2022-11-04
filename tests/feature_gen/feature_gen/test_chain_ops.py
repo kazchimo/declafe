@@ -196,6 +196,10 @@ class TestInvert:
     assert np.array_equal((~a).gen(pd.DataFrame({"a": [True, False]})),
                           pd.Series([False, True]), True)
 
+  def test_handle_float(self):
+    assert np.array_equal((~a).gen(pd.DataFrame({"a": [1.0, 0.0]})),
+                          pd.Series([0.0, 1.0]), True)
+
 
 class TestLag:
 

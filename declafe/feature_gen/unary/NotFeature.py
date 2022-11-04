@@ -15,4 +15,4 @@ class NotFeature(UnaryFeature):
     return "~" + self.column_name
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    return (~ser).astype(bool)
+    return (~ser.astype(bool)).astype(bool)
