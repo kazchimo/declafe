@@ -626,6 +626,19 @@ class TestMaxWith:
 
     assert np.array_equal(result, pd.Series([1, 2, 4]), True)
 
+  def test_dtype(self):
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
+    result = col("c1").max_with("b").gen(df)
+    assert result.dtype == int
+
+    df = pd.DataFrame({"c1": [1.0, 2.0, 3.0], "b": [0.0, 1.0, 4.0]})
+    result = col("c1").max_with("b").gen(df)
+    assert result.dtype == float
+
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0.0, 1.0, 4.0]}).astype(object)
+    result = col("c1").max_with("b").gen(df)
+    assert result.dtype == float
+
 
 class TestMinWith:
 
@@ -640,6 +653,19 @@ class TestMinWith:
     result = col("c1").min_with(col("b")).gen(df)
 
     assert np.array_equal(result, pd.Series([0, 1, 3]), True)
+
+  def test_dtype(self):
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
+    result = col("c1").min_with("b").gen(df)
+    assert result.dtype == int
+
+    df = pd.DataFrame({"c1": [1.0, 2.0, 3.0], "b": [0.0, 1.0, 4.0]})
+    result = col("c1").min_with("b").gen(df)
+    assert result.dtype == float
+
+    df = pd.DataFrame({"c1": [1, 2, 3], "b": [0.0, 1.0, 4.0]}).astype(object)
+    result = col("c1").min_with("b").gen(df)
+    assert result.dtype == float
 
 
 class TestBbandsUpper:
