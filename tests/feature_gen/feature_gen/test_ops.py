@@ -30,6 +30,12 @@ class TestEq:
     assert np.array_equal((b1 == 0.0).gen(test_df),
                           pd.Series([False, True, False, True]))
 
+  def test_dtype(self):
+    assert (b1 == b2).gen(test_df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") == 1).gen(df).dtype == bool
+
 
 class TestNe:
 
@@ -49,6 +55,12 @@ class TestNe:
     assert np.array_equal((b1 != 0.0).gen(test_df),
                           pd.Series([True, False, True, False]))
 
+  def test_dtype(self):
+    assert (b1 != b2).gen(test_df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") == 1).gen(df).dtype == bool
+
 
 class TestAdd:
 
@@ -63,6 +75,16 @@ class TestAdd:
   def test_from_left(self):
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((1 + col("a")).gen(df), pd.Series([2, 3, 4]))
+
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") + 1).gen(df).dtype == int
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") + 1).gen(df).dtype == float
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") + 1).gen(df).dtype == float
 
 
 class TestSub:
@@ -80,6 +102,16 @@ class TestSub:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((1 - col("a")).gen(df), pd.Series([0, -1, -2]))
 
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") - 1).gen(df).dtype == int
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") - 1).gen(df).dtype == float
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") - 1).gen(df).dtype == float
+
 
 class TestMul:
 
@@ -95,6 +127,16 @@ class TestMul:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((2 * col("a")).gen(df), pd.Series([2, 4, 6]))
 
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") * 1).gen(df).dtype == int
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") * 1).gen(df).dtype == float
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") * 1).gen(df).dtype == float
+
 
 class TestMod:
 
@@ -109,6 +151,16 @@ class TestMod:
   def test_from_left(self):
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((2 % col("a")).gen(df), pd.Series([0, 0, 2]))
+
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") % 1).gen(df).dtype == int
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") % 1).gen(df).dtype == float
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") % 1).gen(df).dtype == float
 
 
 class TestTrueDiv:
@@ -126,6 +178,16 @@ class TestTrueDiv:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((2 / col("a")).gen(df),
                           pd.Series([2, 1, 0.6666666666666666]))
+
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") / 1).gen(df).dtype == float
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") / 1).gen(df).dtype == float
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") / 1).gen(df).dtype == float
 
 
 class TestGt:
@@ -145,6 +207,16 @@ class TestGt:
     assert np.array_equal((2 > col("a")).gen(df),
                           pd.Series([True, False, False]))
 
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") > 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") > 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") > 1).gen(df).dtype == bool
+
 
 class TestLt:
 
@@ -162,6 +234,16 @@ class TestLt:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((2 < col("a")).gen(df),
                           pd.Series([False, False, True]))
+
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") < 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") < 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") < 1).gen(df).dtype == bool
 
 
 class TestGe:
@@ -181,6 +263,16 @@ class TestGe:
     assert np.array_equal((2 >= col("a")).gen(df),
                           pd.Series([True, True, False]))
 
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") >= 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") >= 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") >= 1).gen(df).dtype == bool
+
 
 class TestLe:
 
@@ -198,6 +290,16 @@ class TestLe:
     df = pd.DataFrame({"a": [1, 2, 3]})
     assert np.array_equal((2 <= col("a")).gen(df),
                           pd.Series([False, True, True]))
+
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") <= 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") <= 1).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") <= 1).gen(df).dtype == bool
 
 
 class TestAnd:
@@ -224,6 +326,16 @@ class TestAnd:
     assert np.array_equal((b1 & 0.0).gen(test_df),
                           pd.Series([False, False, False, False]))
 
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") & True).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") & True).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") & True).gen(df).dtype == bool
+
 
 class TestOr:
 
@@ -248,3 +360,13 @@ class TestOr:
                           pd.Series([True, True, True, True]))
     assert np.array_equal((b1 | 0.0).gen(test_df),
                           pd.Series([True, False, True, False]))
+
+  def test_dtype(self):
+    df = pd.DataFrame({"a": [1, 2, 3]})
+    assert (col("a") | True).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1.0, 2.0, 3.0]})
+    assert (col("a") | True).gen(df).dtype == bool
+
+    df = pd.DataFrame({"a": [1, 2, 3]}).astype(object)
+    assert (col("a") | True).gen(df).dtype == bool
