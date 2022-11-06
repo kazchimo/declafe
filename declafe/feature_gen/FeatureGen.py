@@ -85,6 +85,10 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     return self
 
   def set_feature(self, df: pd.DataFrame) -> "pd.DataFrame":
+    if self.feature_name in df.columns and df[
+        self.feature_name].dtype == self.dtype:
+      return df
+
     temp_df = df.drop(
         columns=[self.feature_name]) if self.feature_name in df.columns else df
 

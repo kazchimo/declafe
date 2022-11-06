@@ -47,7 +47,8 @@ class Features:
     for p in self.pre_processes:
       df = p.set_feature(df)
 
-    wrap_iter = (lambda i: tqdm(i, desc="Feature generation progress")) if show_progress \
+    wrap_iter: Callable[[List[FeatureGen]], List[FeatureGen]] = (lambda i: tqdm(i, desc="Feature generation progress")) \
+      if  show_progress \
       else lambda x: x
 
     for feature_gen in wrap_iter(self.feature_gens):
