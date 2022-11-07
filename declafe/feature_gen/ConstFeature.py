@@ -14,7 +14,7 @@ class ConstFeature(FeatureGen):
     super().__init__()
     self.const = const
 
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     return np.full(len(df), self.const)
 
   def _feature_name(self) -> str:

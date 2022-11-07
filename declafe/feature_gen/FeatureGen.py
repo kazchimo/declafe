@@ -31,7 +31,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     self.dtype: Optional[Union[DTypes, Literal["numeric_auto"]]] = None
 
   @abstractmethod
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     raise NotImplementedError
 
   def generate(self, df: pd.DataFrame) -> np.ndarray:
@@ -41,7 +41,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     try:
       result = df[self.feature_name].to_numpy() \
         if self.feature_name in df.columns \
-        else self.gen(df)
+        else self._gen(df)
 
       dt = infer_min_numeric_type(result) \
         if self.dtype == "numeric_auto" \

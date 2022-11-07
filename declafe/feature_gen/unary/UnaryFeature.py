@@ -34,7 +34,7 @@ class UnaryFeature(FeatureGen, ABC):
                                            str)) else f"({self.column_name})"
     return f"{self.name}_of_{name}"
 
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     return self.gen_unary(df[self.column_name].to_numpy())
 
   @abstractmethod

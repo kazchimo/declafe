@@ -25,7 +25,7 @@ class BiComposeFeature(FeatureGen):
     self.to = to
     self.toKwargs = toKwargs or {}
 
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     left = self.left.generate(df)
     right = self.right.generate(df)
     return self.to_instance().bigen(left, right)

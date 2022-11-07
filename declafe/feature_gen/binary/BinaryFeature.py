@@ -17,5 +17,5 @@ class BinaryFeature(FeatureGen, ABC):
   def bigen(self, left: np.ndarray, right: np.ndarray) -> np.ndarray:
     raise NotImplementedError()
 
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     return self.bigen(df[self.left].to_numpy(), df[self.right].to_numpy())

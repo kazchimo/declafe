@@ -74,7 +74,7 @@ class TestMinComp:
 
   def test_return_min_value(self):
     df = test_df.copy()
-    result = a.min_comp(500).gen(df)
+    result = a.min_comp(500)._gen(df)
     pred = pd.Series(list(range(1, 501)) + [500] * 500)
 
     assert np.array_equal(result, pred)
@@ -84,7 +84,7 @@ class TestMaxComp:
 
   def test_return_max_value(self):
     df = test_df.copy()
-    result = a.max_comp(500).gen(df)
+    result = a.max_comp(500)._gen(df)
     pred = pd.Series([500] * 500 + list(range(501, 1001)))
 
     assert np.array_equal(result, pred, True)
@@ -96,7 +96,7 @@ class Double(FeatureGen):
     super().__init__()
     self.column = column
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
+  def _gen(self, df: pd.DataFrame) -> pd.Series:
     return df[self.column] * 2
 
   def _feature_name(self) -> str:
@@ -107,10 +107,10 @@ class TestLog:
 
   def test_return_log(self):
     assert np.array_equal(
-        _1.log().gen(test_df),
+        _1.log()._gen(test_df),
         LogFeature("").gen_unary(pd.Series(1, index=test_df.index)))
     assert np.array_equal(
-        Double("a").log().gen(test_df),
+        Double("a").log()._gen(test_df),
         LogFeature("").gen_unary(test_df["a"] * 2))
 
 
@@ -120,7 +120,7 @@ class TestMovingAverage:
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
 
     assert np.array_equal(
-        a.moving_average(3).gen(df), pd.Series([np.nan, np.nan, 2, 3, 4, 5]),
+        a.moving_average(3)._gen(df), pd.Series([np.nan, np.nan, 2, 3, 4, 5]),
         True)
 
 
@@ -141,7 +141,7 @@ class TestMovingSum:
   def test_return_moving_sum(self):
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
     assert np.array_equal(
-        a.moving_sum(3).gen(df), pd.Series([np.nan, np.nan, 6, 9, 12, 15]),
+        a.moving_sum(3)._gen(df), pd.Series([np.nan, np.nan, 6, 9, 12, 15]),
         True)
 
 
@@ -353,7 +353,7 @@ class TestMovingMax:
     f = a.moving_max(3)
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
 
-    assert np.array_equal(f.gen(df),
+    assert np.array_equal(f._gen(df),
                           np.array([np.nan, np.nan, 3, 4, 5, 6, 7, 8, 9, 10]),
                           True)
 
@@ -377,7 +377,7 @@ class TestMovingMin:
     f = a.moving_min(3)
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]})
 
-    assert np.array_equal(f.gen(df),
+    assert np.array_equal(f._gen(df),
                           np.array([np.nan, np.nan, 1, 2, 3, 4, 5, 6, 7, 8]),
                           True)
 
@@ -418,24 +418,24 @@ class TestRoundN:
 class TestAdd:
 
   def test_add(self):
-    assert np.array_equal((a + 1).gen(test_df), test_df["a"] + 1)
+    assert np.array_equal((a + 1)._gen(test_df), test_df["a"] + 1)
 
 
 class TestApo:
 
   def test_calc_apo(self):
     assert np.array_equal(
-        a.apo(12, 26).gen(test_df), talib.APO(test_df["a"], 12, 26), True)
+        a.apo(12, 26)._gen(test_df), talib.APO(test_df["a"], 12, 26), True)
 
 
 class TestInvert:
 
   def test_invert(self):
-    assert np.array_equal((~a).gen(pd.DataFrame({"a": [True, False]})),
+    assert np.array_equal((~a)._gen(pd.DataFrame({"a": [True, False]})),
                           pd.Series([False, True]), True)
 
   def test_handle_float(self):
-    assert np.array_equal((~a).gen(pd.DataFrame({"a": [1.0, 0.0]})),
+    assert np.array_equal((~a)._gen(pd.DataFrame({"a": [1.0, 0.0]})),
                           pd.Series([0.0, 1.0]), True)
 
 
@@ -459,14 +459,14 @@ class TestReplace:
 
   def test_replace(self):
     gen = a.lag(1).replace(np.nan, 99999)
-    assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
+    assert list(gen._gen(test_df)) == [99999] + list(range(1, 1000))
 
 
 class TestReplaceNa:
 
   def test_replace_na(self):
     gen = a.lag(1).replace_na(99999)
-    assert list(gen.gen(test_df)) == [99999] + list(range(1, 1000))
+    assert list(gen._gen(test_df)) == [99999] + list(range(1, 1000))
 
 
 class TestConsecutiveCountOf:
@@ -475,7 +475,7 @@ class TestConsecutiveCountOf:
     df = pd.DataFrame({"a": ["a", "b", "b", "c", "b", "b", "b", "a", "b"]})
     gen = a.consecutive_count_of("b")
 
-    assert np.array_equal(gen.gen(df), pd.Series([0, 1, 2, 0, 1, 2, 3, 0, 1]),
+    assert np.array_equal(gen._gen(df), pd.Series([0, 1, 2, 0, 1, 2, 3, 0, 1]),
                           True)
 
 
@@ -485,8 +485,8 @@ class TestConsecutiveUpCount:
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
     gen = a.consecutive_up_count()
 
-    assert np.array_equal(gen.gen(df), pd.Series([0, 1, 2, 3, 4, 0, 0, 0, 0,
-                                                  1]))
+    assert np.array_equal(gen._gen(df), pd.Series([0, 1, 2, 3, 4, 0, 0, 0, 0,
+                                                   1]))
 
 
 class TestConsecutiveDownCount:
@@ -495,15 +495,15 @@ class TestConsecutiveDownCount:
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
     gen = a.consecutive_down_count()
 
-    assert np.array_equal(gen.gen(df), pd.Series([0, 0, 0, 0, 0, 1, 2, 3, 4,
-                                                  0]))
+    assert np.array_equal(gen._gen(df), pd.Series([0, 0, 0, 0, 0, 1, 2, 3, 4,
+                                                   0]))
 
 
 class TestAbs:
 
   def test_abs(self):
     assert np.array_equal(
-        a.abs().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
+        a.abs()._gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
         pd.Series([1, 2, 3, 4, 5, 6]), True)
 
 
@@ -511,7 +511,7 @@ class TestIsUp:
 
   def test_is_up(self):
     assert np.array_equal(
-        a.is_up().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
+        a.is_up()._gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
         pd.Series([False, False, False, True, True, True]), True)
 
 
@@ -519,14 +519,14 @@ class TestIsDown:
 
   def test_is_down(self):
     assert np.array_equal(
-        a.is_down().gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
+        a.is_down()._gen(pd.DataFrame({"a": [-1, -2, -3, 4, 5, 6]})),
         pd.Series([False, True, True, False, False, False]), True)
 
 
 class TestMovingStd:
 
   def test_moving_std(self):
-    res = a.moving_std(3).gen(pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]}))
+    res = a.moving_std(3)._gen(pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]}))
 
     assert np.array_equal(res, [
         np.nan, np.nan, 0.816496580927726, 0.816496580927726, 0.816496580927726,
@@ -553,7 +553,7 @@ class TestMACD:
 
   def test_calc_macd(self):
     assert np.array_equal(
-        a.macd(12, 26, 9).gen(test_df),
+        a.macd(12, 26, 9)._gen(test_df),
         talib.MACD(test_df["a"], 12, 26, 9)[0], True)
 
 
@@ -561,7 +561,7 @@ class TestMACDSignal:
 
   def test_calc_macd_signal(self):
     assert np.array_equal(
-        a.macd_signal(12, 26, 9).gen(test_df),
+        a.macd_signal(12, 26, 9)._gen(test_df),
         talib.MACD(test_df["a"], 12, 26, 9)[1], True)
 
 
@@ -569,7 +569,7 @@ class TestMACDHist:
 
   def test_calc_macd_hist(self):
     assert np.array_equal(
-        a.macd_hist(12, 26, 9).gen(test_df),
+        a.macd_hist(12, 26, 9)._gen(test_df),
         talib.MACD(test_df["a"], 12, 26, 9)[2], True)
 
 
@@ -577,7 +577,7 @@ class TestMOM:
 
   def test_calc_mom(self):
     assert np.array_equal(
-        a.mom(10).gen(test_df), talib.MOM(test_df["a"], 10), True)
+        a.mom(10)._gen(test_df), talib.MOM(test_df["a"], 10), True)
 
 
 class TestMOMS:
@@ -593,7 +593,7 @@ class TestRSI:
 
   def test_calc_rsi(self):
     assert np.array_equal(
-        a.rsi(10).gen(test_df), talib.RSI(test_df["a"], 10), True)
+        a.rsi(10)._gen(test_df), talib.RSI(test_df["a"], 10), True)
 
 
 class TestRSIs:
@@ -609,34 +609,34 @@ class TestPPO:
 
   def test_calc_ppo(self):
     assert np.array_equal(
-        a.ppo(26, 9).gen(test_df), talib.PPO(test_df["a"], 26, 9), True)
+        a.ppo(26, 9)._gen(test_df), talib.PPO(test_df["a"], 26, 9), True)
 
 
 class TestMaxWith:
 
   def test_max_with(self):
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
-    result = col("c1").max_with("b").gen(df)
+    result = col("c1").max_with("b")._gen(df)
 
     assert np.array_equal(result, pd.Series([1, 2, 4]))
 
   def test_accept_feature_gen(self):
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
-    result = col("c1").max_with(col("b")).gen(df)
+    result = col("c1").max_with(col("b"))._gen(df)
 
     assert np.array_equal(result, pd.Series([1, 2, 4]), True)
 
   def test_dtype(self):
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
-    result = col("c1").max_with("b").gen(df)
+    result = col("c1").max_with("b")._gen(df)
     assert result.dtype == int
 
     df = pd.DataFrame({"c1": [1.0, 2.0, 3.0], "b": [0.0, 1.0, 4.0]})
-    result = col("c1").max_with("b").gen(df)
+    result = col("c1").max_with("b")._gen(df)
     assert result.dtype == float
 
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0.0, 1.0, 4.0]}).astype(object)
-    result = col("c1").max_with("b").gen(df)
+    result = col("c1").max_with("b")._gen(df)
     assert result.dtype == float
 
 
@@ -644,27 +644,27 @@ class TestMinWith:
 
   def test_min_with(self):
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
-    result = col("c1").min_with("b").gen(df)
+    result = col("c1").min_with("b")._gen(df)
 
     assert np.array_equal(result, pd.Series([0, 1, 3]))
 
   def test_accept_feature_gen(self):
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
-    result = col("c1").min_with(col("b")).gen(df)
+    result = col("c1").min_with(col("b"))._gen(df)
 
     assert np.array_equal(result, pd.Series([0, 1, 3]), True)
 
   def test_dtype(self):
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0, 1, 4]})
-    result = col("c1").min_with("b").gen(df)
+    result = col("c1").min_with("b")._gen(df)
     assert result.dtype == int
 
     df = pd.DataFrame({"c1": [1.0, 2.0, 3.0], "b": [0.0, 1.0, 4.0]})
-    result = col("c1").min_with("b").gen(df)
+    result = col("c1").min_with("b")._gen(df)
     assert result.dtype == float
 
     df = pd.DataFrame({"c1": [1, 2, 3], "b": [0.0, 1.0, 4.0]}).astype(object)
-    result = col("c1").min_with("b").gen(df)
+    result = col("c1").min_with("b")._gen(df)
     assert result.dtype == float
 
 
@@ -672,7 +672,7 @@ class TestBbandsUpper:
 
   def test_calc_bbands_upper(self):
     assert np.array_equal(
-        a.bbands_upper(5, 2).gen(test_df),
+        a.bbands_upper(5, 2)._gen(test_df),
         (talib.BBANDS(test_df["a"], 5, 2)[0]), True)
 
 
@@ -691,7 +691,7 @@ class TestBBandsLower:
 
   def test_calc_bbands_lower(self):
     assert np.array_equal(
-        a.bbands_lower(5, 2).gen(test_df),
+        a.bbands_lower(5, 2)._gen(test_df),
         talib.BBANDS(test_df["a"], 5, 2)[2], True)
 
 
@@ -710,7 +710,7 @@ class TestSTOCHRSIFastk:
 
   def test_calc_stochrsi_fastk(self):
     assert np.array_equal(
-        a.stochrsi_fastk(10, 5, 3).gen(test_df),
+        a.stochrsi_fastk(10, 5, 3)._gen(test_df),
         (talib.STOCHRSI(test_df["a"], 10, 5, 3)[0]), True)
 
 
@@ -729,7 +729,7 @@ class STOCHRSIFastd:
 
   def test_calc_stochrsi_fastd(self):
     assert a.stochrsi_fastd(10, 5, 3)\
-      .gen(test_df)\
+      ._gen(test_df)\
       .equals(talib.STOCHRSI(test_df["a"], 10, 5, 3)[1])
 
 
@@ -748,7 +748,7 @@ class TestTRIX:
 
   def test_calc_trix(self):
     assert np.array_equal(
-        a.trix(10).gen(test_df), (talib.TRIX(test_df["a"], 10)), True)
+        a.trix(10)._gen(test_df), (talib.TRIX(test_df["a"], 10)), True)
 
 
 class TestTRIXes:
@@ -763,35 +763,35 @@ class TestTRIXes:
 class TestHT_DCPERIOD:
 
   def test_calc_ht_dcp(self):
-    assert np.array_equal(a.ht_dcperiod().gen(test_df),
+    assert np.array_equal(a.ht_dcperiod()._gen(test_df),
                           (talib.HT_DCPERIOD(test_df["a"])), True)
 
 
 class TestHT_DCPHASE:
 
   def test_calc_ht_dcp(self):
-    assert np.array_equal(a.ht_dcphase().gen(test_df),
+    assert np.array_equal(a.ht_dcphase()._gen(test_df),
                           (talib.HT_DCPHASE(test_df["a"])), True)
 
 
 class TestHTPhasorInphase:
 
   def test_calc_ht_phasor_inphase(self):
-    assert np.array_equal(a.ht_phasor_inphase().gen(test_df),
+    assert np.array_equal(a.ht_phasor_inphase()._gen(test_df),
                           (talib.HT_PHASOR(test_df["a"])[0]), True)
 
 
 class TestHTPhasorQuadrature:
 
   def test_calc_ht_phasor_quadrature(self):
-    assert np.array_equal(a.ht_phasor_quadrature().gen(test_df),
+    assert np.array_equal(a.ht_phasor_quadrature()._gen(test_df),
                           (talib.HT_PHASOR(test_df["a"])[1]), True)
 
 
 class TestHTSine:
 
   def test_calc_ht_sine(self):
-    assert np.array_equal(a.ht_sine().gen(test_df),
+    assert np.array_equal(a.ht_sine()._gen(test_df),
                           (talib.HT_SINE(test_df["a"].values.astype(float))[0]),
                           True)
 
@@ -799,14 +799,14 @@ class TestHTSine:
 class TestHTLeadSine:
 
   def test_calc_ht_sine(self):
-    assert np.array_equal(a.ht_leadsine().gen(test_df),
+    assert np.array_equal(a.ht_leadsine()._gen(test_df),
                           (talib.HT_SINE(test_df["a"])[1]), True)
 
 
 class TestHTTrendmode:
 
   def test_calc_ht_trendmode(self):
-    assert (a.ht_trendmode().gen(test_df) == (talib.HT_TRENDMODE(
+    assert (a.ht_trendmode()._gen(test_df) == (talib.HT_TRENDMODE(
         test_df["a"]))).all()
 
 
@@ -819,8 +819,8 @@ class TestSecond:
             datetime(2018, 1, 1, 0, 0, 1),
         ]})
 
-    assert (a.second().gen(df) == pd.Series([0, 1])).all()
-    assert a.second().gen(df).dtype == np.int64
+    assert (a.second()._gen(df) == pd.Series([0, 1])).all()
+    assert a.second()._gen(df).dtype == np.int64
 
 
 class TestMinute:
@@ -832,8 +832,8 @@ class TestMinute:
             datetime(2018, 1, 1, 0, 1, 1),
         ]})
 
-    assert (a.minute().gen(df) == (pd.Series([0, 1]))).all()
-    assert a.minute().gen(df).dtype == int
+    assert (a.minute()._gen(df) == (pd.Series([0, 1]))).all()
+    assert a.minute()._gen(df).dtype == int
 
 
 class TestMinuteN:
@@ -847,7 +847,7 @@ class TestMinuteN:
         ]
     })
 
-    assert np.array_equal(a.minute_n(2).gen(df), pd.Series([True, False, True]))
+    assert np.array_equal(a.minute_n(2)._gen(df), pd.Series([True, False, True]))
 
 
 class TestMinuteNs:
@@ -892,7 +892,7 @@ class TestHourN:
         ]
     })
 
-    assert np.array_equal(a.hour_n(2).gen(df), pd.Series([True, False, True]))
+    assert np.array_equal(a.hour_n(2)._gen(df), pd.Series([True, False, True]))
 
 
 class TestHourNs:
@@ -922,8 +922,8 @@ class TestDayOfWeek:
             datetime(2018, 1, 2, 0, 0, 1),
         ]})
 
-    assert (a.day_of_week().gen(df) == (np.array([0, 1]))).all()
-    assert a.day_of_week().gen(df).dtype == "int"
+    assert (a.day_of_week()._gen(df) == (np.array([0, 1]))).all()
+    assert a.day_of_week()._gen(df).dtype == "int"
 
 
 class TestWeekOfYear:
@@ -935,8 +935,8 @@ class TestWeekOfYear:
             datetime(2018, 1, 2, 0, 0, 1),
         ]})
 
-    assert (a.week_of_year().gen(df) == (np.array([1, 1]))).all()
-    assert a.week_of_year().gen(df).dtype == "int"
+    assert (a.week_of_year()._gen(df) == (np.array([1, 1]))).all()
+    assert a.week_of_year()._gen(df).dtype == "int"
 
 
 class TestDayOfMonth:
@@ -976,13 +976,13 @@ class TestToDatetime:
     df2 = pd.DataFrame({"a": [1665194183000, 1665194184000]})
 
     assert np.array_equal(
-        a.to_datetime("s").gen(df),
+        a.to_datetime("s")._gen(df),
         pd.Series([
             datetime(2022, 10, 8, 1, 56, 23),
             datetime(2022, 10, 8, 1, 56, 24),
         ]))
     assert np.array_equal(
-        a.to_datetime("ms").gen(df2),
+        a.to_datetime("ms")._gen(df2),
         pd.Series([
             datetime(2022, 10, 8, 1, 56, 23),
             datetime(2022, 10, 8, 1, 56, 24),

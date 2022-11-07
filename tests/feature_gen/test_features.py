@@ -33,7 +33,7 @@ class TestSetFeatures:
 
     class ThrowGen(FeatureGen):
 
-      def gen(self, df: pd.DataFrame) -> pd.Series:
+      def _gen(self, df: pd.DataFrame) -> pd.Series:
         raise Exception("Should not be called")
 
       def _feature_name(self) -> str:

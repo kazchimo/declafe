@@ -23,7 +23,7 @@ class ComposedFeature(FeatureGen):
     if len(self.nexts) == 0:
       raise ValueError("nextsが空です")
 
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     with warnings.catch_warnings():
       warnings.simplefilter("ignore")
       result = self.head.generate(df)

@@ -17,7 +17,7 @@ class TestDipAgainst:
   def test_calc_dip(self):
     df = test_df.copy()
     f = a.dip_against("b", 10)
-    result = f.gen(df)
+    result = f._gen(df)
 
     assert np.array_equal(result, df["a"] / df["b"].rolling(10).max() - 1, True)
 
@@ -42,7 +42,7 @@ class TestRipAgainst:
   def test_calc_rip(self):
     df = test_df.copy()
     f = a.rip_against("b", 10)
-    result = f.gen(df)
+    result = f._gen(df)
     pred = df["a"] / df["b"].rolling(10).min() - 1
 
     assert np.array_equal(result, pred, True)

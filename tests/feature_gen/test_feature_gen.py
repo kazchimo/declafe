@@ -16,7 +16,7 @@ b = col("b")
 
 class SimpleGen(FeatureGen):
 
-  def gen(self, df: pd.DataFrame) -> pd.Series:
+  def _gen(self, df: pd.DataFrame) -> pd.Series:
     return pd.Series(1, index=df.index)
 
   def _feature_name(self) -> str:
@@ -123,7 +123,7 @@ class TestSetFeature:
 
     class RaiseGen(FeatureGen):
 
-      def gen(self, df: pd.DataFrame) -> pd.Series:
+      def _gen(self, df: pd.DataFrame) -> pd.Series:
         raise Exception("This should not be called")
 
       def _feature_name(self) -> str:

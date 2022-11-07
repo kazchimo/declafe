@@ -21,6 +21,6 @@ class QuadriFeature(FeatureGen, ABC):
                 col4: np.ndarray) -> np.ndarray:
     raise NotImplementedError()
 
-  def gen(self, df: pd.DataFrame) -> np.ndarray:
+  def _gen(self, df: pd.DataFrame) -> np.ndarray:
     return self.quadrigen(df[self.col1].to_numpy(), df[self.col2].to_numpy(),
                           df[self.col3].to_numpy(), df[self.col4].to_numpy())
