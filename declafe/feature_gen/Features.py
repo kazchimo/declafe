@@ -47,12 +47,15 @@ class Features:
     for p in self.pre_processes:
       df = p.set_feature(df)
 
-    wrap_iter: Callable[[List[FeatureGen]], List[FeatureGen]] = (lambda i: tqdm(i, desc="Feature generation progress")) \
-      if  show_progress \
-      else lambda x: x
-
-    for feature_gen in wrap_iter(self.feature_gens):
-      df = feature_gen.set_feature(df)
+    if show_progress:
+      with tqdm(total=self.feature_count) as t:
+        for feature_gen in self.feature_gens:
+          t.set_description(f"Gen: {feature_gen.feature_name}")
+          df = feature_gen.set_feature(df)
+          t.update()
+    else:
+      for feature_gen in self.feature_gens:
+        df = feature_gen.set_feature(df)
 
     if drop_nan:
       df.dropna(inplace=True)
