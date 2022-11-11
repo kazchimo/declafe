@@ -158,6 +158,12 @@ class Features:
   def as_type_auto_num_all(self, override: bool = False):
     return self.map(lambda f: f.as_type_auto_num(override))
 
+  def enable_numba(self) -> "Features":
+    return self.map(lambda f: f.enable_numba())
+
+  def disable_numba(self) -> "Features":
+    return self.map(lambda f: f.disable_numba())
+
   @property
   def feature_count(self) -> int:
     return len(self.feature_gens)

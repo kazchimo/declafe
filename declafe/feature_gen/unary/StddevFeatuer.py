@@ -1,5 +1,4 @@
 import numpy as np
-from numba import jit
 
 from .UnaryFeature import UnaryFeature
 
@@ -23,7 +22,7 @@ class StddevFeature(UnaryFeature):
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
     p = self.periods
 
-    @jit(nopython=True)
+    @self.numba_dec
     def gen(idx: int) -> float:
       a = ser[idx - p + 1:idx + 1]
 

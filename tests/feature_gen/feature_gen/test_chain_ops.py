@@ -1,10 +1,11 @@
+from datetime import datetime
+
 import numpy as np
 import pandas as pd
 import talib
 
 from declafe import col, c, FeatureGen, Features
-from declafe.feature_gen.unary import LogFeature, SumFeature
-from datetime import datetime
+from declafe.feature_gen.unary import LogFeature
 
 test_df = pd.DataFrame({
     "a": list(range(1, 1001)),
@@ -485,8 +486,8 @@ class TestConsecutiveUpCount:
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
     gen = a.consecutive_up_count()
 
-    assert np.array_equal(gen._gen(df), pd.Series([0, 1, 2, 3, 4, 0, 0, 0, 0,
-                                                   1]))
+    assert np.array_equal(gen._gen(df),
+                          pd.Series([0, 1, 2, 3, 4, 0, 0, 0, 0, 1]))
 
 
 class TestConsecutiveDownCount:
@@ -495,8 +496,8 @@ class TestConsecutiveDownCount:
     df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 4, 3, 2, 1, 2]})
     gen = a.consecutive_down_count()
 
-    assert np.array_equal(gen._gen(df), pd.Series([0, 0, 0, 0, 0, 1, 2, 3, 4,
-                                                   0]))
+    assert np.array_equal(gen._gen(df),
+                          pd.Series([0, 0, 0, 0, 0, 1, 2, 3, 4, 0]))
 
 
 class TestAbs:
@@ -847,7 +848,8 @@ class TestMinuteN:
         ]
     })
 
-    assert np.array_equal(a.minute_n(2)._gen(df), pd.Series([True, False, True]))
+    assert np.array_equal(
+        a.minute_n(2)._gen(df), pd.Series([True, False, True]))
 
 
 class TestMinuteNs:

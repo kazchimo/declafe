@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Optional, Type, Union, Literal, Callable
+from typing import TYPE_CHECKING, Optional, Type, Union, Literal, Callable, Any
 
 import numpy as np
 import pandas as pd
 
 __all__ = ["FeatureGen", "ColLike"]
+
+from numba import jit
 
 from .ChainMixin import ChainMixin
 from .ComplexFeatureMixin import ComplexFeatureMixin
@@ -29,6 +31,7 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     super().__init__()
     self.override_feature_name: Optional[str] = None
     self.dtype: Optional[Union[DTypes, Literal["numeric_auto"]]] = None
+    self._enable_numba = False
 
   @abstractmethod
   def _gen(self, df: pd.DataFrame) -> np.ndarray:
@@ -116,6 +119,26 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
 
   def con_ap(self, f: Callable[["FeatureGen"], "FeatureGen"]) -> "Features":
     return self.to_features.add_feature(f(self))
+
+  def enable_numba(self) -> "FeatureGen":
+    self._enable_numba = True
+    return self
+
+  def disable_numba(self) -> "FeatureGen":
+    self._enable_numba = False
+    return self
+
+  @property
+  def numba_enabled(self) -> bool:
+    return self._enable_numba
+
+  def numba_dec(self, func: Callable[..., Any]):
+    f = jit(nopython=True)(func) if self.numba_enabled else func
+
+    def wrapper(*args, **kwargs):
+      return f(*args, **kwargs)
+
+    return wrapper
 
   @staticmethod
   def FS() -> "Type[Features]":
