@@ -1,4 +1,5 @@
 import numpy as np
+from numba import jit
 
 from .UnaryFeature import UnaryFeature
 
@@ -19,6 +20,7 @@ class PctChangeFeature(UnaryFeature):
     p = self.periods
     s = ser
 
+    @jit(nopython=True)
     def gen(idx: int) -> float:
       pre_idx = idx - p
 
