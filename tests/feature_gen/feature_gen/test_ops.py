@@ -91,8 +91,8 @@ class TestSub:
 
   def test_sub(self):
     df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
-    assert np.array_equal((col("a") - col("b"))._gen(df), pd.Series([-3, -3,
-                                                                     -3]))
+    assert np.array_equal((col("a") - col("b"))._gen(df),
+                          pd.Series([-3, -3, -3]))
 
   def test_with_const(self):
     df = pd.DataFrame({"a": [1, 2, 3]})
@@ -117,7 +117,8 @@ class TestMul:
 
   def test_mul(self):
     df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
-    assert np.array_equal((col("a") * col("b"))._gen(df), pd.Series([4, 10, 18]))
+    assert np.array_equal((col("a") * col("b"))._gen(df), pd.Series([4, 10,
+                                                                     18]))
 
   def test_with_const(self):
     df = pd.DataFrame({"a": [1, 2, 3]})

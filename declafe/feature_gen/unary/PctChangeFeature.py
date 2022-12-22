@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 from .UnaryFeature import UnaryFeature
 
@@ -16,18 +17,4 @@ class PctChangeFeature(UnaryFeature):
     return f"pct_change_{self.periods}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    p = self.periods
-    s = ser
-
-    @self.numba_dec
-    def gen(idx: int) -> float:
-      pre_idx = idx - p
-
-      if 0 <= pre_idx < len(s):
-        return s[idx] / s[pre_idx] - 1
-      else:
-        return np.nan
-
-    f = np.frompyfunc(gen, 1, 1)
-
-    return f(np.arange(len(ser))).astype("float")
+    return pd.Series(ser).pct_change(self.periods).to_numpy()

@@ -14,7 +14,10 @@ class WILLRFeature(TriFeature):
 
   def trigen(self, col1: np.ndarray, col2: np.ndarray,
              col3: np.ndarray) -> np.ndarray:
-    return talib.WILLR(col1.astype(float), col2.astype(float), col3.astype(float), timeperiod=self.timeperiod)
+    return talib.WILLR(col1.astype(float),
+                       col2.astype(float),
+                       col3.astype(float),
+                       timeperiod=self.timeperiod)
 
   def _feature_name(self) -> str:
     return f"WILLR_{self.timeperiod}_of_{self.col1}_{self.col2}_{self.col3}"

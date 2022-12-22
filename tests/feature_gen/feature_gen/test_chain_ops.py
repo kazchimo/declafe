@@ -529,6 +529,8 @@ class TestMovingStd:
   def test_moving_std(self):
     res = a.moving_std(3)._gen(pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]}))
 
+    print(res)
+
     assert np.array_equal(res, [
         np.nan, np.nan, 0.816496580927726, 0.816496580927726, 0.816496580927726,
         0.816496580927726
