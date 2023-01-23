@@ -13,6 +13,9 @@ class TriFeature(FeatureGen, ABC):
     self.col1 = self.to_col(col1)
     self.col2 = self.to_col(col2)
     self.col3 = self.to_col(col3)
+    self.col1_f = self.to_col_feature_gen(col1)
+    self.col2_f = self.to_col_feature_gen(col2)
+    self.col3_f = self.to_col_feature_gen(col3)
 
   @abstractmethod
   def trigen(self, col1: np.ndarray, col2: np.ndarray,
@@ -20,5 +23,7 @@ class TriFeature(FeatureGen, ABC):
     raise NotImplementedError()
 
   def _gen(self, df: pd.DataFrame) -> np.ndarray:
-    return self.trigen(df[self.col1].to_numpy(), df[self.col2].to_numpy(),
-                       df[self.col3].to_numpy())
+    return self.trigen(
+        self.col1_f.extract(df).to_numpy(),
+        self.col2_f.extract(df).to_numpy(),
+        self.col3_f.extract(df).to_numpy())

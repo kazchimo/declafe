@@ -20,6 +20,9 @@ class ConstFeature(FeatureGen):
   def _feature_name(self) -> str:
     return f"{self.const}"
 
+  def extract(self, df: pd.DataFrame) -> pd.Series:
+    return pd.Series(self._gen(df), index=df.index)
+
   @staticmethod
   def conv(a: Any) -> "FeatureGen":
     if not isinstance(a, FeatureGen):

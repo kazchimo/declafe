@@ -73,6 +73,9 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
     return self.override_feature_name or \
            (self._feature_name())
 
+  def extract(self, df: pd.DataFrame) -> pd.Series:
+    return df[self.feature_name]
+
   def equals(self, other: "FeatureGen") -> bool:
     return self.feature_name == other.feature_name
 
@@ -155,6 +158,13 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
       return c.feature_name
     else:
       return c
+
+  def to_col_feature_gen(self, c: Union["FeatureGen", str]) -> "FeatureGen":
+    if isinstance(c, FeatureGen):
+      return c
+    else:
+      from declafe.feature_gen.unary import IdFeature
+      return IdFeature(c)
 
   def __str__(self):
     return self.feature_name

@@ -17,6 +17,10 @@ class UnaryFeature(FeatureGen, ABC):
     self.orig_column_name = column_name
     self.column_name = self.to_col(column_name)
 
+    from declafe.feature_gen.unary import IdFeature
+    if not isinstance(self, IdFeature):
+      self.column_f = self.to_col_feature_gen(column_name)
+
   @property
   @abstractmethod
   def name(self) -> str:
@@ -35,7 +39,7 @@ class UnaryFeature(FeatureGen, ABC):
     return f"{self.name}_of_{name}"
 
   def _gen(self, df: pd.DataFrame) -> np.ndarray:
-    return self.gen_unary(df[self.column_name].to_numpy())
+    return self.gen_unary(self.column_f.extract(df).to_numpy())
 
   @abstractmethod
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
