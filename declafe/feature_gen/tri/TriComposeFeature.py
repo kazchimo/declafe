@@ -34,7 +34,7 @@ class TriComposeFeature(FeatureGen):
     return self.to_instance().trigen(f1, f2, f3)
 
   def _feature_name(self) -> str:
-    pass
+    return self.to_instance().feature_name
 
   def to_instance(self):
     gen = self.to(col1=self.f1.feature_name,
