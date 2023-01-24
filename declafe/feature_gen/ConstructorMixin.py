@@ -11,7 +11,7 @@ class ConstructorMixin:
   @classmethod
   def cond(cls, test: C, true: C, false: C) -> "FeatureGen":
     from declafe.feature_gen.tri.CondFeature import CondFeature
-    return CondFeature(test_col=test, true_col=true, false_col=false)
+    return CondFeature(col1=test, col2=true, col3=false)
 
   @classmethod
   def sar(cls, high: C, low: C) -> "FeatureGen":

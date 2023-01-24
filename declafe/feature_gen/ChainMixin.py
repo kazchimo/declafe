@@ -35,7 +35,10 @@ class ChainMixin:
 
   def of_cond(self, true_col: "ColLike", false_col: "ColLike"):
     from declafe.feature_gen.tri.CondFeature import CondFeature
-    return CondFeature(self._self(), true_col, false_col)
+    from declafe.feature_gen.tri.TriComposeFeature import TriComposeFeature
+
+    return TriComposeFeature.make(self._self(), true_col, false_col,
+                                  CondFeature)
 
   def then(self, func: Callable[[pd.Series], pd.Series],
            op_name: str) -> "FeatureGen":

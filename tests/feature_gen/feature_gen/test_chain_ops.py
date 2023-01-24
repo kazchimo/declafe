@@ -29,6 +29,15 @@ class TestCond:
 
     assert f.generate(df).equals(pd.Series([1, 4]))
 
+  def test_chain(self):
+    df = pd.DataFrame({
+        "a": [1, 2],
+        "b": [3, 4],
+    })
+    f = (a % 2 == 0).of_cond(a, b)
+
+    assert f.generate(df).equals(pd.Series([3, 2]))
+
 
 class TestThen:
 

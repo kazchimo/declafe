@@ -9,8 +9,13 @@ __all__ = ["CondFeature"]
 
 class CondFeature(TriFeature):
 
-  def __init__(self, test_col: ColLike, true_col: ColLike, false_col: ColLike):
-    super().__init__(test_col, true_col, false_col)
+  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike):
+    """
+    :param col1: test column
+    :param col2: true column
+    :param col3: false column
+    """
+    super().__init__(col1, col2, col3)
 
   def trigen(self, col1: np.ndarray, col2: np.ndarray,
              col3: np.ndarray) -> np.ndarray:
