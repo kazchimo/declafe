@@ -155,6 +155,35 @@ class TestMovingSum:
         True)
 
 
+class TestRollingApply:
+
+  def test_return_rolling_apply(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    f = a.rolling_apply(3, lambda x: sum(x), "sum").to_features
+    result = f(df)
+
+    assert np.array_equal(result["rolling_apply_sum_over_a_3"],
+                          pd.Series([np.nan, np.nan, 6, 9, 12, 15]), True)
+
+  def test_multi_columns(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6], "b": [1, 2, 3, 4, 5, 6]})
+    f = a.rolling_apply(3, lambda a, b: sum(a) + sum(b), "sum", [b]).to_features
+    result = f(df)
+
+    assert np.array_equal(result["rolling_apply_sum_over_a_b_3"],
+                          pd.Series([np.nan, np.nan, 12, 18, 24, 30]), True)
+
+  def test_chain(self):
+    df = pd.DataFrame({"a": [1, 2, 3, 4, 5, 6]})
+    s = a + 1
+    m = a * 2
+    f = s.rolling_apply(3, lambda a, b: sum(a) + sum(b), "sum", [m]).to_features
+    result = f(df)
+
+    assert np.array_equal(result["rolling_apply_sum_over_a_+_1_a_*_2_3"],
+                          pd.Series([np.nan, np.nan, 21, 30, 39, 48]), True)
+
+
 class TestMovingSums:
 
   def test_return_moving_sums(self):

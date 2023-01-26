@@ -39,6 +39,12 @@ class Features:
     self.feature_gens = fs
     self.pre_processes = ps
 
+  def __call__(self,
+               temp_df: pd.DataFrame,
+               show_progress: bool = False,
+               drop_nan: bool = False):
+    return self.set_features(temp_df, show_progress, drop_nan)
+
   def set_features(self,
                    temp_df: pd.DataFrame,
                    show_progress: bool = False,

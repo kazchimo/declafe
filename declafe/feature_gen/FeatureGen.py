@@ -37,6 +37,9 @@ class FeatureGen(ABC, ConstructorMixin, ChainMixin, OpsMixin,
   def _gen(self, df: pd.DataFrame) -> np.ndarray:
     raise NotImplementedError
 
+  def __call__(self, df: pd.DataFrame) -> np.ndarray:
+    return self.generate(df)
+
   def generate(self, df: pd.DataFrame) -> np.ndarray:
     """
     optimized gen

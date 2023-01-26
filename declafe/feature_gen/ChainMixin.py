@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable, Literal
+from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable, Literal, Optional
 
 import numpy as np
 import pandas as pd
@@ -95,6 +95,17 @@ class ChainMixin:
   def moving_sum(self, period: int) -> "FeatureGen":
     from declafe.feature_gen.unary import SumFeature
     return self.next(SumFeature, periods=period)
+
+  def rolling_apply(
+      self,
+      window: int,
+      func: Callable[[np.ndarray, ...], np.ndarray],
+      ops_name: str,
+      additional_columns: Optional[List["ColLike"]] = None,
+  ):
+    from declafe.feature_gen.RollingApplyFeature import RollingApplyFeature
+    return RollingApplyFeature(self._self(), window, func, ops_name,
+                               additional_columns)
 
   def ema(self, period: int) -> "FeatureGen":
     from declafe.feature_gen.unary import EMAFeature
