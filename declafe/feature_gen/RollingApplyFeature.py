@@ -1,4 +1,4 @@
-from typing import Callable, List, Optional
+from typing import List, Optional, Protocol
 
 import numpy as np
 import pandas as pd
@@ -6,12 +6,18 @@ import pandas as pd
 from .FeatureGen import FeatureGen, ColLike
 
 
+class F(Protocol):
+
+  def __call__(self, *args: np.ndarray) -> np.ndarray:
+    ...
+
+
 class RollingApplyFeature(FeatureGen):
 
   def __init__(self,
                target_col: ColLike,
                window: int,
-               f: Callable[[np.ndarray, ...], np.ndarray],
+               f: F,
                ops_name: str,
                additional_columns: Optional[List[ColLike]] = None):
     super().__init__()
@@ -31,12 +37,11 @@ class RollingApplyFeature(FeatureGen):
     def ap(arr: pd.Series, df: pd.DataFrame) -> np.ndarray:
       temp_df = df.loc[arr.index]
       others = [c(temp_df) for c in self.additional_columns]
-      return self.f(arr, *others)
-
+      return self.f(arr.to_numpy(), *others)
 
     return pd.Series(self.target_col(df), index=df.index)\
       .rolling(window=self.window)\
-      .apply(ap, raw=False, args=(df, ))
+      .apply(ap, raw=False, args=(df, )).to_numpy()
 
   def _feature_name(self) -> str:
     additional_column_names = [c.feature_name for c in self.additional_columns]
