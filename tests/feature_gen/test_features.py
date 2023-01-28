@@ -264,3 +264,9 @@ class TestStatic:
 
     def test_return_many_features(self):
       assert Features.many(a, b) == Features([a, b])
+
+  class TestIterOver:
+
+    def test_iter_over_features(self):
+      assert Features.iter_over([1, 2, 3])(lambda i: a + i) == \
+             Features([a + 1, a + 2, a + 3])

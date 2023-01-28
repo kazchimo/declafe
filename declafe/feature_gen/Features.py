@@ -1,6 +1,6 @@
 import functools
 from dataclasses import dataclass, field
-from typing import List, Type, Callable, Union, TYPE_CHECKING
+from typing import List, Type, Callable, Union, TYPE_CHECKING, TypeVar, Iterable
 
 __all__ = ["Features", "F"]
 
@@ -13,6 +13,10 @@ if TYPE_CHECKING:
   from declafe.feature_gen.FeatureGen import FeatureGen
 
 from declafe.feature_gen.unary import UnaryFeature
+
+T = TypeVar("T")
+Ap = Callable[[T], "Features"]
+Fun = Callable[[T], "FeatureGen"]
 
 
 @dataclass
@@ -192,6 +196,14 @@ class Features:
   @staticmethod
   def many(*args: "FeatureGen") -> "Features":
     return Features(list(args))
+
+  @staticmethod
+  def iter_over(it: Iterable[T]) -> Ap:
+
+    def ap(f: Fun) -> "Features":
+      return Features([f(x) for x in it])
+
+    return ap
 
   def __iter__(self):
     return self.feature_gens.__iter__()
