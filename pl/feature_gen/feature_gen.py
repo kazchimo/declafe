@@ -19,6 +19,9 @@ class FeatureGen(ABC):
   def expr(self) -> pl.Expr:
     return self._expr().alias(self.feature_name)
 
+  def equals(self, other: "FeatureGen") -> bool:
+    return self.feature_name == other.feature_name
+
   def __call__(self, df: pl.DataFrame) -> pl.Series:
     return self.generate(df)
 
