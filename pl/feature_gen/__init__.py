@@ -19,6 +19,15 @@ def col_like_to_str(col_like: ColLike) -> str:
     raise TypeError(f"Expected str or FeatureGen, got {type(col_like)}")
 
 
+def col_like_to_feature_gen(col_like: ColLike) -> "FeatureGen":
+  if isinstance(col_like, str):
+    return col(col_like)
+  elif isinstance(col_like, FeatureGen):
+    return col_like
+  else:
+    raise TypeError(f"Expected str or FeatureGen, got {type(col_like)}")
+
+
 def col(column_name: str) -> "IdFeature":
   from pl.feature_gen.unary.id_feature import IdFeature
   return IdFeature(column_name)

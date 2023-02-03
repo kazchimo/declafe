@@ -9,4 +9,7 @@ class IdFeature(UnaryFeature):
     return orig_col
 
   def _feature_name(self) -> str:
-    return self.column_name
+    if isinstance(self.column_name, str):
+      return self.column_name
+    else:
+      return self.column_name.feature_name
