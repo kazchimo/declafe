@@ -22,7 +22,7 @@ class UnaryFeature(FeatureGen, ABC):
   def name(self) -> str:
     """
     各featureクラスをインスタンス化したときにcolumn_nameを除外した名前
-    e.g. PctChangeFeature(column_name="close", periods=5) => "pct_change_5"
+    e.g. PctChangeFeature(column="close", periods=5) => "pct_change_5"
     """
     raise NotImplementedError
 
