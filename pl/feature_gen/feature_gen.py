@@ -13,22 +13,18 @@ class FeatureGen(ABC):
     self.dtype: Optional[Union[DTypes, Literal["numeric_auto"]]] = None
 
   @abstractmethod
-  def _gen(self, df: pl.DataFrame) -> pl.Series:
+  def _expr(self) -> pl.Expr:
     raise NotImplementedError
+
+  def expr(self) -> pl.Expr:
+    return self._expr().alias(self.feature_name)
 
   def __call__(self, df: pl.DataFrame) -> pl.Series:
     return self.generate(df)
 
   def generate(self, df: pl.DataFrame) -> pl.Series:
-    """
-    optimized gen
-    """
-
     try:
-      result = df[self.feature_name] \
-        if self.feature_name in df.columns \
-        else self._gen(df)
-
+      result = df.select(self.expr()).get_column(self.feature_name)
     except Exception as e:
       raise FailedToGenerate(f"Failed to generate {self.feature_name}") from e
 
