@@ -52,6 +52,10 @@ class FeatureGen(ABC):
   def as_name_of(self, name: str) -> "FeatureGen":
     return self.alias(name)
 
+  def abs(self) -> "FeatureGen":
+    from pl.feature_gen.unary.abs_feature import AbsFeature
+    return AbsFeature(self)
+
 
 class FailedToGenerate(Exception):
   ...
