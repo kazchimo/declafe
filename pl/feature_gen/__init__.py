@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from pl.feature_gen.feature_gen import FeatureGen
 from pl.feature_gen.types import ColLike
@@ -6,6 +6,7 @@ from pl.feature_gen.unary.id_feature import IdFeature
 
 if TYPE_CHECKING:
   from pl.feature_gen.unary.id_feature import IdFeature
+  from pl.feature_gen.const_feature import ConstFeature
   from pl.feature_gen.types import ColLike
 
 
@@ -21,3 +22,12 @@ def col_like_to_str(col_like: ColLike) -> str:
 def col(column_name: str) -> "IdFeature":
   from pl.feature_gen.unary.id_feature import IdFeature
   return IdFeature(column_name)
+
+
+def lit(value: Any) -> "ConstFeature":
+  from pl.feature_gen.const_feature import ConstFeature
+  return ConstFeature(value)
+
+
+def const(value: Any) -> "ConstFeature":
+  return lit(value)
