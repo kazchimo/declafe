@@ -14,4 +14,4 @@ class SumFeature(UnaryFeature):
     return orig_col.rolling_sum(self.periods)
 
   def _feature_names(self) -> list[str]:
-    return [f"sum", str(self.periods), "of", self._col_wrapped_feature_name]
+    return [f"rolling_sum{self.periods}({self.col_feature.feature_name})"]
