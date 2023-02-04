@@ -60,6 +60,13 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.consecutive_count_feature import ConsecutiveCountFeature
     return ConsecutiveCountFeature(self, target_value)
 
+  def lag(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.lag_feature import LagFeature
+    return LagFeature(periods, self)
+
+  def shift(self, periods: int) -> "FeatureGen":
+    return self.lag(periods)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
