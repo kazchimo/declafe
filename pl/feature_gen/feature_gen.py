@@ -67,6 +67,10 @@ class FeatureGen(ABC):
   def shift(self, periods: int) -> "FeatureGen":
     return self.lag(periods)
 
+  def pct_change(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.pct_change_feature import PctChangeFeature
+    return PctChangeFeature(periods, self)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
