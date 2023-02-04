@@ -83,6 +83,16 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
 
+  @property
+  def wrapped_feature_name(self) -> str:
+    from pl.feature_gen.const_feature import ConstFeature
+    from pl.feature_gen.unary.id_feature import IdFeature
+
+    if isinstance(self, (IdFeature, ConstFeature)):
+      return self.feature_name
+    else:
+      return f"({self.feature_name})"
+
 
 class FailedToGenerate(Exception):
   ...

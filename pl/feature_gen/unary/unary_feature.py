@@ -25,18 +25,10 @@ class UnaryFeature(FeatureGen, ABC):
     raise NotImplementedError
 
   @property
-  def _wrapped_column_name(self) -> str:
-    from pl.feature_gen.const_feature import ConstFeature
-    from pl.feature_gen.unary.id_feature import IdFeature
-
-    if isinstance(self.column, str):
-      return self.column
-    elif isinstance(self.column, (IdFeature, ConstFeature)):
-      return self.column.feature_name
-    else:
-      return f"({self.column.feature_name})"
-
-  @property
-  def col_feature(self):
+  def col_feature(self) -> "FeatureGen":
     from pl.feature_gen import col_like_to_feature_gen
     return col_like_to_feature_gen(self.column)
+
+  @property
+  def _col_wrapped_feature_name(self) -> str:
+    return self.col_feature.wrapped_feature_name

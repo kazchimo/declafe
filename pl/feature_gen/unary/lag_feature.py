@@ -14,4 +14,4 @@ class LagFeature(UnaryFeature):
     return orig_col.shift(self.periods)
 
   def _feature_name(self) -> str:
-    return f"lag_{self.periods}_of_{self._wrapped_column_name}"
+    return f"lag_{self.periods}_of_{self._col_wrapped_feature_name}"

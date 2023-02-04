@@ -14,4 +14,4 @@ class PctChangeFeature(UnaryFeature):
     return orig_col.pct_change(self.periods)
 
   def _feature_name(self) -> str:
-    return f"pct_change_{self.periods}_of_{self._wrapped_column_name}"
+    return f"pct_change_{self.periods}_of_{self._col_wrapped_feature_name}"

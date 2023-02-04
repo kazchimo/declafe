@@ -1,6 +1,7 @@
 import polars as pl
 
 from pl.feature_gen.feature_gen import FeatureGen
+import pl.feature_gen as fg
 
 
 class AddFeature(FeatureGen):
@@ -56,3 +57,12 @@ class TestAsNameOf:
   def test_as_name_of(self):
     f = AddFeature("a", "b").as_name_of("c")
     assert f.feature_name == "c"
+
+
+class Test_WrappedFeatureName:
+
+  def test_wrapped_feature_name(self):
+    assert fg.col("a").wrapped_feature_name == "a"
+    assert fg.lit(1).wrapped_feature_name == "1"
+    assert fg.col("a").abs().wrapped_feature_name == "(|a|)"
+    assert fg.col("a").abs().log().wrapped_feature_name == "(log(|a|))"

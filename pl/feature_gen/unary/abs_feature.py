@@ -9,4 +9,4 @@ class AbsFeature(UnaryFeature):
     return orig_col.abs()
 
   def _feature_name(self) -> str:
-    return f"|{self._wrapped_column_name}|"
+    return f"|{self.col_feature.wrapped_feature_name}|"

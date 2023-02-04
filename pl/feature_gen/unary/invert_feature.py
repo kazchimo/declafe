@@ -9,4 +9,4 @@ class InvertFeature(UnaryFeature):
     return ~orig_col
 
   def _feature_name(self) -> str:
-    return f"~{self._wrapped_column_name}"
+    return f"~{self._col_wrapped_feature_name}"

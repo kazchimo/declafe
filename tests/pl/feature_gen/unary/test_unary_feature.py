@@ -10,7 +10,7 @@ class Plus1Feature(UnaryFeature):
     return orig_col + 1
 
   def _feature_name(self) -> str:
-    return f"{self._wrapped_column_name} + 1"
+    return f"{self._col_wrapped_feature_name} + 1"
 
 
 class TestUnaryFeature:
