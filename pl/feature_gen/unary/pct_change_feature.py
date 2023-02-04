@@ -15,6 +15,5 @@ class PctChangeFeature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        "pct_change",
-        str(self.periods), "of", self._col_wrapped_feature_name
+        f"pct_change{self.periods}({self.col_feature.feature_name})",
     ]
