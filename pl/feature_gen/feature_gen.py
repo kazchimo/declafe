@@ -84,6 +84,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.log_feature import LogFeature
     return LogFeature(self)
 
+  def round_n(self, round_digit: int) -> "FeatureGen":
+    from pl.feature_gen.unary.round_n_feature import RoundNFeature
+    return RoundNFeature(round_digit, self)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
