@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Literal
-import polars as pl
+from typing import Optional, Union, Literal, Any
 
 from pl.feature_gen.types import DTypes
+import polars as pl
 
 
 class FeatureGen(ABC):
@@ -55,6 +55,10 @@ class FeatureGen(ABC):
   def abs(self) -> "FeatureGen":
     from pl.feature_gen.unary.abs_feature import AbsFeature
     return AbsFeature(self)
+
+  def consecutive_count_of(self, target_value: Any) -> "FeatureGen":
+    from pl.feature_gen.unary.consecutive_count_feature import ConsecutiveCountFeature
+    return ConsecutiveCountFeature(self, target_value)
 
 
 class FailedToGenerate(Exception):

@@ -1,4 +1,4 @@
-from typing import Union, Literal, TYPE_CHECKING
+from typing import Union, Literal, TYPE_CHECKING, TypeAlias
 
 import numpy as np
 
@@ -15,7 +15,7 @@ DTypes = Union[Literal["category"], Literal["bool"], Literal["datetime64[ns]"],
                Literal["uint16"], Literal["uint32"], Literal["uint64"],
                NumericDTypes]
 
-ColLike = Union["FeatureGen", str]
+ColLike: TypeAlias = Union["FeatureGen", str]
 
 
 def as_numeric(a: np.ndarray) -> np.ndarray:
