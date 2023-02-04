@@ -71,6 +71,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.pct_change_feature import PctChangeFeature
     return PctChangeFeature(periods, self)
 
+  def sum(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.sum_feature import SumFeature
+    return SumFeature(periods, self)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
