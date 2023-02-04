@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Literal, Any
+from typing import Optional, Union, Literal, Any, TypeVar
 
 from pl.feature_gen.types import DTypes
 import polars as pl
+
+T = TypeVar("T")
 
 
 class FeatureGen(ABC):
@@ -87,6 +89,10 @@ class FeatureGen(ABC):
   def round_n(self, round_digit: int) -> "FeatureGen":
     from pl.feature_gen.unary.round_n_feature import RoundNFeature
     return RoundNFeature(round_digit, self)
+
+  def replace(self, target_value: T, to_value: T) -> "FeatureGen":
+    from pl.feature_gen.unary.replace_feature import ReplaceFeature
+    return ReplaceFeature(self, target_value, to_value)
 
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
