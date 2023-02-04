@@ -78,9 +78,19 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.pct_change_feature import PctChangeFeature
     return PctChangeFeature(periods, self)
 
-  def sum(self, periods: int) -> "FeatureGen":
+  def rolling_sum(self, periods: int) -> "FeatureGen":
     from pl.feature_gen.unary.rolling_sum_feature import RollingSumFeature
     return RollingSumFeature(periods, self)
+
+  def sum(self, periods: int) -> "FeatureGen":
+    return self.rolling_sum(periods)
+
+  def rolling_min(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.rolling_min_feature import RollingMinFeature
+    return RollingMinFeature(periods, self)
+
+  def min(self, periods: int) -> "FeatureGen":
+    return self.rolling_min(periods)
 
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature
