@@ -127,6 +127,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.minimum_feature import MinimumFeature
     return MinimumFeature(self, comp)
 
+  def maximum(self, comp: float) -> "FeatureGen":
+    from pl.feature_gen.unary.maximum_feature import MaximumFeature
+    return MaximumFeature(self, comp)
+
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature
     return LogFeature(self)
