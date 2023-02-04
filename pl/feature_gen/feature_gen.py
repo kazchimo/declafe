@@ -123,6 +123,10 @@ class FeatureGen(ABC):
   def std(self, periods: int) -> "FeatureGen":
     return self.rolling_std(periods)
 
+  def minimum(self, comp: float) -> "FeatureGen":
+    from pl.feature_gen.unary.minimum_feature import MinimumFeature
+    return MinimumFeature(self, comp)
+
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature
     return LogFeature(self)
