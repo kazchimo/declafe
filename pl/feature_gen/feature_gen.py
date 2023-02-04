@@ -99,6 +99,16 @@ class FeatureGen(ABC):
   def max(self, periods: int) -> "FeatureGen":
     return self.rolling_max(periods)
 
+  def rolling_median(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.rolling_med_feature import RollingMedFeature
+    return RollingMedFeature(periods, self)
+
+  def median(self, periods: int) -> "FeatureGen":
+    return self.rolling_median(periods)
+
+  def med(self, periods: int) -> "FeatureGen":
+    return self.rolling_median(periods)
+
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature
     return LogFeature(self)
