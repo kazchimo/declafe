@@ -92,6 +92,13 @@ class FeatureGen(ABC):
   def min(self, periods: int) -> "FeatureGen":
     return self.rolling_min(periods)
 
+  def rolling_max(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.rolling_max_feature import RollingMaxFeature
+    return RollingMaxFeature(periods, self)
+
+  def max(self, periods: int) -> "FeatureGen":
+    return self.rolling_max(periods)
+
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature
     return LogFeature(self)
