@@ -60,6 +60,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.consecutive_count_feature import ConsecutiveCountFeature
     return ConsecutiveCountFeature(self, target_value)
 
+  def __invert__(self) -> "FeatureGen":
+    from pl.feature_gen.unary.invert_feature import InvertFeature
+    return InvertFeature(self)
+
 
 class FailedToGenerate(Exception):
   ...
