@@ -3,6 +3,7 @@ import polars as pl
 from pl.feature_gen.feature_gen import FeatureGen
 from pl.feature_gen.features import Features
 import pl.feature_gen.constructor_dsl as dsl
+import pl.feature_gen as fg
 
 
 class AddFeature(FeatureGen):
@@ -127,3 +128,20 @@ class TestContains:
     assert add in fs
     assert sub in fs
     assert AddFeature("a", "c") not in fs
+
+
+class TestMap:
+
+  def test_map(self):
+    df = pl.DataFrame({"a": [1, -2, 3], "b": [4, -5, 6]})
+    fs = fg.features(fg.col("a"), fg.col("b")).map(lambda x: x.abs())
+
+    print(fs(df))
+
+    assert fs(df).frame_equal(
+        pl.DataFrame({
+            "a": [1, -2, 3],
+            "b": [4, -5, 6],
+            "|a|": [1, 2, 3],
+            "|b|": [4, 5, 6],
+        }))

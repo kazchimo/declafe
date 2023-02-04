@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Callable
 
 from pl.feature_gen.feature_gen import FeatureGen
 import polars as pl
@@ -32,6 +32,9 @@ class Features:
   @property
   def feature_names(self) -> List[str]:
     return [f.feature_name for f in self.feature_gens]
+
+  def map(self, func: Callable[["FeatureGen"], "FeatureGen"]) -> "Features":
+    return Features([func(f) for f in self.feature_gens])
 
   def contains(self, feature: Union["FeatureGen", str]) -> bool:
     if isinstance(feature, str):
