@@ -6,11 +6,15 @@ import pl.feature_gen as fg
 
 class Plus1Feature(UnaryFeature):
 
+  def __init__(self, column: fg.ColLike):
+    super().__init__(column)
+    self.change_seperator(" ")
+
   def _unary_expr(self, orig_col: pl.Expr):
     return orig_col + 1
 
-  def _feature_name(self) -> str:
-    return f"{self._col_wrapped_feature_name} + 1"
+  def _feature_names(self) -> list[str]:
+    return [f"{self._col_wrapped_feature_name}", "+", "1"]
 
 
 class TestUnaryFeature:

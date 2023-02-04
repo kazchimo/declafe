@@ -25,5 +25,8 @@ class ConsecutiveCountFeature(UnaryFeature):
 
     return orig_col.map(ap)
 
-  def _feature_name(self) -> str:
-    return f"consecutive_count_{self.target_value}_of_{self._col_wrapped_feature_name}"
+  def _feature_names(self) -> list[str]:
+    return [
+        "consecutive_count",
+        str(self.target_value), "of", self._col_wrapped_feature_name
+    ]

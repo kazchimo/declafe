@@ -12,4 +12,4 @@ class TestAbsFeature:
     assert pl.Series("|a|", [1, 2, 3]).series_equal(abs_feature(df))
 
     f = a.abs().abs()
-    assert pl.Series("|(|a|)|", [1, 2, 3]).series_equal(f(df))
+    assert pl.Series("||a||", [1, 2, 3]).series_equal(f(df))

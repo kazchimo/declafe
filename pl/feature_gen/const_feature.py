@@ -14,5 +14,5 @@ class ConstFeature(FeatureGen):
   def _expr(self) -> pl.Expr:
     return pl.lit(self.value).alias(self.feature_name)
 
-  def _feature_name(self) -> str:
+  def _feature_names(self) -> str:
     return str(self.value)

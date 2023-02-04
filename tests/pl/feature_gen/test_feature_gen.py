@@ -10,12 +10,13 @@ class AddFeature(FeatureGen):
     super(AddFeature, self).__init__()
     self.left = left
     self.right = right
+    self.change_seperator(" ")
 
   def _expr(self) -> pl.Expr:
     return pl.col(self.left) + pl.col(self.right)
 
-  def _feature_name(self) -> str:
-    return f"{self.left} + {self.right}"
+  def _feature_names(self) -> list[str]:
+    return [f"{self.left}", "+", f"{self.right}"]
 
 
 class TestCall:

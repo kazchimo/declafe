@@ -8,8 +8,8 @@ class IdFeature(UnaryFeature):
   def _unary_expr(self, orig_col: pl.Expr):
     return pl.col(self._col_wrapped_feature_name)
 
-  def _feature_name(self) -> str:
+  def _feature_names(self) -> list[str]:
     if isinstance(self.column, str):
-      return self.column
+      return [self.column]
     else:
-      return self._col_wrapped_feature_name
+      return [self._col_wrapped_feature_name]

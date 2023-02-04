@@ -11,6 +11,7 @@ class FeatureGen(ABC):
     super(FeatureGen, self).__init__()
     self.override_feature_name: Optional[str] = None
     self.dtype: Optional[Union[DTypes, Literal["numeric_auto"]]] = None
+    self.sep = "_"
 
   @abstractmethod
   def _expr(self) -> pl.Expr:
@@ -21,6 +22,10 @@ class FeatureGen(ABC):
 
   def equals(self, other: "FeatureGen") -> bool:
     return self.feature_name == other.feature_name
+
+  def change_seperator(self, sep: str) -> "FeatureGen":
+    self.sep = sep
+    return self
 
   def __call__(self, df: pl.DataFrame) -> pl.Series:
     return self.generate(df)
@@ -36,10 +41,10 @@ class FeatureGen(ABC):
   @property
   def feature_name(self) -> str:
     return self.override_feature_name or \
-           (self._feature_name())
+           (self.sep.join(self._feature_names()))
 
   @abstractmethod
-  def _feature_name(self) -> str:
+  def _feature_names(self) -> list[str]:
     """
     default feature name used for this FeatureGen class
     """
