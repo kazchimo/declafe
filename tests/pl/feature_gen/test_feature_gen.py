@@ -67,3 +67,12 @@ class Test_WrappedFeatureName:
     assert fg.lit(1).wrapped_feature_name == "1"
     assert fg.col("a").abs().wrapped_feature_name == "(|a|)"
     assert fg.col("a").abs().log().wrapped_feature_name == "(log(|a|))"
+
+
+class TestChangeSeperator:
+
+  def test_change_seperator(self):
+    f = fg.col("a").log().replace(2, 10)
+
+    assert f.feature_name == "replace_2_of_(log(a))_to_10"
+    assert f.change_seperator(" ").feature_name == "replace 2 of (log(a)) to 10"
