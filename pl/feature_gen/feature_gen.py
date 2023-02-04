@@ -79,8 +79,8 @@ class FeatureGen(ABC):
     return PctChangeFeature(periods, self)
 
   def sum(self, periods: int) -> "FeatureGen":
-    from pl.feature_gen.unary.sum_feature import SumFeature
-    return SumFeature(periods, self)
+    from pl.feature_gen.unary.rolling_sum_feature import RollingSumFeature
+    return RollingSumFeature(periods, self)
 
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature

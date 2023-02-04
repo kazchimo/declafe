@@ -4,7 +4,7 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 from pl.feature_gen.types import ColLike
 
 
-class SumFeature(UnaryFeature):
+class RollingSumFeature(UnaryFeature):
 
   def __init__(self, periods: int, column: ColLike):
     super().__init__(column)
