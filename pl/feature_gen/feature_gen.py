@@ -106,6 +106,13 @@ class FeatureGen(ABC):
   def median(self, periods: int) -> "FeatureGen":
     return self.rolling_median(periods)
 
+  def rolling_mean(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.rolling_mean_feature import RollingMeanFeature
+    return RollingMeanFeature(periods, self)
+
+  def mean(self, periods: int) -> "FeatureGen":
+    return self.rolling_mean(periods)
+
   def med(self, periods: int) -> "FeatureGen":
     return self.rolling_median(periods)
 
