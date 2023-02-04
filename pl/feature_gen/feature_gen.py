@@ -116,6 +116,13 @@ class FeatureGen(ABC):
   def med(self, periods: int) -> "FeatureGen":
     return self.rolling_median(periods)
 
+  def rolling_std(self, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.rolling_std_feature import RollingStdFeature
+    return RollingStdFeature(periods, self)
+
+  def std(self, periods: int) -> "FeatureGen":
+    return self.rolling_std(periods)
+
   def log(self) -> "FeatureGen":
     from pl.feature_gen.unary.log_feature import LogFeature
     return LogFeature(self)
