@@ -160,6 +160,11 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.from_func_feature import FromFuncFeature
     return FromFuncFeature(self, func, ops_name)
 
+  def parse_unixtime(self, unit: Literal["ns", "us", "ms", "s",
+                                         "d"]) -> "FeatureGen":
+    from pl.feature_gen.unary.times.parse_unixtime_feature import ParseUnixTimeFeature
+    return ParseUnixTimeFeature(self, unit)
+
   def day_of_month(self) -> "FeatureGen":
     from pl.feature_gen.unary.times.day_of_month_feature import DayOfMonthFeature
     return DayOfMonthFeature(self)
