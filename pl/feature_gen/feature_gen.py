@@ -174,6 +174,13 @@ class FeatureGen(ABC):
   def __rsub__(self, other: O) -> "FeatureGen":
     return fg.conv_lit(other).__sub__(self)
 
+  def __mul__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.mul_feature import MulFeature
+    return MulFeature(self, fg.conv_lit(other))
+
+  def __rmul__(self, other: O) -> "FeatureGen":
+    return fg.conv_lit(other).__mul__(self)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
