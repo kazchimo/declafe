@@ -23,7 +23,7 @@ class OpsMixin:
     from declafe.feature_gen.ConstFeature import ConstFeature
     return ConstFeature.conv(a)
 
-  def __eq__(self, other: O) -> "FeatureGen":
+  def __eq__(self, other: O) -> "FeatureGen":  # type: ignore
     from .binary import BiComposeFeature
     from .binary.ops import EqFeature
 
@@ -31,7 +31,7 @@ class OpsMixin:
                                  right=self._conv(other),
                                  to=EqFeature)
 
-  def __ne__(self, other: O) -> "FeatureGen":
+  def __ne__(self, other: O) -> "FeatureGen":  # type: ignore
     return (cast("FeatureGen", self) == other).flip_bool()
 
   def __add__(self, other: O) -> "FeatureGen":

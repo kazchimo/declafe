@@ -23,7 +23,8 @@ def partialclass(cls, *args, **kwds):
 
 class GroupBy:
 
-  def __init__(self, by: str, aggs: Optional[List[AggConst]] = None):
+  def __init__(  # type: ignore
+      self, by: str, aggs: Optional[List[AggConst]] = None):
     if aggs is None:
       aggs = []
     self.aggs = aggs

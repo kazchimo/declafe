@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable, Literal, Optional
+from typing import Type, TYPE_CHECKING, Any, List, TypeVar, cast, Callable, Literal, Optional, Protocol
 
 import numpy as np
 import pandas as pd
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 class ChainMixin:
 
-  def __init__(self):
+  def __init__(self):  # type: ignore
     from declafe.feature_gen.Features import Features
     self.FS = Features
 
@@ -37,8 +37,8 @@ class ChainMixin:
     from declafe.feature_gen.tri.CondFeature import CondFeature
     from declafe.feature_gen.tri.TriComposeFeature import TriComposeFeature
 
-    return TriComposeFeature.make(self._self(), true_col, false_col,
-                                  CondFeature)
+    return TriComposeFeature.make(  # type: ignore
+        self._self(), true_col, false_col, CondFeature)  # type: ignore
 
   def then(self, func: Callable[[pd.Series], pd.Series],
            op_name: str) -> "FeatureGen":
@@ -96,10 +96,15 @@ class ChainMixin:
     from declafe.feature_gen.unary import SumFeature
     return self.next(SumFeature, periods=period)
 
+  class F(Protocol):
+
+    def __call__(self, *args: np.ndarray) -> np.ndarray:
+      ...
+
   def rolling_apply(
       self,
       window: int,
-      func: Callable[[np.ndarray, ...], np.ndarray],
+      func: F,
       ops_name: str,
       additional_columns: Optional[List["ColLike"]] = None,
   ):

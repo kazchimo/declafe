@@ -228,11 +228,11 @@ class FeatureGen(ABC):
   def __rmod__(self, other: O) -> "FeatureGen":
     return fg.conv_lit(other).__mod__(self)
 
-  def __eq__(self, other: O) -> "FeatureGen":
+  def __eq__(self, other: O) -> "FeatureGen":  # type: ignore
     from pl.feature_gen.binary.ops.eq_feature import EqFeature
     return EqFeature(self, fg.conv_lit(other))
 
-  def __ne__(self, other: O) -> "FeatureGen":
+  def __ne__(self, other: O) -> "FeatureGen":  # type: ignore
     from pl.feature_gen.binary.ops.ne_feature import NeFeature
     return NeFeature(self, fg.conv_lit(other))
 

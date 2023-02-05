@@ -7,7 +7,7 @@ from .agg_fun import AggFun
 
 class AggFeatures:
 
-  def __init__(self, by: str, agg_funs: List[AggFun]):
+  def __init__(self, by: str, agg_funs: List[AggFun]):  # type: ignore
     self.agg_funs = agg_funs
     self.by = by
 

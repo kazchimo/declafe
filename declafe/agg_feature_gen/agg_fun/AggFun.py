@@ -10,7 +10,7 @@ from declafe.feature_gen.unary import IdFeature
 
 class AggFun(ABC):
 
-  def __init__(self, target: str):
+  def __init__(self, target: str):  # type: ignore
     self.target = target
 
   @abstractmethod

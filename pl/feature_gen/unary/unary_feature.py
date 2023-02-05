@@ -16,7 +16,7 @@ class UnaryFeature(FeatureGen, ABC):
     from pl.feature_gen.unary.id_feature import IdFeature
 
     if isinstance(self, IdFeature):
-      return self._unary_expr(pl.lit(0))
+      return self._unary_expr(pl.lit(0))  # type: ignore
     else:
       return self._unary_expr(self.col_feature.expr())
 
