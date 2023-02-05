@@ -7,3 +7,5 @@ build
 declafe.egg-info
 
 **/*.ipynb
+
+gen-talib.py
