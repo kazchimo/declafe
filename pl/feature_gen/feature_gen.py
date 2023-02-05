@@ -210,6 +210,13 @@ class FeatureGen(ABC):
   def __rand__(self, other: O) -> "FeatureGen":
     return fg.conv_lit(other).__and__(self)
 
+  def __or__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.or_feature import OrFeature
+    return OrFeature(self, fg.conv_lit(other))
+
+  def __ror__(self, other: O) -> "FeatureGen":
+    return fg.conv_lit(other).__or__(self)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
