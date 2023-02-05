@@ -185,6 +185,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.times.minute_feature import MinuteFeature
     return MinuteFeature(self)
 
+  def second(self) -> "FeatureGen":
+    from pl.feature_gen.unary.times.second_feature import SecondFeature
+    return SecondFeature(self)
+
   def __add__(self, other: O) -> "FeatureGen":
     from pl.feature_gen.binary.ops.add_feature import AddFeature
     return AddFeature(self, fg.conv_lit(other))
