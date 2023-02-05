@@ -188,6 +188,13 @@ class FeatureGen(ABC):
   def __rtruediv__(self, other: O) -> "FeatureGen":
     return fg.conv_lit(other).__truediv__(self)
 
+  def __mod__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.mod_feature import ModFeature
+    return ModFeature(self, fg.conv_lit(other))
+
+  def __rmod__(self, other: O) -> "FeatureGen":
+    return fg.conv_lit(other).__mod__(self)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
