@@ -28,3 +28,18 @@ def test_day_of_month():
           "day_of_month(a_date)",
           [1, 2, 3, 4],
       ))
+
+  df = pl.DataFrame({
+      "a": [
+          1612137600000000000,
+          1612224000000000000,
+          1612310400000000000,
+          1612396800000000000,
+      ]
+  })
+  day_of_month = fg.col("a").parse_unixtime("ns").day_of_month()
+  assert day_of_month(df).series_equal(
+      pl.Series(
+          "day_of_month(parse_unixtime(a))",
+          [1, 2, 3, 4],
+      ))

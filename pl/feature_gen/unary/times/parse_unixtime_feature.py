@@ -5,13 +5,14 @@ import polars as pl
 
 from ..unary_feature import UnaryFeature
 
+Unit = Literal["ns", "us", "ms", "s", "d"]
+
 
 class ParseUnixTimeFeature(UnaryFeature):
 
-  def __init__(self, column: ColLike, unit: Literal["ns", "us", "ms", "s",
-                                                    "d"]):
+  def __init__(self, column: ColLike, unit: Unit):
     super().__init__(column)
-    self.unit = unit
+    self.unit: Unit = unit
 
   def _unary_expr(self, orig_col: pl.Expr):
     return pl.from_epoch(orig_col, self.unit)
