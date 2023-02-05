@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Literal, Any, TypeVar
+from typing import Optional, Union, Literal, Any, TypeVar, Callable
 
 from pl.feature_gen.types import DTypes
 import polars as pl
@@ -142,6 +142,11 @@ class FeatureGen(ABC):
   def replace(self, target_value: T, to_value: T) -> "FeatureGen":
     from pl.feature_gen.unary.replace_feature import ReplaceFeature
     return ReplaceFeature(self, target_value, to_value)
+
+  def accumulate(self, ops_name: str, ops_func: Callable[[Any, Any],
+                                                         Any]) -> "FeatureGen":
+    from pl.feature_gen.unary.accumulate_feature import AccumulateFeature
+    return AccumulateFeature(self, ops_name, ops_func)
 
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
