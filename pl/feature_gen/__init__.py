@@ -38,5 +38,12 @@ def lit(value: Any) -> "ConstFeature":
   return ConstFeature(value)
 
 
+def conv_lit(value: Any) -> "FeatureGen":
+  if isinstance(value, FeatureGen):
+    return value
+  else:
+    return lit(value)
+
+
 def const(value: Any) -> "ConstFeature":
   return lit(value)

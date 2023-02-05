@@ -1,10 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Literal, Any, TypeVar, Callable
+from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias
 
 from pl.feature_gen.types import DTypes
+import pl.feature_gen as fg
 import polars as pl
 
 T = TypeVar("T")
+
+O: TypeAlias = Union["FeatureGen", int, float, str, bool]
 
 
 class FeatureGen(ABC):
@@ -156,6 +159,13 @@ class FeatureGen(ABC):
            ops_name: str) -> "FeatureGen":
     from pl.feature_gen.unary.from_func_feature import FromFuncFeature
     return FromFuncFeature(self, func, ops_name)
+
+  def __add__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.add_feature import AddFeature
+    return AddFeature(self, fg.conv_lit(other))
+
+  def __radd__(self, other: O) -> "FeatureGen":
+    return fg.conv_lit(other).__add__(self)
 
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
