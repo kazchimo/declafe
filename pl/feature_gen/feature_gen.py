@@ -148,6 +148,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.accumulate_feature import AccumulateFeature
     return AccumulateFeature(self, ops_name, ops_func)
 
+  def exists_within(self, target_value: Any, periods: int) -> "FeatureGen":
+    from pl.feature_gen.unary.exists_within_feature import ExistsWithinFeature
+    return ExistsWithinFeature(self, target_value, periods)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
