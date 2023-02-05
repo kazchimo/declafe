@@ -21,7 +21,7 @@ class UnaryFeature(FeatureGen, ABC):
       return self._unary_expr(self.col_feature.expr())
 
   @abstractmethod
-  def _unary_expr(self, orig_col: pl.Expr):
+  def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:
     raise NotImplementedError
 
   @property
