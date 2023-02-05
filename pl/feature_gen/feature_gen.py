@@ -217,6 +217,10 @@ class FeatureGen(ABC):
   def __ror__(self, other: O) -> "FeatureGen":
     return fg.conv_lit(other).__or__(self)
 
+  def __ge__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.ge_feature import GEFeature
+    return GEFeature(self, fg.conv_lit(other))
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
