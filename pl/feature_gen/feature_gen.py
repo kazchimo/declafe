@@ -221,6 +221,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.binary.ops.ge_feature import GEFeature
     return GEFeature(self, fg.conv_lit(other))
 
+  def __gt__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.gt_feature import GTFeature
+    return GTFeature(self, fg.conv_lit(other))
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
