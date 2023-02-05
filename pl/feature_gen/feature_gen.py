@@ -152,6 +152,11 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.exists_within_feature import ExistsWithinFeature
     return ExistsWithinFeature(self, target_value, periods)
 
+  def then(self, func: Callable[[pl.Series], pl.Series],
+           ops_name: str) -> "FeatureGen":
+    from pl.feature_gen.unary.from_func_feature import FromFuncFeature
+    return FromFuncFeature(self, func, ops_name)
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
