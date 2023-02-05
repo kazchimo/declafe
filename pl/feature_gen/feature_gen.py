@@ -160,6 +160,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.from_func_feature import FromFuncFeature
     return FromFuncFeature(self, func, ops_name)
 
+  def day_of_month(self) -> "FeatureGen":
+    from pl.feature_gen.unary.times.day_of_month_feature import DayOfMonthFeature
+    return DayOfMonthFeature(self)
+
   def __add__(self, other: O) -> "FeatureGen":
     from pl.feature_gen.binary.ops.add_feature import AddFeature
     return AddFeature(self, fg.conv_lit(other))
