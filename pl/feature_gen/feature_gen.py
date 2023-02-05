@@ -177,6 +177,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.times.hour_feature import HourFeature
     return HourFeature(self)
 
+  def month(self) -> "FeatureGen":
+    from pl.feature_gen.unary.times.month_feature import MonthFeature
+    return MonthFeature(self)
+
   def minute(self) -> "FeatureGen":
     from pl.feature_gen.unary.times.minute_feature import MinuteFeature
     return MinuteFeature(self)
