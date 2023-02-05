@@ -173,6 +173,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.unary.times.day_of_week_feature import DayOfWeekFeature
     return DayOfWeekFeature(self)
 
+  def hour(self) -> "FeatureGen":
+    from pl.feature_gen.unary.times.hour_feature import HourFeature
+    return HourFeature(self)
+
   def __add__(self, other: O) -> "FeatureGen":
     from pl.feature_gen.binary.ops.add_feature import AddFeature
     return AddFeature(self, fg.conv_lit(other))
