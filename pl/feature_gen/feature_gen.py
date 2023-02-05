@@ -199,6 +199,10 @@ class FeatureGen(ABC):
     from pl.feature_gen.binary.ops.eq_feature import EqFeature
     return EqFeature(self, fg.conv_lit(other))
 
+  def __ne__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.ne_feature import NeFeature
+    return NeFeature(self, fg.conv_lit(other))
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
