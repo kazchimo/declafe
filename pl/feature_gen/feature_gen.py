@@ -195,6 +195,10 @@ class FeatureGen(ABC):
   def __rmod__(self, other: O) -> "FeatureGen":
     return fg.conv_lit(other).__mod__(self)
 
+  def __eq__(self, other: O) -> "FeatureGen":
+    from pl.feature_gen.binary.ops.eq_feature import EqFeature
+    return EqFeature(self, fg.conv_lit(other))
+
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
