@@ -19,19 +19,19 @@ class TalibChain:
     from pl.feature_gen.unary.talib.tema_feature import TEMAFeature
     return TEMAFeature(self.feature, timeperiod)
 
-  def ht_phasor_0(self,) -> "FeatureGen":
+  def ht_phasor_0(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_phasor_feature import HT_PHASOR_0Feature
     return HT_PHASOR_0Feature(self.feature)
 
-  def ht_phasor_1(self,) -> "FeatureGen":
+  def ht_phasor_1(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_phasor_feature import HT_PHASOR_1Feature
     return HT_PHASOR_1Feature(self.feature)
 
-  def ht_sine_0(self,) -> "FeatureGen":
+  def ht_sine_0(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_sine_feature import HT_SINE_0Feature
     return HT_SINE_0Feature(self.feature)
 
-  def ht_sine_1(self,) -> "FeatureGen":
+  def ht_sine_1(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_sine_feature import HT_SINE_1Feature
     return HT_SINE_1Feature(self.feature)
 
@@ -99,11 +99,11 @@ class TalibChain:
     from pl.feature_gen.unary.talib.ema_feature import EMAFeature
     return EMAFeature(self.feature, timeperiod)
 
-  def ht_trendmode(self,) -> "FeatureGen":
+  def ht_trendmode(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_trendmode_feature import HT_TRENDMODEFeature
     return HT_TRENDMODEFeature(self.feature)
 
-  def ht_dcphase(self,) -> "FeatureGen":
+  def ht_dcphase(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_dcphase_feature import HT_DCPHASEFeature
     return HT_DCPHASEFeature(self.feature)
 
@@ -111,7 +111,7 @@ class TalibChain:
     from pl.feature_gen.unary.talib.ma_feature import MAFeature
     return MAFeature(self.feature, timeperiod, matype)
 
-  def ht_dcperiod(self,) -> "FeatureGen":
+  def ht_dcperiod(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_dcperiod_feature import HT_DCPERIODFeature
     return HT_DCPERIODFeature(self.feature)
 
@@ -182,7 +182,7 @@ class TalibChain:
     return STOCHRSI_1Feature(self.feature, timeperiod, fastk_period,
                              fastd_period, fastd_matype)
 
-  def ht_trendline(self,) -> "FeatureGen":
+  def ht_trendline(self) -> "FeatureGen":
     from pl.feature_gen.unary.talib.ht_trendline_feature import HT_TRENDLINEFeature
     return HT_TRENDLINEFeature(self.feature)
 

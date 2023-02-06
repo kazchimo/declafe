@@ -28,16 +28,17 @@ class TalibChain:
     """
 
   def _accessor_method(self, talib_feature: TalibFeature) -> str:
-    args = ', '.join([
+    init_args = [
         f"{a.arg_def_component}" for a in talib_feature.init_args
         if a.type != "ColLike"
-    ])
+    ]
+    args = (", " + ', '.join(init_args)) if len(init_args) > 0 else ""
     pass_args = (", " + ', '.join(
         [f"{a.name}" for a in talib_feature.init_args if a.type != "ColLike"])
                 ) if len(talib_feature.init_args) > 1 else ""
 
     return f"""\
-def {talib_feature.name.lower()}(self, {args}) -> "FeatureGen":
+def {talib_feature.name.lower()}(self{args}) -> "FeatureGen":
   from pl.feature_gen.{talib_feature.kind}.talib.{talib_feature.file_name} import {talib_feature.name}Feature
   return {talib_feature.name}Feature(self.feature{pass_args})
 """
