@@ -1,6 +1,8 @@
 import polars as pl
 from pl.feature_gen.types import ColLike
 import talib
+from typing import cast
+
 from pl.feature_gen.tri.tri_feature import TriFeature
 
 
@@ -17,16 +19,16 @@ class STOCH_0Feature(TriFeature):
     self.slowd_matype = slowd_matype
 
   def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:
-    return pl.struct(
-        [col1, col2,
-         col3]).map(lambda s: talib.STOCH(s[f'{self.col1.feature_name}'],
-                                          s[f'{self.col2.feature_name}'],
-                                          s[f'{self.col3.feature_name}'],
-                                          fastk_period=self.fastk_period,
-                                          slowk_period=self.slowk_period,
-                                          slowk_matype=self.slowk_matype,
-                                          slowd_period=self.slowd_period,
-                                          slowd_matype=self.slowd_matype)[0])
+    return cast(pl.Expr,
+                pl.struct([col1, col2, col3])).map(lambda s: talib.STOCH(
+                    s.apply(lambda ss: ss[f'{self.col1_feature.feature_name}']),
+                    s.apply(lambda ss: ss[f'{self.col2_feature.feature_name}']),
+                    s.apply(lambda ss: ss[f'{self.col3_feature.feature_name}']),
+                    fastk_period=self.fastk_period,
+                    slowk_period=self.slowk_period,
+                    slowk_matype=self.slowk_matype,
+                    slowd_period=self.slowd_period,
+                    slowd_matype=self.slowd_matype)[0])
 
   def _feature_names(self) -> list[str]:
     return [
@@ -47,16 +49,16 @@ class STOCH_1Feature(TriFeature):
     self.slowd_matype = slowd_matype
 
   def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:
-    return pl.struct(
-        [col1, col2,
-         col3]).map(lambda s: talib.STOCH(s[f'{self.col1.feature_name}'],
-                                          s[f'{self.col2.feature_name}'],
-                                          s[f'{self.col3.feature_name}'],
-                                          fastk_period=self.fastk_period,
-                                          slowk_period=self.slowk_period,
-                                          slowk_matype=self.slowk_matype,
-                                          slowd_period=self.slowd_period,
-                                          slowd_matype=self.slowd_matype)[1])
+    return cast(pl.Expr,
+                pl.struct([col1, col2, col3])).map(lambda s: talib.STOCH(
+                    s.apply(lambda ss: ss[f'{self.col1_feature.feature_name}']),
+                    s.apply(lambda ss: ss[f'{self.col2_feature.feature_name}']),
+                    s.apply(lambda ss: ss[f'{self.col3_feature.feature_name}']),
+                    fastk_period=self.fastk_period,
+                    slowk_period=self.slowk_period,
+                    slowk_matype=self.slowk_matype,
+                    slowd_period=self.slowd_period,
+                    slowd_matype=self.slowd_matype)[1])
 
   def _feature_names(self) -> list[str]:
     return [

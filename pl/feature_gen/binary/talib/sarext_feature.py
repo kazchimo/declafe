@@ -1,6 +1,8 @@
 import polars as pl
 from pl.feature_gen.types import ColLike
 import talib
+from typing import cast
+
 from pl.feature_gen.binary.binary_feature import BinaryFeature
 
 
@@ -22,17 +24,17 @@ class SAREXTFeature(BinaryFeature):
     self.accelerationmaxshort = accelerationmaxshort
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
-    return pl.struct([left, right]).map(
-        lambda s: talib.SAREXT(s[f'{self.left.feature_name}'],
-                               s[f'{self.right.feature_name}'],
-                               startvalue=self.startvalue,
-                               offsetonreverse=self.offsetonreverse,
-                               accelerationinitlong=self.accelerationinitlong,
-                               accelerationlong=self.accelerationlong,
-                               accelerationmaxlong=self.accelerationmaxlong,
-                               accelerationinitshort=self.accelerationinitshort,
-                               accelerationshort=self.accelerationshort,
-                               accelerationmaxshort=self.accelerationmaxshort))
+    return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.SAREXT(
+        s.apply(lambda ss: ss[f'{self.left_feature.feature_name}']),
+        s.apply(lambda ss: ss[f'{self.right_feature.feature_name}']),
+        startvalue=self.startvalue,
+        offsetonreverse=self.offsetonreverse,
+        accelerationinitlong=self.accelerationinitlong,
+        accelerationlong=self.accelerationlong,
+        accelerationmaxlong=self.accelerationmaxlong,
+        accelerationinitshort=self.accelerationinitshort,
+        accelerationshort=self.accelerationshort,
+        accelerationmaxshort=self.accelerationmaxshort))
 
   def _feature_names(self) -> list[str]:
     return [

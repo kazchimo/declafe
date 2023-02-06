@@ -1,6 +1,8 @@
 import polars as pl
 from pl.feature_gen.types import ColLike
 import talib
+from typing import cast
+
 from pl.feature_gen.binary.binary_feature import BinaryFeature
 
 
@@ -13,11 +15,11 @@ class SARFeature(BinaryFeature):
     self.maximum = maximum
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
-    return pl.struct([left, right
-                     ]).map(lambda s: talib.SAR(s[f'{self.left.feature_name}'],
-                                                s[f'{self.right.feature_name}'],
-                                                acceleration=self.acceleration,
-                                                maximum=self.maximum))
+    return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.SAR(
+        s.apply(lambda ss: ss[f'{self.left_feature.feature_name}']),
+        s.apply(lambda ss: ss[f'{self.right_feature.feature_name}']),
+        acceleration=self.acceleration,
+        maximum=self.maximum))
 
   def _feature_names(self) -> list[str]:
     return [

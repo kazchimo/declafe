@@ -64,30 +64,30 @@ def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:
     elif self.talib_def.feature_kind_num == 2:
       return f"""\
 def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
-  return pl.struct([left, right]).map(lambda s: talib.{self.talib_def.name}(
-    s[f'{{self.left.feature_name}}'],
-    s[f'{{self.right.feature_name}}'],
+  return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.{self.talib_def.name}(
+    s.apply(lambda ss: ss[f'{{self.left_feature.feature_name}}']),
+    s.apply(lambda ss: ss[f'{{self.right_feature.feature_name}}']),
 {indent(additionals, "    ")}
   ){idx_component})
 """
     elif self.talib_def.feature_kind_num == 3:
       return f"""\
 def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:
-  return pl.struct([col1, col2, col3]).map(lambda s: talib.{self.talib_def.name}(
-    s[f'{{self.col1.feature_name}}'],
-    s[f'{{self.col2.feature_name}}'],
-    s[f'{{self.col3.feature_name}}'],
+  return cast(pl.Expr, pl.struct([col1, col2, col3])).map(lambda s: talib.{self.talib_def.name}(
+    s.apply(lambda ss: ss[f'{{self.col1_feature.feature_name}}']),
+    s.apply(lambda ss: ss[f'{{self.col2_feature.feature_name}}']),
+    s.apply(lambda ss: ss[f'{{self.col3_feature.feature_name}}']),
 {indent(additionals, "    ")}
   ){idx_component})
 """
     elif self.talib_def.feature_kind_num == 4:
       return f"""\
 def _quadri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr, col4: pl.Expr) -> pl.Expr:
-  return pl.struct([col1, col2, col3, col4]).map(lambda s: talib.{self.talib_def.name}(
-    s[f'{{self.col1.feature_name}}'],
-    s[f'{{self.col2.feature_name}}'],
-    s[f'{{self.col3.feature_name}}'],
-    s[f'{{self.col4.feature_name}}'],
+  return cast(pl.Expr, pl.struct([col1, col2, col3, col4])).map(lambda s: talib.{self.talib_def.name}(
+    s.apply(lambda ss: ss[f'{{self.col1_feature.feature_name}}']),
+    s.apply(lambda ss: ss[f'{{self.col2_feature.feature_name}}']),
+    s.apply(lambda ss: ss[f'{{self.col3_feature.feature_name}}']),
+    s.apply(lambda ss: ss[f'{{self.col4_feature.feature_name}}']),
 {indent(additionals, "    ")}
   ){idx_component})
 """
@@ -137,6 +137,8 @@ class {name_idx}Feature({self.talib_def.cap_feature_kind}Feature):
 import polars as pl
 from pl.feature_gen.types import ColLike
 import talib
+{"from typing import cast" if self.talib_def.feature_kind_num > 1 else ""}
+
 {self._import_base_class_component}
 """
 
