@@ -24,7 +24,7 @@ class TalibFeature:
   path: str
 
   name_regex = re.compile(r".*?class (\w+)\(.*")
-  init_arg_regex = re.compile(r".*?def __init__\(self, (.*?)\):.*",
+  init_arg_regex = re.compile(r".*?def __init__\(self,(.*?)\):.*",
                               re.MULTILINE | re.DOTALL)
 
   @property
@@ -44,7 +44,9 @@ class TalibFeature:
     return self.path.split("/")[-1].replace(".py", "")
 
   @staticmethod
-  def read(kind: str, path: str) -> list["TalibFeature"]:
+  def read(path: str) -> list["TalibFeature"]:
+    kind = path.split("/")[2]
+
     with open(path, "r") as f:
       content = f.read()
       contents = content.split("\n")
