@@ -7,8 +7,8 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class MIDPOINTFeature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int):
-    super().__init__(column)
+  def __init__(self, close: ColLike, timeperiod: int):
+    super().__init__(close)
     self.timeperiod = timeperiod
 
   def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:

@@ -7,8 +7,8 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class MAMA_0Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastlimit: float, slowlimit: float):
-    super().__init__(column)
+  def __init__(self, close: ColLike, fastlimit: float, slowlimit: float):
+    super().__init__(close)
     self.fastlimit = fastlimit
     self.slowlimit = slowlimit
 
@@ -22,8 +22,8 @@ class MAMA_0Feature(UnaryFeature):
 
 class MAMA_1Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastlimit: float, slowlimit: float):
-    super().__init__(column)
+  def __init__(self, close: ColLike, fastlimit: float, slowlimit: float):
+    super().__init__(close)
     self.fastlimit = fastlimit
     self.slowlimit = slowlimit
 

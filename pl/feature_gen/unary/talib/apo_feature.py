@@ -7,9 +7,9 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class APOFeature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, slowperiod: int,
+  def __init__(self, close: ColLike, fastperiod: int, slowperiod: int,
                matype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.slowperiod = slowperiod
     self.matype = matype

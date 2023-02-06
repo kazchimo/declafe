@@ -7,9 +7,9 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class STOCHRSI_0Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, fastk_period: int,
+  def __init__(self, close: ColLike, timeperiod: int, fastk_period: int,
                fastd_period: int, fastd_matype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.fastk_period = fastk_period
     self.fastd_period = fastd_period
@@ -31,9 +31,9 @@ class STOCHRSI_0Feature(UnaryFeature):
 
 class STOCHRSI_1Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, fastk_period: int,
+  def __init__(self, close: ColLike, timeperiod: int, fastk_period: int,
                fastd_period: int, fastd_matype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.fastk_period = fastk_period
     self.fastd_period = fastd_period

@@ -8,9 +8,9 @@ from pl.feature_gen.quadri.quadri_feature import QuadriFeature
 
 class ADFeature(QuadriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike,
-               col4: ColLike):
-    super().__init__(col1, col2, col3, col4)
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
+               volume: ColLike):
+    super().__init__(high, low, close, volume)
 
   def _quadri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr,
                    col4: pl.Expr) -> pl.Expr:

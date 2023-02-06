@@ -7,8 +7,8 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class MAFeature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, matype: int):
-    super().__init__(column)
+  def __init__(self, close: ColLike, timeperiod: int, matype: int):
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.matype = matype
 

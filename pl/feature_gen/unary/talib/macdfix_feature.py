@@ -7,8 +7,8 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class MACDFIX_0Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, signalperiod: int):
-    super().__init__(column)
+  def __init__(self, close: ColLike, signalperiod: int):
+    super().__init__(close)
     self.signalperiod = signalperiod
 
   def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:
@@ -21,8 +21,8 @@ class MACDFIX_0Feature(UnaryFeature):
 
 class MACDFIX_1Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, signalperiod: int):
-    super().__init__(column)
+  def __init__(self, close: ColLike, signalperiod: int):
+    super().__init__(close)
     self.signalperiod = signalperiod
 
   def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:
@@ -35,8 +35,8 @@ class MACDFIX_1Feature(UnaryFeature):
 
 class MACDFIX_2Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, signalperiod: int):
-    super().__init__(column)
+  def __init__(self, close: ColLike, signalperiod: int):
+    super().__init__(close)
     self.signalperiod = signalperiod
 
   def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:

@@ -8,8 +8,8 @@ from pl.feature_gen.binary.binary_feature import BinaryFeature
 
 class OBVFeature(BinaryFeature):
 
-  def __init__(self, left: ColLike, right: ColLike):
-    super().__init__(left, right)
+  def __init__(self, close: ColLike, volume: ColLike):
+    super().__init__(close, volume)
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
     return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.OBV(

@@ -26,11 +26,13 @@ class Arg:
   def is_type(self, type_: str) -> bool:
     return self.type == type_
 
-  def to_arg_component(self) -> str:
+  def to_arg_component(self, tpe: Optional[str] = None) -> str:
+    tpe = tpe or self.type
+
     if self.default:
-      return f'{self.name}: {self.type}={self.default}'
+      return f'{self.name}: {tpe}={self.default}'
     else:
-      return f"{self.name}: {self.type}"
+      return f"{self.name}: {tpe}"
 
   def to_init_component(self) -> str:
     return f"self.{self.name} = {self.name}"

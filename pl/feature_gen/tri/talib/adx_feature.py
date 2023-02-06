@@ -8,9 +8,9 @@ from pl.feature_gen.tri.tri_feature import TriFeature
 
 class ADXFeature(TriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
                timeperiod: int):
-    super().__init__(col1, col2, col3)
+    super().__init__(high, low, close)
     self.timeperiod = timeperiod
 
   def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:

@@ -8,506 +8,505 @@ class TalibConstructor:
   def __init__(self):
     super().__init__()
 
-  def dx(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def dx(self, high: ColLike, low: ColLike, close: ColLike,
          timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.dx_feature import DXFeature
-    return DXFeature(col1, col2, col3, timeperiod)
+    return DXFeature(high, low, close, timeperiod)
 
-  def trange(self, col1: ColLike, col2: ColLike, col3: ColLike) -> "FeatureGen":
+  def trange(self, high: ColLike, low: ColLike, close: ColLike) -> "FeatureGen":
     from pl.feature_gen.tri.talib.trange_feature import TRANGEFeature
-    return TRANGEFeature(col1, col2, col3)
+    return TRANGEFeature(high, low, close)
 
   def natr(self,
-           col1: ColLike,
-           col2: ColLike,
-           col3: ColLike,
+           high: ColLike,
+           low: ColLike,
+           close: ColLike,
            timeperiod: int = 14) -> "FeatureGen":
     from pl.feature_gen.tri.talib.natr_feature import NATRFeature
-    return NATRFeature(col1, col2, col3, timeperiod)
+    return NATRFeature(high, low, close, timeperiod)
 
   def willr(self,
-            col1: ColLike,
-            col2: ColLike,
-            col3: ColLike,
+            high: ColLike,
+            low: ColLike,
+            close: ColLike,
             timeperiod: int = 14) -> "FeatureGen":
     from pl.feature_gen.tri.talib.willr_feature import WILLRFeature
-    return WILLRFeature(col1, col2, col3, timeperiod)
+    return WILLRFeature(high, low, close, timeperiod)
 
-  def adxr(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def adxr(self, high: ColLike, low: ColLike, close: ColLike,
            timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.adxr_feature import ADXRFeature
-    return ADXRFeature(col1, col2, col3, timeperiod)
+    return ADXRFeature(high, low, close, timeperiod)
 
-  def stoch_0(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def stoch_0(self, high: ColLike, low: ColLike, close: ColLike,
               fastk_period: int, slowk_period: int, slowk_matype: int,
               slowd_period: int, slowd_matype: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.stoch_feature import STOCH_0Feature
-    return STOCH_0Feature(col1, col2, col3, fastk_period, slowk_period,
+    return STOCH_0Feature(high, low, close, fastk_period, slowk_period,
                           slowk_matype, slowd_period, slowd_matype)
 
-  def stoch_1(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def stoch_1(self, high: ColLike, low: ColLike, close: ColLike,
               fastk_period: int, slowk_period: int, slowk_matype: int,
               slowd_period: int, slowd_matype: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.stoch_feature import STOCH_1Feature
-    return STOCH_1Feature(col1, col2, col3, fastk_period, slowk_period,
+    return STOCH_1Feature(high, low, close, fastk_period, slowk_period,
                           slowk_matype, slowd_period, slowd_matype)
 
-  def minus_di(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def minus_di(self, high: ColLike, low: ColLike, close: ColLike,
                timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.minus_di_feature import MINUS_DIFeature
-    return MINUS_DIFeature(col1, col2, col3, timeperiod)
+    return MINUS_DIFeature(high, low, close, timeperiod)
 
-  def stochf_0(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def stochf_0(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, fastd_period: int,
                fastd_matype: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.stochf_feature import STOCHF_0Feature
-    return STOCHF_0Feature(col1, col2, col3, fastk_period, fastd_period,
+    return STOCHF_0Feature(high, low, close, fastk_period, fastd_period,
                            fastd_matype)
 
-  def stochf_1(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def stochf_1(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, fastd_period: int,
                fastd_matype: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.stochf_feature import STOCHF_1Feature
-    return STOCHF_1Feature(col1, col2, col3, fastk_period, fastd_period,
+    return STOCHF_1Feature(high, low, close, fastk_period, fastd_period,
                            fastd_matype)
 
-  def cci(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def cci(self, high: ColLike, low: ColLike, close: ColLike,
           timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.cci_feature import CCIFeature
-    return CCIFeature(col1, col2, col3, timeperiod)
+    return CCIFeature(high, low, close, timeperiod)
 
   def ultosc(self,
-             col1: ColLike,
-             col2: ColLike,
-             col3: ColLike,
+             high: ColLike,
+             low: ColLike,
+             close: ColLike,
              timeperiod1: int = 7,
              timeperiod2: int = 14,
              timeperiod3: int = 28) -> "FeatureGen":
     from pl.feature_gen.tri.talib.ultosc_feature import ULTOSCFeature
-    return ULTOSCFeature(col1, col2, col3, timeperiod1, timeperiod2,
+    return ULTOSCFeature(high, low, close, timeperiod1, timeperiod2,
                          timeperiod3)
 
   def atr(self,
-          col1: ColLike,
-          col2: ColLike,
-          col3: ColLike,
+          high: ColLike,
+          low: ColLike,
+          close: ColLike,
           timeperiod: int = 14) -> "FeatureGen":
     from pl.feature_gen.tri.talib.atr_feature import ATRFeature
-    return ATRFeature(col1, col2, col3, timeperiod)
+    return ATRFeature(high, low, close, timeperiod)
 
   def plus_di(self,
-              col1: ColLike,
-              col2: ColLike,
-              col3: ColLike,
+              high: ColLike,
+              low: ColLike,
+              close: ColLike,
               timeperiod: int = 14) -> "FeatureGen":
     from pl.feature_gen.tri.talib.plus_di_feature import PLUS_DIFeature
-    return PLUS_DIFeature(col1, col2, col3, timeperiod)
+    return PLUS_DIFeature(high, low, close, timeperiod)
 
-  def adx(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def adx(self, high: ColLike, low: ColLike, close: ColLike,
           timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.tri.talib.adx_feature import ADXFeature
-    return ADXFeature(col1, col2, col3, timeperiod)
+    return ADXFeature(high, low, close, timeperiod)
 
-  def cdlbreakaway(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                   col4: ColLike) -> "FeatureGen":
+  def cdlbreakaway(self, open: ColLike, high: ColLike, low: ColLike,
+                   close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlbreakaway_feature import CDLBREAKAWAYFeature
-    return CDLBREAKAWAYFeature(col1, col2, col3, col4)
+    return CDLBREAKAWAYFeature(open, high, low, close)
 
-  def cdlrickshawman(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike) -> "FeatureGen":
+  def cdlrickshawman(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlrickshawman_feature import CDLRICKSHAWMANFeature
-    return CDLRICKSHAWMANFeature(col1, col2, col3, col4)
+    return CDLRICKSHAWMANFeature(open, high, low, close)
 
   def cdlmorningdojistar(self,
-                         col1: ColLike,
-                         col2: ColLike,
-                         col3: ColLike,
-                         col4: ColLike,
+                         open: ColLike,
+                         high: ColLike,
+                         low: ColLike,
+                         close: ColLike,
                          penetration: float = 0) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlmorningdojistar_feature import CDLMORNINGDOJISTARFeature
-    return CDLMORNINGDOJISTARFeature(col1, col2, col3, col4, penetration)
+    return CDLMORNINGDOJISTARFeature(open, high, low, close, penetration)
 
-  def cdl3starsinsouth(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                       col4: ColLike) -> "FeatureGen":
+  def cdl3starsinsouth(self, open: ColLike, high: ColLike, low: ColLike,
+                       close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl3starsinsouth_feature import CDL3STARSINSOUTHFeature
-    return CDL3STARSINSOUTHFeature(col1, col2, col3, col4)
+    return CDL3STARSINSOUTHFeature(open, high, low, close)
 
-  def cdlladderbottom(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                      col4: ColLike) -> "FeatureGen":
+  def cdlladderbottom(self, open: ColLike, high: ColLike, low: ColLike,
+                      close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlladderbottom_feature import CDLLADDERBOTTOMFeature
-    return CDLLADDERBOTTOMFeature(col1, col2, col3, col4)
+    return CDLLADDERBOTTOMFeature(open, high, low, close)
 
-  def cdldarkcloudcover(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                        col4: ColLike, penetration: float) -> "FeatureGen":
+  def cdldarkcloudcover(self, open: ColLike, high: ColLike, low: ColLike,
+                        close: ColLike, penetration: float) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdldarkcloudcover_feature import CDLDARKCLOUDCOVERFeature
-    return CDLDARKCLOUDCOVERFeature(col1, col2, col3, col4, penetration)
+    return CDLDARKCLOUDCOVERFeature(open, high, low, close, penetration)
 
-  def cdlpiercing(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdlpiercing(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlpiercing_feature import CDLPIERCINGFeature
-    return CDLPIERCINGFeature(col1, col2, col3, col4)
+    return CDLPIERCINGFeature(open, high, low, close)
 
-  def cdlstalledpattern(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                        col4: ColLike) -> "FeatureGen":
+  def cdlstalledpattern(self, open: ColLike, high: ColLike, low: ColLike,
+                        close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlstalledpattern_feature import CDLSTALLEDPATTERNFeature
-    return CDLSTALLEDPATTERNFeature(col1, col2, col3, col4)
+    return CDLSTALLEDPATTERNFeature(open, high, low, close)
 
-  def cdlinneck(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                col4: ColLike) -> "FeatureGen":
+  def cdlinneck(self, open: ColLike, high: ColLike, low: ColLike,
+                close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlinneck_feature import CDLINNECKFeature
-    return CDLINNECKFeature(col1, col2, col3, col4)
+    return CDLINNECKFeature(open, high, low, close)
 
-  def cdlgravestonedoji(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                        col4: ColLike) -> "FeatureGen":
+  def cdlgravestonedoji(self, open: ColLike, high: ColLike, low: ColLike,
+                        close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlgravestonedoji_feature import CDLGRAVESTONEDOJIFeature
-    return CDLGRAVESTONEDOJIFeature(col1, col2, col3, col4)
+    return CDLGRAVESTONEDOJIFeature(open, high, low, close)
 
-  def cdl3linestrike(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike) -> "FeatureGen":
+  def cdl3linestrike(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl3linestrike_feature import CDL3LINESTRIKEFeature
-    return CDL3LINESTRIKEFeature(col1, col2, col3, col4)
+    return CDL3LINESTRIKEFeature(open, high, low, close)
 
-  def cdlabandonedbaby(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                       col4: ColLike, penetration: float) -> "FeatureGen":
+  def cdlabandonedbaby(self, open: ColLike, high: ColLike, low: ColLike,
+                       close: ColLike, penetration: float) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlabandonedbaby_feature import CDLABANDONEDBABYFeature
-    return CDLABANDONEDBABYFeature(col1, col2, col3, col4, penetration)
+    return CDLABANDONEDBABYFeature(open, high, low, close, penetration)
 
-  def cdl2crows(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                col4: ColLike) -> "FeatureGen":
+  def cdl2crows(self, open: ColLike, high: ColLike, low: ColLike,
+                close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl2crows_feature import CDL2CROWSFeature
-    return CDL2CROWSFeature(col1, col2, col3, col4)
+    return CDL2CROWSFeature(open, high, low, close)
 
-  def cdlunique3river(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                      col4: ColLike) -> "FeatureGen":
+  def cdlunique3river(self, open: ColLike, high: ColLike, low: ColLike,
+                      close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlunique3river_feature import CDLUNIQUE3RIVERFeature
-    return CDLUNIQUE3RIVERFeature(col1, col2, col3, col4)
+    return CDLUNIQUE3RIVERFeature(open, high, low, close)
 
-  def cdl3blackcrows(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike) -> "FeatureGen":
+  def cdl3blackcrows(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl3blackcrows_feature import CDL3BLACKCROWSFeature
-    return CDL3BLACKCROWSFeature(col1, col2, col3, col4)
+    return CDL3BLACKCROWSFeature(open, high, low, close)
 
-  def mfi(self, col1: ColLike, col2: ColLike, col3: ColLike, col4: ColLike,
+  def mfi(self, high: ColLike, low: ColLike, close: ColLike, volume: ColLike,
           timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.mfi_feature import MFIFeature
-    return MFIFeature(col1, col2, col3, col4, timeperiod)
+    return MFIFeature(high, low, close, volume, timeperiod)
 
-  def cdlhomingpigeon(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                      col4: ColLike) -> "FeatureGen":
+  def cdlhomingpigeon(self, open: ColLike, high: ColLike, low: ColLike,
+                      close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlhomingpigeon_feature import CDLHOMINGPIGEONFeature
-    return CDLHOMINGPIGEONFeature(col1, col2, col3, col4)
+    return CDLHOMINGPIGEONFeature(open, high, low, close)
 
   def adosc(self,
-            col1: ColLike,
-            col2: ColLike,
-            col3: ColLike,
-            col4: ColLike,
+            high: ColLike,
+            low: ColLike,
+            close: ColLike,
+            volume: ColLike,
             fastperiod: int = 3,
             slowperiod: int = 10) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.adosc_feature import ADOSCFeature
-    return ADOSCFeature(col1, col2, col3, col4, fastperiod, slowperiod)
+    return ADOSCFeature(high, low, close, volume, fastperiod, slowperiod)
 
-  def cdlcounterattack(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                       col4: ColLike) -> "FeatureGen":
+  def cdlcounterattack(self, open: ColLike, high: ColLike, low: ColLike,
+                       close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlcounterattack_feature import CDLCOUNTERATTACKFeature
-    return CDLCOUNTERATTACKFeature(col1, col2, col3, col4)
+    return CDLCOUNTERATTACKFeature(open, high, low, close)
 
-  def cdlidentical3crows(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                         col4: ColLike) -> "FeatureGen":
+  def cdlidentical3crows(self, open: ColLike, high: ColLike, low: ColLike,
+                         close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlidentical3crows_feature import CDLIDENTICAL3CROWSFeature
-    return CDLIDENTICAL3CROWSFeature(col1, col2, col3, col4)
+    return CDLIDENTICAL3CROWSFeature(open, high, low, close)
 
   def cdlmorningstar(self,
-                     col1: ColLike,
-                     col2: ColLike,
-                     col3: ColLike,
-                     col4: ColLike,
+                     open: ColLike,
+                     high: ColLike,
+                     low: ColLike,
+                     close: ColLike,
                      penetration: float = 0) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlmorningstar_feature import CDLMORNINGSTARFeature
-    return CDLMORNINGSTARFeature(col1, col2, col3, col4, penetration)
+    return CDLMORNINGSTARFeature(open, high, low, close, penetration)
 
-  def cdllongleggeddoji(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                        col4: ColLike) -> "FeatureGen":
+  def cdllongleggeddoji(self, open: ColLike, high: ColLike, low: ColLike,
+                        close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdllongleggeddoji_feature import CDLLONGLEGGEDDOJIFeature
-    return CDLLONGLEGGEDDOJIFeature(col1, col2, col3, col4)
+    return CDLLONGLEGGEDDOJIFeature(open, high, low, close)
 
-  def cdlseparatinglines(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                         col4: ColLike) -> "FeatureGen":
+  def cdlseparatinglines(self, open: ColLike, high: ColLike, low: ColLike,
+                         close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlseparatinglines_feature import CDLSEPARATINGLINESFeature
-    return CDLSEPARATINGLINESFeature(col1, col2, col3, col4)
+    return CDLSEPARATINGLINESFeature(open, high, low, close)
 
-  def cdlspinningtop(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike) -> "FeatureGen":
+  def cdlspinningtop(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlspinningtop_feature import CDLSPINNINGTOPFeature
-    return CDLSPINNINGTOPFeature(col1, col2, col3, col4)
+    return CDLSPINNINGTOPFeature(open, high, low, close)
 
-  def cdllongline(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdllongline(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdllongline_feature import CDLLONGLINEFeature
-    return CDLLONGLINEFeature(col1, col2, col3, col4)
+    return CDLLONGLINEFeature(open, high, low, close)
 
-  def cdlinvertedhammer(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                        col4: ColLike) -> "FeatureGen":
+  def cdlinvertedhammer(self, open: ColLike, high: ColLike, low: ColLike,
+                        close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlinvertedhammer_feature import CDLINVERTEDHAMMERFeature
-    return CDLINVERTEDHAMMERFeature(col1, col2, col3, col4)
+    return CDLINVERTEDHAMMERFeature(open, high, low, close)
 
-  def cdlxsidegap3methods(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                          col4: ColLike) -> "FeatureGen":
+  def cdlxsidegap3methods(self, open: ColLike, high: ColLike, low: ColLike,
+                          close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlxsidegap3methods_feature import CDLXSIDEGAP3METHODSFeature
-    return CDLXSIDEGAP3METHODSFeature(col1, col2, col3, col4)
+    return CDLXSIDEGAP3METHODSFeature(open, high, low, close)
 
-  def cdlengulfing(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                   col4: ColLike) -> "FeatureGen":
+  def cdlengulfing(self, open: ColLike, high: ColLike, low: ColLike,
+                   close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlengulfing_feature import CDLENGULFINGFeature
-    return CDLENGULFINGFeature(col1, col2, col3, col4)
+    return CDLENGULFINGFeature(open, high, low, close)
 
-  def cdlhikkakemod(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                    col4: ColLike) -> "FeatureGen":
+  def cdlhikkakemod(self, open: ColLike, high: ColLike, low: ColLike,
+                    close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlhikkakemod_feature import CDLHIKKAKEMODFeature
-    return CDLHIKKAKEMODFeature(col1, col2, col3, col4)
+    return CDLHIKKAKEMODFeature(open, high, low, close)
 
-  def cdlharami(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                col4: ColLike) -> "FeatureGen":
+  def cdlharami(self, open: ColLike, high: ColLike, low: ColLike,
+                close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlharami_feature import CDLHARAMIFeature
-    return CDLHARAMIFeature(col1, col2, col3, col4)
+    return CDLHARAMIFeature(open, high, low, close)
 
-  def cdladvanceblock(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                      col4: ColLike) -> "FeatureGen":
+  def cdladvanceblock(self, open: ColLike, high: ColLike, low: ColLike,
+                      close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdladvanceblock_feature import CDLADVANCEBLOCKFeature
-    return CDLADVANCEBLOCKFeature(col1, col2, col3, col4)
+    return CDLADVANCEBLOCKFeature(open, high, low, close)
 
-  def cdltasukigap(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                   col4: ColLike) -> "FeatureGen":
+  def cdltasukigap(self, open: ColLike, high: ColLike, low: ColLike,
+                   close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdltasukigap_feature import CDLTASUKIGAPFeature
-    return CDLTASUKIGAPFeature(col1, col2, col3, col4)
+    return CDLTASUKIGAPFeature(open, high, low, close)
 
-  def cdlonneck(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                col4: ColLike) -> "FeatureGen":
+  def cdlonneck(self, open: ColLike, high: ColLike, low: ColLike,
+                close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlonneck_feature import CDLONNECKFeature
-    return CDLONNECKFeature(col1, col2, col3, col4)
+    return CDLONNECKFeature(open, high, low, close)
 
-  def cdldojistar(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdldojistar(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdldojistar_feature import CDLDOJISTARFeature
-    return CDLDOJISTARFeature(col1, col2, col3, col4)
+    return CDLDOJISTARFeature(open, high, low, close)
 
-  def ad(self, col1: ColLike, col2: ColLike, col3: ColLike,
-         col4: ColLike) -> "FeatureGen":
+  def ad(self, high: ColLike, low: ColLike, close: ColLike,
+         volume: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.ad_feature import ADFeature
-    return ADFeature(col1, col2, col3, col4)
+    return ADFeature(high, low, close, volume)
 
-  def cdlsticksandwich(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                       col4: ColLike) -> "FeatureGen":
+  def cdlsticksandwich(self, open: ColLike, high: ColLike, low: ColLike,
+                       close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlsticksandwich_feature import CDLSTICKSANDWICHFeature
-    return CDLSTICKSANDWICHFeature(col1, col2, col3, col4)
+    return CDLSTICKSANDWICHFeature(open, high, low, close)
 
-  def cdlshortline(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                   col4: ColLike) -> "FeatureGen":
+  def cdlshortline(self, open: ColLike, high: ColLike, low: ColLike,
+                   close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlshortline_feature import CDLSHORTLINEFeature
-    return CDLSHORTLINEFeature(col1, col2, col3, col4)
+    return CDLSHORTLINEFeature(open, high, low, close)
 
-  def cdl3outside(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdl3outside(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl3outside_feature import CDL3OUTSIDEFeature
-    return CDL3OUTSIDEFeature(col1, col2, col3, col4)
+    return CDL3OUTSIDEFeature(open, high, low, close)
 
-  def cdlkicking(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                 col4: ColLike) -> "FeatureGen":
+  def cdlkicking(self, open: ColLike, high: ColLike, low: ColLike,
+                 close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlkicking_feature import CDLKICKINGFeature
-    return CDLKICKINGFeature(col1, col2, col3, col4)
+    return CDLKICKINGFeature(open, high, low, close)
 
-  def cdldragonflydoji(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                       col4: ColLike) -> "FeatureGen":
+  def cdldragonflydoji(self, open: ColLike, high: ColLike, low: ColLike,
+                       close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdldragonflydoji_feature import CDLDRAGONFLYDOJIFeature
-    return CDLDRAGONFLYDOJIFeature(col1, col2, col3, col4)
+    return CDLDRAGONFLYDOJIFeature(open, high, low, close)
 
-  def cdlhighwave(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdlhighwave(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlhighwave_feature import CDLHIGHWAVEFeature
-    return CDLHIGHWAVEFeature(col1, col2, col3, col4)
+    return CDLHIGHWAVEFeature(open, high, low, close)
 
   def cdlmathold(self,
-                 col1: ColLike,
-                 col2: ColLike,
-                 col3: ColLike,
-                 col4: ColLike,
+                 open: ColLike,
+                 high: ColLike,
+                 low: ColLike,
+                 close: ColLike,
                  penetration: float = 0) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlmathold_feature import CDLMATHOLDFeature
-    return CDLMATHOLDFeature(col1, col2, col3, col4, penetration)
+    return CDLMATHOLDFeature(open, high, low, close, penetration)
 
-  def cdlhikkake(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                 col4: ColLike) -> "FeatureGen":
+  def cdlhikkake(self, open: ColLike, high: ColLike, low: ColLike,
+                 close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlhikkake_feature import CDLHIKKAKEFeature
-    return CDLHIKKAKEFeature(col1, col2, col3, col4)
+    return CDLHIKKAKEFeature(open, high, low, close)
 
-  def cdldoji(self, col1: ColLike, col2: ColLike, col3: ColLike,
-              col4: ColLike) -> "FeatureGen":
+  def cdldoji(self, open: ColLike, high: ColLike, low: ColLike,
+              close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdldoji_feature import CDLDOJIFeature
-    return CDLDOJIFeature(col1, col2, col3, col4)
+    return CDLDOJIFeature(open, high, low, close)
 
-  def cdleveningstar(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike, penetration: float) -> "FeatureGen":
+  def cdleveningstar(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike, penetration: float) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdleveningstar_feature import CDLEVENINGSTARFeature
-    return CDLEVENINGSTARFeature(col1, col2, col3, col4, penetration)
+    return CDLEVENINGSTARFeature(open, high, low, close, penetration)
 
-  def cdlgapsidesidewhite(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                          col4: ColLike) -> "FeatureGen":
+  def cdlgapsidesidewhite(self, open: ColLike, high: ColLike, low: ColLike,
+                          close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlgapsidesidewhite_feature import CDLGAPSIDESIDEWHITEFeature
-    return CDLGAPSIDESIDEWHITEFeature(col1, col2, col3, col4)
+    return CDLGAPSIDESIDEWHITEFeature(open, high, low, close)
 
-  def cdltristar(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                 col4: ColLike) -> "FeatureGen":
+  def cdltristar(self, open: ColLike, high: ColLike, low: ColLike,
+                 close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdltristar_feature import CDLTRISTARFeature
-    return CDLTRISTARFeature(col1, col2, col3, col4)
+    return CDLTRISTARFeature(open, high, low, close)
 
-  def cdlthrusting(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                   col4: ColLike) -> "FeatureGen":
+  def cdlthrusting(self, open: ColLike, high: ColLike, low: ColLike,
+                   close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlthrusting_feature import CDLTHRUSTINGFeature
-    return CDLTHRUSTINGFeature(col1, col2, col3, col4)
+    return CDLTHRUSTINGFeature(open, high, low, close)
 
-  def cdlshootingstar(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                      col4: ColLike) -> "FeatureGen":
+  def cdlshootingstar(self, open: ColLike, high: ColLike, low: ColLike,
+                      close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlshootingstar_feature import CDLSHOOTINGSTARFeature
-    return CDLSHOOTINGSTARFeature(col1, col2, col3, col4)
+    return CDLSHOOTINGSTARFeature(open, high, low, close)
 
-  def cdlbelthold(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdlbelthold(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlbelthold_feature import CDLBELTHOLDFeature
-    return CDLBELTHOLDFeature(col1, col2, col3, col4)
+    return CDLBELTHOLDFeature(open, high, low, close)
 
-  def bop(self, col1: ColLike, col2: ColLike, col3: ColLike,
-          col4: ColLike) -> "FeatureGen":
+  def bop(self, open: ColLike, high: ColLike, low: ColLike,
+          close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.bop_feature import BOPFeature
-    return BOPFeature(col1, col2, col3, col4)
+    return BOPFeature(open, high, low, close)
 
-  def cdlhammer(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                col4: ColLike) -> "FeatureGen":
+  def cdlhammer(self, open: ColLike, high: ColLike, low: ColLike,
+                close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlhammer_feature import CDLHAMMERFeature
-    return CDLHAMMERFeature(col1, col2, col3, col4)
+    return CDLHAMMERFeature(open, high, low, close)
 
-  def cdlrisefall3methods(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                          col4: ColLike) -> "FeatureGen":
+  def cdlrisefall3methods(self, open: ColLike, high: ColLike, low: ColLike,
+                          close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlrisefall3methods_feature import CDLRISEFALL3METHODSFeature
-    return CDLRISEFALL3METHODSFeature(col1, col2, col3, col4)
+    return CDLRISEFALL3METHODSFeature(open, high, low, close)
 
-  def cdlhangingman(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                    col4: ColLike) -> "FeatureGen":
+  def cdlhangingman(self, open: ColLike, high: ColLike, low: ColLike,
+                    close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlhangingman_feature import CDLHANGINGMANFeature
-    return CDLHANGINGMANFeature(col1, col2, col3, col4)
+    return CDLHANGINGMANFeature(open, high, low, close)
 
-  def cdl3whitesoldiers(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                        col4: ColLike) -> "FeatureGen":
+  def cdl3whitesoldiers(self, open: ColLike, high: ColLike, low: ColLike,
+                        close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl3whitesoldiers_feature import CDL3WHITESOLDIERSFeature
-    return CDL3WHITESOLDIERSFeature(col1, col2, col3, col4)
+    return CDL3WHITESOLDIERSFeature(open, high, low, close)
 
-  def cdleveningdojistar(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                         col4: ColLike, penetration: float) -> "FeatureGen":
+  def cdleveningdojistar(self, open: ColLike, high: ColLike, low: ColLike,
+                         close: ColLike, penetration: float) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdleveningdojistar_feature import CDLEVENINGDOJISTARFeature
-    return CDLEVENINGDOJISTARFeature(col1, col2, col3, col4, penetration)
+    return CDLEVENINGDOJISTARFeature(open, high, low, close, penetration)
 
-  def cdltakuri(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                col4: ColLike) -> "FeatureGen":
+  def cdltakuri(self, open: ColLike, high: ColLike, low: ColLike,
+                close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdltakuri_feature import CDLTAKURIFeature
-    return CDLTAKURIFeature(col1, col2, col3, col4)
+    return CDLTAKURIFeature(open, high, low, close)
 
-  def cdlharamicross(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike) -> "FeatureGen":
+  def cdlharamicross(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlharamicross_feature import CDLHARAMICROSSFeature
-    return CDLHARAMICROSSFeature(col1, col2, col3, col4)
+    return CDLHARAMICROSSFeature(open, high, low, close)
 
-  def cdl3inside(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                 col4: ColLike) -> "FeatureGen":
+  def cdl3inside(self, open: ColLike, high: ColLike, low: ColLike,
+                 close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdl3inside_feature import CDL3INSIDEFeature
-    return CDL3INSIDEFeature(col1, col2, col3, col4)
+    return CDL3INSIDEFeature(open, high, low, close)
 
-  def cdlupsidegap2crows(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                         col4: ColLike) -> "FeatureGen":
+  def cdlupsidegap2crows(self, open: ColLike, high: ColLike, low: ColLike,
+                         close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlupsidegap2crows_feature import CDLUPSIDEGAP2CROWSFeature
-    return CDLUPSIDEGAP2CROWSFeature(col1, col2, col3, col4)
+    return CDLUPSIDEGAP2CROWSFeature(open, high, low, close)
 
-  def cdlconcealbabyswall(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                          col4: ColLike) -> "FeatureGen":
+  def cdlconcealbabyswall(self, open: ColLike, high: ColLike, low: ColLike,
+                          close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlconcealbabyswall_feature import CDLCONCEALBABYSWALLFeature
-    return CDLCONCEALBABYSWALLFeature(col1, col2, col3, col4)
+    return CDLCONCEALBABYSWALLFeature(open, high, low, close)
 
-  def cdlmatchinglow(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                     col4: ColLike) -> "FeatureGen":
+  def cdlmatchinglow(self, open: ColLike, high: ColLike, low: ColLike,
+                     close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlmatchinglow_feature import CDLMATCHINGLOWFeature
-    return CDLMATCHINGLOWFeature(col1, col2, col3, col4)
+    return CDLMATCHINGLOWFeature(open, high, low, close)
 
-  def cdlclosingmarubozu(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                         col4: ColLike) -> "FeatureGen":
+  def cdlclosingmarubozu(self, open: ColLike, high: ColLike, low: ColLike,
+                         close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlclosingmarubozu_feature import CDLCLOSINGMARUBOZUFeature
-    return CDLCLOSINGMARUBOZUFeature(col1, col2, col3, col4)
+    return CDLCLOSINGMARUBOZUFeature(open, high, low, close)
 
-  def cdlkickingbylength(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                         col4: ColLike) -> "FeatureGen":
+  def cdlkickingbylength(self, open: ColLike, high: ColLike, low: ColLike,
+                         close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlkickingbylength_feature import CDLKICKINGBYLENGTHFeature
-    return CDLKICKINGBYLENGTHFeature(col1, col2, col3, col4)
+    return CDLKICKINGBYLENGTHFeature(open, high, low, close)
 
-  def cdlmarubozu(self, col1: ColLike, col2: ColLike, col3: ColLike,
-                  col4: ColLike) -> "FeatureGen":
+  def cdlmarubozu(self, open: ColLike, high: ColLike, low: ColLike,
+                  close: ColLike) -> "FeatureGen":
     from pl.feature_gen.quadri.talib.cdlmarubozu_feature import CDLMARUBOZUFeature
-    return CDLMARUBOZUFeature(col1, col2, col3, col4)
+    return CDLMARUBOZUFeature(open, high, low, close)
 
-  def sarext(self, left: ColLike, right: ColLike, startvalue: float,
+  def sarext(self, high: ColLike, low: ColLike, startvalue: float,
              offsetonreverse: float, accelerationinitlong: float,
              accelerationlong: float, accelerationmaxlong: float,
              accelerationinitshort: float, accelerationshort: float,
              accelerationmaxshort: float) -> "FeatureGen":
     from pl.feature_gen.binary.talib.sarext_feature import SAREXTFeature
-    return SAREXTFeature(left, right, startvalue, offsetonreverse,
+    return SAREXTFeature(high, low, startvalue, offsetonreverse,
                          accelerationinitlong, accelerationlong,
                          accelerationmaxlong, accelerationinitshort,
                          accelerationshort, accelerationmaxshort)
 
-  def minus_dm(self, left: ColLike, right: ColLike,
+  def minus_dm(self, low: ColLike, high: ColLike,
                timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.minus_dm_feature import MINUS_DMFeature
-    return MINUS_DMFeature(left, right, timeperiod)
+    return MINUS_DMFeature(low, high, timeperiod)
 
-  def beta(self, left: ColLike, right: ColLike,
-           timeperiod: int) -> "FeatureGen":
+  def beta(self, high: ColLike, low: ColLike, timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.beta_feature import BETAFeature
-    return BETAFeature(left, right, timeperiod)
+    return BETAFeature(high, low, timeperiod)
 
-  def correl(self, left: ColLike, right: ColLike,
+  def correl(self, high: ColLike, low: ColLike,
              timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.correl_feature import CORRELFeature
-    return CORRELFeature(left, right, timeperiod)
+    return CORRELFeature(high, low, timeperiod)
 
-  def aroon_0(self, left: ColLike, right: ColLike,
+  def aroon_0(self, high: ColLike, low: ColLike,
               timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.aroon_feature import AROON_0Feature
-    return AROON_0Feature(left, right, timeperiod)
+    return AROON_0Feature(high, low, timeperiod)
 
-  def aroon_1(self, left: ColLike, right: ColLike,
+  def aroon_1(self, high: ColLike, low: ColLike,
               timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.aroon_feature import AROON_1Feature
-    return AROON_1Feature(left, right, timeperiod)
+    return AROON_1Feature(high, low, timeperiod)
 
   def plus_dm(self,
-              left: ColLike,
-              right: ColLike,
+              high: ColLike,
+              low: ColLike,
               timeperiod: int = 14) -> "FeatureGen":
     from pl.feature_gen.binary.talib.plus_dm_feature import PLUS_DMFeature
-    return PLUS_DMFeature(left, right, timeperiod)
+    return PLUS_DMFeature(high, low, timeperiod)
 
-  def midprice(self, left: ColLike, right: ColLike,
+  def midprice(self, high: ColLike, low: ColLike,
                timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.midprice_feature import MIDPRICEFeature
-    return MIDPRICEFeature(left, right, timeperiod)
+    return MIDPRICEFeature(high, low, timeperiod)
 
-  def aroonosc(self, left: ColLike, right: ColLike,
+  def aroonosc(self, high: ColLike, low: ColLike,
                timeperiod: int) -> "FeatureGen":
     from pl.feature_gen.binary.talib.aroonosc_feature import AROONOSCFeature
-    return AROONOSCFeature(left, right, timeperiod)
+    return AROONOSCFeature(high, low, timeperiod)
 
-  def sar(self, left: ColLike, right: ColLike, acceleration: float,
+  def sar(self, high: ColLike, low: ColLike, acceleration: float,
           maximum: float) -> "FeatureGen":
     from pl.feature_gen.binary.talib.sar_feature import SARFeature
-    return SARFeature(left, right, acceleration, maximum)
+    return SARFeature(high, low, acceleration, maximum)
 
-  def obv(self, left: ColLike, right: ColLike) -> "FeatureGen":
+  def obv(self, close: ColLike, volume: ColLike) -> "FeatureGen":
     from pl.feature_gen.binary.talib.obv_feature import OBVFeature
-    return OBVFeature(left, right)
+    return OBVFeature(close, volume)

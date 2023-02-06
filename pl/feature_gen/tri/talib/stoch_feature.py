@@ -8,10 +8,10 @@ from pl.feature_gen.tri.tri_feature import TriFeature
 
 class STOCH_0Feature(TriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, slowk_period: int, slowk_matype: int,
                slowd_period: int, slowd_matype: int):
-    super().__init__(col1, col2, col3)
+    super().__init__(high, low, close)
     self.fastk_period = fastk_period
     self.slowk_period = slowk_period
     self.slowk_matype = slowk_matype
@@ -38,10 +38,10 @@ class STOCH_0Feature(TriFeature):
 
 class STOCH_1Feature(TriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, slowk_period: int, slowk_matype: int,
                slowd_period: int, slowd_matype: int):
-    super().__init__(col1, col2, col3)
+    super().__init__(high, low, close)
     self.fastk_period = fastk_period
     self.slowk_period = slowk_period
     self.slowk_matype = slowk_matype

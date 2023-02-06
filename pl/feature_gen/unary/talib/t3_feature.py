@@ -7,8 +7,8 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class T3Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, vfactor: float):
-    super().__init__(column)
+  def __init__(self, close: ColLike, timeperiod: int, vfactor: float):
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.vfactor = vfactor
 

@@ -19,6 +19,7 @@ class TalibConstructorFile:
 from pl.feature_gen.types import ColLike
 from pl.feature_gen.feature_gen import FeatureGen
 
+# noinspection PyMethodMayBeStatic,SpellCheckingInspection
 class TalibConstructor:
   def __init__(self):
     super().__init__()

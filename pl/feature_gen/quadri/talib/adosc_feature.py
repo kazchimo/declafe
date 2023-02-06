@@ -9,13 +9,13 @@ from pl.feature_gen.quadri.quadri_feature import QuadriFeature
 class ADOSCFeature(QuadriFeature):
 
   def __init__(self,
-               col1: ColLike,
-               col2: ColLike,
-               col3: ColLike,
-               col4: ColLike,
+               high: ColLike,
+               low: ColLike,
+               close: ColLike,
+               volume: ColLike,
                fastperiod: int = 3,
                slowperiod: int = 10):
-    super().__init__(col1, col2, col3, col4)
+    super().__init__(high, low, close, volume)
     self.fastperiod = fastperiod
     self.slowperiod = slowperiod
 

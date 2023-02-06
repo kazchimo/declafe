@@ -7,10 +7,10 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class MACDEXT_0Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, fastmatype: int,
+  def __init__(self, close: ColLike, fastperiod: int, fastmatype: int,
                slowperiod: int, slowmatype: int, signalperiod: int,
                signalmatype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.fastmatype = fastmatype
     self.slowperiod = slowperiod
@@ -36,10 +36,10 @@ class MACDEXT_0Feature(UnaryFeature):
 
 class MACDEXT_1Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, fastmatype: int,
+  def __init__(self, close: ColLike, fastperiod: int, fastmatype: int,
                slowperiod: int, slowmatype: int, signalperiod: int,
                signalmatype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.fastmatype = fastmatype
     self.slowperiod = slowperiod
@@ -65,10 +65,10 @@ class MACDEXT_1Feature(UnaryFeature):
 
 class MACDEXT_2Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, fastmatype: int,
+  def __init__(self, close: ColLike, fastperiod: int, fastmatype: int,
                slowperiod: int, slowmatype: int, signalperiod: int,
                signalmatype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.fastmatype = fastmatype
     self.slowperiod = slowperiod

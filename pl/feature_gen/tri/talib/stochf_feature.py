@@ -8,9 +8,9 @@ from pl.feature_gen.tri.tri_feature import TriFeature
 
 class STOCHF_0Feature(TriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, fastd_period: int, fastd_matype: int):
-    super().__init__(col1, col2, col3)
+    super().__init__(high, low, close)
     self.fastk_period = fastk_period
     self.fastd_period = fastd_period
     self.fastd_matype = fastd_matype
@@ -33,9 +33,9 @@ class STOCHF_0Feature(TriFeature):
 
 class STOCHF_1Feature(TriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike,
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, fastd_period: int, fastd_matype: int):
-    super().__init__(col1, col2, col3)
+    super().__init__(high, low, close)
     self.fastk_period = fastk_period
     self.fastd_period = fastd_period
     self.fastd_matype = fastd_matype

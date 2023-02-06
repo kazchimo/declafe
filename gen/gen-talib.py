@@ -16,29 +16,14 @@ class TalibFeatureFile:
     additional_inits = "\n".join([a.to_init_component() for a in self.talib_def.additional_args]) \
       if self.talib_def.additional_args \
       else ''
+    primary_args = ", ".join(
+        [a.to_arg_component("ColLike") for a in self.talib_def.primary_args])
+    primary_args_pass = ", ".join([a.name for a in self.talib_def.primary_args])
 
-    if self.talib_def.feature_kind_num == 1:
-      return f"""def __init__(self, column: ColLike{additionals}):
-  super().__init__(column)
+    return f"""def __init__(self, {primary_args}{additionals}):
+  super().__init__({primary_args_pass})
 {indent(additional_inits, "  ")}
   """
-    elif self.talib_def.feature_kind_num == 2:
-      return f"""def __init__(self, left: ColLike, right: ColLike{additionals}):
-  super().__init__(left, right)
-{indent(additional_inits, "  ")}
-  """
-    elif self.talib_def.feature_kind_num == 3:
-      return f"""def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike{additionals}):
-  super().__init__(col1, col2, col3)
-{indent(additional_inits, "  ")}
-  """
-    elif self.talib_def.feature_kind_num == 4:
-      return f"""def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike, col4: ColLike{additionals}):
-  super().__init__(col1, col2, col3, col4)
-{indent(additional_inits, "  ")}
-  """
-    else:
-      raise ValueError("Invalid number of feature kinds")
 
   @property
   def _import_base_class_component(self) -> str:

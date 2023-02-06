@@ -8,8 +8,8 @@ from pl.feature_gen.tri.tri_feature import TriFeature
 
 class TRANGEFeature(TriFeature):
 
-  def __init__(self, col1: ColLike, col2: ColLike, col3: ColLike):
-    super().__init__(col1, col2, col3)
+  def __init__(self, high: ColLike, low: ColLike, close: ColLike):
+    super().__init__(high, low, close)
 
   def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:
     return cast(pl.Expr,

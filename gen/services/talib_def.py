@@ -49,3 +49,7 @@ class TalibDef:
   @property
   def additional_args(self) -> list[Arg]:
     return [arg for arg in self.args if not arg.is_type("pl.Series")]
+
+  @property
+  def primary_args(self) -> list[Arg]:
+    return [arg for arg in self.args if arg.is_type("pl.Series")]

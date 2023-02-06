@@ -9,12 +9,12 @@ from pl.feature_gen.quadri.quadri_feature import QuadriFeature
 class CDLMATHOLDFeature(QuadriFeature):
 
   def __init__(self,
-               col1: ColLike,
-               col2: ColLike,
-               col3: ColLike,
-               col4: ColLike,
+               open: ColLike,
+               high: ColLike,
+               low: ColLike,
+               close: ColLike,
                penetration: float = 0):
-    super().__init__(col1, col2, col3, col4)
+    super().__init__(open, high, low, close)
     self.penetration = penetration
 
   def _quadri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr,

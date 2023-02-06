@@ -30,10 +30,10 @@ class TalibChain:
   def _accessor_method(self, talib_feature: TalibFeature) -> str:
     args = ', '.join([
         f"{a.arg_def_component}" for a in talib_feature.init_args
-        if a.name != "column"
+        if a.type != "ColLike"
     ])
     pass_args = (", " + ', '.join(
-        [f"{a.name}" for a in talib_feature.init_args if a.name != "column"])
+        [f"{a.name}" for a in talib_feature.init_args if a.type != "ColLike"])
                 ) if len(talib_feature.init_args) > 1 else ""
 
     return f"""\
@@ -50,7 +50,7 @@ def {talib_feature.name.lower()}(self, {args}) -> "FeatureGen":
 def main():
   unary_features = [
       t for p in glob("pl/feature_gen/unary/talib/*.py")
-      for t in TalibFeature.read("unary", p)
+      for t in TalibFeature.read(p)
   ]
   chain_file = TalibChainFile(unary_features)
   chain_file.write()

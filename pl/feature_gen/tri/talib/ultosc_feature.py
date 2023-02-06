@@ -9,13 +9,13 @@ from pl.feature_gen.tri.tri_feature import TriFeature
 class ULTOSCFeature(TriFeature):
 
   def __init__(self,
-               col1: ColLike,
-               col2: ColLike,
-               col3: ColLike,
+               high: ColLike,
+               low: ColLike,
+               close: ColLike,
                timeperiod1: int = 7,
                timeperiod2: int = 14,
                timeperiod3: int = 28):
-    super().__init__(col1, col2, col3)
+    super().__init__(high, low, close)
     self.timeperiod1 = timeperiod1
     self.timeperiod2 = timeperiod2
     self.timeperiod3 = timeperiod3

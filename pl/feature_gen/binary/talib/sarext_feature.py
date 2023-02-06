@@ -8,12 +8,12 @@ from pl.feature_gen.binary.binary_feature import BinaryFeature
 
 class SAREXTFeature(BinaryFeature):
 
-  def __init__(self, left: ColLike, right: ColLike, startvalue: float,
+  def __init__(self, high: ColLike, low: ColLike, startvalue: float,
                offsetonreverse: float, accelerationinitlong: float,
                accelerationlong: float, accelerationmaxlong: float,
                accelerationinitshort: float, accelerationshort: float,
                accelerationmaxshort: float):
-    super().__init__(left, right)
+    super().__init__(high, low)
     self.startvalue = startvalue
     self.offsetonreverse = offsetonreverse
     self.accelerationinitlong = accelerationinitlong

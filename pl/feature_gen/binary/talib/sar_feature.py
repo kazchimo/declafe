@@ -8,9 +8,9 @@ from pl.feature_gen.binary.binary_feature import BinaryFeature
 
 class SARFeature(BinaryFeature):
 
-  def __init__(self, left: ColLike, right: ColLike, acceleration: float,
+  def __init__(self, high: ColLike, low: ColLike, acceleration: float,
                maximum: float):
-    super().__init__(left, right)
+    super().__init__(high, low)
     self.acceleration = acceleration
     self.maximum = maximum
 

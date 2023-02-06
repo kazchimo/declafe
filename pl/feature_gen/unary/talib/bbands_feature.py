@@ -7,9 +7,9 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class BBANDS_0Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, nbdevup: float,
+  def __init__(self, close: ColLike, timeperiod: int, nbdevup: float,
                nbdevdn: float, matype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.nbdevup = nbdevup
     self.nbdevdn = nbdevdn
@@ -30,9 +30,9 @@ class BBANDS_0Feature(UnaryFeature):
 
 class BBANDS_1Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, nbdevup: float,
+  def __init__(self, close: ColLike, timeperiod: int, nbdevup: float,
                nbdevdn: float, matype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.nbdevup = nbdevup
     self.nbdevdn = nbdevdn
@@ -53,9 +53,9 @@ class BBANDS_1Feature(UnaryFeature):
 
 class BBANDS_2Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, timeperiod: int, nbdevup: float,
+  def __init__(self, close: ColLike, timeperiod: int, nbdevup: float,
                nbdevdn: float, matype: int):
-    super().__init__(column)
+    super().__init__(close)
     self.timeperiod = timeperiod
     self.nbdevup = nbdevup
     self.nbdevdn = nbdevdn

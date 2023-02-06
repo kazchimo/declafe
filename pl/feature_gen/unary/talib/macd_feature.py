@@ -7,9 +7,9 @@ from pl.feature_gen.unary.unary_feature import UnaryFeature
 
 class MACD_0Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, slowperiod: int,
+  def __init__(self, close: ColLike, fastperiod: int, slowperiod: int,
                signalperiod: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.slowperiod = slowperiod
     self.signalperiod = signalperiod
@@ -28,9 +28,9 @@ class MACD_0Feature(UnaryFeature):
 
 class MACD_1Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, slowperiod: int,
+  def __init__(self, close: ColLike, fastperiod: int, slowperiod: int,
                signalperiod: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.slowperiod = slowperiod
     self.signalperiod = signalperiod
@@ -49,9 +49,9 @@ class MACD_1Feature(UnaryFeature):
 
 class MACD_2Feature(UnaryFeature):
 
-  def __init__(self, column: ColLike, fastperiod: int, slowperiod: int,
+  def __init__(self, close: ColLike, fastperiod: int, slowperiod: int,
                signalperiod: int):
-    super().__init__(column)
+    super().__init__(close)
     self.fastperiod = fastperiod
     self.slowperiod = slowperiod
     self.signalperiod = signalperiod

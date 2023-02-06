@@ -8,8 +8,8 @@ from pl.feature_gen.binary.binary_feature import BinaryFeature
 
 class MINUS_DMFeature(BinaryFeature):
 
-  def __init__(self, left: ColLike, right: ColLike, timeperiod: int):
-    super().__init__(left, right)
+  def __init__(self, low: ColLike, high: ColLike, timeperiod: int):
+    super().__init__(low, high)
     self.timeperiod = timeperiod
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
