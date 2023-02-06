@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias
+from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias, TYPE_CHECKING
 
 from pl.feature_gen.types import DTypes
 import pl.feature_gen as fg
 import polars as pl
+
+if TYPE_CHECKING:
+  from talib_chain import TalibChain
 
 T = TypeVar("T")
 
@@ -192,6 +195,11 @@ class FeatureGen(ABC):
   def second(self) -> "FeatureGen":
     from pl.feature_gen.unary.times.second_feature import SecondFeature
     return SecondFeature(self)
+
+  @property
+  def talib(self) -> "TalibChain":
+    from pl.feature_gen.talib_chain import TalibChain
+    return TalibChain(self)
 
   def __add__(self, other: O) -> "FeatureGen":
     from pl.feature_gen.binary.ops.add_feature import AddFeature
