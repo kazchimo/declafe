@@ -2,6 +2,7 @@ import polars as pl
 
 from pl.feature_gen.feature_gen import FeatureGen
 import pl.feature_gen as fg
+from pl.feature_gen.features import Features
 
 
 class AddFeature(FeatureGen):
@@ -58,6 +59,73 @@ class TestAsNameOf:
   def test_as_name_of(self):
     f = AddFeature("a", "b").as_name_of("c")
     assert f.feature_name == "c"
+
+
+class TestExtract:
+
+  def test_extract(self):
+    df = pl.DataFrame({"a + b": [1, 2, 3]})
+    f = AddFeature("a", "b")
+    assert f.extract(df).series_equal(df["a + b"])
+
+
+class TestTransform:
+
+  def test_transform(self):
+    df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    f = AddFeature("a", "b")
+    assert f.transform(df).frame_equal(
+        df.with_columns((pl.col("a") + pl.col("b")).alias("a + b")))
+
+  def test_set_feature(self):
+    df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    f = AddFeature("a", "b")
+    assert f.set_feature(df).frame_equal(
+        df.with_columns((pl.col("a") + pl.col("b")).alias("a + b")))
+
+
+class TestToFeatures:
+
+  def test_to_features(self):
+    f = AddFeature("a", "b")
+    assert f.to_features == Features.one(f)
+
+
+class TestCombine:
+
+  def test_combine(self):
+    f = AddFeature("a", "b")
+    ff = AddFeature("c", "d")
+    assert f.combine(ff) == Features.many(f, ff)
+
+
+class TestConApp:
+
+  def test_con_app(self):
+    df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    f = fg.col("a").con_ap(lambda x: x + 1)
+    res = f(df)
+    assert res["a_+_1"].series_equal(pl.Series("a_+_1", [2, 3, 4]))
+    assert res["a"].series_equal(pl.Series("a", [1, 2, 3]))
+
+
+class TestConAps:
+
+  def test_con_aps(self):
+    df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    f = fg.col("a").con_aps(lambda x: Features.many(x + 1, x + 2))
+    res = f(df)
+
+    assert res["a_+_1"].series_equal(pl.Series("a_+_1", [2, 3, 4]))
+    assert res["a_+_2"].series_equal(pl.Series("a_+_2", [3, 4, 5]))
+    assert res["a"].series_equal(pl.Series("a", [1, 2, 3]))
+
+
+class TestStr:
+
+  def test_str(self):
+    f = AddFeature("a", "b")
+    assert str(f) == "a + b"
 
 
 class Test_WrappedFeatureName:

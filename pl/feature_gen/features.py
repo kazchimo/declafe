@@ -42,8 +42,31 @@ class Features:
     else:
       return feature.feature_name in self.feature_names
 
+  def add_feature(self, feature: "FeatureGen") -> "Features":
+    if feature.feature_name in self.feature_names:
+      return self
+    else:
+      return Features(self.feature_gens + [feature])
+
   def __call__(self, temp_df: pl.DataFrame) -> pl.DataFrame:
     return self.transform(temp_df)
 
   def __contains__(self, item: Union["FeatureGen", str]) -> bool:
     return self.contains(item)
+
+  def __add__(self, other: "Features") -> "Features":
+    return Features(self.feature_gens + other.feature_gens)
+
+  def __radd__(self, other: "Features") -> "Features":
+    return Features(other.feature_gens + self.feature_gens)
+
+  def __eq__(self, other: "Features") -> bool:
+    return self.feature_names == other.feature_names
+
+  @staticmethod
+  def one(f: FeatureGen) -> "Features":
+    return Features([f])
+
+  @staticmethod
+  def many(*fs: FeatureGen) -> "Features":
+    return Features(list(fs))

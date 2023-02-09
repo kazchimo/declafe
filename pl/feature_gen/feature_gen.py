@@ -7,6 +7,7 @@ import polars as pl
 
 if TYPE_CHECKING:
   from talib_chain import TalibChain
+  from pl.feature_gen.features import Features
 
 T = TypeVar("T")
 
@@ -46,6 +47,12 @@ class FeatureGen(ABC):
 
     return result
 
+  def transform(self, df: pl.DataFrame) -> pl.DataFrame:
+    return df.with_columns(self.expr())
+
+  def set_feature(self, df: pl.DataFrame) -> pl.DataFrame:
+    return self.transform(df)
+
   @property
   def feature_name(self) -> str:
     return self.override_feature_name or \
@@ -64,6 +71,23 @@ class FeatureGen(ABC):
 
   def as_name_of(self, name: str) -> "FeatureGen":
     return self.alias(name)
+
+  def extract(self, df: pl.DataFrame) -> pl.Series:
+    return df[self.feature_name]
+
+  @property
+  def to_features(self) -> "Features":
+    from pl.feature_gen.features import Features
+    return Features.one(self)
+
+  def combine(self, other: "FeatureGen") -> "Features":
+    return self.to_features.add_feature(other)
+
+  def con_aps(self, f: Callable[["FeatureGen"], "Features"]) -> "Features":
+    return self.to_features + f(self)
+
+  def con_ap(self, f: Callable[["FeatureGen"], "FeatureGen"]) -> "Features":
+    return self.to_features.add_feature(f(self))
 
   def abs(self) -> "FeatureGen":
     from pl.feature_gen.unary.abs_feature import AbsFeature
@@ -277,6 +301,9 @@ class FeatureGen(ABC):
   def __invert__(self) -> "FeatureGen":
     from pl.feature_gen.unary.invert_feature import InvertFeature
     return InvertFeature(self)
+
+  def __str__(self) -> str:
+    return self.feature_name
 
   @property
   def wrapped_feature_name(self) -> str:
