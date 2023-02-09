@@ -15,4 +15,4 @@ class TRIXFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.TRIX(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'TRIX({self.timeperiod})({self.column})']
+    return [f'TRIX({self.timeperiod})({self.col_feature.feature_name})']

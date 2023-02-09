@@ -15,4 +15,4 @@ class KAMAFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.KAMA(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'KAMA({self.timeperiod})({self.column})']
+    return [f'KAMA({self.timeperiod})({self.col_feature.feature_name})']

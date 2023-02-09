@@ -14,4 +14,4 @@ class HT_DCPHASEFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.HT_DCPHASE(s,))
 
   def _feature_names(self) -> list[str]:
-    return [f'HT_DCPHASE()({self.column})']
+    return [f'HT_DCPHASE()({self.col_feature.feature_name})']

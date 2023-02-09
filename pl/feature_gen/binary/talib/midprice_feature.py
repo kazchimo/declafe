@@ -19,4 +19,6 @@ class MIDPRICEFeature(BinaryFeature):
         timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'MIDPRICE({self.timeperiod})({self.left}, {self.right})']
+    return [
+        f'MIDPRICE({self.timeperiod})({self.left_feature.feature_name}, {self.right_feature.feature_name})'
+    ]

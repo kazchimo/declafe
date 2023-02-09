@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any
 from pl.feature_gen.feature_gen import FeatureGen
 from pl.feature_gen.types import ColLike
 from pl.feature_gen.constructor_dsl import *
-from talib_constructor import TalibConstructor
+from pl.feature_gen.talib_constructor import TalibConstructor
 
 if TYPE_CHECKING:
   from pl.feature_gen.unary.id_feature import IdFeature

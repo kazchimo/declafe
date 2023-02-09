@@ -17,4 +17,6 @@ class STDDEVFeature(UnaryFeature):
         lambda s: talib.STDDEV(s, timeperiod=self.timeperiod, nbdev=self.nbdev))
 
   def _feature_names(self) -> list[str]:
-    return [f'STDDEV({self.timeperiod}, {self.nbdev})({self.column})']
+    return [
+        f'STDDEV({self.timeperiod}, {self.nbdev})({self.col_feature.feature_name})'
+    ]

@@ -32,5 +32,5 @@ class ULTOSCFeature(TriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'ULTOSC({self.timeperiod1}, {self.timeperiod2}, {self.timeperiod3})({self.col1}, {self.col2}, {self.col3})'
+        f'ULTOSC({self.timeperiod1}, {self.timeperiod2}, {self.timeperiod3})({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name})'
     ]

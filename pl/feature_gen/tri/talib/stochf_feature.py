@@ -27,7 +27,7 @@ class STOCHF_0Feature(TriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'STOCHF_0({self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.col1}, {self.col2}, {self.col3})'
+        f'STOCHF_0({self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name})'
     ]
 
 
@@ -52,5 +52,5 @@ class STOCHF_1Feature(TriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'STOCHF_1({self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.col1}, {self.col2}, {self.col3})'
+        f'STOCHF_1({self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name})'
     ]

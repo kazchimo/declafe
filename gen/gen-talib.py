@@ -85,13 +85,14 @@ def _quadri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr, col4: pl.Exp
         [f"{{self.{a.name}}}" for a in self.talib_def.additional_args])
 
     if self.talib_def.feature_kind_num == 1:
-      arg_component = f"{{self.column}}"
+      arg_component = f"{{self.col_feature.feature_name}}"
     elif self.talib_def.feature_kind_num == 2:
-      arg_component = f"{{self.left}}, {{self.right}}"
+      arg_component = f"{{self.left_feature.feature_name}}, {{self.right_feature.feature_name}}"
     elif self.talib_def.feature_kind_num == 3:
-      arg_component = f"{{self.col1}}, {{self.col2}}, {{self.col3}}"
+      arg_component = f"{{self.col1_feature.feature_name}}, {{self.col2_feature.feature_name}}, " \
+                      f"{{self.col3_feature.feature_name}}"
     elif self.talib_def.feature_kind_num == 4:
-      arg_component = f"{{self.col1}}, {{self.col2}}, {{self.col3}}, {{self.col4}}"
+      arg_component = f"{{self.col1_feature.feature_name}}, {{self.col2_feature.feature_name}}, {{self.col3_feature.feature_name}}, {{self.col4_feature.feature_name}}"
     else:
       raise ValueError("Invalid number of feature kinds")
 

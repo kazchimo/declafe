@@ -14,7 +14,7 @@ class HT_PHASOR_0Feature(UnaryFeature):
     return orig_col.map(lambda s: talib.HT_PHASOR(s,)[0])
 
   def _feature_names(self) -> list[str]:
-    return [f'HT_PHASOR_0()({self.column})']
+    return [f'HT_PHASOR_0()({self.col_feature.feature_name})']
 
 
 class HT_PHASOR_1Feature(UnaryFeature):
@@ -26,4 +26,4 @@ class HT_PHASOR_1Feature(UnaryFeature):
     return orig_col.map(lambda s: talib.HT_PHASOR(s,)[1])
 
   def _feature_names(self) -> list[str]:
-    return [f'HT_PHASOR_1()({self.column})']
+    return [f'HT_PHASOR_1()({self.col_feature.feature_name})']

@@ -24,5 +24,5 @@ class CDLENGULFINGFeature(QuadriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'CDLENGULFING()({self.col1}, {self.col2}, {self.col3}, {self.col4})'
+        f'CDLENGULFING()({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name}, {self.col4_feature.feature_name})'
     ]

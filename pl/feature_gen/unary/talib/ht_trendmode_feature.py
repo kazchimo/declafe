@@ -14,4 +14,4 @@ class HT_TRENDMODEFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.HT_TRENDMODE(s,))
 
   def _feature_names(self) -> list[str]:
-    return [f'HT_TRENDMODE()({self.column})']
+    return [f'HT_TRENDMODE()({self.col_feature.feature_name})']

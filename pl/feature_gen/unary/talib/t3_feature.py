@@ -17,4 +17,6 @@ class T3Feature(UnaryFeature):
         lambda s: talib.T3(s, timeperiod=self.timeperiod, vfactor=self.vfactor))
 
   def _feature_names(self) -> list[str]:
-    return [f'T3({self.timeperiod}, {self.vfactor})({self.column})']
+    return [
+        f'T3({self.timeperiod}, {self.vfactor})({self.col_feature.feature_name})'
+    ]

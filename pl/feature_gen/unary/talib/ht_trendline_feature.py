@@ -14,4 +14,4 @@ class HT_TRENDLINEFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.HT_TRENDLINE(s,))
 
   def _feature_names(self) -> list[str]:
-    return [f'HT_TRENDLINE()({self.column})']
+    return [f'HT_TRENDLINE()({self.col_feature.feature_name})']

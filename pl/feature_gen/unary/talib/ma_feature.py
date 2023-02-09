@@ -17,4 +17,6 @@ class MAFeature(UnaryFeature):
         lambda s: talib.MA(s, timeperiod=self.timeperiod, matype=self.matype))
 
   def _feature_names(self) -> list[str]:
-    return [f'MA({self.timeperiod}, {self.matype})({self.column})']
+    return [
+        f'MA({self.timeperiod}, {self.matype})({self.col_feature.feature_name})'
+    ]

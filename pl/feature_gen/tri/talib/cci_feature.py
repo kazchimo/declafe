@@ -21,4 +21,6 @@ class CCIFeature(TriFeature):
         timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'CCI({self.timeperiod})({self.col1}, {self.col2}, {self.col3})']
+    return [
+        f'CCI({self.timeperiod})({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name})'
+    ]

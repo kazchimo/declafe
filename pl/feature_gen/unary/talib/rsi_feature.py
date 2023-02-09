@@ -15,4 +15,4 @@ class RSIFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.RSI(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'RSI({self.timeperiod})({self.column})']
+    return [f'RSI({self.timeperiod})({self.col_feature.feature_name})']

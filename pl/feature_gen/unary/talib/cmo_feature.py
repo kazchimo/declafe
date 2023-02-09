@@ -15,4 +15,4 @@ class CMOFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.CMO(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'CMO({self.timeperiod})({self.column})']
+    return [f'CMO({self.timeperiod})({self.col_feature.feature_name})']

@@ -18,4 +18,6 @@ class OBVFeature(BinaryFeature):
     ))
 
   def _feature_names(self) -> list[str]:
-    return [f'OBV()({self.left}, {self.right})']
+    return [
+        f'OBV()({self.left_feature.feature_name}, {self.right_feature.feature_name})'
+    ]

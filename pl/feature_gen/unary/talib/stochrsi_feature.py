@@ -25,7 +25,7 @@ class STOCHRSI_0Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'STOCHRSI_0({self.timeperiod}, {self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.column})'
+        f'STOCHRSI_0({self.timeperiod}, {self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.col_feature.feature_name})'
     ]
 
 
@@ -49,5 +49,5 @@ class STOCHRSI_1Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'STOCHRSI_1({self.timeperiod}, {self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.column})'
+        f'STOCHRSI_1({self.timeperiod}, {self.fastk_period}, {self.fastd_period}, {self.fastd_matype})({self.col_feature.feature_name})'
     ]

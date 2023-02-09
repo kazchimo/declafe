@@ -32,7 +32,7 @@ class STOCH_0Feature(TriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'STOCH_0({self.fastk_period}, {self.slowk_period}, {self.slowk_matype}, {self.slowd_period}, {self.slowd_matype})({self.col1}, {self.col2}, {self.col3})'
+        f'STOCH_0({self.fastk_period}, {self.slowk_period}, {self.slowk_matype}, {self.slowd_period}, {self.slowd_matype})({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name})'
     ]
 
 
@@ -62,5 +62,5 @@ class STOCH_1Feature(TriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'STOCH_1({self.fastk_period}, {self.slowk_period}, {self.slowk_matype}, {self.slowd_period}, {self.slowd_matype})({self.col1}, {self.col2}, {self.col3})'
+        f'STOCH_1({self.fastk_period}, {self.slowk_period}, {self.slowk_matype}, {self.slowd_period}, {self.slowd_matype})({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name})'
     ]

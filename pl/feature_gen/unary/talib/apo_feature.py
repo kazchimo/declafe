@@ -22,5 +22,5 @@ class APOFeature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'APO({self.fastperiod}, {self.slowperiod}, {self.matype})({self.column})'
+        f'APO({self.fastperiod}, {self.slowperiod}, {self.matype})({self.col_feature.feature_name})'
     ]

@@ -17,7 +17,9 @@ class MAMA_0Feature(UnaryFeature):
         s, fastlimit=self.fastlimit, slowlimit=self.slowlimit)[0])
 
   def _feature_names(self) -> list[str]:
-    return [f'MAMA_0({self.fastlimit}, {self.slowlimit})({self.column})']
+    return [
+        f'MAMA_0({self.fastlimit}, {self.slowlimit})({self.col_feature.feature_name})'
+    ]
 
 
 class MAMA_1Feature(UnaryFeature):
@@ -32,4 +34,6 @@ class MAMA_1Feature(UnaryFeature):
         s, fastlimit=self.fastlimit, slowlimit=self.slowlimit)[1])
 
   def _feature_names(self) -> list[str]:
-    return [f'MAMA_1({self.fastlimit}, {self.slowlimit})({self.column})']
+    return [
+        f'MAMA_1({self.fastlimit}, {self.slowlimit})({self.col_feature.feature_name})'
+    ]

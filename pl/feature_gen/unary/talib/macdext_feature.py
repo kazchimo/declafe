@@ -30,7 +30,7 @@ class MACDEXT_0Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'MACDEXT_0({self.fastperiod}, {self.fastmatype}, {self.slowperiod}, {self.slowmatype}, {self.signalperiod}, {self.signalmatype})({self.column})'
+        f'MACDEXT_0({self.fastperiod}, {self.fastmatype}, {self.slowperiod}, {self.slowmatype}, {self.signalperiod}, {self.signalmatype})({self.col_feature.feature_name})'
     ]
 
 
@@ -59,7 +59,7 @@ class MACDEXT_1Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'MACDEXT_1({self.fastperiod}, {self.fastmatype}, {self.slowperiod}, {self.slowmatype}, {self.signalperiod}, {self.signalmatype})({self.column})'
+        f'MACDEXT_1({self.fastperiod}, {self.fastmatype}, {self.slowperiod}, {self.slowmatype}, {self.signalperiod}, {self.signalmatype})({self.col_feature.feature_name})'
     ]
 
 
@@ -88,5 +88,5 @@ class MACDEXT_2Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'MACDEXT_2({self.fastperiod}, {self.fastmatype}, {self.slowperiod}, {self.slowmatype}, {self.signalperiod}, {self.signalmatype})({self.column})'
+        f'MACDEXT_2({self.fastperiod}, {self.fastmatype}, {self.slowperiod}, {self.slowmatype}, {self.signalperiod}, {self.signalmatype})({self.col_feature.feature_name})'
     ]

@@ -22,7 +22,7 @@ class MACD_0Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'MACD_0({self.fastperiod}, {self.slowperiod}, {self.signalperiod})({self.column})'
+        f'MACD_0({self.fastperiod}, {self.slowperiod}, {self.signalperiod})({self.col_feature.feature_name})'
     ]
 
 
@@ -43,7 +43,7 @@ class MACD_1Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'MACD_1({self.fastperiod}, {self.slowperiod}, {self.signalperiod})({self.column})'
+        f'MACD_1({self.fastperiod}, {self.slowperiod}, {self.signalperiod})({self.col_feature.feature_name})'
     ]
 
 
@@ -64,5 +64,5 @@ class MACD_2Feature(UnaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'MACD_2({self.fastperiod}, {self.slowperiod}, {self.signalperiod})({self.column})'
+        f'MACD_2({self.fastperiod}, {self.slowperiod}, {self.signalperiod})({self.col_feature.feature_name})'
     ]

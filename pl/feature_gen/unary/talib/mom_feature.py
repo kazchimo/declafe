@@ -15,4 +15,4 @@ class MOMFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.MOM(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'MOM({self.timeperiod})({self.column})']
+    return [f'MOM({self.timeperiod})({self.col_feature.feature_name})']

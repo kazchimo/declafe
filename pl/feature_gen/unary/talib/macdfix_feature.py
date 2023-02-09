@@ -16,7 +16,7 @@ class MACDFIX_0Feature(UnaryFeature):
         lambda s: talib.MACDFIX(s, signalperiod=self.signalperiod)[0])
 
   def _feature_names(self) -> list[str]:
-    return [f'MACDFIX_0({self.signalperiod})({self.column})']
+    return [f'MACDFIX_0({self.signalperiod})({self.col_feature.feature_name})']
 
 
 class MACDFIX_1Feature(UnaryFeature):
@@ -30,7 +30,7 @@ class MACDFIX_1Feature(UnaryFeature):
         lambda s: talib.MACDFIX(s, signalperiod=self.signalperiod)[1])
 
   def _feature_names(self) -> list[str]:
-    return [f'MACDFIX_1({self.signalperiod})({self.column})']
+    return [f'MACDFIX_1({self.signalperiod})({self.col_feature.feature_name})']
 
 
 class MACDFIX_2Feature(UnaryFeature):
@@ -44,4 +44,4 @@ class MACDFIX_2Feature(UnaryFeature):
         lambda s: talib.MACDFIX(s, signalperiod=self.signalperiod)[2])
 
   def _feature_names(self) -> list[str]:
-    return [f'MACDFIX_2({self.signalperiod})({self.column})']
+    return [f'MACDFIX_2({self.signalperiod})({self.col_feature.feature_name})']

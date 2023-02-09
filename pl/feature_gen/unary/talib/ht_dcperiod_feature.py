@@ -14,4 +14,4 @@ class HT_DCPERIODFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.HT_DCPERIOD(s,))
 
   def _feature_names(self) -> list[str]:
-    return [f'HT_DCPERIOD()({self.column})']
+    return [f'HT_DCPERIOD()({self.col_feature.feature_name})']

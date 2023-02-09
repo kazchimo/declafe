@@ -23,5 +23,5 @@ class SARFeature(BinaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'SAR({self.acceleration}, {self.maximum})({self.left}, {self.right})'
+        f'SAR({self.acceleration}, {self.maximum})({self.left_feature.feature_name}, {self.right_feature.feature_name})'
     ]

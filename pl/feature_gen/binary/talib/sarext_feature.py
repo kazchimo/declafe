@@ -38,5 +38,5 @@ class SAREXTFeature(BinaryFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'SAREXT({self.startvalue}, {self.offsetonreverse}, {self.accelerationinitlong}, {self.accelerationlong}, {self.accelerationmaxlong}, {self.accelerationinitshort}, {self.accelerationshort}, {self.accelerationmaxshort})({self.left}, {self.right})'
+        f'SAREXT({self.startvalue}, {self.offsetonreverse}, {self.accelerationinitlong}, {self.accelerationlong}, {self.accelerationmaxlong}, {self.accelerationinitshort}, {self.accelerationshort}, {self.accelerationmaxshort})({self.left_feature.feature_name}, {self.right_feature.feature_name})'
     ]

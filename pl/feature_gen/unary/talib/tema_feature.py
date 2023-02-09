@@ -15,4 +15,4 @@ class TEMAFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.TEMA(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'TEMA({self.timeperiod})({self.column})']
+    return [f'TEMA({self.timeperiod})({self.col_feature.feature_name})']

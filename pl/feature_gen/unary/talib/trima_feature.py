@@ -15,4 +15,4 @@ class TRIMAFeature(UnaryFeature):
     return orig_col.map(lambda s: talib.TRIMA(s, timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'TRIMA({self.timeperiod})({self.column})']
+    return [f'TRIMA({self.timeperiod})({self.col_feature.feature_name})']

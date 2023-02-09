@@ -19,4 +19,6 @@ class MINUS_DMFeature(BinaryFeature):
         timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
-    return [f'MINUS_DM({self.timeperiod})({self.left}, {self.right})']
+    return [
+        f'MINUS_DM({self.timeperiod})({self.left_feature.feature_name}, {self.right_feature.feature_name})'
+    ]

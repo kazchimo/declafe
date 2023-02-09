@@ -19,7 +19,9 @@ class AROON_0Feature(BinaryFeature):
         timeperiod=self.timeperiod)[0])
 
   def _feature_names(self) -> list[str]:
-    return [f'AROON_0({self.timeperiod})({self.left}, {self.right})']
+    return [
+        f'AROON_0({self.timeperiod})({self.left_feature.feature_name}, {self.right_feature.feature_name})'
+    ]
 
 
 class AROON_1Feature(BinaryFeature):
@@ -35,4 +37,6 @@ class AROON_1Feature(BinaryFeature):
         timeperiod=self.timeperiod)[1])
 
   def _feature_names(self) -> list[str]:
-    return [f'AROON_1({self.timeperiod})({self.left}, {self.right})']
+    return [
+        f'AROON_1({self.timeperiod})({self.left_feature.feature_name}, {self.right_feature.feature_name})'
+    ]

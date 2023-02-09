@@ -24,5 +24,5 @@ class CDLUPSIDEGAP2CROWSFeature(QuadriFeature):
 
   def _feature_names(self) -> list[str]:
     return [
-        f'CDLUPSIDEGAP2CROWS()({self.col1}, {self.col2}, {self.col3}, {self.col4})'
+        f'CDLUPSIDEGAP2CROWS()({self.col1_feature.feature_name}, {self.col2_feature.feature_name}, {self.col3_feature.feature_name}, {self.col4_feature.feature_name})'
     ]
