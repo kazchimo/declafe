@@ -21,7 +21,10 @@ class ReplaceFeature(UnaryFeature):
     return f"replace_{self.target_value}_to_{self.to_value}"
 
   def gen_unary(self, ser: np.ndarray) -> np.ndarray:
-    if np.isnan(self.target_value):
-      return np.where(np.isnan(ser), self.to_value, ser)
+    if np.isnan(self.target_value):  # type: ignore
+      return np.where(np.isnan(ser), self.to_value, ser)  # type: ignore
     else:
-      return np.where(ser == self.target_value, self.to_value, ser)
+      return np.where(
+          ser == self.target_value,
+          self.to_value,  # type: ignore
+          ser)

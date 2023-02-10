@@ -5,3 +5,6 @@ node_modules
 dist
 build
 declafe.egg-info
+
+**/*.ipynb
+

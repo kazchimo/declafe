@@ -28,6 +28,7 @@ ta-lib = "*"
 numba = "*"
 tqdm = "^4.64.1"
 scipy = "^1.9.3"
+polars = {extras = ["numpy", "pandas"], version = "^0.16.1"}
 
 
 [tool.poetry.dev-dependencies]

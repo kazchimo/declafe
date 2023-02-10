@@ -1,6 +1,6 @@
 import functools
 from dataclasses import dataclass, field
-from typing import List, Type, Callable, Union, TYPE_CHECKING, TypeVar, Iterable
+from typing import List, Type, Callable, Union, TYPE_CHECKING, TypeVar, Iterable, cast
 
 __all__ = ["Features", "F"]
 
@@ -147,8 +147,11 @@ class Features:
   _F = Union[Type["UnaryFeature"], Callable[["FeatureGen"], "FeatureGen"]]
 
   def map(self, f: _F, **kwargs) -> "Features":
-    if isinstance(f, UnaryFeature.__class__):
-      return Features([fg.next(f, **kwargs) for fg in self.feature_gens])
+    if isinstance(f, UnaryFeature.__class__):  # type: ignore
+      return Features([
+          fg.next(cast(Type[UnaryFeature], f), **kwargs)
+          for fg in self.feature_gens
+      ])
     else:
       return Features([f(fg) for fg in self.feature_gens])  # type: ignore
 

@@ -3,7 +3,8 @@
   "useLibraryCodeForTypes": true,
   "ignore": [
     "build",
-    "tests"
+    "tests",
+    "typings",
   ],
   "reportUnusedImport": true,
   "reportUnusedClass": true,
