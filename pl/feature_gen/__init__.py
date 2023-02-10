@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, TypeVar, Callable, Iterable
 
 from pl.feature_gen.feature_gen import FeatureGen
 from pl.feature_gen.types import ColLike
@@ -50,3 +50,16 @@ def conv_lit(value: Any) -> "FeatureGen":
 
 def const(value: Any) -> "ConstFeature":
   return lit(value)
+
+
+T = TypeVar("T")
+Fun = Callable[[T], "FeatureGen"]
+Ap = Callable[[Fun], "Features"]
+
+
+def iter_over(it: Iterable[T]) -> Ap:
+
+  def ap(f: Fun) -> "Features":
+    return Features([f(x) for x in it])
+
+  return ap
