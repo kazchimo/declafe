@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias, TYPE_CHECKING
+from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias, TYPE_CHECKING, Protocol
 
 from pl.feature_gen.types import DTypes
 import pl.feature_gen as fg
@@ -224,6 +224,20 @@ class FeatureGen(ABC):
   def of_cond(self, true: "ColLike", false: "ColLike") -> "FeatureGen":
     from pl.feature_gen.tri.cond_feature import CondFeature
     return CondFeature(self, true, false)
+
+  class F(Protocol):
+
+    def __call__(self, args: pl.Series) -> pl.Series:
+      ...
+
+  def rolling_apply(
+      self,
+      window: int,
+      func: F,
+      ops_name: str,
+  ) -> "FeatureGen":
+    from pl.feature_gen.rolling_apply_feature import RollingApplyFeature
+    return RollingApplyFeature(self, window, func, ops_name)
 
   @property
   def talib(self) -> "TalibChain":
