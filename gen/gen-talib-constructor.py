@@ -16,8 +16,8 @@ class TalibConstructorFile:
         for talib_feature in self.talib_features
     ])
     return f"""\
-from pl.feature_gen.types import ColLike
-from pl.feature_gen.feature_gen import FeatureGen
+from declafe.pl.feature_gen.types import ColLike
+from declafe.pl.feature_gen.feature_gen import FeatureGen
 
 # noinspection PyMethodMayBeStatic,SpellCheckingInspection
 class TalibConstructor:
@@ -38,7 +38,7 @@ class TalibConstructor:
 
     return f"""\
 def {talib_feature.name.lower()}(self, {args}) -> "FeatureGen":
-  from pl.feature_gen.{talib_feature.kind}.talib.{talib_feature.file_name} import {talib_feature.name}Feature
+  from declafe.pl.feature_gen.{talib_feature.kind}.talib.{talib_feature.file_name} import {talib_feature.name}Feature
   return {talib_feature.name}Feature({pass_args})
 """
 

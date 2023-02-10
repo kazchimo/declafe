@@ -16,7 +16,7 @@ class TalibConstructorTests:
     return f"""\
 import talib
 import polars as pl
-import pl.feature_gen as fg
+import declafe.pl.feature_gen as fg
 import numpy as np
 
 df = pl.DataFrame({{

@@ -17,7 +17,7 @@ class TalibChainFile:
     ])
 
     return f"""\
-from pl.feature_gen.feature_gen import FeatureGen
+from declafe.pl.feature_gen.feature_gen import FeatureGen
 
 class TalibChain:
   def __init__(self, feature: FeatureGen):
@@ -39,7 +39,7 @@ class TalibChain:
 
     return f"""\
 def {talib_feature.name.lower()}(self{args}) -> "FeatureGen":
-  from pl.feature_gen.{talib_feature.kind}.talib.{talib_feature.file_name} import {talib_feature.name}Feature
+  from declafe.pl.feature_gen.{talib_feature.kind}.talib.{talib_feature.file_name} import {talib_feature.name}Feature
   return {talib_feature.name}Feature(self.feature{pass_args})
 """
 

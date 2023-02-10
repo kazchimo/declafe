@@ -1,7 +1,7 @@
 import polars as pl
 
-from pl.feature_gen.unary.unary_feature import UnaryFeature
-import pl.feature_gen as fg
+from declafe.pl.feature_gen.unary.unary_feature import UnaryFeature
+import declafe.pl.feature_gen as fg
 
 
 class Plus1Feature(UnaryFeature):

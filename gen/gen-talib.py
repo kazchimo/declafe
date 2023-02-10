@@ -30,7 +30,7 @@ class TalibFeatureFile:
     kind = self.talib_def.feature_kind
     cap_kind = self.talib_def.cap_feature_kind
 
-    return f"from pl.feature_gen.{kind}.{kind}_feature import {cap_kind}Feature"
+    return f"from declafe.pl.feature_gen.{kind}.{kind}_feature import {cap_kind}Feature"
 
   def _expr_component(self, i: Optional[int] = None) -> str:
     idx_component = f"[{i}]" if i is not None else ""
@@ -121,7 +121,7 @@ class {name_idx}Feature({self.talib_def.cap_feature_kind}Feature):
 
     import_component = f"""\
 import polars as pl
-from pl.feature_gen.types import ColLike
+from declafe.pl.feature_gen.types import ColLike
 import talib
 {"from typing import cast" if self.talib_def.feature_kind_num > 1 else ""}
 

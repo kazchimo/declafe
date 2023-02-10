@@ -1,5 +1,5 @@
 import polars as pl
-import pl.feature_gen as fg
+import declafe.pl.feature_gen as fg
 
 a = fg.col("a")
 b = fg.col("b")

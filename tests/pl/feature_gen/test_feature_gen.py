@@ -1,8 +1,8 @@
 import polars as pl
 
-from pl.feature_gen.feature_gen import FeatureGen
-import pl.feature_gen as fg
-from pl.feature_gen.features import Features
+from declafe.pl.feature_gen.feature_gen import FeatureGen
+import declafe.pl.feature_gen as fg
+from declafe.pl.feature_gen.features import Features
 
 
 class AddFeature(FeatureGen):

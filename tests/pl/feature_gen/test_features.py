@@ -1,10 +1,10 @@
 import polars as pl
 
-from pl.feature_gen.feature_gen import FeatureGen
-from pl.feature_gen.features import Features
-import pl.feature_gen.constructor_dsl as dsl
-import pl.feature_gen as fg
-from pl.feature_gen.unary.id_feature import IdFeature
+from declafe.pl.feature_gen.feature_gen import FeatureGen
+from declafe.pl.feature_gen.features import Features
+import declafe.pl.feature_gen.constructor_dsl as dsl
+import declafe.pl.feature_gen as fg
+from declafe.pl.feature_gen.unary.id_feature import IdFeature
 
 a = fg.col("a")
 b = fg.col("b")

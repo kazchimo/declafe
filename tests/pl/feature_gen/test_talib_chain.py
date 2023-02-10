@@ -1,6 +1,6 @@
 import talib
 import polars as pl
-import pl.feature_gen as fg
+import declafe.pl.feature_gen as fg
 
 df = pl.DataFrame({
     "close": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
