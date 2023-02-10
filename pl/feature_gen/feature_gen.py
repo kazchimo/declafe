@@ -8,6 +8,7 @@ import polars as pl
 if TYPE_CHECKING:
   from talib_chain import TalibChain
   from pl.feature_gen.features import Features
+  from pl.feature_gen import ColLike
 
 T = TypeVar("T")
 
@@ -219,6 +220,10 @@ class FeatureGen(ABC):
   def second(self) -> "FeatureGen":
     from pl.feature_gen.unary.times.second_feature import SecondFeature
     return SecondFeature(self)
+
+  def of_cond(self, true: "ColLike", false: "ColLike") -> "FeatureGen":
+    from pl.feature_gen.tri.cond_feature import CondFeature
+    return CondFeature(self, true, false)
 
   @property
   def talib(self) -> "TalibChain":

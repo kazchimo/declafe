@@ -52,6 +52,11 @@ def const(value: Any) -> "ConstFeature":
   return lit(value)
 
 
+def cond(test: "ColLike", true: "ColLike", false: "ColLike") -> "FeatureGen":
+  from pl.feature_gen.tri.cond_feature import CondFeature
+  return CondFeature(test, true, false)
+
+
 T = TypeVar("T")
 Fun = Callable[[T], "FeatureGen"]
 Ap = Callable[[Fun], "Features"]
