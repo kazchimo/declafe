@@ -9,3 +9,9 @@ def test_minimum_feature():
       "minimum(a, 2)",
       [1, 2, 2, 2, 2],
   ))
+
+  minimum = fg.col("a").minimum(fg.col("b"))
+  assert minimum(df).series_equal(pl.Series(
+      "minimum(a, b)",
+      [1, 2, 3, 4, 5],
+  ))

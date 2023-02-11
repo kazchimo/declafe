@@ -9,3 +9,9 @@ def test_maximum_feature():
       "maximum(a, 2)",
       [2, 2, 3, 4, 5],
   ))
+
+  maximum = fg.col("a").maximum(fg.col("b"))
+  assert maximum(df).series_equal(pl.Series(
+      "maximum(a, b)",
+      [4, 5, 6, 7, 8],
+  ))

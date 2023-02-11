@@ -154,13 +154,15 @@ class FeatureGen(ABC):
   def std(self, periods: int) -> "FeatureGen":
     return self.rolling_std(periods)
 
-  def minimum(self, comp: float) -> "FeatureGen":
-    from declafe.pl.feature_gen.unary.minimum_feature import MinimumFeature
-    return MinimumFeature(self, comp)
+  def minimum(self, other: Any) -> "FeatureGen":
+    from declafe.pl.feature_gen.binary.minimum_feature import MinimumFeature
+    from declafe.pl.feature_gen import conv_lit
+    return MinimumFeature(self, conv_lit(other))
 
-  def maximum(self, comp: float) -> "FeatureGen":
-    from declafe.pl.feature_gen.unary.maximum_feature import MaximumFeature
-    return MaximumFeature(self, comp)
+  def maximum(self, other: Any) -> "FeatureGen":
+    from declafe.pl.feature_gen.binary.maximum_feature import MaximumFeature
+    from declafe.pl.feature_gen import conv_lit
+    return MaximumFeature(self, conv_lit(other))
 
   def log(self) -> "FeatureGen":
     from declafe.pl.feature_gen.unary.log_feature import LogFeature
