@@ -18,3 +18,10 @@ def test_fill_null():
           "fill_null(lag1(|b|), 99)",
           [99, 1, 2, 3, 4, 5],
       ))
+
+  zero_fill_null = fg.col("b").abs().lag(1).fill_null(storategy="zero")
+  assert zero_fill_null(df).series_equal(
+      pl.Series(
+          "zero_fill_null(lag1(|b|))",
+          [0, 1, 2, 3, 4, 5],
+      ))

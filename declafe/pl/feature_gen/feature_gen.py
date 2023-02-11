@@ -4,6 +4,7 @@ from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias, 
 from declafe.pl.feature_gen.types import DTypes
 import declafe.pl.feature_gen as fg
 import polars as pl
+from polars.internals.type_aliases import FillNullStrategy
 
 if TYPE_CHECKING:
   from talib_chain import TalibChain
@@ -229,9 +230,12 @@ class FeatureGen(ABC):
 
     return CondFeature(self, conv_lit(true), conv_lit(false))
 
-  def fill_null(self, value: Any) -> "FeatureGen":
+  def fill_null(self,
+                value: Optional[Any] = None,
+                storategy: Optional[FillNullStrategy] = None,
+                limit: Optional[int] = None) -> "FeatureGen":
     from declafe.pl.feature_gen.unary.fill_null_feature import FillNullFeature
-    return FillNullFeature(self, value)
+    return FillNullFeature(self, value, storategy, limit)
 
   def fill_nan(self, value: Any) -> "FeatureGen":
     from declafe.pl.feature_gen.unary.fill_nan_feature import FillNanFeature
