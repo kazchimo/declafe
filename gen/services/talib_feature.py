@@ -45,7 +45,7 @@ class TalibFeature:
 
   @staticmethod
   def read(path: str) -> list["TalibFeature"]:
-    kind = path.split("/")[2]
+    kind = path.split("/")[3]
 
     with open(path, "r") as f:
       content = f.read()
