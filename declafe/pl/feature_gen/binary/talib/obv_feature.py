@@ -13,8 +13,8 @@ class OBVFeature(BinaryFeature):
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
     return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.OBV(
-        s.apply(lambda ss: ss[f'{self.left_feature.feature_name}']),
-        s.apply(lambda ss: ss[f'{self.right_feature.feature_name}']),
+        s.struct.field(self.left_feature.feature_name),
+        s.struct.field(self.right_feature.feature_name),
     ))
 
   def _feature_names(self) -> list[str]:

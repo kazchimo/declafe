@@ -13,10 +13,10 @@ class AROON_0Feature(BinaryFeature):
     self.timeperiod = timeperiod
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
-    return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.AROON(
-        s.apply(lambda ss: ss[f'{self.left_feature.feature_name}']),
-        s.apply(lambda ss: ss[f'{self.right_feature.feature_name}']),
-        timeperiod=self.timeperiod)[0])
+    return cast(pl.Expr, pl.struct([left, right])).map(
+        lambda s: talib.AROON(s.struct.field(self.left_feature.feature_name),
+                              s.struct.field(self.right_feature.feature_name),
+                              timeperiod=self.timeperiod)[0])
 
   def _feature_names(self) -> list[str]:
     return [
@@ -31,10 +31,10 @@ class AROON_1Feature(BinaryFeature):
     self.timeperiod = timeperiod
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
-    return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.AROON(
-        s.apply(lambda ss: ss[f'{self.left_feature.feature_name}']),
-        s.apply(lambda ss: ss[f'{self.right_feature.feature_name}']),
-        timeperiod=self.timeperiod)[1])
+    return cast(pl.Expr, pl.struct([left, right])).map(
+        lambda s: talib.AROON(s.struct.field(self.left_feature.feature_name),
+                              s.struct.field(self.right_feature.feature_name),
+                              timeperiod=self.timeperiod)[1])
 
   def _feature_names(self) -> list[str]:
     return [

@@ -50,8 +50,8 @@ def _unary_expr(self, orig_col: pl.Expr) -> pl.Expr:
       return f"""\
 def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
   return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.{self.talib_def.name}(
-    s.apply(lambda ss: ss[f'{{self.left_feature.feature_name}}']),
-    s.apply(lambda ss: ss[f'{{self.right_feature.feature_name}}']),
+    s.struct.field(self.left_feature.feature_name),
+    s.struct.field(self.right_feature.feature_name),
 {indent(additionals, "    ")}
   ){idx_component})
 """
@@ -59,9 +59,9 @@ def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
       return f"""\
 def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:
   return cast(pl.Expr, pl.struct([col1, col2, col3])).map(lambda s: talib.{self.talib_def.name}(
-    s.apply(lambda ss: ss[f'{{self.col1_feature.feature_name}}']),
-    s.apply(lambda ss: ss[f'{{self.col2_feature.feature_name}}']),
-    s.apply(lambda ss: ss[f'{{self.col3_feature.feature_name}}']),
+    s.struct.field(self.col1_feature.feature_name),
+    s.struct.field(self.col2_feature.feature_name),
+    s.struct.field(self.col3_feature.feature_name),
 {indent(additionals, "    ")}
   ){idx_component})
 """
@@ -69,10 +69,10 @@ def _tri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr) -> pl.Expr:
       return f"""\
 def _quadri_expr(self, col1: pl.Expr, col2: pl.Expr, col3: pl.Expr, col4: pl.Expr) -> pl.Expr:
   return cast(pl.Expr, pl.struct([col1, col2, col3, col4])).map(lambda s: talib.{self.talib_def.name}(
-    s.apply(lambda ss: ss[f'{{self.col1_feature.feature_name}}']),
-    s.apply(lambda ss: ss[f'{{self.col2_feature.feature_name}}']),
-    s.apply(lambda ss: ss[f'{{self.col3_feature.feature_name}}']),
-    s.apply(lambda ss: ss[f'{{self.col4_feature.feature_name}}']),
+    s.struct.field(self.col1_feature.feature_name),
+    s.struct.field(self.col2_feature.feature_name),
+    s.struct.field(self.col3_feature.feature_name),
+    s.struct.field(self.col4_feature.feature_name),
 {indent(additionals, "    ")}
   ){idx_component})
 """
@@ -136,7 +136,7 @@ import talib
 
   @property
   def file_path(self) -> str:
-    return f"pl/feature_gen/{self.talib_def.feature_kind}/talib/{self.talib_def.name.lower()}_feature.py"
+    return f"declafe/pl/feature_gen/{self.talib_def.feature_kind}/talib/{self.talib_def.name.lower()}_feature.py"
 
   def write(self):
     with open(self.file_path, "w") as f:

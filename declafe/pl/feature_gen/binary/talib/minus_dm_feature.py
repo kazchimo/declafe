@@ -14,8 +14,8 @@ class MINUS_DMFeature(BinaryFeature):
 
   def _binary_expr(self, left: pl.Expr, right: pl.Expr) -> pl.Expr:
     return cast(pl.Expr, pl.struct([left, right])).map(lambda s: talib.MINUS_DM(
-        s.apply(lambda ss: ss[f'{self.left_feature.feature_name}']),
-        s.apply(lambda ss: ss[f'{self.right_feature.feature_name}']),
+        s.struct.field(self.left_feature.feature_name),
+        s.struct.field(self.right_feature.feature_name),
         timeperiod=self.timeperiod))
 
   def _feature_names(self) -> list[str]:
