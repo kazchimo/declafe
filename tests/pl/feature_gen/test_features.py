@@ -409,3 +409,17 @@ class TestConstructor:
             "rolling_max1(a)": [3, 2, 3],
             "rolling_max2(a)": [None, 3, 3],
         }))
+
+  def test_from_iter(self):
+    df = pl.DataFrame({"a": [3, 2, 3], "b": [4, 5, 6]})
+    fs = Features.from_iter(a * i for i in range(4))
+
+    assert fs(df).frame_equal(
+        pl.DataFrame({
+            "a": [3, 2, 3],
+            "b": [4, 5, 6],
+            "a_*_0": [0, 0, 0],
+            "a_*_1": [3, 2, 3],
+            "a_*_2": [6, 4, 6],
+            "a_*_3": [9, 6, 9],
+        }))

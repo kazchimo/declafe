@@ -124,6 +124,10 @@ class Features:
   def __len__(self) -> int:
     return self.feature_count
 
+  def __iter__(self):
+
+    return self.feature_gens.__iter__()
+
   @staticmethod
   def empty() -> "Features":
     return Features([])
@@ -144,5 +148,6 @@ class Features:
 
     return ap
 
-  def __iter__(self):
-    return self.feature_gens.__iter__()
+  @staticmethod
+  def from_iter(it: Iterable[FeatureGen]) -> "Features":
+    return Features(list(it))
