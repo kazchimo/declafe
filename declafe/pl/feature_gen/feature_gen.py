@@ -232,8 +232,11 @@ class FeatureGen(ABC):
 
   def fill_null(self, value: Any) -> "FeatureGen":
     from declafe.pl.feature_gen.unary.fill_null_feature import FillNullFeature
-
     return FillNullFeature(self, value)
+
+  def fill_nan(self, value: Any) -> "FeatureGen":
+    from declafe.pl.feature_gen.unary.fill_nan_feature import FillNanFeature
+    return FillNanFeature(self, value)
 
   class F(Protocol):
 
