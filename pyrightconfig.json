@@ -5,6 +5,7 @@
     "build",
     "tests",
     "typings",
+    "gen"
   ],
   "reportUnusedImport": true,
   "reportUnusedClass": true,

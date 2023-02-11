@@ -8,7 +8,6 @@ import polars as pl
 if TYPE_CHECKING:
   from talib_chain import TalibChain
   from declafe.pl.feature_gen.features import Features
-  from declafe.pl.feature_gen import ColLike
 
 T = TypeVar("T")
 
@@ -240,7 +239,7 @@ class FeatureGen(ABC):
 
   class F(Protocol):
 
-    def __call__(self, args: pl.Series) -> pl.Series:
+    def __call__(self, ser: pl.Series) -> pl.Series:
       ...
 
   def rolling_apply(
