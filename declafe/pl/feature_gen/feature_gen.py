@@ -230,6 +230,11 @@ class FeatureGen(ABC):
 
     return CondFeature(self, conv_lit(true), conv_lit(false))
 
+  def fill_null(self, value: Any) -> "FeatureGen":
+    from declafe.pl.feature_gen.unary.fill_null_feature import FillNullFeature
+
+    return FillNullFeature(self, value)
+
   class F(Protocol):
 
     def __call__(self, args: pl.Series) -> pl.Series:
