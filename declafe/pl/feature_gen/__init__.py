@@ -52,9 +52,10 @@ def const(value: Any) -> "ConstFeature":
   return lit(value)
 
 
-def cond(test: "ColLike", true: "ColLike", false: "ColLike") -> "FeatureGen":
+def cond(test: Any, true: Any, false: Any) -> "FeatureGen":
   from declafe.pl.feature_gen.tri.cond_feature import CondFeature
-  return CondFeature(test, true, false)
+
+  return CondFeature(conv_lit(test), conv_lit(true), conv_lit(false))
 
 
 T = TypeVar("T")

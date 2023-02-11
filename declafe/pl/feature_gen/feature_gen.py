@@ -224,9 +224,11 @@ class FeatureGen(ABC):
     from declafe.pl.feature_gen.unary.times.second_feature import SecondFeature
     return SecondFeature(self)
 
-  def of_cond(self, true: "ColLike", false: "ColLike") -> "FeatureGen":
+  def of_cond(self, true: Any, false: Any) -> "FeatureGen":
     from declafe.pl.feature_gen.tri.cond_feature import CondFeature
-    return CondFeature(self, true, false)
+    from declafe.pl.feature_gen import conv_lit
+
+    return CondFeature(self, conv_lit(true), conv_lit(false))
 
   class F(Protocol):
 

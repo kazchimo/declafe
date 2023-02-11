@@ -22,6 +22,10 @@ def test_of_cond():
   assert f(df).series_equal(
       pl.Series("if_((a_%_2)_==_0)_then_c_else_d", ["a", "7", "c", "9", "e"]))
 
+  f = ((a % 2) == 0).of_cond(c, 99)
+  assert f(df).series_equal(
+      pl.Series("if_((a_%_2)_==_0)_then_c_else_99", [99, 7, 99, 9, 99]))
+
 
 def test_cond():
   f = fg.cond(fg.col("b"), fg.col("a"), fg.col("c"))
@@ -30,3 +34,7 @@ def test_cond():
   f = fg.cond((a % 2) == 0, c, d)
   assert f(df).series_equal(
       pl.Series("if_((a_%_2)_==_0)_then_c_else_d", ["a", "7", "c", "9", "e"]))
+
+  f = fg.cond((a % 2) == 0, c, 99)
+  assert f(df).series_equal(
+      pl.Series("if_((a_%_2)_==_0)_then_c_else_99", [99, 7, 99, 9, 99]))
