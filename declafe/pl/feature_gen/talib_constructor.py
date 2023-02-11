@@ -45,12 +45,24 @@ class TalibConstructor:
     return STOCH_0Feature(high, low, close, fastk_period, slowk_period,
                           slowk_matype, slowd_period, slowd_matype)
 
+  def stoch_fastk(self, high: ColLike, low: ColLike, close: ColLike,
+                  fastk_period: int, slowk_period: int, slowk_matype: int,
+                  slowd_period: int, slowd_matype: int) -> "FeatureGen":
+    return self.stoch_0(high, low, close, fastk_period, slowk_period,
+                        slowk_matype, slowd_period, slowd_matype)
+
   def stoch_1(self, high: ColLike, low: ColLike, close: ColLike,
               fastk_period: int, slowk_period: int, slowk_matype: int,
               slowd_period: int, slowd_matype: int) -> "FeatureGen":
     from declafe.pl.feature_gen.tri.talib.stoch_feature import STOCH_1Feature
     return STOCH_1Feature(high, low, close, fastk_period, slowk_period,
                           slowk_matype, slowd_period, slowd_matype)
+
+  def stoch_fastd(self, high: ColLike, low: ColLike, close: ColLike,
+                  fastk_period: int, slowk_period: int, slowk_matype: int,
+                  slowd_period: int, slowd_matype: int) -> "FeatureGen":
+    return self.stoch_1(high, low, close, fastk_period, slowk_period,
+                        slowk_matype, slowd_period, slowd_matype)
 
   def minus_di(self, high: ColLike, low: ColLike, close: ColLike,
                timeperiod: int) -> "FeatureGen":
@@ -64,12 +76,24 @@ class TalibConstructor:
     return STOCHF_0Feature(high, low, close, fastk_period, fastd_period,
                            fastd_matype)
 
+  def stochf_fastk(self, high: ColLike, low: ColLike, close: ColLike,
+                   fastk_period: int, fastd_period: int,
+                   fastd_matype: int) -> "FeatureGen":
+    return self.stochf_0(high, low, close, fastk_period, fastd_period,
+                         fastd_matype)
+
   def stochf_1(self, high: ColLike, low: ColLike, close: ColLike,
                fastk_period: int, fastd_period: int,
                fastd_matype: int) -> "FeatureGen":
     from declafe.pl.feature_gen.tri.talib.stochf_feature import STOCHF_1Feature
     return STOCHF_1Feature(high, low, close, fastk_period, fastd_period,
                            fastd_matype)
+
+  def stochf_fastd(self, high: ColLike, low: ColLike, close: ColLike,
+                   fastk_period: int, fastd_period: int,
+                   fastd_matype: int) -> "FeatureGen":
+    return self.stochf_1(high, low, close, fastk_period, fastd_period,
+                         fastd_matype)
 
   def cci(self, high: ColLike, low: ColLike, close: ColLike,
           timeperiod: int) -> "FeatureGen":
@@ -480,10 +504,18 @@ class TalibConstructor:
     from declafe.pl.feature_gen.binary.talib.aroon_feature import AROON_0Feature
     return AROON_0Feature(high, low, timeperiod)
 
+  def aroon_aroonup(self, high: ColLike, low: ColLike,
+                    timeperiod: int) -> "FeatureGen":
+    return self.aroon_0(high, low, timeperiod)
+
   def aroon_1(self, high: ColLike, low: ColLike,
               timeperiod: int) -> "FeatureGen":
     from declafe.pl.feature_gen.binary.talib.aroon_feature import AROON_1Feature
     return AROON_1Feature(high, low, timeperiod)
+
+  def aroon_aroondown(self, high: ColLike, low: ColLike,
+                      timeperiod: int) -> "FeatureGen":
+    return self.aroon_1(high, low, timeperiod)
 
   def plus_dm(self,
               high: ColLike,

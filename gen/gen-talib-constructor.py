@@ -3,6 +3,15 @@ from glob import glob
 from gen.services.talib_feature import TalibFeature
 from textwrap import indent
 
+Aliases = {
+    "stoch_0": "stoch_fastk",
+    "stoch_1": "stoch_fastd",
+    "stochf_0": "stochf_fastk",
+    "stochf_1": "stochf_fastd",
+    "aroon_0": "aroon_aroonup",
+    "aroon_1": "aroon_aroondown",
+}
+
 
 class TalibConstructorFile:
 
@@ -35,21 +44,28 @@ class TalibConstructor:
     pass_args = (', '.join([
         f"{a.name}" for a in talib_feature.init_args if a.name != "column"
     ])) if len(talib_feature.init_args) > 1 else ""
+    method_name = talib_feature.name.lower()
+    alias = Aliases.get(method_name)
+
+    alias_def = f"""\
+def {alias}(self, {args}) -> "FeatureGen":
+  return self.{method_name}({pass_args})"""
 
     return f"""\
 def {talib_feature.name.lower()}(self, {args}) -> "FeatureGen":
   from declafe.pl.feature_gen.{talib_feature.kind}.talib.{talib_feature.file_name} import {talib_feature.name}Feature
   return {talib_feature.name}Feature({pass_args})
+{alias_def if alias else ""}
 """
 
   def write(self):
-    with open("pl/feature_gen/talib_constructor.py", "w") as f:
+    with open("declafe/pl/feature_gen/talib_constructor.py", "w") as f:
       f.write(self.file_content)
 
 
 def main():
   features = [
-      t for p in glob("pl/feature_gen/*/talib/*.py")
+      t for p in glob("declafe/pl/feature_gen/*/talib/*.py")
       for t in TalibFeature.read(p) if "unary" not in t.path
   ]
 
