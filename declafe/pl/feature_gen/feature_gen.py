@@ -42,7 +42,8 @@ class FeatureGen(ABC):
 
   def generate(self, df: pl.DataFrame) -> pl.Series:
     try:
-      result = df.select(self.expr()).get_column(self.feature_name)
+      result = df.lazy().select(self.expr()).collect().get_column(
+          self.feature_name)
     except Exception as e:
       raise FailedToGenerate(f"Failed to generate {self.feature_name}") from e
 

@@ -29,7 +29,9 @@ class Features:
     orig_columns = [
         pl.col(c) for c in temp_df.columns if c not in self.feature_names
     ]
-    return temp_df.select(orig_columns + [f.expr() for f in self.feature_gens])
+    return temp_df.lazy().select(orig_columns +
+                                 [f.expr()
+                                  for f in self.feature_gens]).collect()
 
   def set_features(self, temp_df: pl.DataFrame) -> pl.DataFrame:
     return self.transform(temp_df)
