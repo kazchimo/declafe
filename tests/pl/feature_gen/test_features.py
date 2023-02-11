@@ -140,14 +140,44 @@ class TestMap:
     df = pl.DataFrame({"a": [1, -2, 3], "b": [4, -5, 6]})
     fs = fg.features(fg.col("a"), fg.col("b")).map(lambda x: x.abs())
 
-    print(fs(df))
-
     assert fs(df).frame_equal(
         pl.DataFrame({
             "a": [1, -2, 3],
             "b": [4, -5, 6],
             "|a|": [1, 2, 3],
             "|b|": [4, 5, 6],
+        }))
+
+
+class TestMapAliasWithIdx:
+
+  def test_map_alias_with_idx(self):
+    df = pl.DataFrame({"a": [1, -2, 3], "b": [4, -5, 6]})
+    fs = fg.features(a, b, a * b).map_aliases_with_idx(lambda i, s: f"{i}_{s}")
+
+    assert fs(df).frame_equal(
+        pl.DataFrame({
+            "a": [1, -2, 3],
+            "b": [4, -5, 6],
+            "0_a": [1, -2, 3],
+            "1_b": [4, -5, 6],
+            "2_a_*_b": [4, 10, 18],
+        }))
+
+
+class TestMapAlias:
+
+  def test_map_alias(self):
+    df = pl.DataFrame({"a": [1, -2, 3], "b": [4, -5, 6]})
+    fs = fg.features(a, b, a * b).map_aliases(lambda s: f"{s}_new")
+
+    assert fs(df).frame_equal(
+        pl.DataFrame({
+            "a": [1, -2, 3],
+            "b": [4, -5, 6],
+            "a_new": [1, -2, 3],
+            "b_new": [4, -5, 6],
+            "a_*_b_new": [4, 10, 18],
         }))
 
 

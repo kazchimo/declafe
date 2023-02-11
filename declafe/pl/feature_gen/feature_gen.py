@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Union, Literal, Any, TypeVar, Callable, TypeAlias, TYPE_CHECKING, Protocol
+import copy
 
 from declafe.pl.feature_gen.types import DTypes
 import declafe.pl.feature_gen as fg
@@ -68,8 +69,14 @@ class FeatureGen(ABC):
     raise NotImplementedError
 
   def alias(self, name: str) -> "FeatureGen":
-    self.override_feature_name = name
-    return self
+    cp = copy.deepcopy(self)
+    cp.override_feature_name = name
+    return cp
+
+  def map_alias(self, func: Callable[[str], str]) -> "FeatureGen":
+    cp = copy.deepcopy(self)
+    cp.override_feature_name = func(self.feature_name)
+    return cp
 
   def as_name_of(self, name: str) -> "FeatureGen":
     return self.alias(name)

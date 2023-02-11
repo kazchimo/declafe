@@ -54,6 +54,14 @@ class TestAlias:
     assert f.feature_name == "c"
 
 
+class TestMapAlias:
+
+  def test_map_alias(self):
+    f = ((fg.col("a") + fg.col("b")) *
+         2).map_alias(lambda s: s.replace("_", "="))
+    assert f.feature_name == "(a=+=b)=*=2"
+
+
 class TestAsNameOf:
 
   def test_as_name_of(self):

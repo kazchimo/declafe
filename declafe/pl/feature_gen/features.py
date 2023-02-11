@@ -86,6 +86,15 @@ class Features:
   def map(self, func: Callable[["FeatureGen"], "FeatureGen"]) -> "Features":
     return Features([func(f) for f in self.feature_gens])
 
+  def map_aliases_with_idx(self, func: Callable[[int, str], str]) -> "Features":
+    return Features([
+        f.map_alias(lambda s: func(idx, s))
+        for idx, f in enumerate(self.feature_gens)
+    ])
+
+  def map_aliases(self, func: Callable[[str], str]) -> "Features":
+    return Features([f.map_alias(func) for f in self.feature_gens])
+
   def flat_map(
       self, fun: Callable[["FeatureGen"], Union["Features", list["FeatureGen"]]]
   ) -> "Features":
