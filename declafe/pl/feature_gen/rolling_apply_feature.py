@@ -1,4 +1,4 @@
-from typing import Protocol
+from typing import Protocol, Any
 
 import polars as pl
 
@@ -8,7 +8,7 @@ from declafe.pl.feature_gen.feature_gen import FeatureGen
 
 class F(Protocol):
 
-  def __call__(self, ser: pl.Series) -> pl.Series:
+  def __call__(self, ser: pl.Series) -> Any:
     ...
 
 

@@ -250,7 +250,7 @@ class FeatureGen(ABC):
 
   class F(Protocol):
 
-    def __call__(self, ser: pl.Series) -> pl.Series:
+    def __call__(self, ser: pl.Series) -> Any:
       ...
 
   def rolling_apply(
@@ -261,6 +261,16 @@ class FeatureGen(ABC):
   ) -> "FeatureGen":
     from declafe.pl.feature_gen.rolling_apply_feature import RollingApplyFeature
     return RollingApplyFeature(self, window, func, ops_name)
+
+  def rolling_count(self, window: int, target: Any) -> "FeatureGen":
+    from declafe.pl.feature_gen.unary.rolling_count_feature import RollingCountFeature
+    return RollingCountFeature(self, window, target)
+
+  def rolling_true_count(self, window: int) -> "FeatureGen":
+    return self.rolling_count(window, True)
+
+  def rolling_false_count(self, window: int) -> "FeatureGen":
+    return self.rolling_count(window, False)
 
   @property
   def talib(self) -> "TalibChain":
