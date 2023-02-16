@@ -1,3 +1,4 @@
+import numpy as np
 import polars as pl
 
 from declafe.pl.feature_gen.feature_gen import FeatureGen
@@ -364,6 +365,36 @@ class TestReduce:
     fs = fg.features(a, b).reduce(lambda x, y: x + y, 1)
 
     assert fs(df).series_equal((df["a"] + df["b"] + 1).alias("(1_+_a)_+_b"))
+
+
+class TestFillNulls:
+
+  def test_fill_nulls(self):
+    df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    fs = fg.features(a.pct_change(1), b.lag(1)).fill_nulls(storategy="zero")
+
+    assert fs(df).frame_equal(
+        pl.DataFrame({
+            "a": [1, 2, 3],
+            "b": [4, 5, 6],
+            "zero_fill_null(pct_change1(a))": [0, 1.0, 0.5],
+            "zero_fill_null(lag1(b))": [0, 4, 5],
+        }))
+
+
+class TestFillNans:
+
+  def test_fill_nans(self):
+    df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})
+    fs = fg.features(a.replace(1, np.nan), b.replace(4, np.nan)).fill_nans(0)
+
+    assert fs(df).frame_equal(
+        pl.DataFrame({
+            "a": [1, 2, 3],
+            "b": [4, 5, 6],
+            "fill_nan(replace_1_of_a_to_nan, 0)": [0, 2, 3],
+            "fill_nan(replace_4_of_b_to_nan, 0)": [0, 5, 6],
+        }))
 
 
 class TestAdd:

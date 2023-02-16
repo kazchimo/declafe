@@ -1,8 +1,9 @@
-from typing import List, Union, Callable, Type, Iterable, TypeVar, Any
+from typing import List, Union, Callable, Type, Iterable, TypeVar, Any, Optional
 
 from declafe.pl.feature_gen.feature_gen import FeatureGen
 import polars as pl
 import functools
+from polars.internals.type_aliases import FillNullStrategy
 
 T = TypeVar("T")
 Fun = Callable[[T], "FeatureGen"]
@@ -111,6 +112,15 @@ class Features:
     from declafe.pl.feature_gen import conv_lit
     init = conv_lit(initial)
     return functools.reduce(func, self.feature_gens, init)
+
+  def fill_nulls(self,
+                 value: Optional[Any] = None,
+                 storategy: Optional[FillNullStrategy] = None,
+                 limit: Optional[int] = None) -> "Features":
+    return self.map(lambda f: f.fill_null(value, storategy, limit))
+
+  def fill_nans(self, value: Any) -> "Features":
+    return self.map(lambda f: f.fill_nan(value))
 
   def __call__(self, temp_df: pl.DataFrame) -> pl.DataFrame:
     return self.transform(temp_df)
