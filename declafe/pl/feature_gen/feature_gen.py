@@ -59,7 +59,10 @@ class FeatureGen(ABC):
   @property
   def feature_name(self) -> str:
     return self.override_feature_name or \
-           (self.sep.join(self._feature_names()))
+           (self._make_feature_name(self._feature_names()))
+
+  def _make_feature_name(self, feature_names: list[str]) -> str:
+    return self.sep.join(feature_names)
 
   @abstractmethod
   def _feature_names(self) -> list[str]:
@@ -276,6 +279,14 @@ class FeatureGen(ABC):
   def talib(self) -> "TalibChain":
     from declafe.pl.feature_gen.talib_chain import TalibChain
     return TalibChain(self)
+
+  def is_positive(self) -> "FeatureGen":
+    return (self > 0).alias(
+        self._make_feature_name([self.wrapped_feature_name, "is_positive"]))
+
+  def is_negative(self) -> "FeatureGen":
+    return (self < 0).alias(
+        self._make_feature_name([self.wrapped_feature_name, "is_negative"]))
 
   def __add__(self, other: O) -> "FeatureGen":
     from declafe.pl.feature_gen.binary.ops.add_feature import AddFeature
